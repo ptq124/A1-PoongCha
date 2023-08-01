@@ -1,0 +1,50 @@
+name: "기능 레포트"
+description: "Thank you for reporting a bug!"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        개발 요구사항 레포트
+  - type: dropdown
+    id: Domain
+    attributes:
+      label: Domain
+      description: 어떤 Domain에 관련된 Issue입니까?
+      options:
+        - Frontend
+        - Backend
+        - Documentation
+        - Deployment
+        - ETC
+    validations:
+      required: true
+  - type: textarea
+    id: what-need
+    attributes:
+      label: 어떠한 작업을 진행하실 건가요?
+      description: 어떠한 작업을 진행하실 건가요?
+      placeholder: 어떠한 작업을 진행하실 건가요?
+      value: "Projects Card도 생성해주세요!"
+    validations:
+      required: true
+  - type: textarea
+    id: consideration
+    attributes:
+      label: 고려사항
+      description: 개발시 고려해야 할 사항
+  - type: checkboxes
+    id: priority
+    attributes:
+      label: Priority Label Setting
+      description: Priority Label 지정하셨나요?
+      options:
+        - label: Yes!
+          required: true
+  - type: checkboxes
+    id: projects
+    attributes:
+      label: Projects Card
+      description: Project Card도 지정해주세요
+      options:
+      - label: Yes!
+        required: true
