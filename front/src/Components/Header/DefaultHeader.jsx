@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components";
+import HyundaiLogo from "../../assets/icons/hyundai-logo.svg";
 
 const DefaultHeader = () => {
   return (
     <DefaultHeaderWrapper>
-      <img alt="현대" src="" />
+      <img src={HyundaiLogo} alt="logo" />
       <span>펠리세이드</span>
     </DefaultHeaderWrapper>
   );
