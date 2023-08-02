@@ -3,19 +3,15 @@ import { css, styled } from "styled-components";
 import RadioBtn from "../Common/RadioBtn";
 import Check24BlueIcon from "../../assets/icons/check_24_blue.svg";
 
-const SurveyOption = ({ label }) => {
-  const [selected, setSelected] = useState(false);
-  const handleRadioChange = () => {
-    setSelected(!selected);
-  };
+const SurveyOption = ({ label, index, name, selected, onChange }) => {
   return (
-    <div>
-      <SurveyOptionLabel htmlFor="radioInput" selected={selected}>
+    <>
+      <SurveyOptionLabel htmlFor={"radioInput" + index} selected={selected}>
         {label}
         {selected && <img src={Check24BlueIcon} alt="check" />}
       </SurveyOptionLabel>
-      <RadioBtn id="radioInput" onChange={handleRadioChange} />
-    </div>
+      <RadioBtn id={"radioInput" + index} onChange={onChange} name={name} />
+    </>
   );
 };
 

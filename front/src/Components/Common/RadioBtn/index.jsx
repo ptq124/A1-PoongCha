@@ -1,17 +1,16 @@
 import React from "react";
 import { styled } from "styled-components";
 
-const RadioBtn = ({ id, onChange }) => {
+const RadioBtn = ({ id, name, onChange }) => {
   return (
-    <RadioBtnContainer>
-      <RadioBtnInput id={id} onChange={onChange}></RadioBtnInput>
-    </RadioBtnContainer>
+    <>
+      <RadioBtnInput id={id} name={name} onChange={onChange}></RadioBtnInput>
+    </>
   );
 };
 
-const RadioBtnContainer = styled.div`
+const RadioBtnInput = styled.input.attrs({ type: "radio" })`
   display: none;
 `;
-const RadioBtnInput = styled.input.attrs({ type: "radio" })``;
 
 export default RadioBtn;
