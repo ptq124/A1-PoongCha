@@ -2,12 +2,14 @@ import React from "react";
 import { styled } from "styled-components";
 import DefaultHeader from "./DefaultHeader";
 import OptionalHeader from "./OptionalHeader";
+import ProgressBar from "../ProgressBar";
 
 const Header = () => {
   return (
     <HeaderWrapper>
       <DefaultHeader />
-      <OptionalHeader />
+      {/* <OptionalHeader /> */}
+      <ProgressBar progress={0.5} />
     </HeaderWrapper>
   );
 };
@@ -19,7 +21,8 @@ const HeaderWrapper = styled.div`
   width: 100%;
   min-height: 92px;
   overflow-y: auto;
-  padding: 33px 128px 0px;
+  padding-top: 33px;
+  position: fixed;
 `;
 
 export default Header;

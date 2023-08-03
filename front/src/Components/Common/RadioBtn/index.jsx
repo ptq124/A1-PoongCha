@@ -9,11 +9,7 @@ const RadioBtn = ({ id, name, value, onChange }) => {
   };
 
   return (
-    <RadioBtnInput
-      name={name}
-      value={value}
-      onChange={handleOptionChange}
-    ></RadioBtnInput>
+    <RadioBtnInput id={id} name={name} onChange={onChange}></RadioBtnInput>
   );
 };
 
