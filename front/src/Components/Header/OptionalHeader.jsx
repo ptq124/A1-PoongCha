@@ -65,7 +65,7 @@ const NavContainer = styled.div`
   gap: 25px;
   align-items: flex-end;
 `;
-const OptionalHeaderWrapper = styled.div`
+const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 10px 0px 16px;
@@ -74,9 +74,5 @@ const BtnsContainer = styled.div`
   display: flex;
   gap: 8px;
 `;
-// const Button = styled.div`
-//   width: 100px;
-//   height: 50px;
-//   background-color: ${({ theme }) => theme.color.primary_default};
-// `;
+
 export default OptionalHeader;

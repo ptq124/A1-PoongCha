@@ -4,13 +4,13 @@ import { styled } from "styled-components";
 const ProgressBar = ({ progress }) => {
   return (
     <ProgressBarContainer>
-      <Progress progress={progress}></Progress>
+      <Progress $progress={progress}></Progress>
     </ProgressBarContainer>
   );
 };
 
 const Progress = styled.div`
-  width: ${(props) => props.progress * 100}%;
+  width: ${({ $progress }) => $progress * 100}%;
   height: 4px;
   background-color: ${({ theme }) => theme.color.secondary};
 `;
