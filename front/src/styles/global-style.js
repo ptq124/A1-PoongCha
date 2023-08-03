@@ -3,7 +3,7 @@ import { reset } from "styled-reset";
 
 export const GlobalStyle = createGlobalStyle`
   ${reset}
-
+  
   @font-face {
     font-family: "HyundaiSansHeadBoldKR";
     src: url('src/assets/font/HyundaiSansHead-Bold.otf') format('opentype');

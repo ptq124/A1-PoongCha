@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { styled } from "styled-components";
 
-const RadioBtn = ({ id, name, onChange }) => {
+const RadioBtn = ({ id, name, value, onChange }) => {
+  const [selectedOption, setSelectedOption] = useState("");
+
+  const handleOptionChange = (e) => {
+    setSelectedOption(e.target.value);
+  };
+
   return (
     <RadioBtnInput id={id} name={name} onChange={onChange}></RadioBtnInput>
   );
