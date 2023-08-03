@@ -1,10 +1,11 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-import { styled } from "styled-components";
+import { css, styled } from "styled-components";
+import Button from "../Common/Button/Button";
 
 const OptionalHeader = () => {
   return (
-    <OptionalHeaderWrapper>
+    <Wrapper>
       <NavContainer>
         <Nav>
           <NavTitle>1 트림</NavTitle>
@@ -20,12 +21,32 @@ const OptionalHeader = () => {
         </Nav>
       </NavContainer>
       <BtnsContainer>
-        <Button>버튼1</Button>
-        <Button>버튼2</Button>
+        <Button text="요금 상세" style={amoutDetailBtnStyle} />
+        <Button text="견적내기" style={estimateBtnStyle} />
       </BtnsContainer>
-    </OptionalHeaderWrapper>
+    </Wrapper>
   );
 };
+
+const amoutDetailBtnStyle = css`
+  padding: 14px 20px;
+  height: 40px;
+  background-color: ${({ theme }) => theme.color.grey1000};
+  border-radius: 4px;
+  border: 1px solid #d9d9d9;
+  color: ${({ theme }) => theme.color.grey400};
+  ${({ theme }) => theme.font.Body4_Medium};
+`;
+
+const estimateBtnStyle = css`
+  width: 166px;
+  height: 40px;
+  background-color: ${({ theme }) => theme.color.primary_default};
+  border-radius: 4px;
+  border: 1px solid ${({ theme }) => theme.color.primary_default};
+  color: ${({ theme }) => theme.color.grey1000};
+  ${({ theme }) => theme.font.Body4_Medium}
+`;
 
 const NavDetail = styled.div`
   ${({ theme }) => theme.font.Body4_Regular};
@@ -44,18 +65,14 @@ const NavContainer = styled.div`
   gap: 25px;
   align-items: flex-end;
 `;
-const OptionalHeaderWrapper = styled.div`
+const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 10px 0px 16px;
+  padding: 10px 128px 16px;
 `;
 const BtnsContainer = styled.div`
   display: flex;
   gap: 8px;
 `;
-const Button = styled.div`
-  width: 100px;
-  height: 50px;
-  background-color: ${({ theme }) => theme.color.primary_default};
-`;
+
 export default OptionalHeader;

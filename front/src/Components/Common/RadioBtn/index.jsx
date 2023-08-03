@@ -3,9 +3,7 @@ import { styled } from "styled-components";
 
 const RadioBtn = ({ id, name, onChange }) => {
   return (
-    <>
-      <RadioBtnInput id={id} name={name} onChange={onChange}></RadioBtnInput>
-    </>
+    <RadioBtnInput id={id} name={name} onChange={onChange}></RadioBtnInput>
   );
 };
 
