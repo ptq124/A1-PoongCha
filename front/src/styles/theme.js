@@ -7,7 +7,7 @@ const color = {
   black: "#111111",
   grey1000: "#FFF",
   grey900: "#FBFBFB",
-  grey00: "#F0F0F0",
+  grey800: "#F0F0F0",
   grey700: "#EBEBEB",
   grey600: "#BEBEBE",
   grey500: "#A4A4A4",
