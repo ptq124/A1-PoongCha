@@ -4,6 +4,7 @@ import OptionalHeader from "../Header/OptionalHeader/index";
 import HyundaiLogo from "../../assets/icons/hyundai-logo.svg";
 import HyundaiWhiteLogo from "../../assets/icons/hyundai-logo-white.svg";
 import { useLocation } from "react-router-dom";
+import SelectOption from "./SelectOption";
 
 const Header = () => {
   const { pathname } = useLocation();
@@ -21,7 +22,7 @@ const Header = () => {
     <HeaderWrapper>
       <DefaultHeader $pathname={pathname}>
         {getLogoImage()}
-        <HeaderTitle $pathname={pathname}>펠리세이드</HeaderTitle>
+        <SelectOption pathname={pathname} />
       </DefaultHeader>
       <OptionalHeader />
     </HeaderWrapper>
@@ -58,19 +59,6 @@ const DefaultHeader = styled.div`
       : css`
           gap: 24px;
         `}
-`;
-
-const HeaderTitle = styled.span`
-  ${({ $pathname }) =>
-    $pathname === "/"
-      ? css`
-          color: ${({ theme }) => theme.color.grey600};
-        `
-      : css`
-          color: ${({ theme }) => theme.color.grey50};
-        `}
-
-  ${({ theme }) => theme.font.Head4};
 `;
 
 export default Header;
