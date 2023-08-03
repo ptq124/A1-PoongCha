@@ -43,3 +43,27 @@ const SurveyOptionLabel = styled.label`
 `;
 
 export default SurveyOption;
+
+// const [selectedOption, setSelectedOption] = useState(0);
+// const handleOptionChange = (option) => {
+//   setSelectedOption(option);
+// };
+
+{
+  /* <form>
+        <SurveyOption
+          label="20대"
+          index={0}
+          name="age"
+          selected={selectedOption === 0}
+          onChange={() => handleOptionChange(0)}
+        />
+        <SurveyOption
+          label="30대"
+          index={1}
+          name="age"
+          selected={selectedOption === 1}
+          onChange={() => handleOptionChange(1)}
+        />
+      </form> */
+}
