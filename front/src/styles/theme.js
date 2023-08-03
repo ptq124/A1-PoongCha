@@ -137,6 +137,28 @@ const font = {
     font-weight: 400;
     line-height: 18px;
   `,
+
+
+  // 추가한 폰트
+  // Extra1 : SurveyPage > SurveyTitle 
+  Extra1: css`
+    font-family: "HyundaiSansHeadBoldKR";
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 28px;
+    letter-spacing: -0.3px;
+  `,
+  // Extra2 : SurveyPage > PageIndicator
+  Extra2: css`
+    font-family: "HyundaiSansHeadMediumKR";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: -0.2px;
+`,
+
 };
 
 export const theme = {

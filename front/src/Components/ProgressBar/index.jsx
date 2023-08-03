@@ -3,9 +3,9 @@ import { styled } from "styled-components";
 
 const ProgressBar = ({ progress }) => {
   return (
-    <ProgressBarContainer>
+    <Wrapper>
       <Progress $progress={progress}></Progress>
-    </ProgressBarContainer>
+    </Wrapper>
   );
 };
 
@@ -14,9 +14,10 @@ const Progress = styled.div`
   height: 4px;
   background-color: ${({ theme }) => theme.color.secondary};
 `;
-const ProgressBarContainer = styled.div`
+const Wrapper = styled.div`
   width: 100%;
   height: 4px;
   background-color: ${({ theme }) => theme.color.grey800};
+  margin-top: 39px;
 `;
 export default ProgressBar;

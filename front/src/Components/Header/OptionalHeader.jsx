@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import { css, styled } from "styled-components";
-import Button from "../Button/Button";
+import Button from "../Common/Button/Button";
 
 const OptionalHeader = () => {
   return (
@@ -21,14 +21,14 @@ const OptionalHeader = () => {
         </Nav>
       </NavContainer>
       <BtnsContainer>
-        <Button text="요금 상세" style={AmoutDetailBtnStyle} />
-        <Button text="견적내기" style={EstimateBtnStyle} />
+        <Button text="요금 상세" style={amoutDetailBtnStyle} />
+        <Button text="견적내기" style={estimateBtnStyle} />
       </BtnsContainer>
     </Wrapper>
   );
 };
 
-const AmoutDetailBtnStyle = css`
+const amoutDetailBtnStyle = css`
   padding: 14px 20px;
   height: 40px;
   background-color: ${({ theme }) => theme.color.grey1000};
@@ -38,7 +38,7 @@ const AmoutDetailBtnStyle = css`
   ${({ theme }) => theme.font.Body4_Medium};
 `;
 
-const EstimateBtnStyle = css`
+const estimateBtnStyle = css`
   width: 166px;
   height: 40px;
   background-color: ${({ theme }) => theme.color.primary_default};
@@ -68,7 +68,7 @@ const NavContainer = styled.div`
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 10px 0px 16px;
+  padding: 10px 128px 16px;
 `;
 const BtnsContainer = styled.div`
   display: flex;

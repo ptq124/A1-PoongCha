@@ -10,6 +10,10 @@ const CommonButton = styled.button`
   justify-content: center;
   align-items: center;
 
+  &:hover {
+    cursor: pointer;
+  }
+
   ${({ $style }) => $style}
 `;
 
