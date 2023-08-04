@@ -22,7 +22,6 @@ const HeaderWrapper = styled.div`
   min-height: 92px;
   overflow-y: auto;
   padding-top: 33px;
-  position: fixed;
 `;
 
 export default Header;

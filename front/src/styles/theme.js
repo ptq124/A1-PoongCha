@@ -19,7 +19,7 @@ const color = {
 };
 
 const font = {
-  Head1: css`
+  Head1: css` 
     font-family: "HyundaiSansHeadBoldKR";
     font-size: 22px;
     font-style: normal;
