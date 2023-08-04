@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import ProgressBar from "../../ProgressBar";
+import ProgressBar from "../../Survey/ProgressBar";
 import Navigation from "./Navigation";
 
 const OptionalHeader = () => {

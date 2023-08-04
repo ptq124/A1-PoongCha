@@ -1,10 +1,8 @@
 import * as S from "../styles";
 import React, { useState } from "react";
 import Button from "../../../Components/Common/Button/Button";
-import PageIndicator from "../../../Components/PageIndicator";
 import { css } from "styled-components";
-
-const lifestyleOptions = [];
+import SurveyHeader from "../../../Components/Survey/SurveyHeader";
 
 const LifestyleSurvey = () => {
   const [selectedOption, setSelectedOption] = useState(0);
@@ -13,13 +11,7 @@ const LifestyleSurvey = () => {
   };
   return (
     <S.SurveyContent>
-      <S.SurveyHeader>
-        <S.SurveyTitle>
-          유사한 <strong>라이프스타일</strong>을 선택하면 <br />
-          차량 조합을 추천해 드려요.
-        </S.SurveyTitle>
-        <PageIndicator crntPage={2} totalPage={2} />
-      </S.SurveyHeader>
+      <SurveyHeader index={2} />
 
       <S.SurveyOptions></S.SurveyOptions>
 
