@@ -2,7 +2,7 @@ import React from "react";
 import { styled } from "styled-components";
 import video from "../../../assets/video/Home_mp4.mp4";
 
-const BackGroundVideo = () => {
+const CoverVideo = () => {
   return (
     <Wrapepr>
       <VideoTag autoPlay loop muted playsInline>
@@ -31,4 +31,4 @@ const VideoTag = styled.video`
   object-fit: fill;
 `;
 
-export default BackGroundVideo;
+export default CoverVideo;
