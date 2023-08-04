@@ -3,21 +3,27 @@ import { styled } from "styled-components";
 import AgeSurvey from "./AgeSurvey";
 import LifestyleSurvey from "./LifestyleSurvey";
 import ExtraSurvey from "./ExtraSurvey";
+import ProgressBar from "../../Components/Survey/progressBar";
 
 const SurveyPage = () => {
-  const [page, setPage] = useState("Age");
+  const [page, setPage] = useState(0);
   const Pages = {
-    Age: <AgeSurvey buttonHandler={() => setPage("Lifestyle")} />,
-    Lifestyle: <LifestyleSurvey linkHandler={() => setPage("Extra")} />,
-    Extra: <ExtraSurvey />,
+    0: <AgeSurvey buttonHandler={() => setPage(1)} />,
+    1: <LifestyleSurvey linkHandler={() => setPage(2)} />,
+    2: <ExtraSurvey />,
   };
-  return <Wrapper>{Pages[page]}</Wrapper>;
+  return (
+    <Wrapper>
+      <ProgressBar progress={(page + 1) / 2} />
+      {Pages[page]}
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.div`
   width: 100%;
-
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 `;
 export default SurveyPage;
