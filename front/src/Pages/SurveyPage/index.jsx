@@ -14,7 +14,7 @@ const SurveyPage = () => {
   };
   return (
     <Wrapper>
-      <ProgressBar progress={(page + 1) / 2} />
+      {page < 2 && <ProgressBar progress={(page + 1) / 2} />}
       {Pages[page]}
     </Wrapper>
   );
