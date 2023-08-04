@@ -1,8 +1,8 @@
 import * as S from "../styles";
 import React, { useState } from "react";
-import SurveyOption from "../../../Components/SurveyOption";
+import SurveyOption from "../../../Components/Survey/SurveyOption";
 import Button from "../../../Components/Common/Button/Button";
-import PageIndicator from "../../../Components/PageIndicator";
+import PageIndicator from "../../../Components/Survey/PageIndicator";
 import { css } from "styled-components";
 
 const ageOptions = [
@@ -32,7 +32,7 @@ const AgeSurvey = ({ data, buttonHandler }) => {
   return (
     <S.SurveyContent>
       <S.SurveyHeader>
-        <S.SurveyTitle>{stringToHTML(data.title)}</S.SurveyTitle>
+        <S.SurveyTitle>{data.title}</S.SurveyTitle>
         <PageIndicator crntPage={1} totalPage={2} />
       </S.SurveyHeader>
 

@@ -1,8 +1,9 @@
 import * as S from "../styles";
 import React, { useState } from "react";
 import Button from "../../../Components/Common/Button/Button";
-import PageIndicator from "../../../Components/PageIndicator";
+import PageIndicator from "../../../Components/Survey/PageIndicator";
 import { css } from "styled-components";
+import LifestylePersona from "../../../Components/Survey/LifestylePersona";
 
 const lifestyleOptions = [];
 
@@ -21,7 +22,9 @@ const LifestyleSurvey = () => {
         <PageIndicator crntPage={2} totalPage={2} />
       </S.SurveyHeader>
 
-      <S.SurveyOptions></S.SurveyOptions>
+      <S.SurveyOptions>
+        <LifestylePersona />
+      </S.SurveyOptions>
 
       <Button text="선택 완료" style={surveyBtnStyle} />
     </S.SurveyContent>

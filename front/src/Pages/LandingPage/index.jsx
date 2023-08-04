@@ -1,9 +1,12 @@
 import React from "react";
 import { styled, css } from "styled-components";
-import BackGroundVideo from "./BackGroundVideo";
+import CoverVideo from "./CoverVideo";
 import Button from "../../Components/Common/Button/Button";
+import useButtonNavigation from "../../hooks/useButtonNavigation";
 
 const LandingPage = () => {
+  const handleButtonClick = useButtonNavigation();
+
   return (
     <Wrapper>
       <Text>
@@ -13,11 +16,18 @@ const LandingPage = () => {
       </Text>
 
       <BtnWrapper>
-        <Button text="직접 만들래요" style={Direct} />
-        <Button text="추천받기" style={Recommend} />
+        <Button
+          text="직접 만들래요"
+          style={Direct}
+          onClick={() => handleButtonClick("/custom")}
+        />
+        <Button
+          text="추천받기"
+          style={Recommend}
+          onClick={() => handleButtonClick("/survey")}
+        />
       </BtnWrapper>
-
-      <BackGroundVideo />
+      <CoverVideo />
     </Wrapper>
   );
 };
@@ -50,7 +60,7 @@ const Text = styled.span`
 `;
 
 const TextBold = styled.span`
-  font-family: "HyundaiSansHeadBlodKR";
+  font-family: "HyundaiSansHeadBoldKR";
   font-size: 28px;
   font-style: normal;
   font-weight: 600;
