@@ -4,7 +4,7 @@ import Navigation from "./Navigation";
 
 const OptionalHeader = () => {
   const { pathname } = useLocation();
-  console.log(pathname);
+
   if (pathname === "/") {
     return null;
   } else if (pathname === "/custom") {

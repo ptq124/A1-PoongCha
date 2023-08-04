@@ -64,6 +64,8 @@ const OptionList = styled.ul`
         : css`
             color: ${({ theme }) => theme.color.grey50};
           `}
+
+    padding-top: 2%;
   }
 `;
 
@@ -86,6 +88,8 @@ const SelectWrapper = styled.div`
         : css`
             color: ${({ theme }) => theme.color.grey50};
           `}
+
+    padding-top: 2%;
   }
 
   ${({ theme }) => theme.font.Head4};

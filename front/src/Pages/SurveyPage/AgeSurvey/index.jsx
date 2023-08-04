@@ -32,7 +32,6 @@ const AgeSurvey = ({ buttonHandler }) => {
   return (
     <S.SurveyContent>
       <SurveyHeader index={1} />
-
       <S.SurveyOptions>
         {ageOptions.map((option, index) => (
           <SurveyOption

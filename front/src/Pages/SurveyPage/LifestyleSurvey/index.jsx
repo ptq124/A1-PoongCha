@@ -18,7 +18,6 @@ const LifestyleSurvey = ({ linkHandler }) => {
         onClick={linkHandler}
       />
       <S.SurveyOptions></S.SurveyOptions>
-
       <Button text="선택 완료" style={SurveyBtnStyle} />
     </S.SurveyContent>
   );
