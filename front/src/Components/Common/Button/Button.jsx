@@ -1,8 +1,12 @@
 import React from "react";
 import { styled, css } from "styled-components";
 
-const Button = ({ text, style }) => {
-  return <CommonButton $style={style}>{text}</CommonButton>;
+const Button = ({ text, style, onClick }) => {
+  return (
+    <CommonButton $style={style} onClick={onClick}>
+      {text}
+    </CommonButton>
+  );
 };
 
 const CommonButton = styled.button`
