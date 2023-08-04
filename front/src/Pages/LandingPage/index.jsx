@@ -10,7 +10,7 @@ const LandingPage = () => {
   return (
     <Wrapper>
       <Text>
-        당신의 <TextBold>라이프스타일</TextBold>에 맞게
+        당신의 <strong>라이프스타일</strong>에 맞게
         <br />
         차량을 추천해드려요
       </Text>
@@ -51,21 +51,11 @@ const Text = styled.span`
   left: 128px;
 
   color: ${({ theme }) => theme.color.grey1000};
-  font-family: "HyundaiSansTextRegularKR";
-  font-size: 28px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 150%;
-  letter-spacing: -0.3px;
-`;
+  ${({ theme }) => theme.font.Extra3};
 
-const TextBold = styled.span`
-  font-family: "HyundaiSansHeadBoldKR";
-  font-size: 28px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 150%;
-  letter-spacing: -0.3px;
+  strong {
+    font-family: "HyundaiSansHeadMediumKR";
+  }
 `;
 
 const BtnWrapper = styled.div`

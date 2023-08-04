@@ -13,6 +13,10 @@ export const GlobalStyle = createGlobalStyle`
     src: url('src/assets/font/HyundaiSansHeadKRMedium.ttf') format('truetype');
   }
   @font-face {
+    font-family: "HyundaiSansHeadRegularKR";
+    src: url('src/assets/font/HyundaiSansHeadKRRegular.ttf') format('truetype');
+  }
+  @font-face {
     font-family: "HyundaiSansTextBoldKR";
     src: url('src/assets/font/HyundaiSansTextKRBold.ttf') format('truetype');
   }

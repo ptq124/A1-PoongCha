@@ -18,6 +18,5 @@ const Wrapper = styled.div`
   width: 100%;
   height: 4px;
   background-color: ${({ theme }) => theme.color.grey800};
-  margin-top: 39px;
 `;
 export default ProgressBar;

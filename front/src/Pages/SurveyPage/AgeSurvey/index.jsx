@@ -2,8 +2,8 @@ import * as S from "../styles";
 import React, { useState } from "react";
 import SurveyOption from "../../../Components/Survey/SurveyOption";
 import Button from "../../../Components/Common/Button/Button";
-import PageIndicator from "../../../Components/Survey/PageIndicator";
 import { css } from "styled-components";
+import SurveyHeader from "../../../Components/Survey/SurveyHeader";
 
 const ageOptions = [
   {
@@ -24,18 +24,14 @@ const ageOptions = [
   },
 ];
 
-const AgeSurvey = ({ data, buttonHandler }) => {
+const AgeSurvey = ({ buttonHandler }) => {
   const [selectedOption, setSelectedOption] = useState(0);
   const handleOptionChange = (option) => {
     setSelectedOption(option);
   };
   return (
     <S.SurveyContent>
-      <S.SurveyHeader>
-        <S.SurveyTitle>{data.title}</S.SurveyTitle>
-        <PageIndicator crntPage={1} totalPage={2} />
-      </S.SurveyHeader>
-
+      <SurveyHeader index={1} />
       <S.SurveyOptions>
         {ageOptions.map((option, index) => (
           <SurveyOption
@@ -48,12 +44,13 @@ const AgeSurvey = ({ data, buttonHandler }) => {
           />
         ))}
       </S.SurveyOptions>
-      <Button text="다음" style={surveyBtnStyle} onClick={buttonHandler} />
+
+      <Button text="다음" style={SurveyBtnStyle} onClick={buttonHandler} />
     </S.SurveyContent>
   );
 };
 
-const surveyBtnStyle = css`
+const SurveyBtnStyle = css`
   width: 608px;
   height: 52px;
 
