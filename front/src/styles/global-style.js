@@ -6,22 +6,22 @@ export const GlobalStyle = createGlobalStyle`
   
   @font-face {
     font-family: "HyundaiSansHeadBoldKR";
-    src: url('src/assets/font/HyundaiSansHead-Bold.otf') format('opentype');
+    src: url('src/assets/font/HyundaiSansHeadKRBold.ttf') format('truetype');
   }
   @font-face {
     font-family: "HyundaiSansHeadMediumKR";
-    src: url('src/assets/font/HyundaiSansHead-Medium.otf') format('opentype');
+    src: url('src/assets/font/HyundaiSansHeadKRMedium.ttf') format('truetype');
   }
   @font-face {
     font-family: "HyundaiSansTextBoldKR";
-    src: url('src/assets/font/HyundaiSansText-Bold.otf') format('opentype');
+    src: url('src/assets/font/HyundaiSansTextKRBold.ttf') format('truetype');
   }
   @font-face {
     font-family: "HyundaiSansTextMediumKR";
-    src: url('src/assets/font/HyundaiSansText-Medium.otf') format('opentype');
+    src: url('src/assets/font/HyundaiSansTextKRMedium.ttf') format('truetype');
   }
   @font-face {
     font-family: "HyundaiSansTextRegularKR";
-    src: url('src/assets/font/HyundaiSansText-Regular.otf') format('opentype');
+    src: url('src/assets/font/HyundaiSansTextKRRegular.ttf') format('truetype');
   }
 `;
