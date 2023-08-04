@@ -24,7 +24,7 @@ const ageOptions = [
   },
 ];
 
-const AgeSurvey = ({ data, buttonHandler }) => {
+const AgeSurvey = ({ buttonHandler }) => {
   const [selectedOption, setSelectedOption] = useState(0);
   const handleOptionChange = (option) => {
     setSelectedOption(option);
@@ -32,7 +32,9 @@ const AgeSurvey = ({ data, buttonHandler }) => {
   return (
     <S.SurveyContent>
       <S.SurveyHeader>
-        <S.SurveyTitle>{stringToHTML(data.title)}</S.SurveyTitle>
+        <S.SurveyTitle>
+          <strong>나이</strong>를 알려주세요.
+        </S.SurveyTitle>
         <PageIndicator crntPage={1} totalPage={2} />
       </S.SurveyHeader>
 

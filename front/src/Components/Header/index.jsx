@@ -19,7 +19,7 @@ const Header = () => {
   };
 
   return (
-    <HeaderWrapper>
+    <HeaderWrapper $pathname={pathname}>
       <DefaultHeader $pathname={pathname}>
         {getLogoImage()}
         <SelectOption pathname={pathname} />
@@ -30,7 +30,14 @@ const Header = () => {
 };
 
 const HeaderWrapper = styled.div`
-  position: absolute;
+  ${({ $pathname }) =>
+    $pathname === "/"
+      ? css`
+          position: absolute;
+        `
+      : css`
+          position: relative;
+        `}
 
   display: flex;
   flex-direction: column;
