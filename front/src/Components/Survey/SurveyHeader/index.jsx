@@ -26,14 +26,12 @@ const SurveyHeader = ({ index }) => {
 
 const Title = styled.div`
   ${({ theme }) => theme.font.Extra1}
-
   strong {
-    font-weight: bold;
+    font-family: "HyundaiSansHeadMediumKR";
   }
 `;
 const Wrapper = styled.div`
   display: flex;
-  align-items: center;
   justify-content: space-between;
 `;
 export default SurveyHeader;

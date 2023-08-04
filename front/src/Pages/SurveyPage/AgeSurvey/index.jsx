@@ -46,12 +46,12 @@ const AgeSurvey = ({ buttonHandler }) => {
         ))}
       </S.SurveyOptions>
 
-      <Button text="다음" style={surveyBtnStyle} onClick={buttonHandler} />
+      <Button text="다음" style={SurveyBtnStyle} onClick={buttonHandler} />
     </S.SurveyContent>
   );
 };
 
-const surveyBtnStyle = css`
+const SurveyBtnStyle = css`
   width: 608px;
   height: 52px;
 
