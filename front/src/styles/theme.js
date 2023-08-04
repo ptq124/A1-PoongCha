@@ -140,9 +140,9 @@ const font = {
 
 
   // 추가한 폰트
-  // Extra1 : SurveyPage > SurveyTitle 
+  // Extra1 : SurveyHeader > Title 
   Extra1: css`
-    font-family: "HyundaiSansHeadBoldKR";
+    font-family: "HyundaiSansHeadRegularKR";
     font-size: 22px;
     font-style: normal;
     font-weight: 400;
@@ -158,7 +158,24 @@ const font = {
     line-height: 24px;
     letter-spacing: -0.2px;
 `,
-
+// Extra3 : LandingPage > Text
+  Extra3: css`
+    font-family: "HyundaiSansHeadRegularKR";
+    font-size: 28px;
+    font-style:normal;
+    font-weight:400;
+    line-height:42px;
+    letter-spacing:-0.3px;
+  `,
+  // Extra4 : LifestyleSurvey > "원하는 라이프스타일이 없다면?" 버튼
+  Extra4: css`
+    font-family: "HyundaiSansTextRegularKR";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 16px;
+    letter-spacing: -0.07px;
+  `
 };
 
 export const theme = {

@@ -1,6 +1,6 @@
 import React from "react";
 import { styled, css } from "styled-components";
-import OptionalHeader from "../Header/OptionalHeader/index";
+import OptionalHeader from "./OptionalHeader/index";
 import HyundaiLogo from "../../assets/icons/hyundai-logo.svg";
 import HyundaiWhiteLogo from "../../assets/icons/hyundai-logo-white.svg";
 import { useLocation } from "react-router-dom";
@@ -19,7 +19,7 @@ const Header = () => {
   };
 
   return (
-    <HeaderWrapper>
+    <HeaderWrapper $pathname={pathname}>
       <DefaultHeader $pathname={pathname}>
         {getLogoImage()}
         <SelectOption pathname={pathname} />
@@ -30,7 +30,14 @@ const Header = () => {
 };
 
 const HeaderWrapper = styled.div`
-  position: absolute;
+  ${({ $pathname }) =>
+    $pathname === "/"
+      ? css`
+          position: absolute;
+        `
+      : css`
+          position: relative;
+        `}
 
   display: flex;
   flex-direction: column;
