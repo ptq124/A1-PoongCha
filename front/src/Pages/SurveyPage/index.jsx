@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 import AgeSurvey from "./AgeSurvey";
 import LifestyleSurvey from "./LifestyleSurvey";
 import ExtraSurvey from "./ExtraSurvey";
-import ProgressBar from "../../Components/Survey/progressBar";
+import ProgressBar from "../../Components/Survey/ProgressBar";
 
 const SurveyPage = () => {
   const [page, setPage] = useState(0);
