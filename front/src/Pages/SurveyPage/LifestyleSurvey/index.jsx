@@ -1,14 +1,19 @@
 import * as S from "../styles";
 import React, { useState } from "react";
 import Button from "../../../Components/Common/Button/Button";
-import { css } from "styled-components";
+import { css, styled } from "styled-components";
 import SurveyHeader from "../../../Components/Survey/SurveyHeader";
+import LifestylePersona from "../../../Components/Survey/LifestylePersona";
+
+const testData = [0, 1, 2, 3];
 
 const LifestyleSurvey = ({ linkHandler }) => {
-  const [selectedOption, setSelectedOption] = useState(0);
-  const handleOptionChange = (option) => {
-    setSelectedOption(option);
+  const [selectedOption, setSelectedOption] = useState("Option 1");
+
+  const handleOptionChange = (event) => {
+    setSelectedOption(parseInt(event.target.value));
   };
+
   return (
     <S.SurveyContent>
       <SurveyHeader index={2} />
@@ -17,11 +22,27 @@ const LifestyleSurvey = ({ linkHandler }) => {
         style={LinkBtnStyle}
         onClick={linkHandler}
       />
-      <S.SurveyOptions></S.SurveyOptions>
+      <S.SurveyOptions>
+        {testData.map((_, index) => (
+          <label key={index}>
+            <LifestylePersona selected={selectedOption === index} />
+            <Radio
+              type="radio"
+              value={index}
+              checked={selectedOption === index}
+              onChange={handleOptionChange}
+            />
+          </label>
+        ))}
+      </S.SurveyOptions>
       <Button text="선택 완료" style={SurveyBtnStyle} />
     </S.SurveyContent>
   );
 };
+
+const Radio = styled.input`
+  display: none;
+`;
 
 const LinkBtnStyle = css`
   color: ${({ theme }) => theme.color.secondary};
