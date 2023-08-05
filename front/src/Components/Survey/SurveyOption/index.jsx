@@ -3,25 +3,29 @@ import { css, styled } from "styled-components";
 import RadioBtn from "../../Common/RadioBtn";
 import Check24BlueIcon from "../../../assets/checkcircle/check-24-blue.svg";
 
-const SurveyOption = ({ label, index, value, name, selected, onChange }) => {
+const SurveyOption = ({
+  label,
+  index,
+  value,
+  name,
+  selected,
+  onChange,
+  isLong,
+}) => {
+  const inputId = `radioInput_${name}_${index}`;
   return (
     <>
-      <SurveyOptionLabel htmlFor={"radioInput" + index} selected={selected}>
+      <SurveyOptionLabel htmlFor={inputId} selected={selected} isLong={isLong}>
         {label}
         {selected && <img src={Check24BlueIcon} alt="check" />}
       </SurveyOptionLabel>
-      <RadioBtn
-        id={"radioInput" + index}
-        onChange={onChange}
-        name={name}
-        value={value}
-      />
+      <RadioBtn id={inputId} onChange={onChange} name={name} value={value} />
     </>
   );
 };
 
 const SurveyOptionLabel = styled.label`
-  width: 298px;
+  width: ${(props) => (props.isLong ? "100%" : "298px")};
   height: 56px;
 
   display: flex;
@@ -47,33 +51,9 @@ const SurveyOptionLabel = styled.label`
         `
       : css`
           background-color: ${({ theme }) => theme.color.grey800};
-          ${({ theme }) => theme.font.Body2_Medium};
+          ${({ theme }) => theme.font.Extra5};
           color: ${({ theme }) => theme.color.grey500};
         `}
 `;
 
 export default SurveyOption;
-
-// const [selectedOption, setSelectedOption] = useState(0);
-// const handleOptionChange = (option) => {
-//   setSelectedOption(option);
-// };
-
-{
-  /* <form>
-        <SurveyOption
-          label="20대"
-          index={0}
-          name="age"
-          selected={selectedOption === 0}
-          onChange={() => handleOptionChange(0)}
-        />
-        <SurveyOption
-          label="30대"
-          index={1}
-          name="age"
-          selected={selectedOption === 1}
-          onChange={() => handleOptionChange(1)}
-        />
-      </form> */
-}
