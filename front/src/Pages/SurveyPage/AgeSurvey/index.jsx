@@ -4,25 +4,30 @@ import SurveyOption from "../../../Components/Survey/SurveyOption";
 import Button from "../../../Components/Common/Button/Button";
 import { css } from "styled-components";
 import SurveyHeader from "../../../Components/Survey/SurveyHeader";
+import SurveyOptionGroup from "../../../Components/Survey/SurveyOptionGroup";
 
-const ageOptions = [
-  {
-    index: 0,
-    label: "20대",
-  },
-  {
-    index: 1,
-    label: "30대",
-  },
-  {
-    index: 2,
-    label: "40대",
-  },
-  {
-    index: 3,
-    label: "50대 이상",
-  },
-];
+const ageSurveyInfo = {
+  groupname: "age",
+  title: "",
+  options: [
+    {
+      index: 0,
+      label: "20대",
+    },
+    {
+      index: 1,
+      label: "30대",
+    },
+    {
+      index: 2,
+      label: "40대",
+    },
+    {
+      index: 3,
+      label: "50대 이상",
+    },
+  ],
+};
 
 const AgeSurvey = ({ buttonHandler }) => {
   const [selectedOption, setSelectedOption] = useState(0);
@@ -32,19 +37,12 @@ const AgeSurvey = ({ buttonHandler }) => {
   return (
     <S.SurveyContent>
       <SurveyHeader index={1} />
-      <S.SurveyOptions>
-        {ageOptions.map((option, index) => (
-          <SurveyOption
-            label={option.label}
-            key={index}
-            index={index}
-            name="age"
-            selected={selectedOption === index}
-            onChange={() => handleOptionChange(index)}
-          />
-        ))}
-      </S.SurveyOptions>
-
+      <SurveyOptionGroup
+        options={ageSurveyInfo.options}
+        handleOptionChange={handleOptionChange}
+        selectedOption={selectedOption}
+        groupname={ageSurveyInfo.groupname}
+      />
       <Button text="다음" style={SurveyBtnStyle} onClick={buttonHandler} />
     </S.SurveyContent>
   );

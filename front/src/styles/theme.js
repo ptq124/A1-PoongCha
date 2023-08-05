@@ -175,7 +175,25 @@ const font = {
     font-weight: 500;
     line-height: 16px;
     letter-spacing: -0.07px;
-  `
+  `,
+  // Extra5 : SurveyOption > unselected된 버튼
+  Extra5: css`
+  font-family: "HyundaiSansTextRegularKR";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: -0.2px;
+`,
+// Extra6: SurveyOption > selected 버튼
+Extra6: css`
+  font-family: "HyundaiSansTextRegularKR";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 22px;
+  letter-spacing: -0.2px;
+`,
 };
 
 export const theme = {
