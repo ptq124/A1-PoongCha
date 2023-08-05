@@ -3,7 +3,8 @@ import * as S from "../styles";
 import SurveyHeader from "../../../Components/Survey/SurveyHeader";
 import SurveyOptionGroup from "../../../Components/Survey/SurveyOptionGroup";
 import Button from "../../../Components/Common/Button/Button";
-import { css } from "styled-components";
+import { css, styled } from "styled-components";
+import BudgetSliderGroup from "./BudgetSliderGroup";
 
 const extraSurveyInfo = [
   {
@@ -121,7 +122,10 @@ const ExtraSurvey = () => {
           groupname={info.groupname}
         />
       ))}
+
+      <BudgetSliderGroup />
     </S.SurveyContent>
   );
 };
+
 export default ExtraSurvey;

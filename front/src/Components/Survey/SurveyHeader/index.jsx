@@ -58,7 +58,7 @@ const Subtitle = styled.div`
   margin-top: 8px;
 `;
 const Title = styled.div`
-  ${({ theme }) => theme.font.Extra1}
+  ${({ theme }) => theme.font.Extra1};
   strong {
     font-family: "HyundaiSansHeadMediumKR";
   }
@@ -68,7 +68,8 @@ const TitleWrapper = styled.div`
   justify-content: space-between;
 `;
 const Wrapper = styled.div`
-  display:flex;
-  flex-direction:column;s
+  display: flex;
+  flex-direction: column;
 `;
+
 export default SurveyHeader;
