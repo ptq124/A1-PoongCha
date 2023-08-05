@@ -1,9 +1,21 @@
 import React, { useRef, useState } from "react";
-import { styled } from "styled-components";
+import { css, styled } from "styled-components";
+
+// 슬라이더 값 범위
+// 0: 4200
+// 1: 4500
+// 2: 4800
+// 3: 5100
+// 4: 5400
+// 5: 5700
+// 6: 6000
+// 7: 6300
+// 8: 6600
+// 9: 6900
 
 const BudgetSliderGroup = () => {
   const sliderRef = useRef();
-  const [offset, setOffset] = useState(1);
+  const [offset, setOffset] = useState((5 * 608) / 9);
   const [value, setValue] = useState(5700);
 
   const handleMouseUp = (e) => {
@@ -17,7 +29,17 @@ const BudgetSliderGroup = () => {
   const handleMouseMove = (e) => {
     const rect = sliderRef.current.getBoundingClientRect();
     const offsetX = e.clientX - rect.left;
-    setOffset(offsetX);
+    if (offsetX >= 12 && offsetX <= 608) {
+      // setOffset(offsetX);
+      const closestIndex = Math.round((offsetX / 608) * 9);
+      let calcOffset = (closestIndex * 608) / 9;
+      if (closestIndex === 9) {
+        calcOffset -= 24;
+      }
+      setOffset(calcOffset);
+      setValue(4200 + closestIndex * 300);
+      console.log(closestIndex);
+    }
   };
   return (
     <Wrapper>
@@ -25,10 +47,18 @@ const BudgetSliderGroup = () => {
       <BudgetRange>
         <strong>4200</strong>만원 ~ <strong>{value}</strong>만원
       </BudgetRange>
-      <Slider ref={sliderRef} onMouseDown={handleMouseDown}>
-        <SliderBody offset={offset}></SliderBody>
-        <SliderHandle></SliderHandle>
-      </Slider>
+      <SliderContainer>
+        <SliderHandle $isFixed={false}></SliderHandle>
+        <Slider ref={sliderRef}>
+          <SliderBody offset={offset}></SliderBody>
+        </Slider>
+        <SliderHandle
+          $isFixed={true}
+          offset={offset}
+          onMouseDown={handleMouseDown}
+        ></SliderHandle>
+      </SliderContainer>
+
       <SliderMark>
         <span>4200만원</span>
         <span>6900만원</span>
@@ -46,11 +76,33 @@ const SliderMark = styled.div`
 
   margin-top: 14px;
 `;
-const SliderHandle = styled.div``;
+const SliderHandle = styled.div`
+  position: absolute;
+  left: ${({ offset }) => offset}px;
+
+  width: 24px;
+  height: 24px;
+
+  background-color: ${({ theme }) => theme.color.grey1000};
+
+  border: 1px solid ${({ theme }) => theme.color.grey500};
+  border-radius: 100px;
+
+  ${({ $isFixed }) =>
+    $isFixed &&
+    css`
+      &:hover {
+        cursor: pointer;
+      }
+    `}
+`;
 const SliderBody = styled.div`
-  width: ${({ offset }) => offset}px;
+  width: ${({ offset }) => offset + 12}px;
   height: 8px;
+
   background-color: ${({ theme }) => theme.color.secondary};
+
+  border-radius: 16px;
 `;
 const Slider = styled.div`
   width: 100%;
@@ -59,9 +111,16 @@ const Slider = styled.div`
   background-color: ${({ theme }) => theme.color.grey700};
 
   border-radius: 16px;
-  margin-top: 34px;
+`;
+const SliderContainer = styled.div`
+  display: flex;
+  position: relative;
 
-  overflow: hidden;
+  align-items: center;
+  width: 100%;
+  height: 24px;
+
+  margin-top: 26px;
 `;
 const BudgetRange = styled.div`
   ${({ theme }) => theme.font.Extra7};
