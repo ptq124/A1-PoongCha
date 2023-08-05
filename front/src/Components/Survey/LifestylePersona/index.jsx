@@ -1,29 +1,40 @@
 import React from "react";
-import { styled } from "styled-components";
-import check24blue from "../../../assets/checkcircle/check-32-blue.svg";
-import check24grey from "../../../assets/checkcircle/check-24-grey.svg";
+import { styled, css } from "styled-components";
+import check32blue from "../../../assets/checkcircle/check-32-blue.svg";
+import check32grey from "../../../assets/checkcircle/check-32-grey.svg";
 import life from "../../../assets/lifestyle/lifestyle1.svg";
 
-const LifestylePersona = () => {
+/**
+데이터 전달 값: 라이프 스타일
+태그: []
+문구: 텍스트
+프로필 사진: 이미지
+*/
+const LifestylePersona = ({ selected }) => {
   return (
-    <Wrapper>
+    <Wrapper selected={selected}>
       <TagWrppaer>
-        <LifeStlyeTag>#주행안전</LifeStlyeTag>
-        <LifeStlyeTag>#사용편의</LifeStlyeTag>
+        <LifeStlyeTag selected={selected}>#주행안전</LifeStlyeTag>
+        <LifeStlyeTag selected={selected}>#사용편의</LifeStlyeTag>
       </TagWrppaer>
-      <MainWrapper>
+      <LifestylePhrase selected={selected}>
         <span>
           가족과 함께 타서
           <br />
           안전을 중시해요.
         </span>
-        <img src={check24blue} />
-      </MainWrapper>
+        <CheckImg src={selected ? check32blue : check32grey} />
+      </LifestylePhrase>
       <LifeStyleDetail>라이프스타일 엿보기</LifeStyleDetail>
       <LifeStyleImg src={life} alt="Lifestyle" />
     </Wrapper>
   );
 };
+
+const CheckImg = styled.img`
+  width: 32px;
+  height: 32px;
+`;
 
 const LifeStyleImg = styled.img`
   position: absolute;
@@ -51,10 +62,23 @@ const Wrapper = styled.div`
   width: 256px;
   height: 180px;
 
+  background-color: ${({ selected }) =>
+    selected
+      ? css`
+          ${({ theme }) => theme.color.grey1000}
+        `
+      : `var(--blue-blue-100, rgba(0, 66, 142, 0.10))`};
+
   border: 1.5px solid;
-  border-color: ${({ theme }) => theme.color.primary_default};
+  border-color: ${({ selected }) =>
+    selected
+      ? css`
+          ${({ theme }) => theme.color.primary_default}
+        `
+      : "transparent"};
   border-radius: 8px;
 
+  margin-top: 10%;
   padding: 20px;
   padding-bottom: 0px;
 `;
@@ -63,7 +87,12 @@ const LifeStlyeTag = styled.span`
   display: flex;
   align-items: center;
 
-  background: rgba(33, 151, 201, 0.1);
+  background: ${({ selected }) =>
+    selected
+      ? `rgba(33, 151, 201, 0.1)`
+      : css`
+          ${({ theme }) => theme.color.grey1000}
+        `};
   color: ${({ theme }) => theme.color.secondary};
 
   padding: 6px 10px;
@@ -81,7 +110,7 @@ const TagWrppaer = styled.div`
   gap: 8px;
 `;
 
-const MainWrapper = styled.div`
+const LifestylePhrase = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -90,7 +119,15 @@ const MainWrapper = styled.div`
 
   span {
     ${({ theme }) => theme.font.Body2_Medium}
-    color: ${({ theme }) => theme.color.primary_default};
+
+    color: ${({ selected }) =>
+      selected
+        ? css`
+            ${({ theme }) => theme.color.primary_default}
+          `
+        : css`
+            ${({ theme }) => theme.color.grey0}
+          `};
   }
 `;
 
@@ -103,7 +140,14 @@ const LifeStyleDetail = styled.div`
   align-items: center;
 
   border-top: 1px solid;
-  border-top-color: ${({ theme }) => theme.color.grey700};
+  border-top-color: ${({ selected }) =>
+    selected
+      ? css`
+          ${({ theme }) => theme.color.grey700}
+        `
+      : css`
+          ${({ theme }) => theme.color.grey900}
+        `};
 
   color: ${({ theme }) => theme.color.grey200};
   ${({ theme }) => theme.font.Body4_Medium};
