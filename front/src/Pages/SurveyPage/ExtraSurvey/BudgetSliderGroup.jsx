@@ -1,18 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { css, styled } from "styled-components";
 
-// 슬라이더 인덱스/최대 예산 값
-// 0: 4200
-// 1: 4500
-// 2: 4800
-// 3: 5100
-// 4: 5400
-// 5: 5700
-// 6: 6000
-// 7: 6300
-// 8: 6600
-// 9: 6900
-
 const BudgetSliderGroup = () => {
   const sliderRef = useRef();
   let idx = 3;
@@ -50,12 +38,12 @@ const BudgetSliderGroup = () => {
         <strong>4200</strong>만원 ~ <strong>{maxBudget}</strong>만원
       </BudgetRange>
       <SliderContainer>
-        <SliderHandle $isFixed={false}></SliderHandle>
+        <SliderHandle $isFixed={true}></SliderHandle>
         <Slider ref={sliderRef}>
           <SliderContent offset={offset}></SliderContent>
         </Slider>
         <SliderHandle
-          $isFixed={true}
+          $isFixed={false}
           offset={offset}
           onMouseDown={handleMouseDown}
         ></SliderHandle>
@@ -91,7 +79,7 @@ const SliderHandle = styled.div`
   border-radius: 100px;
 
   ${({ $isFixed }) =>
-    $isFixed &&
+    !$isFixed &&
     css`
       &:hover {
         cursor: pointer;
