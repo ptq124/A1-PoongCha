@@ -222,6 +222,15 @@ Extra9: css`
   line-height: 16px;
   letter-spacing: -0.06px;
 `,
+// QNASummary > Title
+Extra10: css`
+  font-family: "HyundaiSansHeadMediumKR";
+  font-size: 26px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 32px; 
+  letter-spacing: -0.3px;
+`
 };
 
 export const theme = {

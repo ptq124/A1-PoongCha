@@ -15,6 +15,8 @@ const QNASummary = () => {
     <Wrapper>
       <SummaryContent>
         <AnswerTagContainer>{AnswerTags}</AnswerTagContainer>
+        <Title>질문에 기반한 추천 차량이에요.</Title>
+        <Subtitle>전국의 카마스터분들이 엄선하여 추천했어요.</Subtitle>
         <Img src={PalisadeImg} />
       </SummaryContent>
 
@@ -22,6 +24,17 @@ const QNASummary = () => {
     </Wrapper>
   );
 };
+const Title = styled.div`
+  ${({ theme }) => theme.font.Extra10};
+
+  margin-top: 16px;
+`;
+const Subtitle = styled.div`
+  ${({ theme }) => theme.font.Body4_Regular};
+  color: ${({ theme }) => theme.color.grey200};
+
+  margin-top: 8px;
+`;
 const AnswerTag = styled.div`
   display: flex;
   align-items: center;
