@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as S from "../styles";
 import SurveyHeader from "../../../Components/Survey/SurveyHeader";
 import SurveyOptionGroup from "../../../Components/Survey/SurveyOptionGroup";
 import Button from "../../../Components/Common/Button/Button";
-import { css, styled } from "styled-components";
 import BudgetSliderGroup from "./BudgetSliderGroup";
+import { css } from "styled-components";
 
 const extraSurveyInfo = [
   {
@@ -92,13 +92,14 @@ const extraSurveyInfo = [
     ],
   },
 ];
-const ExtraSurvey = () => {
+const ExtraSurvey = ({ buttonHandler }) => {
   const [surveyData, setSurveyData] = useState({
     drivingRecord: 0,
     familySize: 0,
     purpose: null,
     viewpoint: null,
   });
+  const [isBtnActive, setIsBtnActive] = useState(false);
 
   const handleOptionChange = (group, newValue) => {
     setSurveyData((prevData) => ({
@@ -106,6 +107,21 @@ const ExtraSurvey = () => {
       [group]: newValue,
     }));
   };
+  const checkBtnActivity = () => {
+    if (
+      surveyData["drivingRecord"] !== null &&
+      surveyData["familySize"] !== null &&
+      surveyData["purpose"] !== null &&
+      surveyData["viewpoint"] !== null
+    ) {
+      setIsBtnActive(true);
+    }
+  };
+  useEffect(() => {
+    if (!isBtnActive) {
+      checkBtnActivity();
+    }
+  }, [surveyData]);
 
   return (
     <S.SurveyContent>
@@ -124,8 +140,37 @@ const ExtraSurvey = () => {
       ))}
 
       <BudgetSliderGroup />
+      <Button
+        text="완료"
+        $isActive={isBtnActive}
+        style={SurveyBtnStyle}
+        onClick={buttonHandler}
+      />
     </S.SurveyContent>
   );
 };
+
+const SurveyBtnStyle = css`
+  width: 608px;
+  height: 52px;
+
+  position: relative;
+
+  color: ${({ theme }) => theme.color.grey1000};
+  background-color: ${({ theme }) => theme.color.primary_default};
+
+  border-radius: 6px;
+  border: 1px solid ${({ theme }) => theme.color.primary_default};
+  ${({ theme }) => theme.font.Body3_Medium};
+
+  margin: 52px 0px 36px;
+
+  ${({ $isActive }) =>
+    !$isActive &&
+    css`
+      opacity: 0.3;
+      pointer-events: none;
+    `}
+`;
 
 export default ExtraSurvey;

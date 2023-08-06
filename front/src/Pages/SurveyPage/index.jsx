@@ -4,13 +4,15 @@ import AgeSurvey from "./AgeSurvey";
 import LifestyleSurvey from "./LifestyleSurvey";
 import ExtraSurvey from "./ExtraSurvey";
 import ProgressBar from "../../Components/Survey/ProgressBar";
+import { useNavigate } from "react-router-dom";
 
 const SurveyPage = () => {
+  const navigate = useNavigate();
   const [page, setPage] = useState(0);
   const Pages = {
     0: <AgeSurvey buttonHandler={() => setPage(1)} />,
     1: <LifestyleSurvey linkHandler={() => setPage(2)} />,
-    2: <ExtraSurvey />,
+    2: <ExtraSurvey buttonHandler={() => navigate("/etc_end")} />,
   };
   return (
     <Wrapper>
