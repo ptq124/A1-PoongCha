@@ -16,7 +16,14 @@ const ExtraSurvey = ({ buttonHandler }) => {
     maxBudget: 5100,
   });
   const [isBtnActive, setIsBtnActive] = useState(false);
-
+  const refineAnswersAndNavigate = () => {
+    const refinedAnswers = {};
+    surveyData.map(({ groupname, options }) => {
+      refinedAnswers[groupname] = options[surveyAnswers[groupname]].label;
+    });
+    refinedAnswers["maxBudget"] = surveyAnswers["maxBudget"];
+    buttonHandler(refinedAnswers);
+  };
   const handleOptionChange = (group, newValue) => {
     setSurveyAnswers((prevData) => ({
       ...prevData,
@@ -64,7 +71,7 @@ const ExtraSurvey = ({ buttonHandler }) => {
         text="완료"
         $isActive={isBtnActive}
         style={SurveyBtnStyle}
-        onClick={buttonHandler}
+        onClick={refineAnswersAndNavigate}
       />
     </S.SurveyContent>
   );
