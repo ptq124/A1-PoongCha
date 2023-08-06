@@ -15,7 +15,7 @@ const SurveyOption = ({
   const inputId = `radioInput_${name}_${index}`;
   return (
     <>
-      <SurveyOptionLabel htmlFor={inputId} selected={selected} isLong={isLong}>
+      <SurveyOptionLabel htmlFor={inputId} selected={selected} $isLong={isLong}>
         {label}
         {selected && <img src={Check24BlueIcon} alt="check" />}
       </SurveyOptionLabel>
@@ -25,7 +25,7 @@ const SurveyOption = ({
 };
 
 const SurveyOptionLabel = styled.label`
-  width: ${(props) => (props.isLong ? "100%" : "298px")};
+  width: ${(props) => (props.$isLong ? "100%" : "298px")};
   height: 56px;
 
   display: flex;

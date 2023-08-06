@@ -194,6 +194,23 @@ Extra6: css`
   line-height: 22px;
   letter-spacing: -0.2px;
 `,
+// Extra7: ExtraSurvey > BudgetSlider > BudgetRange
+Extra7: css`
+  font-family: "HyundaiSansHeadRegularKR";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px;
+  letter-spacing: -0.2px;
+`,
+Extra8: css`
+  font-family: "HyundaiSansHeadBoldKR";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px;
+  letter-spacing: -0.2px;
+`,
 };
 
 export const theme = {
