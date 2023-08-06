@@ -16,7 +16,8 @@ import { css, styled } from "styled-components";
 const BudgetSliderGroup = () => {
   const sliderRef = useRef();
   let idx = 3;
-  const [index, setIndex] = useState(idx);
+  const [offset, setOffset] = useState((idx * 608) / 9);
+  const [maxBudget, setMaxBudget] = useState(4200 + idx * 300);
 
   const handleMouseUp = (e) => {
     document.removeEventListener("mousemove", handleMouseMove);
@@ -31,12 +32,14 @@ const BudgetSliderGroup = () => {
     if (offsetX >= 12 && offsetX <= 608) {
       const closestIndex = Math.round((offsetX / 608) * 9);
       if (closestIndex !== idx) {
-        let calcOffset = (closestIndex * 608) / 9;
-        if (closestIndex === 9) {
-          calcOffset -= 24;
-        }
+        const calcOffset =
+          closestIndex < 9
+            ? (closestIndex * 608) / 9
+            : (closestIndex * 608) / 9 - 24;
+        const calcBudget = 4200 + closestIndex * 300;
         idx = closestIndex;
-        setIndex(idx);
+        setOffset(calcOffset);
+        setMaxBudget(calcBudget);
       }
     }
   };
@@ -44,16 +47,16 @@ const BudgetSliderGroup = () => {
     <Wrapper>
       <Title>최대 예산을 알려주세요.</Title>
       <BudgetRange>
-        <strong>4200</strong>만원 ~ <strong>{4200 + index * 300}</strong>만원
+        <strong>4200</strong>만원 ~ <strong>{maxBudget}</strong>만원
       </BudgetRange>
       <SliderContainer>
         <SliderHandle $isFixed={false}></SliderHandle>
         <Slider ref={sliderRef}>
-          <SliderContent offset={(index * 608) / 9}></SliderContent>
+          <SliderContent offset={offset}></SliderContent>
         </Slider>
         <SliderHandle
           $isFixed={true}
-          offset={(index * 608) / 9}
+          offset={offset}
           onMouseDown={handleMouseDown}
         ></SliderHandle>
       </SliderContainer>
