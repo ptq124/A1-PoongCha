@@ -3,14 +3,13 @@ import { styled, css } from "styled-components";
 import check32blue from "../../../assets/checkcircle/check-32-blue.svg";
 import check32grey from "../../../assets/checkcircle/check-32-grey.svg";
 import life from "../../../assets/lifestyle/lifestyle1.svg";
-
 /**
 데이터 전달 값: 라이프 스타일
 태그: []
 문구: 텍스트
 프로필 사진: 이미지
 */
-const LifestylePersona = ({ selected }) => {
+const LifestylePersona = ({ selected, setPopupOpen }) => {
   return (
     <Wrapper selected={selected}>
       <TagWrppaer>
@@ -25,31 +24,13 @@ const LifestylePersona = ({ selected }) => {
         </span>
         <CheckImg src={selected ? check32blue : check32grey} />
       </LifestylePhrase>
-      <LifeStyleDetail>라이프스타일 엿보기</LifeStyleDetail>
+      <LifeStyleDetail onClick={() => setPopupOpen(true)}>
+        라이프스타일 엿보기
+      </LifeStyleDetail>
       <LifeStyleImg src={life} alt="Lifestyle" />
     </Wrapper>
   );
 };
-
-const CheckImg = styled.img`
-  width: 32px;
-  height: 32px;
-`;
-
-const LifeStyleImg = styled.img`
-  position: absolute;
-
-  width: 97.948px;
-  height: 88px;
-  flex-shrink: 0;
-
-  background: ${({ src }) => `url('${src}')`}, lightgray 50% / cover no-repeat;
-  border-radius: 50%;
-
-  object-fit: cover;
-  top: -40px;
-  right: 20px;
-`;
 
 const Wrapper = styled.div`
   position: relative;
@@ -81,6 +62,8 @@ const Wrapper = styled.div`
   margin-top: 10%;
   padding: 20px;
   padding-bottom: 0px;
+
+  cursor: pointer;
 `;
 
 const LifeStlyeTag = styled.span`
@@ -95,10 +78,10 @@ const LifeStlyeTag = styled.span`
         `};
   color: ${({ theme }) => theme.color.secondary};
 
-  padding: 6px 10px;
-  border-radius: 100px;
   ${({ theme }) => theme.font.Caption1_Medium};
   text-align: center;
+  padding: 6px 10px;
+  border-radius: 100px;
 `;
 
 const TagWrppaer = styled.div`
@@ -131,6 +114,11 @@ const LifestylePhrase = styled.div`
   }
 `;
 
+const CheckImg = styled.img`
+  width: 32px;
+  height: 32px;
+`;
+
 const LifeStyleDetail = styled.div`
   width: 256px;
   height: 48px;
@@ -151,6 +139,21 @@ const LifeStyleDetail = styled.div`
 
   color: ${({ theme }) => theme.color.grey200};
   ${({ theme }) => theme.font.Body4_Medium};
+`;
+
+const LifeStyleImg = styled.img`
+  position: absolute;
+
+  width: 97.948px;
+  height: 88px;
+  flex-shrink: 0;
+
+  background: ${({ src }) => `url('${src}')`}, lightgray 50% / cover no-repeat;
+  border-radius: 50%;
+
+  object-fit: cover;
+  top: -40px;
+  right: 20px;
 `;
 
 export default LifestylePersona;
