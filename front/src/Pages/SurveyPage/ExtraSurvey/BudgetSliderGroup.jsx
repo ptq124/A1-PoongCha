@@ -1,7 +1,7 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { css, styled } from "styled-components";
 
-// 슬라이더 값 범위
+// 슬라이더 인덱스/최대 예산 값
 // 0: 4200
 // 1: 4500
 // 2: 4800
@@ -15,12 +15,11 @@ import { css, styled } from "styled-components";
 
 const BudgetSliderGroup = () => {
   const sliderRef = useRef();
-  const [offset, setOffset] = useState((5 * 608) / 9);
-  const [value, setValue] = useState(5700);
+  let idx = 3;
+  const [index, setIndex] = useState(idx);
 
   const handleMouseUp = (e) => {
     document.removeEventListener("mousemove", handleMouseMove);
-    document.removeEventListener("mouseup", handleMouseUp);
   };
   const handleMouseDown = (e) => {
     document.addEventListener("mousemove", handleMouseMove);
@@ -30,31 +29,31 @@ const BudgetSliderGroup = () => {
     const rect = sliderRef.current.getBoundingClientRect();
     const offsetX = e.clientX - rect.left;
     if (offsetX >= 12 && offsetX <= 608) {
-      // setOffset(offsetX);
       const closestIndex = Math.round((offsetX / 608) * 9);
-      let calcOffset = (closestIndex * 608) / 9;
-      if (closestIndex === 9) {
-        calcOffset -= 24;
+      if (closestIndex !== idx) {
+        let calcOffset = (closestIndex * 608) / 9;
+        if (closestIndex === 9) {
+          calcOffset -= 24;
+        }
+        idx = closestIndex;
+        setIndex(idx);
       }
-      setOffset(calcOffset);
-      setValue(4200 + closestIndex * 300);
-      console.log(closestIndex);
     }
   };
   return (
     <Wrapper>
       <Title>최대 예산을 알려주세요.</Title>
       <BudgetRange>
-        <strong>4200</strong>만원 ~ <strong>{value}</strong>만원
+        <strong>4200</strong>만원 ~ <strong>{4200 + index * 300}</strong>만원
       </BudgetRange>
       <SliderContainer>
         <SliderHandle $isFixed={false}></SliderHandle>
         <Slider ref={sliderRef}>
-          <SliderBody offset={offset}></SliderBody>
+          <SliderContent offset={(index * 608) / 9}></SliderContent>
         </Slider>
         <SliderHandle
           $isFixed={true}
-          offset={offset}
+          offset={(index * 608) / 9}
           onMouseDown={handleMouseDown}
         ></SliderHandle>
       </SliderContainer>
@@ -96,7 +95,7 @@ const SliderHandle = styled.div`
       }
     `}
 `;
-const SliderBody = styled.div`
+const SliderContent = styled.div`
   width: ${({ offset }) => offset + 12}px;
   height: 8px;
 
