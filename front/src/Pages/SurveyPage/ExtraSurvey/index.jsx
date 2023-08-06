@@ -98,6 +98,7 @@ const ExtraSurvey = ({ buttonHandler }) => {
     familySize: 0,
     purpose: null,
     viewpoint: null,
+    maxBudget: 5100,
   });
   const [isBtnActive, setIsBtnActive] = useState(false);
 
@@ -112,7 +113,8 @@ const ExtraSurvey = ({ buttonHandler }) => {
       surveyData["drivingRecord"] !== null &&
       surveyData["familySize"] !== null &&
       surveyData["purpose"] !== null &&
-      surveyData["viewpoint"] !== null
+      surveyData["viewpoint"] !== null &&
+      surveyData["maxBudget"] !== null
     ) {
       setIsBtnActive(true);
     }
@@ -139,7 +141,10 @@ const ExtraSurvey = ({ buttonHandler }) => {
         />
       ))}
 
-      <BudgetSliderGroup />
+      <BudgetSliderGroup
+        maxBudget={surveyData["maxBudget"]}
+        setMaxBudget={(newValue) => handleOptionChange("maxBudget", newValue)}
+      />
       <Button
         text="완료"
         $isActive={isBtnActive}

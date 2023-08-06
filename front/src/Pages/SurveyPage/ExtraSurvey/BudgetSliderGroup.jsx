@@ -1,11 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { css, styled } from "styled-components";
 
-const BudgetSliderGroup = () => {
+const BudgetSliderGroup = ({ maxBudget, setMaxBudget }) => {
   const sliderRef = useRef();
   let idx = 3;
   const [offset, setOffset] = useState((idx * 608) / 9);
-  const [maxBudget, setMaxBudget] = useState(4200 + idx * 300);
 
   const handleMouseUp = (e) => {
     document.removeEventListener("mousemove", handleMouseMove);
