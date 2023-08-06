@@ -19,7 +19,7 @@ const color = {
 };
 
 const font = {
-  Head1: css` 
+  Head1: css`
     font-family: "HyundaiSansHeadBoldKR";
     font-size: 22px;
     font-style: normal;
@@ -138,9 +138,8 @@ const font = {
     line-height: 18px;
   `,
 
-
   // 추가한 폰트
-  // Extra1 : SurveyHeader > Title 
+  // Extra1 : SurveyHeader > Title
   Extra1: css`
     font-family: "HyundaiSansHeadRegularKR";
     font-size: 22px;
@@ -157,15 +156,15 @@ const font = {
     font-weight: 500;
     line-height: 24px;
     letter-spacing: -0.2px;
-`,
-// Extra3 : LandingPage > Text
+  `,
+  // Extra3 : LandingPage > Text
   Extra3: css`
     font-family: "HyundaiSansHeadRegularKR";
     font-size: 28px;
-    font-style:normal;
-    font-weight:400;
-    line-height:42px;
-    letter-spacing:-0.3px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 42px;
+    letter-spacing: -0.3px;
   `,
   // Extra4 : LifestyleSurvey > "원하는 라이프스타일이 없다면?" 버튼
   Extra4: css`
@@ -178,39 +177,47 @@ const font = {
   `,
   // Extra5 : SurveyOption > unselected된 버튼
   Extra5: css`
-  font-family: "HyundaiSansTextRegularKR";
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 22px;
-  letter-spacing: -0.2px;
-`,
-// Extra6: SurveyOption > selected 버튼
-Extra6: css`
-  font-family: "HyundaiSansTextRegularKR";
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 22px;
-  letter-spacing: -0.2px;
-`,
-// Extra7: ExtraSurvey > BudgetSlider > BudgetRange
-Extra7: css`
-  font-family: "HyundaiSansHeadRegularKR";
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 26px;
-  letter-spacing: -0.2px;
-`,
-Extra8: css`
-  font-family: "HyundaiSansHeadBoldKR";
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 26px;
-  letter-spacing: -0.2px;
-`,
+    font-family: "HyundaiSansTextRegularKR";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: -0.2px;
+  `,
+  // Extra6: SurveyOption > selected 버튼
+  Extra6: css`
+    font-family: "HyundaiSansTextRegularKR";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 22px;
+    letter-spacing: -0.2px;
+  `,
+  // Extra7: ExtraSurvey > BudgetSlider > BudgetRange
+  Extra7: css`
+    font-family: "HyundaiSansHeadRegularKR";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 26px;
+    letter-spacing: -0.2px;
+  `,
+  Extra8: css`
+    font-family: "HyundaiSansHeadBoldKR";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 26px;
+    letter-spacing: -0.2px;
+  `,
+  Extra9: css`
+    font-family: "HyundaiSansHeadMediumKR";
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 140%; /* 44.8px */
+    letter-spacing: -0.3px;
+  `,
 };
 
 export const theme = {
