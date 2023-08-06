@@ -107,7 +107,7 @@ const ExtraSurvey = ({ buttonHandler }) => {
       [group]: newValue,
     }));
   };
-  const checkBtnActivity = () => {
+  const updateButtonStatusIfAllAnswered = () => {
     if (
       surveyData["drivingRecord"] !== null &&
       surveyData["familySize"] !== null &&
@@ -119,7 +119,7 @@ const ExtraSurvey = ({ buttonHandler }) => {
   };
   useEffect(() => {
     if (!isBtnActive) {
-      checkBtnActivity();
+      updateButtonStatusIfAllAnswered();
     }
   }, [surveyData]);
 
