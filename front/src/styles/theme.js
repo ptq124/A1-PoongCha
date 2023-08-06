@@ -16,6 +16,8 @@ const color = {
   grey200: "#404040",
   grey100: "#303030",
   grey50: "#1A1A1A",
+
+  extra1: "#EDF0F4", // QNASummary > Wrapper
 };
 
 const font = {
@@ -210,6 +212,15 @@ Extra8: css`
   font-weight: 400;
   line-height: 26px;
   letter-spacing: -0.2px;
+`,
+// QNASummary > AnswerTag
+Extra9: css`
+  font-family: "HyundaiSansTextRegularKR";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: -0.06px;
 `,
 };
 

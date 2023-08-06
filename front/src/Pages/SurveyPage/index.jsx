@@ -10,7 +10,7 @@ const SurveyPage = () => {
   const navigate = useNavigate();
   const [page, setPage] = useState(0);
   const handleExtraSurveyCompletion = (surveyAnswers) => {
-    navigate("/etc_end", { surveyAnswers });
+    navigate("/etc_end", { state: surveyAnswers });
   };
   const Pages = {
     0: <AgeSurvey buttonHandler={() => setPage(1)} />,
