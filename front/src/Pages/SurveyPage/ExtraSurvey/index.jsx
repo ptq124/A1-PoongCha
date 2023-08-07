@@ -49,7 +49,7 @@ const ExtraSurvey = ({ buttonHandler }) => {
 
   return (
     <S.SurveyContent>
-      <SurveyHeader index={3} />
+      <SurveyHeader surveyType={"Extra"} />
       {surveyData.map((info, index) => (
         <SurveyOptionGroup
           key={index}

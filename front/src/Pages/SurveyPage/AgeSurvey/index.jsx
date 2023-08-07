@@ -36,7 +36,7 @@ const AgeSurvey = ({ buttonHandler }) => {
   };
   return (
     <S.SurveyContent>
-      <SurveyHeader index={1} />
+      <SurveyHeader surveyType={"Age"} />
       <SurveyOptionGroup
         options={ageSurveyInfo.options}
         handleOptionChange={handleOptionChange}
