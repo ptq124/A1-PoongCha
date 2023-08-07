@@ -77,7 +77,7 @@ const Tag = styled.div`
 `;
 
 const Phrase = styled.div`
-  ${({ theme }) => theme.font.Extra9};
+  ${({ theme }) => theme.font.Extra11};
   margin-bottom: 8px;
 `;
 

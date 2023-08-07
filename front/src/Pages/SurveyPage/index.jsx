@@ -9,10 +9,13 @@ import { useNavigate } from "react-router-dom";
 const SurveyPage = () => {
   const navigate = useNavigate();
   const [page, setPage] = useState(0);
+  const handleExtraSurveyCompletion = (surveyAnswers) => {
+    navigate("/etc_end", { state: surveyAnswers });
+  };
   const Pages = {
     0: <AgeSurvey buttonHandler={() => setPage(1)} />,
     1: <LifestyleSurvey linkHandler={() => setPage(2)} />,
-    2: <ExtraSurvey buttonHandler={() => navigate("/etc_end")} />,
+    2: <ExtraSurvey buttonHandler={handleExtraSurveyCompletion} />,
   };
   return (
     <Wrapper>
