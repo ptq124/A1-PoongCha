@@ -14,7 +14,9 @@ const LifestylePersona = ({ selected, setPopupOpen, data }) => {
     <Wrapper selected={selected}>
       <TagWrapper>
         {data.tags.map((tag, index) => (
-          <LifestyleTag selected={selected}>{tag}</LifestyleTag>
+          <LifestyleTag selected={selected} key={index}>
+            {tag}
+          </LifestyleTag>
         ))}
       </TagWrapper>
       <LifestylePhrase selected={selected}>

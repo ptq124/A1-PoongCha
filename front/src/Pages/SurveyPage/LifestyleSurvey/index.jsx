@@ -7,7 +7,6 @@ import LifestylePersona from "../../../Components/Survey/LifestylePersona";
 import useOnClickPopUp from "../../../hooks/useOnClickPopUp";
 import PopUp from "./PopUp";
 
-const testData = [0, 1, 2, 3];
 const lifestyleSurveyInfo = {
   options: [
     {
