@@ -6,43 +6,27 @@ import { css } from "styled-components";
 import SurveyHeader from "../../../Components/Survey/SurveyHeader";
 import SurveyOptionGroup from "../../../Components/Survey/SurveyOptionGroup";
 
-const ageSurveyInfo = {
-  groupname: "age",
-  title: "",
-  options: [
-    {
-      index: 0,
-      label: "20대",
-    },
-    {
-      index: 1,
-      label: "30대",
-    },
-    {
-      index: 2,
-      label: "40대",
-    },
-    {
-      index: 3,
-      label: "50대 이상",
-    },
-  ],
+const surveyData = {
+  age: {
+    title: "",
+    options: ["20대", "30대", "40대", "50대 이상"],
+  },
 };
 
 const AgeSurvey = ({ buttonHandler }) => {
-  const [selectedOption, setSelectedOption] = useState(0);
-  const handleOptionChange = (option) => {
+  const [selectedOption, setSelectedOption] = useState("20대");
+  const handleOptionSelect = (option) => {
     setSelectedOption(option);
   };
   return (
     <S.SurveyContent>
       <SurveyHeader surveyType={"Age"} />
-      {/* <SurveyOptionGroup
-        options={ageSurveyInfo.options}
-        handleOptionChange={handleOptionChange}
+      <SurveyOptionGroup
+        data={surveyData["age"]}
+        handleOptionSelect={handleOptionSelect}
+        radioGroup={"age"}
         selectedOption={selectedOption}
-        groupname={ageSurveyInfo.groupname}
-      /> */}
+      />
       <Button text="다음" style={SurveyBtnStyle} onClick={buttonHandler} />
     </S.SurveyContent>
   );
