@@ -5,6 +5,7 @@ import { css, styled } from "styled-components";
 import SurveyHeader from "../../../Components/Survey/SurveyHeader";
 import LifestylePersona from "../../../Components/Survey/LifestylePersona";
 import useOnClickPopUp from "../../../hooks/useOnClickPopUp";
+import PopUp from "./PopUp";
 
 const testData = [0, 1, 2, 3];
 
@@ -47,7 +48,7 @@ const LifestyleSurvey = ({ linkHandler }) => {
       {isPopupOpen && (
         <>
           <BackgroundOverlay />
-          <PopUp ref={popupRef}></PopUp>
+          <PopUp popupRef={popupRef} />
         </>
       )}
       <Button text="선택 완료" style={SurveyBtnStyle} />
@@ -55,19 +56,6 @@ const LifestyleSurvey = ({ linkHandler }) => {
   );
 };
 
-const PopUp = styled.div`
-  position: absolute;
-
-  width: 100%;
-  max-width: 688px;
-  height: 1318px;
-  flex-shrink: 0;
-
-  background-color: ${({ theme }) => theme.color.grey1000};
-  border-radius: 20px;
-
-  z-index: 10;
-`;
 const BackgroundOverlay = styled.div`
   position: fixed;
   top: 0;
