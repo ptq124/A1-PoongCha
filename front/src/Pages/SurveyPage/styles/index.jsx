@@ -6,7 +6,12 @@ export const SurveyOptions = styled.div`
   gap: 12px;
   margin-top: 20px;
 `;
-
+export const LifeStyleOptions = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 20px;
+`;
 export const SurveyContent = styled.div`
   width: 608px;
   height: 100%;

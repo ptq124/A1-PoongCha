@@ -8,6 +8,50 @@ import useOnClickPopUp from "../../../hooks/useOnClickPopUp";
 import PopUp from "./PopUp";
 
 const testData = [0, 1, 2, 3];
+const lifestyleSurveyInfo = {
+  options: [
+    {
+      index: 0,
+      phrase: (
+        <>
+          가족과 함께 타서 <br /> 안전을 중시해요.
+        </>
+      ),
+      tags: ["#주행안전", "#사용편의"],
+    },
+    {
+      index: 1,
+      phrase: (
+        <>
+          매일 출퇴근하여 경제적이고
+          <br />
+          편안한 주행을 원해요.
+        </>
+      ),
+      tags: ["#사용편의", "#추위/더위"],
+    },
+    {
+      index: 2,
+      phrase: (
+        <>
+          운전 경력이 짧아 <br />
+          똑똑한 주행을 원해요.
+        </>
+      ),
+      tags: ["#주행안전", "#주차/출차"],
+    },
+    {
+      index: 3,
+      phrase: (
+        <>
+          트렌드에 민감해 <br />
+          디자인과 성능이 중요해요.
+        </>
+      ),
+      tags: ["#스타일", "#퍼포먼스"],
+    },
+  ],
+};
 
 const LifestyleSurvey = ({ linkHandler }) => {
   const [selectedOption, setSelectedOption] = useState("");
@@ -28,12 +72,13 @@ const LifestyleSurvey = ({ linkHandler }) => {
           style={LinkBtnStyle}
           onClick={linkHandler}
         />
-        <S.SurveyOptions>
-          {testData.map((_, index) => (
+        <S.LifeStyleOptions>
+          {lifestyleSurveyInfo.options.map((_, index) => (
             <label key={index}>
               <LifestylePersona
                 selected={selectedOption === index}
                 setPopupOpen={setPopupOpen}
+                data={lifestyleSurveyInfo.options[index]}
               />
               <Radio
                 type="radio"
@@ -43,7 +88,7 @@ const LifestyleSurvey = ({ linkHandler }) => {
               />
             </label>
           ))}
-        </S.SurveyOptions>
+        </S.LifeStyleOptions>
       </S.SurveyContent>
       {isPopupOpen && (
         <>
