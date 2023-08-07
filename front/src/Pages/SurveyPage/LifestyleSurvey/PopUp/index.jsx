@@ -1,11 +1,13 @@
 import React from "react";
 import { css, styled } from "styled-components";
 import Cover from "./Cover";
+import Detail from "./Detail";
 
 const PopUp = ({ popupRef }) => {
   return (
     <Wrapper ref={popupRef}>
       <Cover />
+      <Detail />
     </Wrapper>
   );
 };
