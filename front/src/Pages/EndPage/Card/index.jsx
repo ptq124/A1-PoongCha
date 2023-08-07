@@ -4,23 +4,6 @@ import car from "../../../assets/car.svg";
 import point from "../../../assets/point.svg";
 import logo from "../../../assets/icons/hyundaicardlogo.svg";
 
-const font = css`
-  font-family: "HyundaiSansHeadRegularKR";
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 28px; /* 140% */
-  letter-spacing: -0.3px;
-`;
-
-const font1 = css`
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 20px; /* 142.857% */
-  letter-spacing: -0.07px;
-`;
-
 const Card = () => {
   return (
     <Wrapper>
@@ -55,7 +38,7 @@ const Description = styled.div`
   width: 257px;
   height: 55px;
 
-  ${font1}
+  ${({ theme }) => theme.font.Extra16};
   color: ${({ theme }) => theme.color.grey400};
   background: ${({ theme }) => theme.color.grey1000};
 
@@ -69,7 +52,7 @@ const Description = styled.div`
 const Phrase = styled.div`
   width: 217px;
   height: 56px;
-  ${font}
+  ${({ theme }) => theme.font.Extra15};
 
   span {
     color: ${({ theme }) => theme.color.primary_default};
@@ -77,6 +60,7 @@ const Phrase = styled.div`
 `;
 
 const Wrapper = styled.div`
+  width: 100%;
   height: 485px;
   display: flex;
   background: linear-gradient(180deg, #a2b1d3 0%, #edf2fe 100%);
