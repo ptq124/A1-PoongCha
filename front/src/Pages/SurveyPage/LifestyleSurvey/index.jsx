@@ -6,6 +6,7 @@ import SurveyHeader from "../../../Components/Survey/SurveyHeader";
 import LifestylePersona from "../../../Components/Survey/LifestylePersona";
 import useOnClickPopUp from "../../../hooks/useOnClickPopUp";
 import PopUp from "./PopUp";
+import useButtonNavigation from "../../../hooks/useButtonNavigation";
 
 const lifestyleSurveyInfo = {
   options: [
@@ -62,6 +63,8 @@ const LifestyleSurvey = ({ linkHandler }) => {
   const popupRef = useRef();
   useOnClickPopUp(popupRef, () => setPopupOpen(false));
 
+  const move = useButtonNavigation();
+
   return (
     <>
       <S.SurveyContent>
@@ -95,7 +98,11 @@ const LifestyleSurvey = ({ linkHandler }) => {
           <PopUp popupRef={popupRef} />
         </>
       )}
-      <Button text="선택 완료" style={SurveyBtnStyle} />
+      <Button
+        text="선택 완료"
+        style={SurveyBtnStyle}
+        onClick={() => move("/survey_end")}
+      />
     </>
   );
 };

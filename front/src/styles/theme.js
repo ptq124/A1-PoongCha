@@ -236,7 +236,7 @@ Extra11: css`
   font-size: 32px;
   font-style: normal;
   font-weight: 500;
-  line-height: 140%; /* 44.8px */
+  line-height: 140%; 
   letter-spacing: -0.3px;
 `,
 // Summary > TrimName
@@ -257,13 +257,32 @@ Extra13: css`
   line-height: 26px;
   letter-spacing: -0.2px;
 `,
+// Summary > EstimateContainer > value
 Extra14: css`
-    font-family: "HyundaiSansHeadMediumKR";
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 30px;
-    letter-spacing: -0.3px;
+  font-family: "HyundaiSansHeadMediumKR";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 30px;
+  letter-spacing: -0.3px;
+`,
+// EndPage > Card > Phrase
+Extra15: css`
+  font-family: "HyundaiSansHeadRegularKR";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: -0.3px;
+`,
+// EndPage > Card > Description
+Extra16: css`
+  font-family:"HyundaiSansTextRegularKR";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: -0.07px;
 `
 };
 
