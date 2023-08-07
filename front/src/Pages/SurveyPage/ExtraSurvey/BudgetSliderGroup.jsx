@@ -1,10 +1,18 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { css, styled } from "styled-components";
+import {
+  INIT_SLIDER_IDX,
+  MAX_SLIDER_OFFSET,
+  MIN_SLIDER_OFFSET,
+  SLIDER_HANDLE_SIZE,
+  SLIDER_IDX_COUNT,
+  SLIDER_UNIT_WIDTH,
+} from "../../../utils/constants";
 
 const BudgetSliderGroup = ({ maxBudget, setMaxBudget }) => {
   const sliderRef = useRef();
-  let idx = 3;
-  const [offset, setOffset] = useState((idx * 608) / 9);
+  let idx = INIT_SLIDER_IDX;
+  const [offset, setOffset] = useState(idx * SLIDER_UNIT_WIDTH);
 
   const handleMouseUp = (e) => {
     document.removeEventListener("mousemove", handleMouseMove);
@@ -16,13 +24,13 @@ const BudgetSliderGroup = ({ maxBudget, setMaxBudget }) => {
   const handleMouseMove = (e) => {
     const rect = sliderRef.current.getBoundingClientRect();
     const offsetX = e.clientX - rect.left;
-    if (offsetX >= 12 && offsetX <= 608) {
-      const closestIndex = Math.round((offsetX / 608) * 9);
+    if (offsetX >= MIN_SLIDER_OFFSET && offsetX <= MAX_SLIDER_OFFSET) {
+      const closestIndex = Math.round((offsetX / 608) * SLIDER_IDX_COUNT);
       if (closestIndex !== idx) {
         const calcOffset =
-          closestIndex < 9
-            ? (closestIndex * 608) / 9
-            : (closestIndex * 608) / 9 - 24;
+          closestIndex < SLIDER_IDX_COUNT
+            ? closestIndex * SLIDER_UNIT_WIDTH
+            : closestIndex * SLIDER_UNIT_WIDTH - SLIDER_HANDLE_SIZE;
         const calcBudget = 4200 + closestIndex * 300;
         idx = closestIndex;
         setOffset(calcOffset);
