@@ -179,66 +179,66 @@ const font = {
   `,
   // Extra5 : SurveyOption > unselected된 버튼
   Extra5: css`
-  font-family: "HyundaiSansTextRegularKR";
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 22px;
-  letter-spacing: -0.2px;
-`,
-// Extra6: SurveyOption > selected 버튼
-Extra6: css`
-  font-family: "HyundaiSansTextRegularKR";
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 22px;
-  letter-spacing: -0.2px;
-`,
-// Extra7: ExtraSurvey > BudgetSlider > BudgetRange
-Extra7: css`
-  font-family: "HyundaiSansHeadRegularKR";
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 26px;
-  letter-spacing: -0.2px;
-`,
-Extra8: css`
-  font-family: "HyundaiSansHeadBoldKR";
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 26px;
-  letter-spacing: -0.2px;
-`,
-// QNASummary > AnswerTag
-Extra9: css`
-  font-family: "HyundaiSansTextRegularKR";
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 16px;
-  letter-spacing: -0.06px;
-`,
-// QNASummary > Title
-Extra10: css`
-  font-family: "HyundaiSansHeadMediumKR";
-  font-size: 26px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 32px; 
-  letter-spacing: -0.3px;
-`,
-// LifestyleSurvey > Popup > Cover
-Extra11: css`
-  font-family: "HyundaiSansHeadMediumKR";
-  font-size: 32px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 140%; /* 44.8px */
-  letter-spacing: -0.3px;
-`,
+    font-family: "HyundaiSansTextRegularKR";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: -0.2px;
+  `,
+  // Extra6: SurveyOption > selected 버튼
+  Extra6: css`
+    font-family: "HyundaiSansTextRegularKR";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 22px;
+    letter-spacing: -0.2px;
+  `,
+  // Extra7: ExtraSurvey > BudgetSlider > BudgetRange
+  Extra7: css`
+    font-family: "HyundaiSansHeadRegularKR";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 26px;
+    letter-spacing: -0.2px;
+  `,
+  Extra8: css`
+    font-family: "HyundaiSansHeadBoldKR";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 26px;
+    letter-spacing: -0.2px;
+  `,
+  // QNASummary > AnswerTag
+  Extra9: css`
+    font-family: "HyundaiSansTextRegularKR";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 16px;
+    letter-spacing: -0.06px;
+  `,
+  // QNASummary > Title
+  Extra10: css`
+    font-family: "HyundaiSansHeadMediumKR";
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 32px;
+    letter-spacing: -0.3px;
+  `,
+  // LifestyleSurvey > Popup > Cover
+  Extra11: css`
+    font-family: "HyundaiSansHeadMediumKR";
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 140%; /* 44.8px */
+    letter-spacing: -0.3px;
+  `,
 };
 
 export const theme = {
