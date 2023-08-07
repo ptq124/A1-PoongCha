@@ -179,7 +179,6 @@ const font = {
   `,
   // Extra5 : SurveyOption > unselected된 버튼
   Extra5: css`
-<<<<<<< HEAD
   font-family: "HyundaiSansTextRegularKR";
   font-size: 18px;
   font-style: normal;
