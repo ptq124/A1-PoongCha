@@ -1,6 +1,7 @@
 import React from "react";
 import { styled } from "styled-components";
 import SelectedItem from "./SelectedItem/SelectedItem";
+
 const Summary = () => {
   return (
     <Wrapper>

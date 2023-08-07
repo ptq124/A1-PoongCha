@@ -1,6 +1,6 @@
 import React from "react";
 import { styled } from "styled-components";
-import ImgItem from "../../ImgItem/ImgItem";
+
 const SelectedItem = () => {
   return (
     <Wrapper>
