@@ -3,24 +3,23 @@ import { styled } from "styled-components";
 import SurveyOption from "../SurveyOption";
 
 const SurveyOptionGroup = ({
-  options,
-  title = "",
+  data,
   selectedOption,
-  handleOptionChange,
-  groupname,
+  handleOptionSelect,
+  radioGroup,
 }) => {
+  const { title, options } = data;
   return (
     <Wrapper>
       {title !== "" && <Title>{title}</Title>}
       <SurveyOptions>
         {options.map((option, index) => (
           <SurveyOption
-            label={option.label}
             key={index}
-            index={index}
-            name={groupname}
-            selected={selectedOption === index}
-            onChange={() => handleOptionChange(index)}
+            label={option}
+            radioGroup={radioGroup}
+            selected={selectedOption === option}
+            handleOptionSelect={() => handleOptionSelect(option)}
             isLong={options.length % 2 === 1 && index === options.length - 1}
           />
         ))}

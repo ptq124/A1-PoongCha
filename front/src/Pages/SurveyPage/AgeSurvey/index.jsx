@@ -37,12 +37,12 @@ const AgeSurvey = ({ buttonHandler }) => {
   return (
     <S.SurveyContent>
       <SurveyHeader surveyType={"Age"} />
-      <SurveyOptionGroup
+      {/* <SurveyOptionGroup
         options={ageSurveyInfo.options}
         handleOptionChange={handleOptionChange}
         selectedOption={selectedOption}
         groupname={ageSurveyInfo.groupname}
-      />
+      /> */}
       <Button text="다음" style={SurveyBtnStyle} onClick={buttonHandler} />
     </S.SurveyContent>
   );

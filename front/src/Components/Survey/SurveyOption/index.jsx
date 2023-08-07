@@ -5,21 +5,18 @@ import Check24BlueIcon from "../../../assets/checkcircle/check-24-blue.svg";
 
 const SurveyOption = ({
   label,
-  index,
-  value,
-  name,
+  radioGroup,
   selected,
-  onChange,
+  handleOptionSelect,
   isLong,
 }) => {
-  const inputId = `radioInput_${name}_${index}`;
   return (
     <>
-      <SurveyOptionLabel htmlFor={inputId} selected={selected} $isLong={isLong}>
+      <SurveyOptionLabel selected={selected} $isLong={isLong}>
         {label}
         {selected && <img src={Check24BlueIcon} alt="check" />}
+        <RadioBtn onChange={handleOptionSelect} name={radioGroup} />
       </SurveyOptionLabel>
-      <RadioBtn id={inputId} onChange={onChange} name={name} value={value} />
     </>
   );
 };
