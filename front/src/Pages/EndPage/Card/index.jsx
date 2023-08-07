@@ -60,6 +60,7 @@ const Phrase = styled.div`
 `;
 
 const Wrapper = styled.div`
+  width: 100%;
   height: 485px;
   display: flex;
   background: linear-gradient(180deg, #a2b1d3 0%, #edf2fe 100%);

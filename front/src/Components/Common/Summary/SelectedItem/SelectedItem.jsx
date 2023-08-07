@@ -23,6 +23,7 @@ const ItemDetail = styled.div`
 
   width: 100%;
 `;
+
 const RecReasonPhrase = styled.div`
   width: 100%;
 
@@ -36,12 +37,15 @@ const RecReasonPhrase = styled.div`
 
   box-sizing: border-box;
 `;
+
 const Img = styled.img`
   width: 60px;
   height: 60px;
+
   background-color: ${({ theme }) => theme.color.grey600};
   border-radius: 4px;
 `;
+
 const Wrapper = styled.div`
   display: inline-flex;
   flex-direction: column;
@@ -50,19 +54,24 @@ const Wrapper = styled.div`
 
   width: 296px;
 `;
+
 const TextBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 4px;
+
   width: 125px;
   height: 48px;
 `;
+
 const Body4Regular = styled.div`
   ${({ theme }) => theme.font.Body4_Regular};
   color: ${({ theme }) => theme.color.grey200};
 `;
+
 const Head4 = styled.div`
   ${({ theme }) => theme.font.Head4};
 `;
+
 export default SelectedItem;
