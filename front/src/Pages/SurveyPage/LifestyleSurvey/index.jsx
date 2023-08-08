@@ -1,12 +1,13 @@
-import * as S from "../styles";
 import React, { useState, useRef } from "react";
-import Button from "../../../Components/Common/Button/Button";
+import * as S from "../styles";
 import { css, styled } from "styled-components";
+import Button from "../../../Components/Common/Button/Button";
 import SurveyHeader from "../../../Components/Survey/SurveyHeader";
 import LifestylePersona from "../../../Components/Survey/LifestylePersona";
 import useOnClickPopUp from "../../../hooks/useOnClickPopUp";
 import PopUp from "./PopUp";
 import useButtonNavigation from "../../../hooks/useButtonNavigation";
+import { useNavigate } from "react-router";
 
 const lifestyleSurveyInfo = {
   options: [
@@ -54,6 +55,7 @@ const lifestyleSurveyInfo = {
 };
 
 const LifestyleSurvey = ({ linkHandler }) => {
+  const navigate = useNavigate();
   const [selectedOption, setSelectedOption] = useState("");
   const handleOptionChange = (event) => {
     setSelectedOption(parseInt(event.target.value));
@@ -72,7 +74,7 @@ const LifestyleSurvey = ({ linkHandler }) => {
         <Button
           text="원하는 라이프스타일이 없다면?"
           style={LinkBtnStyle}
-          onClick={linkHandler}
+          onClick={() => move("/survey/extra")}
         />
         <S.LifeStyleOptions>
           {lifestyleSurveyInfo.options.map((_, index) => (
@@ -101,7 +103,7 @@ const LifestyleSurvey = ({ linkHandler }) => {
       <Button
         text="선택 완료"
         style={SurveyBtnStyle}
-        onClick={() => move("/survey_end")}
+        onClick={() => move("/survey/end")}
       />
     </>
   );

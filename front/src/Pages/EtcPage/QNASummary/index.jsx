@@ -5,6 +5,7 @@ import { useLocation } from "react-router";
 
 const QNASummary = () => {
   const { state } = useLocation();
+  console.log(state);
   const AnswerTags = Object.entries(state).map(([key, value]) => (
     <AnswerTag key={key}>
       {value}

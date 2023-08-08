@@ -1,10 +1,10 @@
-import * as S from "../styles";
 import React, { useState } from "react";
-import SurveyOption from "../../../Components/Survey/SurveyOption";
-import Button from "../../../Components/Common/Button/Button";
+import * as S from "../styles";
 import { css } from "styled-components";
+import Button from "../../../Components/Common/Button/Button";
 import SurveyHeader from "../../../Components/Survey/SurveyHeader";
 import SurveyOptionGroup from "../../../Components/Survey/SurveyOptionGroup";
+import useButtonNavigation from "../../../hooks/useButtonNavigation";
 
 const surveyData = {
   age: {
@@ -13,7 +13,8 @@ const surveyData = {
   },
 };
 
-const AgeSurvey = ({ buttonHandler }) => {
+const AgeSurvey = () => {
+  const move = useButtonNavigation();
   const [selectedOption, setSelectedOption] = useState("20대");
   const handleOptionSelect = (option) => {
     setSelectedOption(option);
@@ -27,7 +28,11 @@ const AgeSurvey = ({ buttonHandler }) => {
         radioGroup={"age"}
         selectedOption={selectedOption}
       />
-      <Button text="다음" style={SurveyBtnStyle} onClick={buttonHandler} />
+      <Button
+        text="다음"
+        style={SurveyBtnStyle}
+        onClick={() => move("/survey/lifestyle")}
+      />
     </S.SurveyContent>
   );
 };

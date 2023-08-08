@@ -1,11 +1,12 @@
 import React, { useEffect, useReducer, useState } from "react";
 import * as S from "../styles";
+import { css } from "styled-components";
 import SurveyHeader from "../../../Components/Survey/SurveyHeader";
 import SurveyOptionGroup from "../../../Components/Survey/SurveyOptionGroup";
 import Button from "../../../Components/Common/Button/Button";
 import BudgetSliderGroup from "./BudgetSliderGroup";
-import { css } from "styled-components";
 import { initialState, reducer } from "./index.reducer";
+import useButtonNavigation from "../../../hooks/useButtonNavigation";
 
 const surveyData = {
   drivingRecord: {
@@ -26,7 +27,8 @@ const surveyData = {
   },
 };
 
-const ExtraSurvey = ({ buttonHandler }) => {
+const ExtraSurvey = () => {
+  const move = useButtonNavigation();
   const [state, dispatch] = useReducer(reducer, initialState);
   const handleOptionSelect = (questionKey, option) => {
     dispatch({
@@ -72,7 +74,7 @@ const ExtraSurvey = ({ buttonHandler }) => {
         text="완료"
         $isActive={isBtnActive}
         style={SurveyBtnStyle}
-        onClick={() => buttonHandler(state)}
+        onClick={() => move("/survey/etc_end", state)}
       />
     </S.SurveyContent>
   );
