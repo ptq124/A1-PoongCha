@@ -5,6 +5,7 @@ import SurveyOptionGroup from "../../../Components/Survey/SurveyOptionGroup";
 import Button from "../../../Components/Common/Button/Button";
 import BudgetSliderGroup from "./BudgetSliderGroup";
 import { css } from "styled-components";
+import { initialState, reducer } from "./index.reducer";
 
 const surveyData = {
   drivingRecord: {
@@ -23,23 +24,6 @@ const surveyData = {
     title: "자동차를 살 때 어떤 가치가 가장 중요한가요?",
     options: ["디자인", "성능", "안전", "편의성"],
   },
-};
-
-const initialState = {
-  drivingRecord: "1년 이하",
-  familySize: "1인",
-  purpose: "",
-  viewpoint: "",
-  maxBudget: 5100,
-};
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "SELECT_OPTION":
-      return { ...state, [action.questionKey]: action.option };
-    default:
-      return state;
-  }
 };
 
 const ExtraSurvey = ({ buttonHandler }) => {

@@ -15,12 +15,15 @@ const SurveyOption = ({
       <SurveyOptionLabel selected={selected} $isLong={isLong}>
         {label}
         {selected && <img src={Check24BlueIcon} alt="check" />}
-        <RadioBtn onChange={handleOptionSelect} name={radioGroup} />
+        <Radio type="radio" onChange={handleOptionSelect} name={radioGroup} />
       </SurveyOptionLabel>
     </>
   );
 };
 
+const Radio = styled.input`
+  display: none;
+`;
 const SurveyOptionLabel = styled.label`
   width: ${(props) => (props.$isLong ? "100%" : "298px")};
   height: 56px;
