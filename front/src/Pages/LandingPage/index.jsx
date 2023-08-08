@@ -19,7 +19,7 @@ const LandingPage = () => {
         <Button
           text="직접 만들래요"
           style={Direct}
-          onClick={() => move("/custom")}
+          onClick={() => move("/custom/trim")}
         />
         <Button
           text="추천받기"
