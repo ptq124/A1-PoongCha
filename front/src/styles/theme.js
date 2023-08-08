@@ -169,6 +169,7 @@ const font = {
     letter-spacing: -0.3px;
   `,
   // Extra4 : LifestyleSurvey > "원하는 라이프스타일이 없다면?" 버튼
+  // 트림 선택 > 고르기 어렵다면? 버튼
   Extra4: css`
     font-family: "HyundaiSansTextRegularKR";
     font-size: 14px;

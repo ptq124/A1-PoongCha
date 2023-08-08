@@ -1,42 +1,38 @@
 import React from "react";
 import { css, styled } from "styled-components";
-import RadioBtn from "../../Common/RadioBtn";
-import Check24BlueIcon from "../../../assets/checkcircle/check-24-blue.svg";
 
-const SurveyOption = ({
+const ModelItemOption = ({
   label,
   radioGroup,
   selected,
   handleOptionSelect,
-  isLong,
 }) => {
   return (
-    <>
-      <SurveyOptionLabel selected={selected} $isLong={isLong}>
-        {label}
-        {selected && <img src={Check24BlueIcon} alt="check" />}
-        <Radio type="radio" onChange={handleOptionSelect} name={radioGroup} />
-      </SurveyOptionLabel>
-    </>
+    <Label selected={selected}>
+      {label}
+      <Radio type="radio" onChange={handleOptionSelect} name={radioGroup} />
+    </Label>
   );
 };
 
 const Radio = styled.input`
   display: none;
 `;
-const SurveyOptionLabel = styled.label`
+const Label = styled.label`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 
-  width: ${(props) => (props.$isLong ? "100%" : "298px")};
-  height: 56px;
+  width: 50%;
+  height: 40px;
+
+  color: ${({ theme }) => theme.color.primary_default};
+  background-color: beige;
+  ${({ theme }) => theme.font.Body4_Medium};
 
   border-radius: 6px;
 
   box-sizing: border-box;
-
-  padding: 17px 12px;
 
   &:hover {
     cursor: pointer;
@@ -45,15 +41,14 @@ const SurveyOptionLabel = styled.label`
     props.selected
       ? css`
           background-color: ${({ theme }) => theme.color.grey1000};
-          ${({ theme }) => theme.font.Body2_Bold};
+          ${({ theme }) => theme.font.Body4_Medium};
           color: ${({ theme }) => theme.color.primary_default};
           border: 1.5px solid ${({ theme }) => theme.color.primary_default};
         `
       : css`
           background-color: ${({ theme }) => theme.color.grey800};
-          ${({ theme }) => theme.font.Extra5};
+          ${({ theme }) => theme.font.Body4_Regular};
           color: ${({ theme }) => theme.color.grey500};
         `}
 `;
-
-export default SurveyOption;
+export default ModelItemOption;
