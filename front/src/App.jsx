@@ -3,11 +3,13 @@ import { ThemeProvider, styled } from "styled-components";
 import { GlobalStyle } from "./styles/global-style";
 import { Outlet } from "react-router-dom";
 import Header from "./Components/Header";
+import ScrollToTop from "./utils/ScrollToTop";
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
+      <ScrollToTop />
       <Wrapper>
         <Header />
         <Outlet />

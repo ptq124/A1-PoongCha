@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 import PageIndicator from "../PageIndicator";
 
 const titleMap = {
-  1: {
+  Age: {
     id: 1,
     isExtra: false,
     title: (
@@ -12,7 +12,7 @@ const titleMap = {
       </>
     ),
   },
-  2: {
+  Lifestyle: {
     id: 2,
     isExtra: false,
     title: (
@@ -22,7 +22,7 @@ const titleMap = {
       </>
     ),
   },
-  3: {
+  Extra: {
     id: 3,
     isExtra: true,
     title: (
@@ -34,18 +34,18 @@ const titleMap = {
   },
 };
 
-const SurveyHeader = ({ index }) => {
+const SurveyHeader = ({ surveyType }) => {
   return (
     <Wrapper>
       <TitleWrapper>
-        <Title>{titleMap[index].title}</Title>
-        {!titleMap[index].isExtra && (
-          <PageIndicator crntPage={titleMap[index].id} totalPage={2} />
+        <Title>{titleMap[surveyType].title}</Title>
+        {!titleMap[surveyType].isExtra && (
+          <PageIndicator crntPage={titleMap[surveyType].id} totalPage={2} />
         )}
       </TitleWrapper>
 
-      {titleMap[index].subtitle && (
-        <Subtitle>{titleMap[index].subtitle}</Subtitle>
+      {titleMap[surveyType].subtitle && (
+        <Subtitle>{titleMap[surveyType].subtitle}</Subtitle>
       )}
     </Wrapper>
   );

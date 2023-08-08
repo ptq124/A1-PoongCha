@@ -68,7 +68,7 @@ const LifestyleSurvey = ({ linkHandler }) => {
   return (
     <>
       <S.SurveyContent>
-        <SurveyHeader index={2} />
+        <SurveyHeader surveyType={"Lifestyle"} />
         <Button
           text="원하는 라이프스타일이 없다면?"
           style={LinkBtnStyle}
