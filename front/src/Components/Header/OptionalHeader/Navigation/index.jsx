@@ -1,27 +1,45 @@
 import React from "react";
 import { css, styled } from "styled-components";
-import Button from "../../Common/Button/Button";
+import { useLocation } from "react-router";
+import Button from "../../../Common/Button/Button";
+import useButtonNavigation from "../../../../hooks/useButtonNavigation";
+
+const navItems = [
+  { title: "1 트림", detail: "Le Blanc(르블랑)", path: "/custom/trim" },
+  {
+    title: "2 색상",
+    detail: "어비스 블랙펄 / 퀄팅 천연(블랙)",
+    path: "/custom/color",
+  },
+  {
+    title: "3 옵션",
+    detail: "컴포트2, 현대 스마트 센스 1, 주차보조",
+    path: "/custom/options",
+  },
+];
 
 const Navigation = () => {
+  const { pathname } = useLocation();
+
+  const move = useButtonNavigation();
+
   return (
     <Wrapper>
       <NavContainer>
-        <Nav>
-          <NavTitle>1 트림</NavTitle>
-          <NavDetail>Le Blanc(르블랑)</NavDetail>
-        </Nav>
-        <Nav>
-          <NavTitle>2 색상</NavTitle>
-          <NavDetail>어비스 블랙펄 / 퀄팅 천연(블랙)</NavDetail>
-        </Nav>
-        <Nav>
-          <NavTitle>3 옵션</NavTitle>
-          <NavDetail>컴포트2, 현대 스마트 센스 1, 주차보조</NavDetail>
-        </Nav>
+        {navItems.map((item, index) => (
+          <Nav key={index}>
+            <NavTitle $active={item.path === pathname}>{item.title}</NavTitle>
+            <NavDetail>{item.detail}</NavDetail>
+          </Nav>
+        ))}
       </NavContainer>
       <BtnsContainer>
         <Button text="요금 상세" style={amoutDetailBtnStyle} />
-        <Button text="견적내기" style={estimateBtnStyle} />
+        <Button
+          text="견적내기"
+          style={estimateBtnStyle}
+          onClick={() => move("/result")}
+        />
       </BtnsContainer>
     </Wrapper>
   );
@@ -59,7 +77,8 @@ const NavDetail = styled.div`
 
 const NavTitle = styled.div`
   ${({ theme }) => theme.font.Body4_Medium};
-  color: ${({ theme }) => theme.color.primary_default};
+  color: ${({ $active, theme }) =>
+    $active ? theme.color.primary_default : theme.color.grey600};
 `;
 
 const Nav = styled.div`
