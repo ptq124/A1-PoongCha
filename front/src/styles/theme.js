@@ -284,9 +284,16 @@ Extra16: css`
   font-weight: 500;
   line-height: 20px;
   letter-spacing: -0.07px;
+`,
+Extra17: css`
+ font-family: "HyundaiSansTextRegularKR";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: -0.2px;
 `
 };
-
 export const theme = {
   color,
   font,

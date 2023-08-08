@@ -3,6 +3,7 @@ import { css, styled } from "styled-components";
 import Button from "../../../../Components/Common/Button/Button";
 import ModelItemOptionGroup from "./ModelItemOptionGroup";
 import { initialState, reducer } from "./index.reducer";
+import TrimOptionGroup from "./TrimOptionGroup";
 
 const modelItemData = {
   engine: {
@@ -44,6 +45,8 @@ const TrimCustomBar = () => {
           />
         ))}
       </ModelItems>
+
+      <TrimOptionGroup />
     </Wrapper>
   );
 };
