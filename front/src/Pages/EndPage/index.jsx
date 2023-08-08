@@ -3,14 +3,20 @@ import { css, styled } from "styled-components";
 import Card from "./Card";
 import Summary from "../../Components/Common/Summary";
 import Button from "../../Components/Common/Button/Button";
+import useButtonNavigation from "../../hooks/useButtonNavigation";
 
 const EndPage = () => {
+  const move = useButtonNavigation();
   return (
     <Wrapper>
       <Card />
       <Summary />
       <ButtonContainer>
-        <Button text="커스텀하기" style={CustomBtnStyle} />
+        <Button
+          text="커스텀하기"
+          style={CustomBtnStyle}
+          onClick={() => move("/custom/trim")}
+        />
         <Button text="빠른 견적내기" style={CompleteEstimateBtnStyle} />
       </ButtonContainer>
     </Wrapper>

@@ -1,7 +1,14 @@
 import React from "react";
+import { Outlet } from "react-router";
+import { styled } from "styled-components";
 
 const CustomPage = () => {
-  return <div>커스텀 페이지</div>;
+  return (
+    <Wrapper>
+      <Outlet />
+    </Wrapper>
+  );
 };
 
+const Wrapper = styled.div``;
 export default CustomPage;

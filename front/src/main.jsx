@@ -14,6 +14,8 @@ import AgeSurvey from "./Pages/SurveyPage/AgeSurvey/index.jsx";
 import LifestyleSurvey from "./Pages/SurveyPage/LifestyleSurvey/index.jsx";
 import ExtraSurvey from "./Pages/SurveyPage/ExtraSurvey/index.jsx";
 import ProgressBar from "./Components/Survey/ProgressBar/index.jsx";
+import TrimPage from "./Pages/CustomPage/TrimPage/index.jsx";
+import ColorPage from "./Pages/CustomPage/ColorPage/index.jsx";
 
 const router = createBrowserRouter([
   {
@@ -57,14 +59,19 @@ const router = createBrowserRouter([
           },
         ],
       },
-      // {
-      //   path: "/etc_end",
-      //   element: <EtcPage />,
-      // },
-      // { path: "/survey_end", element: <EndPage /> },
       {
         path: "/custom",
         element: <CustomPage />,
+        children: [
+          {
+            path: "trim",
+            element: <TrimPage />,
+          },
+          {
+            path: "color",
+            element: <ColorPage />,
+          },
+        ],
       },
       {
         path: "/result",

@@ -3,14 +3,20 @@ import { css, styled } from "styled-components";
 import QNASummary from "./QNASummary";
 import Summary from "../../Components/Common/Summary";
 import Button from "../../Components/Common/Button/Button";
+import useButtonNavigation from "../../hooks/useButtonNavigation";
 
 const EtcPage = () => {
+  const move = useButtonNavigation();
   return (
     <Wrapper>
       <QNASummary />
       <Summary />
       <ButtonContainer>
-        <Button text="커스텀하기" style={CustomBtnStyle} />
+        <Button
+          text="커스텀하기"
+          style={CustomBtnStyle}
+          onClick={() => move("/custom/trim")}
+        />
         <Button text="빠른 견적내기" style={CompleteEstimateBtnStyle} />
       </ButtonContainer>
     </Wrapper>
