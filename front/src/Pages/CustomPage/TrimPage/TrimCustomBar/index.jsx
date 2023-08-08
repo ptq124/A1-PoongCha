@@ -4,7 +4,7 @@ import Button from "../../../../Components/Common/Button/Button";
 import ModelItemOptionGroup from "./ModelItemOptionGroup";
 import { initialState, reducer } from "./index.reducer";
 
-const surveyData = {
+const modelItemData = {
   engine: {
     title: "엔진",
     options: ["디젤 2.2", "가솔린 3.8"],
@@ -32,7 +32,7 @@ const TrimCustomBar = () => {
     <Wrapper>
       <Button text="고르기 어렵다면?" style={LinkBtnStyle}></Button>
       <ModelItems>
-        {Object.entries(surveyData).map(([questionKey, data]) => (
+        {Object.entries(modelItemData).map(([questionKey, data]) => (
           <ModelItemOptionGroup
             key={questionKey}
             data={data}
