@@ -5,7 +5,7 @@ import Button from "../../Components/Common/Button/Button";
 import useButtonNavigation from "../../hooks/useButtonNavigation";
 
 const LandingPage = () => {
-  const handleButtonClick = useButtonNavigation();
+  const move = useButtonNavigation();
 
   return (
     <Wrapper>
@@ -19,12 +19,12 @@ const LandingPage = () => {
         <Button
           text="직접 만들래요"
           style={Direct}
-          onClick={() => handleButtonClick("/custom")}
+          onClick={() => move("/custom")}
         />
         <Button
           text="추천받기"
           style={Recommend}
-          onClick={() => handleButtonClick("/survey")}
+          onClick={() => move("/survey/age")}
         />
       </BtnWrapper>
       <CoverVideo />

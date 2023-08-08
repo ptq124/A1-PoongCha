@@ -1,18 +1,23 @@
 import React from "react";
-import { styled } from "styled-components";
+import { useLocation } from "react-router";
+import { keyframes, styled } from "styled-components";
 
-const ProgressBar = ({ progress }) => {
+const ProgressBar = () => {
+  const { pathname } = useLocation();
+  const progressStatus = pathname === "/survey/age" ? 0.5 : 1;
+
   return (
     <Wrapper>
-      <Progress $progress={progress}></Progress>
+      <Progress $progressStatus={progressStatus}></Progress>
     </Wrapper>
   );
 };
 
 const Progress = styled.div`
-  width: ${({ $progress }) => $progress * 100}%;
+  width: ${({ $progressStatus }) => $progressStatus * 100}%;
   height: 4px;
   background-color: ${({ theme }) => theme.color.secondary};
+  transition: width 0.3s ease;
 `;
 const Wrapper = styled.div`
   width: 100%;

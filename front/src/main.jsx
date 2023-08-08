@@ -10,6 +10,10 @@ import CustomPage from "./Pages/CustomPage/index.jsx";
 import ResultPage from "./Pages/ResultPage/index.jsx";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import AgeSurvey from "./Pages/SurveyPage/AgeSurvey/index.jsx";
+import LifestyleSurvey from "./Pages/SurveyPage/LifestyleSurvey/index.jsx";
+import ExtraSurvey from "./Pages/SurveyPage/ExtraSurvey/index.jsx";
+import ProgressBar from "./Components/Survey/ProgressBar/index.jsx";
 
 const router = createBrowserRouter([
   {
@@ -17,12 +21,47 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { index: true, path: "/", element: <LandingPage /> },
-      { path: "/survey", element: <SurveyPage /> },
       {
-        path: "/etc_end",
-        element: <EtcPage />,
+        path: "/survey",
+        element: <SurveyPage />,
+        children: [
+          {
+            path: "age",
+            element: (
+              <>
+                <ProgressBar />
+                <AgeSurvey />
+              </>
+            ),
+          },
+          {
+            path: "lifestyle",
+            element: (
+              <>
+                <ProgressBar />
+                <LifestyleSurvey />
+              </>
+            ),
+          },
+          {
+            path: "extra",
+            element: <ExtraSurvey />,
+          },
+          {
+            path: "end",
+            element: <EndPage />,
+          },
+          {
+            path: "etc_end",
+            element: <EtcPage />,
+          },
+        ],
       },
-      { path: "/survey_end", element: <EndPage /> },
+      // {
+      //   path: "/etc_end",
+      //   element: <EtcPage />,
+      // },
+      // { path: "/survey_end", element: <EndPage /> },
       {
         path: "/custom",
         element: <CustomPage />,
