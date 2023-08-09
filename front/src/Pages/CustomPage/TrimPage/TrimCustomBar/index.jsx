@@ -4,6 +4,7 @@ import Button from "../../../../Components/Common/Button/Button";
 import { initialState, reducer } from "./index.reducer";
 import TrimOptionGroup from "../../../../Components/Custom/TrimOptionGroup";
 import ModelItemOptionGroup from "../../../../Components/Custom/ModelItemOptionGroup";
+import useButtonNavigation from "../../../../hooks/useButtonNavigation";
 
 const modelItemData = {
   engine: {
@@ -29,6 +30,8 @@ const TrimCustomBar = () => {
       option,
     });
   };
+  const move = useButtonNavigation();
+
   return (
     <Wrapper>
       <Button text="고르기 어렵다면?" style={LinkBtnStyle}></Button>
@@ -45,12 +48,29 @@ const TrimCustomBar = () => {
           />
         ))}
       </ModelItems>
-
       <TrimOptionGroup />
+      <Button
+        text="색상 선택"
+        style={nextBtnStyle}
+        onClick={() => move("/custom/color")}
+      />
     </Wrapper>
   );
 };
 
+const nextBtnStyle = css`
+  width: 309px;
+  height: 52px;
+
+  color: ${({ theme }) => theme.color.grey1000};
+  background-color: ${({ theme }) => theme.color.primary_default};
+  ${({ theme }) => theme.font.Body3_Medium};
+
+  border: 1px solid ${({ theme }) => theme.color.primary_default};
+  border-radius: 6px;
+
+  margin-top: 24px;
+`;
 const ModelItems = styled.div`
   display: flex;
   flex-direction: column;
@@ -82,6 +102,7 @@ const Wrapper = styled.div`
 
   padding-left: 36px;
   padding-right: 128px;
+  padding-bottom: 36px;
 
   box-sizing: border-box;
 `;
