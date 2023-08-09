@@ -1,7 +1,7 @@
 import React from "react";
 import { css, styled } from "styled-components";
-import Check24BlueIcon from "../../../../assets/checkcircle/check-24-blue.svg";
-import Button from "../../../../Components/Common/Button/Button";
+import Check24BlueIcon from "../../../assets/checkcircle/check-24-blue.svg";
+import Button from "../../Common/Button/Button";
 
 const TrimOption = () => {
   return (
@@ -34,7 +34,6 @@ const TrimOption = () => {
           ></Button>
         </DefaultOptions>
       </TrimDefaultOptions>
-      <Separator></Separator>
     </Wrapper>
   );
 };
@@ -54,12 +53,6 @@ const DefaultOptionBtnStyle = css`
   text-underline-offset: 3px;
 
   margin-right: 12px;
-`;
-const Separator = styled.div`
-  width: 100%;
-  height: 1px;
-  background-color: ${({ theme }) => theme.color.grey700};
-  margin-top: 24px;
 `;
 const DefaultOptions = styled.div`
   display: flex;
@@ -115,5 +108,11 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 24px;
+  padding-bottom: 24px;
+
+  border-bottom: 1px solid ${({ theme }) => theme.color.grey700};
+  &:last-child {
+    border-bottom: none;
+  }
 `;
 export default TrimOption;

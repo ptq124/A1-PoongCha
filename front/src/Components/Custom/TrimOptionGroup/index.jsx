@@ -1,7 +1,7 @@
 import React from "react";
 import { css, styled } from "styled-components";
-import Button from "../../../../Components/Common/Button/Button";
-import TrimOption from "./TrimOption";
+import Button from "../../Common/Button/Button";
+import TrimOption from "../TrimOption";
 
 const TrimOptionGroup = () => {
   return (
