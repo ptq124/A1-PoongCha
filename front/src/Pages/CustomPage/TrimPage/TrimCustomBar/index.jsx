@@ -1,9 +1,9 @@
 import React, { useReducer } from "react";
 import { css, styled } from "styled-components";
 import Button from "../../../../Components/Common/Button/Button";
-import ModelItemOptionGroup from "./ModelItemOptionGroup";
 import { initialState, reducer } from "./index.reducer";
-import TrimOptionGroup from "./TrimOptionGroup";
+import TrimOptionGroup from "../../../../Components/Custom/TrimOptionGroup";
+import ModelItemOptionGroup from "../../../../Components/Custom/ModelItemOptionGroup";
 
 const modelItemData = {
   engine: {

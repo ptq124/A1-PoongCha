@@ -1,7 +1,7 @@
 import React from "react";
 import { css, styled } from "styled-components";
-import Check24BlueIcon from "../../../../assets/checkcircle/check-24-blue.svg";
-import Button from "../../../../Components/Common/Button/Button";
+import Check24BlueIcon from "../../../assets/checkcircle/check-24-blue.svg";
+import Button from "../../Common/Button/Button";
 
 const TrimOption = () => {
   return (

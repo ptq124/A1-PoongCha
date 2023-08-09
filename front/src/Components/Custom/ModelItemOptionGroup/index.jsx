@@ -1,6 +1,6 @@
 import React from "react";
 import { styled } from "styled-components";
-import ModelItemOption from "./ModelItemOption";
+import ModelItemOption from "../ModelItemOption";
 
 const ModelItemOptionGroup = ({
   data,
