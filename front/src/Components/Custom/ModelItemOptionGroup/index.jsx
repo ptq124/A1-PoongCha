@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { styled } from "styled-components";
 import ModelItemOption from "../ModelItemOption";
 import Tooltip from "../Tooltip";
+import useTooltip from "../../../hooks/useTooltip";
 
 const ModelItemOptionGroup = ({
   data,
@@ -10,22 +11,14 @@ const ModelItemOptionGroup = ({
   radioGroup,
 }) => {
   const { title, options } = data;
-  const [isTooltipOpen, setIsTooltipOpen] = useState(false);
-  const handleMouseEnterOption = () => {
-    setIsTooltipOpen(true);
-  };
-  const handleMouseLeaveOption = () => {
-    setIsTooltipOpen(false);
-  };
+  const { isTooltipOpen, openTooltip, closeTooltip } = useTooltip();
+
   return (
     <Wrapper>
       {isTooltipOpen && <Tooltip />}
       <OptionGroup>
         <span>{title}</span>
-        <Options
-          onMouseEnter={handleMouseEnterOption}
-          onMouseLeave={handleMouseLeaveOption}
-        >
+        <Options onMouseEnter={openTooltip} onMouseLeave={closeTooltip}>
           {options.map((option, index) => (
             <ModelItemOption
               key={index}
