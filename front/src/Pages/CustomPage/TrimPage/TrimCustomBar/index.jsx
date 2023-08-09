@@ -34,32 +34,34 @@ const TrimCustomBar = () => {
 
   return (
     <Wrapper>
-      <Button text="고르기 어렵다면?" style={LinkBtnStyle}></Button>
-      <ModelItems>
-        {Object.entries(modelItemData).map(([questionKey, data]) => (
-          <ModelItemOptionGroup
-            key={questionKey}
-            data={data}
-            handleOptionSelect={(newValue) => {
-              handleOptionSelect(questionKey, newValue);
-            }}
-            radioGroup={questionKey}
-            selectedOption={state[questionKey]}
-          />
-        ))}
-      </ModelItems>
-      <TrimOptionGroup />
-      <Button
-        text="색상 선택"
-        style={nextBtnStyle}
-        onClick={() => move("/custom/color")}
-      />
+      <CustomBarContent>
+        <Button text="고르기 어렵다면?" style={LinkBtnStyle}></Button>
+        <ModelItems>
+          {Object.entries(modelItemData).map(([questionKey, data]) => (
+            <ModelItemOptionGroup
+              key={questionKey}
+              data={data}
+              handleOptionSelect={(newValue) => {
+                handleOptionSelect(questionKey, newValue);
+              }}
+              radioGroup={questionKey}
+              selectedOption={state[questionKey]}
+            />
+          ))}
+        </ModelItems>
+        <TrimOptionGroup />
+        <Button
+          text="색상 선택"
+          style={nextBtnStyle}
+          onClick={() => move("/custom/color")}
+        />
+      </CustomBarContent>
     </Wrapper>
   );
 };
 
 const nextBtnStyle = css`
-  width: 309px;
+  width: 100%;
   height: 52px;
 
   color: ${({ theme }) => theme.color.grey1000};
@@ -97,13 +99,20 @@ const LinkBtnStyle = css`
   margin-top: 56px;
 `;
 
-const Wrapper = styled.div`
-  width: 473px;
+const CustomBarContent = styled.div`
+  width: 473px; // 피그마 기준
+  /* width: 100%; */
 
   padding-left: 36px;
   padding-right: 128px;
-  padding-bottom: 36px;
 
   box-sizing: border-box;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  width: 29%;
+  height: 1292px;
 `;
 export default TrimCustomBar;
