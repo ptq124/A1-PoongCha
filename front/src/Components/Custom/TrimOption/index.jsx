@@ -13,8 +13,8 @@ const TrimOption = ({ data, radioGroup, selected, handleOptionSelect }) => {
             <span className="trimName">{data.name}</span>
             <span className="modelItemSummary">디젤 2.2 • 7인승 • 2WD</span>
           </NameAndModelItem>
-          <span className="comment">합리적인 당신을 위한</span>
-          <span className="price">43,460,000원</span>
+          <span className="comment">{data.information}</span>
+          <span className="price">{data.minPrice.toLocaleString()}원</span>
         </TrimInfo>
         <CheckBtn>
           {selected ? (

@@ -29,6 +29,8 @@ const TrimOptions = [
       "내비 기반 크루즈",
       "세이프티 파워 윈도우",
     ],
+    information: "합리적인 당신을 위한",
+    minPrice: 43460000,
   },
   {
     name: "Le Blanc",
@@ -37,6 +39,8 @@ const TrimOptions = [
       "12인치 클러스터",
       "서라운드 뷰 모니터",
     ],
+    information: "필수적인 옵션만 모은",
+    minPrice: 43460000,
   },
   {
     name: "Prestige",
@@ -45,6 +49,8 @@ const TrimOptions = [
       "내비 기반 크루즈",
       "세이프티 파워 윈도우",
     ],
+    information: "합리적인 당신을 위한",
+    minPrice: 43460000,
   },
   {
     name: "Caligraphy",
@@ -53,6 +59,8 @@ const TrimOptions = [
       "내비 기반 크루즈",
       "세이프티 파워 윈도우",
     ],
+    information: "합리적인 당신을 위한",
+    minPrice: 43460000,
   },
 ];
 
