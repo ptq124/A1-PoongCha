@@ -152,11 +152,8 @@ const LinkBtnStyle = css`
 `;
 
 const CustomBarContent = styled.div`
-  width: 473px; // 피그마 기준
-  /* width: 100%; */
-
-  padding-left: 36px;
-  padding-right: 128px;
+  width: 309px;
+  margin-right: 128px;
 
   box-sizing: border-box;
 `;
@@ -164,7 +161,8 @@ const CustomBarContent = styled.div`
 const Wrapper = styled.div`
   display: flex;
   justify-content: flex-end;
-  width: 29%;
+  flex: 0 0 auto;
+  width: 473px;
   height: 1292px;
 `;
 export default TrimCustomSideBar;

@@ -11,7 +11,7 @@ const TrimOptionGroup = ({ options, selectedOption, handleOptionSelect }) => {
     <Wrapper>
       {isTooltipOpen && <Tooltip offset={810} />}
       <Title onMouseEnter={openTooltip} onMouseLeave={closeTooltip}>
-        <span class="trimOptionTitle">트림</span>
+        <span>트림</span>
         <Button text="비교하기" style={TrimComparisonBtnStyle} />
       </Title>
       {options.map((option, index) => (
