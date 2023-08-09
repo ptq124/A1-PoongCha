@@ -1,21 +1,33 @@
 import React from "react";
 import { css, styled } from "styled-components";
-import Check24BlueIcon from "../../../assets/checkcircle/check-24-blue.svg";
+import Check28BlueIcon from "../../../assets/checkcircle/check-28-blue.svg";
+import Check28GreyIcon from "../../../assets/checkcircle/check-28-grey.svg";
 import Button from "../../Common/Button/Button";
 
-const TrimOption = () => {
+const TrimOption = ({ data, radioGroup, selected, handleOptionSelect }) => {
   return (
     <Wrapper>
       <TrimOptionUpper>
         <TrimInfo>
           <NameAndModelItem>
-            <span className="trimName">Exclusive</span>
+            <span className="trimName">{data.title}</span>
             <span className="modelItemSummary">디젤 2.2 • 7인승 • 2WD</span>
           </NameAndModelItem>
           <span className="comment">합리적인 당신을 위한</span>
           <span className="price">43,460,000원</span>
         </TrimInfo>
-        <img src={Check24BlueIcon} alt="check" />
+        <CheckBtn>
+          {selected ? (
+            <img src={Check28BlueIcon} alt="checked" />
+          ) : (
+            <img src={Check28GreyIcon} alt="checked" />
+          )}
+          <Radio
+            type="radio"
+            name={radioGroup}
+            onChange={handleOptionSelect}
+          ></Radio>
+        </CheckBtn>
       </TrimOptionUpper>
       <TrimDefaultOptions>
         <span className="defaultOptionTitle">기본 옵션</span>
@@ -38,6 +50,14 @@ const TrimOption = () => {
   );
 };
 
+const CheckBtn = styled.label`
+  &:hover {
+    cursor: pointer;
+  }
+`;
+const Radio = styled.input`
+  display: none;
+`;
 const DefaultOptionBtnStyle = css`
   flex-shrink: 0;
 

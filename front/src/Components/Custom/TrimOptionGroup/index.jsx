@@ -3,18 +3,22 @@ import { css, styled } from "styled-components";
 import Button from "../../Common/Button/Button";
 import TrimOption from "../TrimOption";
 
-const TrimOptionGroup = () => {
+const TrimOptionGroup = ({ options, selectedOption, handleOptionSelect }) => {
   return (
     <Wrapper>
       <Title>
         <span>트림</span>
         <Button text="비교하기" style={TrimComparisonBtnStyle} />
       </Title>
-
-      <TrimOption />
-      <TrimOption />
-      <TrimOption />
-      <TrimOption />
+      {options.map((option, index) => (
+        <TrimOption
+          key={index}
+          data={option}
+          radioGroup={"trim"}
+          selected={selectedOption === option.title}
+          handleOptionSelect={() => handleOptionSelect(option.title)}
+        />
+      ))}
     </Wrapper>
   );
 };

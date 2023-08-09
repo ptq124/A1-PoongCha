@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 import { css, styled } from "styled-components";
 import Button from "../../../../Components/Common/Button/Button";
 import { initialState, reducer } from "./index.reducer";
@@ -20,6 +20,13 @@ const modelItemData = {
     options: ["2WD", "4WD"],
   },
 };
+
+const TrimOptions = [
+  { title: "Exclusive" },
+  { title: "Le Blanc" },
+  { title: "Prestige" },
+  { title: "Caligraphy" },
+];
 
 const TrimCustomBar = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -49,7 +56,13 @@ const TrimCustomBar = () => {
             />
           ))}
         </ModelItems>
-        <TrimOptionGroup />
+        <TrimOptionGroup
+          options={TrimOptions}
+          selectedOption={state["trim"]}
+          handleOptionSelect={(newValue) => {
+            handleOptionSelect("trim", newValue);
+          }}
+        />
         <Button
           text="색상 선택"
           style={nextBtnStyle}
