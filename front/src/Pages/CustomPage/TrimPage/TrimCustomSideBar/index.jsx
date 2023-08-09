@@ -5,6 +5,7 @@ import { initialState, reducer } from "./index.reducer";
 import TrimOptionGroup from "../../../../Components/Custom/TrimOptionGroup";
 import ModelItemOptionGroup from "../../../../Components/Custom/ModelItemOptionGroup";
 import useButtonNavigation from "../../../../hooks/useButtonNavigation";
+import Tooltip from "../../../../Components/Custom/Tooltip";
 
 // state의 engine, body, drivetrain 바뀔 때마다 trimOptions 새로 가져와서 TrimOptionsGroup 다시 띄워줘야 함
 const modelItemData = {
@@ -65,7 +66,7 @@ const TrimOptions = [
   },
 ];
 
-const TrimCustomBar = () => {
+const TrimCustomSideBar = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const handleOptionSelect = (questionKey, option) => {
     dispatch({
@@ -124,6 +125,7 @@ const nextBtnStyle = css`
   margin-top: 24px;
 `;
 const ModelItems = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -131,7 +133,7 @@ const ModelItems = styled.div`
   border: 1px solid ${({ theme }) => theme.color.grey700};
   border-radius: 8px;
 
-  padding: 12px;
+  padding: 12px 0px;
   margin-top: 16px;
 `;
 const LinkBtnStyle = css`
@@ -150,11 +152,8 @@ const LinkBtnStyle = css`
 `;
 
 const CustomBarContent = styled.div`
-  width: 473px; // 피그마 기준
-  /* width: 100%; */
-
-  padding-left: 36px;
-  padding-right: 128px;
+  width: 309px;
+  margin-right: 128px;
 
   box-sizing: border-box;
 `;
@@ -162,7 +161,8 @@ const CustomBarContent = styled.div`
 const Wrapper = styled.div`
   display: flex;
   justify-content: flex-end;
-  width: 29%;
+  flex: 0 0 auto;
+  width: 473px;
   height: 1292px;
 `;
-export default TrimCustomBar;
+export default TrimCustomSideBar;

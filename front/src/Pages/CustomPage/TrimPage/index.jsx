@@ -1,13 +1,13 @@
 import React from "react";
 import { styled } from "styled-components";
-import TrimCustomBar from "./TrimCustomBar";
 import CarView from "../../../Components/Custom/CarView";
+import TrimCustomSideBar from "./TrimCustomSideBar";
 
 const TrimPage = () => {
   return (
     <Wrapper>
       <CarView></CarView>
-      <TrimCustomBar />
+      <TrimCustomSideBar />
     </Wrapper>
   );
 };

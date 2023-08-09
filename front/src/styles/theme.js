@@ -18,6 +18,7 @@ const color = {
   grey50: "#1A1A1A",
 
   extra1: "#EDF0F4", // QNASummary > Wrapper
+  tooltip:"#2E3D51",
 };
 
 const font = {
