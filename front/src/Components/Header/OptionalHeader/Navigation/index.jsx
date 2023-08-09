@@ -26,7 +26,14 @@ const Navigation = () => {
 
   return (
     <Wrapper>
-      <NavContainer></NavContainer>
+      <NavContainer>
+        {navItems.map((item, index) => (
+          <Nav key={index}>
+            <NavTitle $active={item.path === pathname}>{item.title}</NavTitle>
+            <NavDetail>{item.detail}</NavDetail>
+          </Nav>
+        ))}
+      </NavContainer>
       <BtnsContainer>
         <Button text="요금 상세" style={amoutDetailBtnStyle} />
         <Button
