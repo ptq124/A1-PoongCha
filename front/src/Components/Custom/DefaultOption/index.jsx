@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { css, styled } from "styled-components";
 import DefaultOptionPopup from "../DefaultOptionPopup";
 import Button from "../../Common/Button/Button";
@@ -10,7 +10,9 @@ const DefaultOption = ({ option }) => {
 
   return (
     <Wrapper>
-      {isPopupOpen && <DefaultOptionPopup popupRef={popupRef} />}
+      {isPopupOpen && (
+        <DefaultOptionPopup popupRef={popupRef} closePopup={closePopup} />
+      )}
       <Button
         text={option}
         style={DefaultOptionBtnStyle}
@@ -36,5 +38,7 @@ const DefaultOptionBtnStyle = css`
 
   margin-right: 12px;
 `;
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  position: relative;
+`;
 export default DefaultOption;
