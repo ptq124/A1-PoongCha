@@ -14,14 +14,16 @@ const TrimPage = () => {
 };
 
 const CustomBarWrapper = styled.div`
-  width: 473px;
-
-  overflow-y: scroll;
+  width: 30%;
+  margin-left: 70%;
 `;
 const Component1 = styled.div`
-  flex: 1;
-  width: 100px;
+  position: fixed;
+
+  width: 70%;
   height: 100%;
+
+  left: 0;
 
   background-color: beige;
 `;
