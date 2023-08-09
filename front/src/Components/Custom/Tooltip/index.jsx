@@ -42,7 +42,6 @@ const TooltipBody = styled.div`
   gap: 10px;
 
   width: 309px;
-  /* height: 68px; */
 
   background-color: ${({ theme }) => theme.color.tooltip};
 
