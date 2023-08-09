@@ -1,12 +1,12 @@
 import React from "react";
 import { styled } from "styled-components";
-import TrimCustomBar from "./TrimCustomBar";
+import TrimCustomSideBar from "./TrimCustomSideBar";
 
 const TrimPage = () => {
   return (
     <Wrapper>
       <Component1></Component1>
-      <TrimCustomBar />
+      <TrimCustomSideBar />
     </Wrapper>
   );
 };

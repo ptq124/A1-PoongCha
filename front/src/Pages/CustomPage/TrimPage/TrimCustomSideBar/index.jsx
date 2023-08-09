@@ -65,7 +65,7 @@ const TrimOptions = [
   },
 ];
 
-const TrimCustomBar = () => {
+const TrimCustomSideBar = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const handleOptionSelect = (questionKey, option) => {
     dispatch({
@@ -124,6 +124,7 @@ const nextBtnStyle = css`
   margin-top: 24px;
 `;
 const ModelItems = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -131,7 +132,7 @@ const ModelItems = styled.div`
   border: 1px solid ${({ theme }) => theme.color.grey700};
   border-radius: 8px;
 
-  padding: 12px;
+  padding: 12px 0px;
   margin-top: 16px;
 `;
 const LinkBtnStyle = css`
@@ -165,4 +166,4 @@ const Wrapper = styled.div`
   width: 29%;
   height: 1292px;
 `;
-export default TrimCustomBar;
+export default TrimCustomSideBar;
