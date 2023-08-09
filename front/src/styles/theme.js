@@ -285,6 +285,7 @@ Extra16: css`
   line-height: 20px;
   letter-spacing: -0.07px;
 `,
+// TrimPage > 트림 비교하기 버튼
 Extra17: css`
  font-family: "HyundaiSansTextRegularKR";
   font-size: 12px;

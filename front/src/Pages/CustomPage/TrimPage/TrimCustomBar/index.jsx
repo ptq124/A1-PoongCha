@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 import { css, styled } from "styled-components";
 import Button from "../../../../Components/Common/Button/Button";
 import { initialState, reducer } from "./index.reducer";
@@ -6,6 +6,7 @@ import TrimOptionGroup from "../../../../Components/Custom/TrimOptionGroup";
 import ModelItemOptionGroup from "../../../../Components/Custom/ModelItemOptionGroup";
 import useButtonNavigation from "../../../../hooks/useButtonNavigation";
 
+// state의 engine, body, drivetrain 바뀔 때마다 trimOptions 새로 가져와서 TrimOptionsGroup 다시 띄워줘야 함
 const modelItemData = {
   engine: {
     title: "엔진",
@@ -20,6 +21,49 @@ const modelItemData = {
     options: ["2WD", "4WD"],
   },
 };
+
+const TrimOptions = [
+  {
+    name: "Exclusive",
+    defaultOptions: [
+      "12인치 내비게이션",
+      "내비 기반 크루즈",
+      "세이프티 파워 윈도우",
+    ],
+    information: "합리적인 당신을 위한",
+    minPrice: 43460000,
+  },
+  {
+    name: "Le Blanc",
+    defaultOptions: [
+      "20인치 알로이 휠",
+      "12인치 클러스터",
+      "서라운드 뷰 모니터",
+    ],
+    information: "필수적인 옵션만 모은",
+    minPrice: 43460000,
+  },
+  {
+    name: "Prestige",
+    defaultOptions: [
+      "12인치 내비게이션",
+      "내비 기반 크루즈",
+      "세이프티 파워 윈도우",
+    ],
+    information: "합리적인 당신을 위한",
+    minPrice: 43460000,
+  },
+  {
+    name: "Caligraphy",
+    defaultOptions: [
+      "12인치 내비게이션",
+      "내비 기반 크루즈",
+      "세이프티 파워 윈도우",
+    ],
+    information: "합리적인 당신을 위한",
+    minPrice: 43460000,
+  },
+];
 
 const TrimCustomBar = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -49,7 +93,13 @@ const TrimCustomBar = () => {
             />
           ))}
         </ModelItems>
-        <TrimOptionGroup />
+        <TrimOptionGroup
+          options={TrimOptions}
+          selectedOption={state["trim"]}
+          handleOptionSelect={(newValue) => {
+            handleOptionSelect("trim", newValue);
+          }}
+        />
         <Button
           text="색상 선택"
           style={nextBtnStyle}

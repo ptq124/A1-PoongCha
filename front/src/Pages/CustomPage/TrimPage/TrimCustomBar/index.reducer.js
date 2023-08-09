@@ -2,6 +2,7 @@ const initialState = {
     engine: "디젤 2.2",
     body: "7인승",
     drivetrain: "2WD",
+    trim:"Le Blanc",
   };
   
   const reducer = (state, action) => {
