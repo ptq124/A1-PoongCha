@@ -3,6 +3,7 @@ import { css, styled } from "styled-components";
 import Check28BlueIcon from "../../../assets/checkcircle/check-28-blue.svg";
 import Check28GreyIcon from "../../../assets/checkcircle/check-28-grey.svg";
 import Button from "../../Common/Button/Button";
+import DefaultOption from "../DefaultOption";
 
 const TrimOption = ({ data, radioGroup, selected, handleOptionSelect }) => {
   return (
@@ -34,11 +35,7 @@ const TrimOption = ({ data, radioGroup, selected, handleOptionSelect }) => {
         <span className="defaultOptionTitle">기본 옵션</span>
         <DefaultOptions>
           {data.defaultOptions.map((option, index) => (
-            <Button
-              key={index}
-              text={option}
-              style={DefaultOptionBtnStyle}
-            ></Button>
+            <DefaultOption key={index} option={option} />
           ))}
         </DefaultOptions>
       </TrimDefaultOptions>
@@ -54,22 +51,7 @@ const CheckBtn = styled.label`
 const Radio = styled.input`
   display: none;
 `;
-const DefaultOptionBtnStyle = css`
-  flex-shrink: 0;
 
-  color: ${({ theme }) => theme.color.secondary};
-  background-color: ${({ theme }) => theme.color.grey1000};
-
-  border: none;
-  ${({ theme }) => theme.font.Body4_Regular};
-  background: none;
-  padding: 0;
-  outline: 0;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-
-  margin-right: 12px;
-`;
 const DefaultOptions = styled.div`
   display: flex;
   flex-wrap: wrap;

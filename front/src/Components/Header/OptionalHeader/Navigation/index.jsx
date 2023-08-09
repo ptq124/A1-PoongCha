@@ -4,7 +4,7 @@ import { useLocation } from "react-router";
 import Button from "../../../Common/Button/Button";
 import useOnClickPopUp from "../../../../hooks/useOnClickPopUp";
 import useButtonNavigation from "../../../../hooks/useButtonNavigation";
-import DropDonw from "./DropDown";
+import Dropdown from "./DropDown";
 
 const navItems = [
   { title: "1 트림", detail: "Le Blanc(르블랑)", path: "/custom/trim" },
@@ -25,9 +25,8 @@ const Navigation = () => {
 
   const move = useButtonNavigation();
 
-  const [isPopupOpen, setPopupOpen] = useState(false);
   const popupRef = useRef();
-  useOnClickPopUp(popupRef, () => setPopupOpen(false));
+  const { isPopupOpen, openPopup, closePopup } = useOnClickPopUp(popupRef);
 
   return (
     <>
@@ -44,7 +43,7 @@ const Navigation = () => {
           <Button
             text="요금 상세"
             style={amoutDetailBtnStyle}
-            onClick={() => setPopupOpen(true)}
+            onClick={openPopup}
           />
           <Button
             text="견적내기"
@@ -53,9 +52,7 @@ const Navigation = () => {
           />
         </BtnsContainer>
       </Wrapper>
-      {isPopupOpen && (
-        <DropDonw popupRef={popupRef} closePopup={() => setPopupOpen(false)} />
-      )}
+      {isPopupOpen && <Dropdown popupRef={popupRef} closePopup={closePopup} />}
     </>
   );
 };
