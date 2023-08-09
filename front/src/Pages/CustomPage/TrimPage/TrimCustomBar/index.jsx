@@ -22,10 +22,38 @@ const modelItemData = {
 };
 
 const TrimOptions = [
-  { title: "Exclusive" },
-  { title: "Le Blanc" },
-  { title: "Prestige" },
-  { title: "Caligraphy" },
+  {
+    name: "Exclusive",
+    defaultOptions: [
+      "12인치 내비게이션",
+      "내비 기반 크루즈",
+      "세이프티 파워 윈도우",
+    ],
+  },
+  {
+    name: "Le Blanc",
+    defaultOptions: [
+      "20인치 알로이 휠",
+      "12인치 클러스터",
+      "서라운드 뷰 모니터",
+    ],
+  },
+  {
+    name: "Prestige",
+    defaultOptions: [
+      "12인치 내비게이션",
+      "내비 기반 크루즈",
+      "세이프티 파워 윈도우",
+    ],
+  },
+  {
+    name: "Caligraphy",
+    defaultOptions: [
+      "12인치 내비게이션",
+      "내비 기반 크루즈",
+      "세이프티 파워 윈도우",
+    ],
+  },
 ];
 
 const TrimCustomBar = () => {

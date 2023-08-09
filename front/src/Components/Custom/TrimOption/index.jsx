@@ -10,7 +10,7 @@ const TrimOption = ({ data, radioGroup, selected, handleOptionSelect }) => {
       <TrimOptionUpper>
         <TrimInfo>
           <NameAndModelItem>
-            <span className="trimName">{data.title}</span>
+            <span className="trimName">{data.name}</span>
             <span className="modelItemSummary">디젤 2.2 • 7인승 • 2WD</span>
           </NameAndModelItem>
           <span className="comment">합리적인 당신을 위한</span>
@@ -29,21 +29,17 @@ const TrimOption = ({ data, radioGroup, selected, handleOptionSelect }) => {
           ></Radio>
         </CheckBtn>
       </TrimOptionUpper>
+
       <TrimDefaultOptions>
         <span className="defaultOptionTitle">기본 옵션</span>
         <DefaultOptions>
-          <Button
-            text="12인치 내비게이션"
-            style={DefaultOptionBtnStyle}
-          ></Button>
-          <Button
-            text="내비 기반 크루즈"
-            style={DefaultOptionBtnStyle}
-          ></Button>
-          <Button
-            text="세이프티 파워 윈도우"
-            style={DefaultOptionBtnStyle}
-          ></Button>
+          {data.defaultOptions.map((option, index) => (
+            <Button
+              key={index}
+              text={option}
+              style={DefaultOptionBtnStyle}
+            ></Button>
+          ))}
         </DefaultOptions>
       </TrimDefaultOptions>
     </Wrapper>
