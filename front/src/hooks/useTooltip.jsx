@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const useTooltip = () => {
   const [isTooltipOpen, setIsTooltipOpen] = useState(false);

@@ -15,7 +15,7 @@ const ModelItemOptionGroup = ({
 
   return (
     <Wrapper>
-      {isTooltipOpen && <Tooltip />}
+      {isTooltipOpen && <Tooltip offset={78} />}
       <OptionGroup>
         <span>{title}</span>
         <Options onMouseEnter={openTooltip} onMouseLeave={closeTooltip}>

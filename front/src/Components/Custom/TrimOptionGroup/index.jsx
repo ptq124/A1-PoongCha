@@ -2,12 +2,16 @@ import React from "react";
 import { css, styled } from "styled-components";
 import Button from "../../Common/Button/Button";
 import TrimOption from "../TrimOption";
+import Tooltip from "../Tooltip";
+import useTooltip from "../../../hooks/useTooltip";
 
 const TrimOptionGroup = ({ options, selectedOption, handleOptionSelect }) => {
+  const { isTooltipOpen, openTooltip, closeTooltip } = useTooltip();
   return (
     <Wrapper>
-      <Title>
-        <span>트림</span>
+      {isTooltipOpen && <Tooltip offset={810} />}
+      <Title onMouseEnter={openTooltip} onMouseLeave={closeTooltip}>
+        <span class="trimOptionTitle">트림</span>
         <Button text="비교하기" style={TrimComparisonBtnStyle} />
       </Title>
       {options.map((option, index) => (
@@ -36,6 +40,7 @@ const TrimComparisonBtnStyle = css`
 const Title = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   margin-top: 34px;
 
@@ -43,5 +48,7 @@ const Title = styled.div`
     ${({ theme }) => theme.font.Head2};
   }
 `;
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  position: relative;
+`;
 export default TrimOptionGroup;

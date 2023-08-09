@@ -5,6 +5,7 @@ import { initialState, reducer } from "./index.reducer";
 import TrimOptionGroup from "../../../../Components/Custom/TrimOptionGroup";
 import ModelItemOptionGroup from "../../../../Components/Custom/ModelItemOptionGroup";
 import useButtonNavigation from "../../../../hooks/useButtonNavigation";
+import Tooltip from "../../../../Components/Custom/Tooltip";
 
 // state의 engine, body, drivetrain 바뀔 때마다 trimOptions 새로 가져와서 TrimOptionsGroup 다시 띄워줘야 함
 const modelItemData = {
