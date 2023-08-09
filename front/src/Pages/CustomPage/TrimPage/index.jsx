@@ -1,26 +1,17 @@
 import React from "react";
 import { styled } from "styled-components";
 import TrimCustomBar from "./TrimCustomBar";
+import CarView from "../../../Components/Custom/CarView";
 
 const TrimPage = () => {
   return (
     <Wrapper>
-      <Component1></Component1>
+      <CarView></CarView>
       <TrimCustomBar />
     </Wrapper>
   );
 };
 
-const Component1 = styled.div`
-  position: fixed;
-
-  width: 71%;
-  height: 100%;
-
-  left: 0;
-
-  background-color: beige;
-`;
 const Wrapper = styled.div`
   display: flex;
   width: 100%;
@@ -31,4 +22,5 @@ const Wrapper = styled.div`
 
   box-sizing: border-box;
 `;
+
 export default TrimPage;
