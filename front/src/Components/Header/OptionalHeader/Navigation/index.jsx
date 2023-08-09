@@ -4,6 +4,7 @@ import { useLocation } from "react-router";
 import Button from "../../../Common/Button/Button";
 import useOnClickPopUp from "../../../../hooks/useOnClickPopUp";
 import useButtonNavigation from "../../../../hooks/useButtonNavigation";
+import DropDonw from "./DropDown";
 
 const navItems = [
   { title: "1 트림", detail: "Le Blanc(르블랑)", path: "/custom/trim" },
@@ -24,25 +25,38 @@ const Navigation = () => {
 
   const move = useButtonNavigation();
 
+  const [isPopupOpen, setPopupOpen] = useState(false);
+  const popupRef = useRef();
+  useOnClickPopUp(popupRef, () => setPopupOpen(false));
+
   return (
-    <Wrapper>
-      <NavContainer>
-        {navItems.map((item, index) => (
-          <Nav key={index}>
-            <NavTitle $active={item.path === pathname}>{item.title}</NavTitle>
-            <NavDetail>{item.detail}</NavDetail>
-          </Nav>
-        ))}
-      </NavContainer>
-      <BtnsContainer>
-        <Button text="요금 상세" style={amoutDetailBtnStyle} />
-        <Button
-          text="견적내기"
-          style={estimateBtnStyle}
-          onClick={() => move("/result")}
-        />
-      </BtnsContainer>
-    </Wrapper>
+    <>
+      <Wrapper>
+        <NavContainer>
+          {navItems.map((item, index) => (
+            <Nav key={index}>
+              <NavTitle $active={item.path === pathname}>{item.title}</NavTitle>
+              <NavDetail>{item.detail}</NavDetail>
+            </Nav>
+          ))}
+        </NavContainer>
+        <BtnsContainer>
+          <Button
+            text="요금 상세"
+            style={amoutDetailBtnStyle}
+            onClick={() => setPopupOpen(true)}
+          />
+          <Button
+            text="견적내기"
+            style={estimateBtnStyle}
+            onClick={() => move("/result")}
+          />
+        </BtnsContainer>
+      </Wrapper>
+      {isPopupOpen && (
+        <DropDonw popupRef={popupRef} closePopup={() => setPopupOpen(false)} />
+      )}
+    </>
   );
 };
 
