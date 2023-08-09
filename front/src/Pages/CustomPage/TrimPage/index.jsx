@@ -20,7 +20,6 @@ const CustomBarWrapper = styled.div`
 `;
 const Component1 = styled.div`
   flex: 1;
-  width: 100px;
   height: 100%;
 
   background-color: beige;
