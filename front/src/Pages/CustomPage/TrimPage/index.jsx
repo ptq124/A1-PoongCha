@@ -6,11 +6,18 @@ const TrimPage = () => {
   return (
     <Wrapper>
       <Component1></Component1>
-      <TrimCustomBar />
+      <CustomBarWrapper>
+        <TrimCustomBar />
+      </CustomBarWrapper>
     </Wrapper>
   );
 };
 
+const CustomBarWrapper = styled.div`
+  width: 473px;
+
+  overflow-y: scroll;
+`;
 const Component1 = styled.div`
   flex: 1;
   width: 100px;
@@ -25,5 +32,10 @@ const Wrapper = styled.div`
   justify-content: center;
 
   margin-right: 128px;
+  padding-top: 121px;
+
+  overflow: scroll;
+
+  box-sizing: border-box;
 `;
 export default TrimPage;

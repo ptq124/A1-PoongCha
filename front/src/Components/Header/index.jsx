@@ -6,6 +6,24 @@ import HyundaiWhiteLogo from "../../assets/icons/hyundai-logo-white.svg";
 import { useLocation } from "react-router-dom";
 import SelectOption from "./SelectOption";
 
+const getHeaderPosition = (pathname) => {
+  let position;
+  switch (pathname) {
+    case "/":
+      position = "absolute";
+      break;
+    case "/custom/trim":
+      position = "fixed";
+      break;
+    default:
+      position = "relative";
+      break;
+  }
+
+  return css`
+    position: ${position};
+  `;
+};
 const Header = () => {
   const { pathname } = useLocation();
 
@@ -30,15 +48,7 @@ const Header = () => {
 };
 
 const HeaderWrapper = styled.div`
-  ${({ $pathname }) =>
-    $pathname === "/"
-      ? css`
-          position: absolute;
-        `
-      : css`
-          position: relative;
-        `}
-
+  ${({ $pathname }) => getHeaderPosition($pathname)};
   display: flex;
   flex-direction: column;
 
