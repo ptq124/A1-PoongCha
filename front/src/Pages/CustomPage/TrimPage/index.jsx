@@ -12,9 +12,10 @@ const TrimPage = () => {
 };
 
 const Component1 = styled.div`
+  flex: 0 0 auto;
+  width: calc(100% - 473px);
   position: fixed;
 
-  width: 71%;
   height: 100%;
 
   left: 0;
