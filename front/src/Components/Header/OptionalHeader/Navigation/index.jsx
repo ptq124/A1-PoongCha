@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { css, styled } from "styled-components";
 import { useLocation } from "react-router";
 import Button from "../../../Common/Button/Button";
+import useOnClickPopUp from "../../../../hooks/useOnClickPopUp";
 import useButtonNavigation from "../../../../hooks/useButtonNavigation";
 
 const navItems = [
@@ -25,14 +26,7 @@ const Navigation = () => {
 
   return (
     <Wrapper>
-      <NavContainer>
-        {navItems.map((item, index) => (
-          <Nav key={index}>
-            <NavTitle $active={item.path === pathname}>{item.title}</NavTitle>
-            <NavDetail>{item.detail}</NavDetail>
-          </Nav>
-        ))}
-      </NavContainer>
+      <NavContainer></NavContainer>
       <BtnsContainer>
         <Button text="요금 상세" style={amoutDetailBtnStyle} />
         <Button
@@ -94,6 +88,8 @@ const NavContainer = styled.div`
 `;
 
 const Wrapper = styled.div`
+  position: relative;
+
   display: flex;
   justify-content: space-between;
 
