@@ -6,6 +6,9 @@ import TrimOptionGroup from "../../../../Components/Custom/TrimOptionGroup";
 import ModelItemOptionGroup from "../../../../Components/Custom/ModelItemOptionGroup";
 import useButtonNavigation from "../../../../hooks/useButtonNavigation";
 import helpIcon from "../../../../assets/icons/help-circle.svg";
+import useOnClickPopUp from "../../../../hooks/useOnClickPopUp";
+import { useRef } from "react";
+import OverlaidPopup from "../../../../Components/Common/OverlaidPopup";
 
 // state의 engine, body, drivetrain 바뀔 때마다 trimOptions 새로 가져와서 TrimOptionsGroup 다시 띄워줘야 함
 const modelItemData = {
@@ -76,13 +79,24 @@ const TrimCustomSideBar = () => {
     });
   };
   const move = useButtonNavigation();
+  const popupRef = useRef();
+  const {
+    isPopupOpen: isModelItemDescriptionPopupOpen,
+    openPopup,
+    closePopup,
+  } = useOnClickPopUp(popupRef);
 
   return (
     <Wrapper>
+      {isModelItemDescriptionPopupOpen && <OverlaidPopup component={<></>} />}
       <CustomBarContent>
         <LinkBtnContainer>
           <img src={helpIcon} />
-          <Button text="고르기 어렵다면?" style={LinkBtnStyle} />
+          <Button
+            text="고르기 어렵다면?"
+            style={LinkBtnStyle}
+            onClick={openPopup}
+          />
         </LinkBtnContainer>
         <ModelItems>
           {Object.entries(modelItemData).map(([questionKey, data]) => (
