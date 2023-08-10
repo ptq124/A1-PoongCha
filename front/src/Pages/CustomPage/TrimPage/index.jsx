@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { styled } from "styled-components";
 import CarView from "../../../Components/Custom/CarView";
 import TrimCustomSideBar from "./TrimCustomSideBar";
@@ -6,7 +6,7 @@ import TrimCustomSideBar from "./TrimCustomSideBar";
 const TrimPage = () => {
   return (
     <Wrapper>
-      <CarView></CarView>
+      <CarView />
       <TrimCustomSideBar />
     </Wrapper>
   );

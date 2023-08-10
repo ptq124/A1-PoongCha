@@ -1,18 +1,38 @@
-import React from "react";
+import React, { useRef } from "react";
 import { css, styled } from "styled-components";
 import Button from "../../Common/Button/Button";
-import TrimOption from "../TrimOption";
+import TrimOption from "./TrimOption";
 import Tooltip from "../Tooltip";
 import useTooltip from "../../../hooks/useTooltip";
+import TrimComparisonPopup from "../../../Pages/CustomPage/TrimPage/TrimComparisonPopup";
+import useOnClickPopUp from "../../../hooks/useOnClickPopUp";
+import OverlaidPopup from "../../Common/OverlaidPopup";
 
 const TrimOptionGroup = ({ options, selectedOption, handleOptionSelect }) => {
   const { isTooltipOpen, openTooltip, closeTooltip } = useTooltip();
+  const popupRef = useRef();
+  const {
+    isPopupOpen: isComparisonPopupOpen,
+    openPopup,
+    closePopup,
+  } = useOnClickPopUp(popupRef);
   return (
     <Wrapper>
       {isTooltipOpen && <Tooltip offset={810} />}
+      {isComparisonPopupOpen && (
+        <OverlaidPopup
+          component={
+            <TrimComparisonPopup popupRef={popupRef} closePopup={closePopup} />
+          }
+        />
+      )}
       <Title onMouseEnter={openTooltip} onMouseLeave={closeTooltip}>
         <span>트림</span>
-        <Button text="비교하기" style={TrimComparisonBtnStyle} />
+        <Button
+          text="비교하기"
+          style={TrimComparisonBtnStyle}
+          onClick={openPopup}
+        />
       </Title>
       {options.map((option, index) => (
         <TrimOption

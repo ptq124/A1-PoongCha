@@ -7,7 +7,7 @@ import LifestylePersona from "../../../Components/Survey/LifestylePersona";
 import useOnClickPopUp from "../../../hooks/useOnClickPopUp";
 import PopUp from "./PopUp";
 import useButtonNavigation from "../../../hooks/useButtonNavigation";
-import { useNavigate } from "react-router";
+import BackgroundOverlay from "../../../Components/Common/OverlaidPopup/BackgroundOverlay";
 
 const lifestyleSurveyInfo = {
   options: [
@@ -54,16 +54,13 @@ const lifestyleSurveyInfo = {
   ],
 };
 
-const LifestyleSurvey = ({ linkHandler }) => {
-  const navigate = useNavigate();
+const LifestyleSurvey = () => {
   const [selectedOption, setSelectedOption] = useState("");
   const handleOptionChange = (event) => {
     setSelectedOption(parseInt(event.target.value));
   };
-
-  const [isPopupOpen, setPopupOpen] = useState(false);
   const popupRef = useRef();
-  useOnClickPopUp(popupRef, () => setPopupOpen(false));
+  const { isPopupOpen, openPopup, closePopup } = useOnClickPopUp(popupRef);
 
   const move = useButtonNavigation();
 
@@ -81,7 +78,7 @@ const LifestyleSurvey = ({ linkHandler }) => {
             <label key={index}>
               <LifestylePersona
                 selected={selectedOption === index}
-                setPopupOpen={setPopupOpen}
+                openPopup={openPopup}
                 data={lifestyleSurveyInfo.options[index]}
               />
               <Radio
@@ -109,15 +106,6 @@ const LifestyleSurvey = ({ linkHandler }) => {
   );
 };
 
-const BackgroundOverlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 9;
-`;
 const Radio = styled.input`
   display: none;
 `;

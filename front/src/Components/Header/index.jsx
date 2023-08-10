@@ -9,6 +9,7 @@ import SelectOption from "./SelectOption";
 const getHeaderStyle = (pathname) => {
   let position;
   let backgroundColor;
+  let boxShadow;
   switch (pathname) {
     case "/":
       position = "absolute";
@@ -18,6 +19,7 @@ const getHeaderStyle = (pathname) => {
     case "/custom/color":
       position = "fixed";
       backgroundColor = "#FFF";
+      boxShadow = "0px 4px 6px 0px rgba(0, 0, 0, 0.08)";
       break;
     default:
       position = "relative";
@@ -27,6 +29,7 @@ const getHeaderStyle = (pathname) => {
   return css`
     position: ${position};
     background-color: ${backgroundColor};
+    box-shadow: ${boxShadow};
   `;
 };
 const Header = () => {
