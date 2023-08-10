@@ -5,7 +5,7 @@ import { initialState, reducer } from "./index.reducer";
 import TrimOptionGroup from "../../../../Components/Custom/TrimOptionGroup";
 import ModelItemOptionGroup from "../../../../Components/Custom/ModelItemOptionGroup";
 import useButtonNavigation from "../../../../hooks/useButtonNavigation";
-import Tooltip from "../../../../Components/Custom/Tooltip";
+import helpIcon from "../../../../assets/icons/help-circle.svg";
 
 // state의 engine, body, drivetrain 바뀔 때마다 trimOptions 새로 가져와서 TrimOptionsGroup 다시 띄워줘야 함
 const modelItemData = {
@@ -80,7 +80,10 @@ const TrimCustomSideBar = () => {
   return (
     <Wrapper>
       <CustomBarContent>
-        <Button text="고르기 어렵다면?" style={LinkBtnStyle}></Button>
+        <LinkBtnContainer>
+          <img src={helpIcon} />
+          <Button text="고르기 어렵다면?" style={LinkBtnStyle} />
+        </LinkBtnContainer>
         <ModelItems>
           {Object.entries(modelItemData).map(([questionKey, data]) => (
             <ModelItemOptionGroup
@@ -111,6 +114,11 @@ const TrimCustomSideBar = () => {
   );
 };
 
+const LinkBtnContainer = styled.div`
+  display: flex;
+  gap: 2px;
+  margin-top: 56px;
+`;
 const nextBtnStyle = css`
   width: 100%;
   height: 52px;
@@ -147,8 +155,6 @@ const LinkBtnStyle = css`
   outline: 0;
   text-decoration: underline;
   text-underline-offset: 3px;
-
-  margin-top: 56px;
 `;
 
 const CustomBarContent = styled.div`
