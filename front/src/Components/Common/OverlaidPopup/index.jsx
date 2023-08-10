@@ -19,7 +19,7 @@ const Wrapper = styled.div`
 
   width: 100%;
   height: 100%;
-  z-index: 12;
+  z-index: 998;
   align-items: center;
 `;
 export default OverlaidPopup;

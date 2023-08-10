@@ -144,6 +144,6 @@ const Wrapper = styled.div`
   height: 535px;
   background-color: ${({ theme }) => theme.color.grey1000};
   border-radius: 12px;
-  z-index: 12;
+  z-index: 999;
 `;
 export default ModelItemsDescriptionPopup;
