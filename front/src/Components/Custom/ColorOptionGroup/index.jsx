@@ -6,6 +6,13 @@ import ArrowUpIcon from "../../../assets/icons/24-chevron-up.svg";
 
 const ColorOptionGroup = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const handleDropdownClick = () => {
+    if (isDropdownOpen) {
+      setIsDropdownOpen(false);
+    } else {
+      setIsDropdownOpen(true);
+    }
+  };
   return (
     <Wrapper>
       <Header>외장 색상</Header>
@@ -23,12 +30,12 @@ const ColorOptionGroup = () => {
         <ColorOption />
       </OptionsContainer>
       <Dropdown>
-        <DropdownTitle>
+        <DropdownTitle onClick={handleDropdownClick}>
           <span>다른 외장 색상을 찾고 있나요?</span>
           {isDropdownOpen ? (
-            <img src={ArrowUpIcon} onClick={() => setIsDropdownOpen(false)} />
+            <img src={ArrowUpIcon} />
           ) : (
-            <img src={ArrowDownIcon} onClick={() => setIsDropdownOpen(true)} />
+            <img src={ArrowDownIcon} />
           )}
         </DropdownTitle>
         {isDropdownOpen && (
@@ -45,6 +52,13 @@ const ColorOptionGroup = () => {
 const DropdownTitle = styled.div`
   display: flex;
   justify-content: space-between;
+  &:hover {
+    cursor: pointer;
+  }
+  span {
+    color: ${({ theme }) => theme.color.primary_default};
+    ${({ theme }) => theme.font.Body4_Medium};
+  }
 `;
 const Dropdown = styled.div`
   width: 308px;
@@ -52,13 +66,6 @@ const Dropdown = styled.div`
   border: 1px solid ${({ theme }) => theme.color.primary_default};
   padding: 11px 16px;
   box-sizing: border-box;
-  span {
-    color: ${({ theme }) => theme.color.primary_default};
-    ${({ theme }) => theme.font.Body4_Medium};
-  }
-  img:hover {
-    cursor: pointer;
-  }
 `;
 const OptionsContainer = styled.div`
   display: flex;
@@ -92,5 +99,6 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 24px;
+  margin-bottom: 32px;
 `;
 export default ColorOptionGroup;
