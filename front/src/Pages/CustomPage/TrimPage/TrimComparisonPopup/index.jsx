@@ -54,5 +54,6 @@ const Wrapper = styled.div`
 
   box-sizing: border-box;
   overflow-y: scroll;
+  z-index: 999;
 `;
 export default TrimComparisonPopup;

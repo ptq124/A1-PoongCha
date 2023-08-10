@@ -7,8 +7,7 @@ import LifestylePersona from "../../../Components/Survey/LifestylePersona";
 import useOnClickPopUp from "../../../hooks/useOnClickPopUp";
 import PopUp from "./PopUp";
 import useButtonNavigation from "../../../hooks/useButtonNavigation";
-import { useNavigate } from "react-router";
-import BackgroundOverlay from "../../../Components/Common/BackgroundOverlay";
+import BackgroundOverlay from "../../../Components/Common/OverlaidPopup/BackgroundOverlay";
 
 const lifestyleSurveyInfo = {
   options: [
@@ -55,8 +54,7 @@ const lifestyleSurveyInfo = {
   ],
 };
 
-const LifestyleSurvey = ({ linkHandler }) => {
-  const navigate = useNavigate();
+const LifestyleSurvey = () => {
   const [selectedOption, setSelectedOption] = useState("");
   const handleOptionChange = (event) => {
     setSelectedOption(parseInt(event.target.value));
