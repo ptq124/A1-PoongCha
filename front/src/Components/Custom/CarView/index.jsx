@@ -26,12 +26,12 @@ const BackgrondBottom = styled.div`
   );
 `;
 const Wrapper = styled.div`
+  flex: 0 0 auto;
+  width: calc(100% - 473px);
   position: fixed;
-
   display: flex;
   flex-direction: column;
 
-  width: 71%;
   height: 100%;
 
   left: 0;
