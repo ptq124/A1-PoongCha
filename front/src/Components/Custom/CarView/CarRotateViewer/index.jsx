@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { styled, css } from "styled-components";
 import { convertToTwoDigits } from "../../../../utils";
 
@@ -36,6 +36,18 @@ const CarRotateViewer = () => {
     }
   };
   const handleMouseLeave = () => setIsClicked(false);
+
+  // 첫 렌더링시 애니메이션 로직 구현
+  const [isAnimate, setIsAnimate] = useState(true);
+  useEffect(() => {
+    if (currentImage <= 10 && isAnimate) {
+      const interval = setInterval(() => {
+        setCurrentImage((prev) => prev + 1);
+      }, 50);
+      return () => clearInterval(interval);
+    }
+    if (currentImage > 10) setIsAnimate(false);
+  }, [currentImage, isAnimate]);
 
   return (
     <Wrapper
