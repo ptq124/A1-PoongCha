@@ -25,7 +25,7 @@ const TrimOption = ({ data, radioGroup, selected, handleOptionSelect }) => {
           <Radio
             type="radio"
             name={radioGroup}
-            onChange={handleOptionSelect}
+            onClick={handleOptionSelect}
           ></Radio>
         </CheckBtn>
       </TrimOptionUpper>
