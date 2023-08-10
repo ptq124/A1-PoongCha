@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import { css, styled } from "styled-components";
 import Button from "../../../../Components/Common/Button/Button";
 import { initialState, reducer } from "./index.reducer";
@@ -10,82 +10,47 @@ import useOnClickPopUp from "../../../../hooks/useOnClickPopUp";
 import { useRef } from "react";
 import OverlaidPopup from "../../../../Components/Common/OverlaidPopup";
 import ModelItemsDescriptionPopup from "../ModelItemsDescriptionPopup";
+import TrimChangePopup from "../TrimChangePopup";
+import { TrimOptions, modelItemData } from "./mockData";
 
 // state의 engine, body, drivetrain 바뀔 때마다 trimOptions 새로 가져와서 TrimOptionsGroup 다시 띄워줘야 함
-const modelItemData = {
-  engine: {
-    title: "엔진",
-    options: ["디젤 2.2", "가솔린 3.8"],
-  },
-  body: {
-    title: "바디",
-    options: ["7인승", "8인승"],
-  },
-  drivetrain: {
-    title: "구동방식",
-    options: ["2WD", "4WD"],
-  },
-};
-
-const TrimOptions = [
-  {
-    name: "Exclusive",
-    defaultOptions: [
-      "12인치 내비게이션",
-      "내비 기반 크루즈",
-      "세이프티 파워 윈도우",
-    ],
-    information: "합리적인 당신을 위한",
-    minPrice: 43460000,
-  },
-  {
-    name: "Le Blanc",
-    defaultOptions: [
-      "20인치 알로이 휠",
-      "12인치 클러스터",
-      "서라운드 뷰 모니터",
-    ],
-    information: "필수적인 옵션만 모은",
-    minPrice: 43460000,
-  },
-  {
-    name: "Prestige",
-    defaultOptions: [
-      "12인치 내비게이션",
-      "내비 기반 크루즈",
-      "세이프티 파워 윈도우",
-    ],
-    information: "합리적인 당신을 위한",
-    minPrice: 43460000,
-  },
-  {
-    name: "Caligraphy",
-    defaultOptions: [
-      "12인치 내비게이션",
-      "내비 기반 크루즈",
-      "세이프티 파워 윈도우",
-    ],
-    information: "합리적인 당신을 위한",
-    minPrice: 43460000,
-  },
-];
 
 const TrimCustomSideBar = () => {
+  const move = useButtonNavigation();
   const [state, dispatch] = useReducer(reducer, initialState);
-  const handleOptionSelect = (questionKey, option) => {
+  const [clickedTrim, setClickedTrim] = useState();
+  const setOptionSelect = (questionKey, option) => {
     dispatch({
       type: "SELECT_OPTION",
       questionKey,
       option,
     });
   };
-  const move = useButtonNavigation();
-  const popupRef = useRef();
+
+  const modelItemDescriptionPopupRef = useRef();
   const {
     isPopupOpen: isModelItemDescriptionPopupOpen,
-    openPopup,
-    closePopup,
-  } = useOnClickPopUp(popupRef);
+    openPopup: openModelItemDescriptionPopup,
+    closePopup: closeModelItemDescriptionPopup,
+  } = useOnClickPopUp(modelItemDescriptionPopupRef);
+
+  const TrimChangePopupRef = useRef();
+  const {
+    isPopupOpen: isTrimChangePopupOpen,
+    openPopup: openTrimChangePopup,
+    closePopup: closeTrimChangePopup,
+  } = useOnClickPopUp(TrimChangePopupRef);
+  const handleTrimOptionChange = (newValue) => {
+    if (newValue === state["trim"]) return;
+    setClickedTrim(newValue);
+    // 새로운 트림 옵션 선택으로 현재 선택한 색상과 옵션이 변동될 경우에 팝업 띄움
+    if (true) {
+      // 일단 항상 팝업 띄우도록 설정
+      openTrimChangePopup();
+    } else {
+      setOptionSelect("trim", newValue);
+    }
+  };
 
   return (
     <Wrapper>
@@ -93,8 +58,19 @@ const TrimCustomSideBar = () => {
         <OverlaidPopup
           component={
             <ModelItemsDescriptionPopup
-              popupRef={popupRef}
-              closePopup={closePopup}
+              popupRef={modelItemDescriptionPopupRef}
+              closePopup={closeModelItemDescriptionPopup}
+            />
+          }
+        />
+      )}
+      {isTrimChangePopupOpen && (
+        <OverlaidPopup
+          component={
+            <TrimChangePopup
+              popupRef={TrimChangePopupRef}
+              closePopup={closeTrimChangePopup}
+              changeTrim={() => setOptionSelect("trim", clickedTrim)}
             />
           }
         />
@@ -105,7 +81,7 @@ const TrimCustomSideBar = () => {
           <Button
             text="고르기 어렵다면?"
             style={LinkBtnStyle}
-            onClick={openPopup}
+            onClick={openModelItemDescriptionPopup}
           />
         </LinkBtnContainer>
         <ModelItems>
@@ -114,7 +90,7 @@ const TrimCustomSideBar = () => {
               key={questionKey}
               data={data}
               handleOptionSelect={(newValue) => {
-                handleOptionSelect(questionKey, newValue);
+                setOptionSelect(questionKey, newValue);
               }}
               radioGroup={questionKey}
               selectedOption={state[questionKey]}
@@ -125,7 +101,7 @@ const TrimCustomSideBar = () => {
           options={TrimOptions}
           selectedOption={state["trim"]}
           handleOptionSelect={(newValue) => {
-            handleOptionSelect("trim", newValue);
+            handleTrimOptionChange(newValue);
           }}
         />
         <Button
