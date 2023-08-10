@@ -60,10 +60,8 @@ const LifestyleSurvey = ({ linkHandler }) => {
   const handleOptionChange = (event) => {
     setSelectedOption(parseInt(event.target.value));
   };
-
-  const [isPopupOpen, setPopupOpen] = useState(false);
   const popupRef = useRef();
-  useOnClickPopUp(popupRef, () => setPopupOpen(false));
+  const { isPopupOpen, openPopup, closePopup } = useOnClickPopUp(popupRef);
 
   const move = useButtonNavigation();
 
@@ -81,7 +79,7 @@ const LifestyleSurvey = ({ linkHandler }) => {
             <label key={index}>
               <LifestylePersona
                 selected={selectedOption === index}
-                setPopupOpen={setPopupOpen}
+                openPopup={openPopup}
                 data={lifestyleSurveyInfo.options[index]}
               />
               <Radio
