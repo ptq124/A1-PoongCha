@@ -9,6 +9,7 @@ import helpIcon from "../../../../assets/icons/help-circle.svg";
 import useOnClickPopUp from "../../../../hooks/useOnClickPopUp";
 import { useRef } from "react";
 import OverlaidPopup from "../../../../Components/Common/OverlaidPopup";
+import ModelItemsDescriptionPopup from "../ModelItemsDescriptionPopup";
 
 // state의 engine, body, drivetrain 바뀔 때마다 trimOptions 새로 가져와서 TrimOptionsGroup 다시 띄워줘야 함
 const modelItemData = {
@@ -88,7 +89,16 @@ const TrimCustomSideBar = () => {
 
   return (
     <Wrapper>
-      {isModelItemDescriptionPopupOpen && <OverlaidPopup component={<></>} />}
+      {isModelItemDescriptionPopupOpen && (
+        <OverlaidPopup
+          component={
+            <ModelItemsDescriptionPopup
+              popupRef={popupRef}
+              closePopup={closePopup}
+            />
+          }
+        />
+      )}
       <CustomBarContent>
         <LinkBtnContainer>
           <img src={helpIcon} />

@@ -6,7 +6,7 @@ import TrimCustomSideBar from "./TrimCustomSideBar";
 const TrimPage = () => {
   return (
     <Wrapper>
-      <CarView></CarView>
+      <CarView />
       <TrimCustomSideBar />
     </Wrapper>
   );

@@ -4,13 +4,13 @@ import { styled } from "styled-components";
 
 const OverlaidPopup = ({ component }) => {
   return (
-    <PopupWrapper>
+    <Wrapper>
       <BackgroundOverlay />
       {component}
-    </PopupWrapper>
+    </Wrapper>
   );
 };
-const PopupWrapper = styled.div`
+const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   position: fixed;
@@ -18,7 +18,8 @@ const PopupWrapper = styled.div`
   left: 0;
 
   width: 100%;
+  height: 100%;
   z-index: 12;
-  margin-top: 120px;
+  align-items: center;
 `;
 export default OverlaidPopup;
