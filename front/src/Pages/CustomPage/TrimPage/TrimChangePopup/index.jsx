@@ -10,7 +10,32 @@ const TrimChangePopup = ({ popupRef, closePopup, changeTrim }) => {
         <span>트림 변경 시, 선택하신 색상과 옵션이 해제돼요</span>
         <img src={closeIcon} onClick={closePopup} />
       </Header>
-      <Content></Content>
+      <Content>
+        <CanceledItemDetail>
+          <span className="title">해제 색상</span>
+          <div className="separator"></div>
+          <Items>
+            <Item>
+              <div className="img"></div>
+              <span className="name">내장 - 인조가죽(블랙)</span>
+            </Item>
+          </Items>
+        </CanceledItemDetail>
+        <CanceledItemDetail>
+          <span className="title">해제 옵션</span>
+          <div className="separator"></div>
+          <Items>
+            <Item>
+              <div className="img"></div>
+              <span className="name">주차보조 시스템</span>
+            </Item>
+            <Item>
+              <div className="img"></div>
+              <span className="name">컴포트 2</span>
+            </Item>
+          </Items>
+        </CanceledItemDetail>
+      </Content>
       <BtnContainer>
         <Button text="취소하기" style={CancelBtnStyle} onClick={closePopup} />
         <Button
@@ -43,6 +68,39 @@ const ChangeBtnStyle = css`
   border: 1px solid ${({ theme }) => theme.color.primary_default};
   color: ${({ theme }) => theme.color.grey1000};
 `;
+const Item = styled.div`
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 50%;
+
+  .img {
+    width: 60px;
+    height: 60px;
+    background-color: grey;
+    border-radius: 3.25px;
+  }
+  .name {
+    ${({ theme }) => theme.font.Body3_Regular}
+    color:${({ theme }) => theme.color.grey100};
+  }
+`;
+const Items = styled.div`
+  display: flex;
+`;
+const CanceledItemDetail = styled.div`
+  .title {
+    ${({ theme }) => theme.font.Body3_Medium}
+    color:${({ theme }) => theme.color.primary_default}
+  }
+  .separator {
+    height: 1px;
+    width: 100%;
+    background-color: ${({ theme }) => theme.color.grey700};
+    margin: 7px 0px 12px;
+  }
+`;
+
 const BtnContainer = styled.div`
   display: flex;
   justify-content: flex-end;
@@ -51,15 +109,16 @@ const BtnContainer = styled.div`
   width: 100%;
 
   margin-top: 48px;
-  /* margin-right: 24px; */
 `;
-const Content = styled.div``;
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+`;
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-
-  /* padding: 24px 27px 0 33px; */
 
   span {
     ${({ theme }) => theme.font.Head2};
