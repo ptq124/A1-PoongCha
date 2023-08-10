@@ -1,9 +1,10 @@
 import React from "react";
 import { styled, css } from "styled-components";
 
-const Button = ({ text, style, onClick, ...rest }) => {
+const Button = ({ text, style, onClick, img, ...rest }) => {
   return (
     <CommonButton $style={style} onClick={onClick} {...rest}>
+      {img && <>{img}</>}
       {text}
     </CommonButton>
   );
