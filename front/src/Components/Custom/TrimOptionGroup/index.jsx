@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { css, styled } from "styled-components";
 import Button from "../../Common/Button/Button";
-import TrimOption from "../TrimOption";
+import TrimOption from "./TrimOption";
 import Tooltip from "../Tooltip";
 import useTooltip from "../../../hooks/useTooltip";
 import TrimComparisonPopup from "../../../Pages/CustomPage/TrimPage/TrimComparisonPopup";
@@ -47,17 +47,6 @@ const TrimOptionGroup = ({ options, selectedOption, handleOptionSelect }) => {
   );
 };
 
-const PopupWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  left: 0;
-
-  z-index: 12;
-  margin-top: 120px;
-`;
 const TrimComparisonBtnStyle = css`
   background-color: ${({ theme }) => theme.color.grey1000};
   ${({ theme }) => theme.font.Extra17};

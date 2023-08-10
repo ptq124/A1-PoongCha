@@ -1,8 +1,7 @@
 import React from "react";
-import { css, styled } from "styled-components";
-import Check28BlueIcon from "../../../assets/checkcircle/check-28-blue.svg";
-import Check28GreyIcon from "../../../assets/checkcircle/check-28-grey.svg";
-import Button from "../../Common/Button/Button";
+import { styled } from "styled-components";
+import Check28BlueIcon from "../../../../assets/checkcircle/check-28-blue.svg";
+import Check28GreyIcon from "../../../../assets/checkcircle/check-28-grey.svg";
 import DefaultOption from "../DefaultOption";
 
 const TrimOption = ({ data, radioGroup, selected, handleOptionSelect }) => {
