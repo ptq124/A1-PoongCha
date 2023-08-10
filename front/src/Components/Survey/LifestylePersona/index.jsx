@@ -9,7 +9,7 @@ import LifeImg from "../../../assets/lifestyle/lifestyle1.svg";
 문구: 텍스트
 프로필 사진: 이미지
 */
-const LifestylePersona = ({ selected, setPopupOpen, data }) => {
+const LifestylePersona = ({ selected, openPopup, data }) => {
   return (
     <Wrapper selected={selected}>
       <TagWrapper>
@@ -23,7 +23,7 @@ const LifestylePersona = ({ selected, setPopupOpen, data }) => {
         <span>{data.phrase}</span>
         <CheckImg src={selected ? check32blue : check32grey} />
       </LifestylePhrase>
-      <LifestyleDetail onClick={() => setPopupOpen(true)} selected={selected}>
+      <LifestyleDetail onClick={openPopup} selected={selected}>
         라이프스타일 엿보기
       </LifestyleDetail>
       <LifestyleImg selected={selected} src={LifeImg} alt="Lifestyle" />

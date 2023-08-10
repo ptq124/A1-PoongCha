@@ -23,7 +23,7 @@ const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.color.grey1000};
   border-radius: 20px;
 
-  z-index: 10;
+  z-index: 12;
 `;
 
 export default PopUp;

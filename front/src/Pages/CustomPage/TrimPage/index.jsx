@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useRef } from "react";
 import { styled } from "styled-components";
 import CarView from "../../../Components/Custom/CarView";
 import TrimCustomSideBar from "./TrimCustomSideBar";
+import useOnClickPopUp from "../../../hooks/useOnClickPopUp";
+import BackgroundOverlay from "../../../Components/Common/BackgroundOverlay";
+import TrimComparisonPopup from "./TrimComparisonPopup";
 
 const TrimPage = () => {
   return (
