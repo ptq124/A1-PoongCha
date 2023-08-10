@@ -1,14 +1,23 @@
 import React from "react";
-import ColorOption from "../../../../Components/Custom/ColorOption";
 import { styled } from "styled-components";
+import ColorOptionGroup from "../../../../Components/Custom/ColorOptionGroup";
 
 const ColorCustomSideBar = () => {
   return (
     <Wrapper>
-      <CustomBarContent></CustomBarContent>
+      <CustomBarContent>
+        <ColorOptionGroup />
+        <Separator></Separator>
+        <ColorOptionGroup />
+      </CustomBarContent>
     </Wrapper>
   );
 };
+const Separator = styled.div`
+  height: 1px;
+  width: 100%;
+  background-color: ${({ theme }) => theme.color.grey700};
+`;
 const CustomBarContent = styled.div`
   width: 309px;
   margin-right: 128px;
@@ -22,5 +31,7 @@ const Wrapper = styled.div`
   flex: 0 0 auto;
   width: 473px;
   height: 1292px;
+
+  padding-top: 24px;
 `;
 export default ColorCustomSideBar;

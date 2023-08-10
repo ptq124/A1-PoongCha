@@ -45,8 +45,10 @@ const Preview = styled.div`
 `;
 const Wrapper = styled.div`
   width: 68px;
+  height: 112px;
   display: flex;
   flex-direction: column;
   gap: 8px;
+  margin-bottom: 12px;
 `;
 export default ColorOption;
