@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { styled, css } from "styled-components";
 import { convertToTwoDigits } from "../../../../utils";
 
-const CarImg = () => {
+const CarRotateViewer = () => {
   const imageArray = Array.from({ length: 60 }, (_, index) => ++index);
 
   const [isClicked, setIsClicked] = useState(false);
@@ -57,6 +57,7 @@ const CarImg = () => {
     </Wrapper>
   );
 };
+
 const Wrapper = styled.div`
   position: absolute;
   top: 40%;
@@ -70,6 +71,5 @@ const CarImage = styled.img`
     `;
   }}
 `;
-export default CarImg;
 
-// https://www.hyundai.com/contents/vr360/LX06/exterior/A2B/002.png
+export default CarRotateViewer;
