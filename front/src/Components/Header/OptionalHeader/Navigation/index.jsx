@@ -34,7 +34,12 @@ const Navigation = () => {
         <NavContainer>
           {navItems.map((item, index) => (
             <Nav key={index}>
-              <NavTitle $active={item.path === pathname}>{item.title}</NavTitle>
+              <NavTitle
+                $active={item.path === pathname}
+                onClick={() => move(item.path)}
+              >
+                {item.title}
+              </NavTitle>
               <NavDetail>{item.detail}</NavDetail>
             </Nav>
           ))}
