@@ -4,12 +4,15 @@ import Button from "../../Common/Button/Button";
 import TrimOption from "../TrimOption";
 import Tooltip from "../Tooltip";
 import useTooltip from "../../../hooks/useTooltip";
+import BackgroundOverlay from "../../Common/BackgroundOverlay";
 
 const TrimOptionGroup = ({ options, selectedOption, handleOptionSelect }) => {
   const { isTooltipOpen, openTooltip, closeTooltip } = useTooltip();
+
   return (
     <Wrapper>
       {isTooltipOpen && <Tooltip offset={810} />}
+      <BackgroundOverlay />
       <Title onMouseEnter={openTooltip} onMouseLeave={closeTooltip}>
         <span>트림</span>
         <Button text="비교하기" style={TrimComparisonBtnStyle} />
