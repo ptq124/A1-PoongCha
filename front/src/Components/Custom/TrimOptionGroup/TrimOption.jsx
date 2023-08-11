@@ -2,9 +2,9 @@ import React from "react";
 import { styled } from "styled-components";
 import Check28BlueIcon from "../../../assets/checkcircle/check-28-blue.svg";
 import Check28GreyIcon from "../../../assets/checkcircle/check-28-grey.svg";
-import DefaultOption from "../DefaultOption";
+import DefaultOption from "./DefaultOption";
 
-const TrimOption = ({ data, radioGroup, selected, handleOptionSelect }) => {
+const TrimOption = ({ data, selected, handleOptionSelect }) => {
   return (
     <Wrapper>
       <TrimOptionUpper>
@@ -16,17 +16,12 @@ const TrimOption = ({ data, radioGroup, selected, handleOptionSelect }) => {
           <span className="comment">{data.information}</span>
           <span className="price">{data.minPrice.toLocaleString()}원</span>
         </TrimInfo>
-        <CheckBtn>
+        <CheckBtn onClick={handleOptionSelect}>
           {selected ? (
             <img src={Check28BlueIcon} alt="checked" />
           ) : (
             <img src={Check28GreyIcon} alt="checked" />
           )}
-          <Radio
-            type="radio"
-            name={radioGroup}
-            onClick={handleOptionSelect}
-          ></Radio>
         </CheckBtn>
       </TrimOptionUpper>
 
@@ -47,10 +42,6 @@ const CheckBtn = styled.label`
     cursor: pointer;
   }
 `;
-const Radio = styled.input`
-  display: none;
-`;
-
 const DefaultOptions = styled.div`
   display: flex;
   flex-wrap: wrap;

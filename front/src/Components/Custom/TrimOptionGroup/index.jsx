@@ -38,7 +38,6 @@ const TrimOptionGroup = ({ options, selectedOption, handleOptionSelect }) => {
         <TrimOption
           key={index}
           data={option}
-          radioGroup={"trim"}
           selected={selectedOption === option.name}
           handleOptionSelect={() => handleOptionSelect(option.name)}
         />

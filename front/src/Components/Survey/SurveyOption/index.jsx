@@ -2,27 +2,21 @@ import React from "react";
 import { css, styled } from "styled-components";
 import Check24BlueIcon from "../../../assets/checkcircle/check-24-blue.svg";
 
-const SurveyOption = ({
-  label,
-  radioGroup,
-  selected,
-  handleOptionSelect,
-  isLong,
-}) => {
+const SurveyOption = ({ label, selected, handleOptionSelect, isLong }) => {
   return (
     <>
-      <SurveyOptionLabel selected={selected} $isLong={isLong}>
+      <SurveyOptionLabel
+        selected={selected}
+        $isLong={isLong}
+        onClick={handleOptionSelect}
+      >
         {label}
         {selected && <img src={Check24BlueIcon} alt="check" />}
-        <Radio type="radio" onChange={handleOptionSelect} name={radioGroup} />
       </SurveyOptionLabel>
     </>
   );
 };
 
-const Radio = styled.input`
-  display: none;
-`;
 const SurveyOptionLabel = styled.label`
   display: flex;
   align-items: center;
