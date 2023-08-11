@@ -22,10 +22,10 @@ const AgeSurvey = () => {
   return (
     <S.SurveyContent>
       <SurveyHeader surveyType={"Age"} />
-
       <SurveyOptionGroup
         data={surveyData["age"]}
         handleOptionSelect={handleOptionSelect}
+        radioGroup={"age"}
         selectedOption={selectedOption}
       />
       <Button

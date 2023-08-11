@@ -13,6 +13,8 @@ import ModelItemsDescriptionPopup from "../ModelItemsDescriptionPopup";
 import TrimChangePopup from "../TrimChangePopup";
 import { TrimOptions, modelItemData } from "./mockData";
 
+// state의 engine, body, drivetrain 바뀔 때마다 trimOptions 새로 가져와서 TrimOptionsGroup 다시 띄워줘야 함
+
 const TrimCustomSideBar = () => {
   const move = useButtonNavigation();
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -90,6 +92,7 @@ const TrimCustomSideBar = () => {
               handleOptionSelect={(newValue) => {
                 setOptionSelect(questionKey, newValue);
               }}
+              radioGroup={questionKey}
               selectedOption={state[questionKey]}
             />
           ))}
