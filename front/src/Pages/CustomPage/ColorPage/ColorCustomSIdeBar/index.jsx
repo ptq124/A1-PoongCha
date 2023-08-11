@@ -2,8 +2,10 @@ import React from "react";
 import { css, styled } from "styled-components";
 import ColorOptionGroup from "../../../../Components/Custom/ColorOptionGroup";
 import Button from "../../../../Components/Common/Button/Button";
+import useButtonNavigation from "../../../../hooks/useButtonNavigation";
 
 const ColorCustomSideBar = () => {
+  const move = useButtonNavigation();
   return (
     <Wrapper>
       <CustomBarContent>
@@ -11,8 +13,16 @@ const ColorCustomSideBar = () => {
         <Separator></Separator>
         <ColorOptionGroup />
         <BtnContainer>
-          <Button text="트림 선택" style={TrimBtnStyle} />
-          <Button text="옵션 선택" style={OptionBtnStyle} />
+          <Button
+            text="트림 선택"
+            style={TrimBtnStyle}
+            onClick={() => move("/custom/trim")}
+          />
+          <Button
+            text="옵션 선택"
+            style={OptionBtnStyle}
+            onClick={() => move("/custom/option")}
+          />
         </BtnContainer>
       </CustomBarContent>
     </Wrapper>
