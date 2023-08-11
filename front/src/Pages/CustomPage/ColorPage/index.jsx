@@ -1,13 +1,13 @@
 import React from "react";
 import { styled } from "styled-components";
 import CarView from "../../../Components/Custom/CarView";
-import ColorCustomSideBar from "./ColorCustomSIdeBar";
+import TrimCustomSideBar from "../TrimPage/TrimCustomSideBar";
 
 const ColorPage = () => {
   return (
     <Wrapper>
-      <CarView />
-      <ColorCustomSideBar />
+      <CarView></CarView>
+      <TrimCustomSideBar />
     </Wrapper>
   );
 };

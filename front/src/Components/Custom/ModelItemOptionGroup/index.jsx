@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { styled } from "styled-components";
-import ModelItemOption from "./ModelItemOption";
+import ModelItemOption from "../ModelItemOption";
 import Tooltip from "../Tooltip";
 import useTooltip from "../../../hooks/useTooltip";
 
-const ModelItemOptionGroup = ({ data, selectedOption, handleOptionSelect }) => {
+const ModelItemOptionGroup = ({
+  data,
+  selectedOption,
+  handleOptionSelect,
+  radioGroup,
+}) => {
   const { title, options } = data;
   const { isTooltipOpen, openTooltip, closeTooltip } = useTooltip();
 
@@ -18,6 +23,7 @@ const ModelItemOptionGroup = ({ data, selectedOption, handleOptionSelect }) => {
             <ModelItemOption
               key={index}
               label={option}
+              radioGroup={radioGroup}
               selected={selectedOption === option}
               handleOptionSelect={() => handleOptionSelect(option)}
             />

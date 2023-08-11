@@ -303,15 +303,6 @@ const font = {
     font-weight: 500;
     line-height: 14px;
   `,
-  // ColorOptionGroup > ExtraColorOption
-  Extra19:css`
-    font-family: "HyundaiSansTextRegularKR";
-    font-size: 11px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    letter-spacing: -0.238px;
-  `
 };
 export const theme = {
   color,
