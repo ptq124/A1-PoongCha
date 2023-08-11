@@ -1,23 +1,13 @@
 import React from "react";
 import { css, styled } from "styled-components";
 
-const ModelItemOption = ({
-  label,
-  radioGroup,
-  selected,
-  handleOptionSelect,
-}) => {
+const ModelItemOption = ({ label, selected, handleOptionSelect }) => {
   return (
-    <Label selected={selected}>
+    <Label selected={selected} onClick={handleOptionSelect}>
       {label}
-      <Radio type="radio" onChange={handleOptionSelect} name={radioGroup} />
     </Label>
   );
 };
-
-const Radio = styled.input`
-  display: none;
-`;
 const Label = styled.label`
   display: flex;
   align-items: center;

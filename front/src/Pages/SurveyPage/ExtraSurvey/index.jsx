@@ -62,7 +62,6 @@ const ExtraSurvey = () => {
           handleOptionSelect={(newValue) => {
             handleOptionSelect(questionKey, newValue);
           }}
-          radioGroup={questionKey}
           selectedOption={state[questionKey]}
         />
       ))}

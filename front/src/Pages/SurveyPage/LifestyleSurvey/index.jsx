@@ -56,8 +56,8 @@ const lifestyleSurveyInfo = {
 
 const LifestyleSurvey = () => {
   const [selectedOption, setSelectedOption] = useState("");
-  const handleOptionChange = (event) => {
-    setSelectedOption(parseInt(event.target.value));
+  const handleOptionChange = (index) => {
+    setSelectedOption(index);
   };
   const popupRef = useRef();
   const { isPopupOpen, openPopup, closePopup } = useOnClickPopUp(popupRef);
@@ -75,19 +75,13 @@ const LifestyleSurvey = () => {
         />
         <S.LifeStyleOptions>
           {lifestyleSurveyInfo.options.map((_, index) => (
-            <label key={index}>
-              <LifestylePersona
-                selected={selectedOption === index}
-                openPopup={openPopup}
-                data={lifestyleSurveyInfo.options[index]}
-              />
-              <Radio
-                type="radio"
-                value={index}
-                checked={selectedOption === index}
-                onChange={handleOptionChange}
-              />
-            </label>
+            <LifestylePersona
+              key={index}
+              selected={selectedOption === index}
+              openPopup={openPopup}
+              data={lifestyleSurveyInfo.options[index]}
+              onClick={() => handleOptionChange(index)}
+            />
           ))}
         </S.LifeStyleOptions>
       </S.SurveyContent>

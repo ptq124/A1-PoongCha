@@ -2,12 +2,7 @@ import React from "react";
 import { styled } from "styled-components";
 import SurveyOption from "../SurveyOption";
 
-const SurveyOptionGroup = ({
-  data,
-  selectedOption,
-  handleOptionSelect,
-  radioGroup,
-}) => {
+const SurveyOptionGroup = ({ data, selectedOption, handleOptionSelect }) => {
   const { title, options } = data;
   return (
     <Wrapper>
@@ -17,7 +12,6 @@ const SurveyOptionGroup = ({
           <SurveyOption
             key={index}
             label={option}
-            radioGroup={radioGroup}
             selected={selectedOption === option}
             handleOptionSelect={() => handleOptionSelect(option)}
             isLong={options.length % 2 === 1 && index === options.length - 1}
