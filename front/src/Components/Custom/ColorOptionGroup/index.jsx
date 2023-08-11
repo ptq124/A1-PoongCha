@@ -1,20 +1,43 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { styled } from "styled-components";
 import ColorOption from "./ColorOption";
 import ArrowDownIcon from "../../../assets/icons/24-chevron-down.svg";
 import ArrowUpIcon from "../../../assets/icons/24-chevron-up.svg";
+import OverlaidPopup from "../../Common/OverlaidPopup";
+import ColorChangePopup from "../../../Pages/CustomPage/ColorPage/ColorChangePopup";
+import useOnClickPopUp from "../../../hooks/useOnClickPopUp";
+
+const innerColorOptions = [
+  "어비스 블랙펄",
+  "어비스 블랙펄",
+  "어비스 블랙펄",
+  "어비스 블랙펄",
+  "어비스 블랙펄",
+];
+const extraColorOptions = ["Exclusive", "Prestige", "Caligraphy"];
 
 const ColorOptionGroup = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const popupRef = useRef();
+  const { isPopupOpen, openPopup, closePopup } = useOnClickPopUp(popupRef);
+  const [selectedColor, setSelectedColor] = useState(0);
+
   const handleDropdownClick = () => {
-    if (isDropdownOpen) {
-      setIsDropdownOpen(false);
-    } else {
-      setIsDropdownOpen(true);
-    }
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const handleSelectExtraColor = () => {
+    openPopup();
   };
   return (
     <Wrapper>
+      {isPopupOpen && (
+        <OverlaidPopup
+          component={
+            <ColorChangePopup popupRef={popupRef} closePopup={closePopup} />
+          }
+        />
+      )}
       <Header>외장 색상</Header>
       <Subtitle>
         <span className="color">그라파이트 그레이 메탈릭</span>
@@ -23,11 +46,14 @@ const ColorOptionGroup = () => {
         </span>
       </Subtitle>
       <OptionsContainer>
-        <ColorOption />
-        <ColorOption />
-        <ColorOption />
-        <ColorOption />
-        <ColorOption />
+        {innerColorOptions.map((data, index) => (
+          <ColorOption
+            key={index}
+            data={data}
+            selected={selectedColor === index}
+            onClick={() => setSelectedColor(index)}
+          />
+        ))}
       </OptionsContainer>
       <Dropdown>
         <DropdownTitle onClick={handleDropdownClick}>
@@ -40,15 +66,31 @@ const ColorOptionGroup = () => {
         </DropdownTitle>
         {isDropdownOpen && (
           <OptionsContainer>
-            <ColorOption />
-            <ColorOption />
-            <ColorOption />
+            {extraColorOptions.map((data, index) => (
+              <ExtraColorOption key={index}>
+                <div className="trimName">Exclusive</div>
+                <ColorOption
+                  data={data}
+                  onClick={() => handleSelectExtraColor()}
+                />
+              </ExtraColorOption>
+            ))}
           </OptionsContainer>
         )}
       </Dropdown>
     </Wrapper>
   );
 };
+const ExtraColorOption = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 68px;
+  .trimName {
+    ${({ theme }) => theme.font.Extra19};
+    color: ${({ theme }) => theme.color.secondary};
+  }
+`;
 const DropdownTitle = styled.div`
   display: flex;
   justify-content: space-between;

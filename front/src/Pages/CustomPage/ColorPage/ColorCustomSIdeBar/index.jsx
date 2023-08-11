@@ -1,6 +1,7 @@
 import React from "react";
-import { styled } from "styled-components";
+import { css, styled } from "styled-components";
 import ColorOptionGroup from "../../../../Components/Custom/ColorOptionGroup";
+import Button from "../../../../Components/Common/Button/Button";
 
 const ColorCustomSideBar = () => {
   return (
@@ -9,10 +10,40 @@ const ColorCustomSideBar = () => {
         <ColorOptionGroup />
         <Separator></Separator>
         <ColorOptionGroup />
+        <BtnContainer>
+          <Button text="트림 선택" style={TrimBtnStyle} />
+          <Button text="옵션 선택" style={OptionBtnStyle} />
+        </BtnContainer>
       </CustomBarContent>
     </Wrapper>
   );
 };
+
+const BtnStyle = css`
+  width: 150px;
+  height: 52px;
+
+  border-radius: 6px;
+  ${({ theme }) => theme.font.Body3_Medium};
+`;
+const TrimBtnStyle = css`
+  ${BtnStyle}
+  color:${({ theme }) => theme.color.grey50};
+  background-color: ${({ theme }) => theme.color.grey1000};
+  border: 1px solid ${({ theme }) => theme.color.grey600};
+`;
+const OptionBtnStyle = css`
+  ${BtnStyle}
+  color:${({ theme }) => theme.color.grey1000};
+  background-color: ${({ theme }) => theme.color.primary_default};
+  border: 1px solid ${({ theme }) => theme.color.primary_default};
+`;
+const BtnContainer = styled.div`
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  padding-bottom: 36px;
+`;
 const Separator = styled.div`
   height: 1px;
   width: 100%;
@@ -30,7 +61,7 @@ const Wrapper = styled.div`
   justify-content: flex-end;
   flex: 0 0 auto;
   width: 473px;
-  height: 1292px;
+  height: 100%;
 
   padding-top: 24px;
 `;

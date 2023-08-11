@@ -1,16 +1,44 @@
 import React from "react";
 import { styled } from "styled-components";
+import Check24Icon from "../../../assets/checkcircle/check-24-white.svg";
 
-const ColorOption = () => {
+const ColorOption = ({ data, selected, onClick }) => {
   let isLabeled = true;
   return (
-    <Wrapper>
-      <Preview>{isLabeled && <Label>Top 1</Label>}</Preview>
-      <Name>어비스 블랙펄</Name>
+    <Wrapper onClick={onClick}>
+      <Preview>
+        {isLabeled && <Label>Top 1</Label>}
+        {selected && (
+          <Cover>
+            <div></div>
+            <img src={Check24Icon} />
+          </Cover>
+        )}
+      </Preview>
+      <Name>{data}</Name>
     </Wrapper>
   );
 };
 
+const Cover = styled.div`
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  div {
+    background-color: ${({ theme }) => theme.color.primary_default};
+    width: 100%;
+    height: 100%;
+    opacity: 0.4;
+  }
+  img {
+    position: absolute;
+  }
+`;
 const Label = styled.div`
   position: absolute;
   top: 0;
@@ -44,11 +72,16 @@ const Preview = styled.div`
   overflow: hidden;
 `;
 const Wrapper = styled.div`
+  position: relative;
   width: 68px;
   height: 112px;
   display: flex;
   flex-direction: column;
   gap: 8px;
   margin-bottom: 12px;
+  overflow: hidden;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 export default ColorOption;
