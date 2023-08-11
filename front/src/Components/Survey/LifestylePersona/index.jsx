@@ -9,9 +9,9 @@ import LifeImg from "../../../assets/lifestyle/lifestyle1.svg";
 문구: 텍스트
 프로필 사진: 이미지
 */
-const LifestylePersona = ({ selected, openPopup, data }) => {
+const LifestylePersona = ({ selected, openPopup, data, onClick }) => {
   return (
-    <Wrapper selected={selected}>
+    <Wrapper selected={selected} onClick={onClick}>
       <TagWrapper>
         {data.tags.map((tag, index) => (
           <LifestyleTag selected={selected} key={index}>
