@@ -2,11 +2,10 @@ package com.poongcha.bootloader;
 
 import com.poongcha.car.CarApplication;
 import com.poongcha.recommend.RecommendApplication;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com.poongcha.*")
 public class BootLoaderApplication {
 
     public static void main(String[] args) {
