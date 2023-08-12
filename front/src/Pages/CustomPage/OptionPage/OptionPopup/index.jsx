@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { css, styled } from "styled-components";
 import Card from "./Card";
 import ArrowLeftIcon from "../../../../assets/icons/arrow-left-32-white.svg";
@@ -19,24 +19,24 @@ const OptionPopup = ({ popupRef, closePopup }) => {
     <Wrapper ref={popupRef}>
       <Window>
         {crntOptionIdx > 0 && (
-          <LeftArrow className="left">
+          <LeftArrow onClick={() => setCrntOptionIdx((prev) => prev - 1)}>
             <img src={ArrowLeftIcon} />
           </LeftArrow>
         )}
 
-        <Cards crntOptionIdx={crntOptionIdx}>
+        <Cards $crntOptionIdx={crntOptionIdx}>
           {popupData.map((data, index) => (
             <Card
               key={index}
               index={index}
               popupData={popupData}
               closePopup={closePopup}
-              crntOptionIdx={crntOptionIdx}
+              handleNavClick={setCrntOptionIdx}
             />
           ))}
         </Cards>
         {crntOptionIdx < popupData.length - 1 && (
-          <RightArrow className="right">
+          <RightArrow onClick={() => setCrntOptionIdx((prev) => prev + 1)}>
             <img src={ArrowRightIcon} />
           </RightArrow>
         )}
@@ -52,7 +52,7 @@ const Arrow = styled.div`
   align-items: center;
   width: 50px;
   height: 50px;
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(0, 0, 0, 0.3);
   border-radius: 4px;
   z-index: 1000;
   &:hover {
@@ -70,20 +70,23 @@ const Cards = styled.div`
   flex-wrap: nowrap;
   justify-content: flex-start;
   gap: 24px;
-  margin-left: -${({ crntOptionIdx }) => crntOptionIdx * 924}px;
+  margin-left: -${({ $crntOptionIdx }) => $crntOptionIdx * 924}px;
+
+  transition: margin-left 0.3s ease;
 `;
+
 const Window = styled.div`
   position: relative;
   display: flex;
   align-items: center;
   width: 900px;
   height: 440px;
-  /* overflow: hidden; */
+  z-index: 999;
 `;
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 999;
+  width: 100%;
 `;
 export default OptionPopup;

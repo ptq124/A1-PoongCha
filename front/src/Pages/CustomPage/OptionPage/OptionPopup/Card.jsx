@@ -4,7 +4,7 @@ import { css, styled } from "styled-components";
 import SampleImg from "../../../../assets/images/option-popup-sample.svg";
 import CloseIcon from "../../../../assets/icons/close.svg";
 
-const Card = ({ closePopup, crntOptionIdx, index, popupData }) => {
+const Card = ({ closePopup, index, popupData, handleNavClick }) => {
   return (
     <CardContainer>
       <ImgContainer>
@@ -30,18 +30,26 @@ const Card = ({ closePopup, crntOptionIdx, index, popupData }) => {
           운전자에게 경고함으로써 부주의에 의한 유아 또는 반려 동물 등의 방치
           사고를 예방하는 신기술입니다.
         </Description>
-        <SetOptionNavigation>
-          {popupData.map((data, idx) => (
-            <Nav key={idx} $selected={idx === index}>
-              {data}
-            </Nav>
-          ))}
-        </SetOptionNavigation>
-        <NavBullets>
-          {popupData.map((data, idx) => (
-            <Bullet key={idx} $selected={idx === index}></Bullet>
-          ))}
-        </NavBullets>
+        {popupData.length !== 1 && (
+          <>
+            <SetOptionNavigation>
+              {popupData.map((data, idx) => (
+                <Nav
+                  key={idx}
+                  $selected={idx === index}
+                  onClick={() => handleNavClick(idx)}
+                >
+                  {data}
+                </Nav>
+              ))}
+            </SetOptionNavigation>
+            <NavBullets>
+              {popupData.map((data, idx) => (
+                <Bullet key={idx} $selected={idx === index}></Bullet>
+              ))}
+            </NavBullets>
+          </>
+        )}
       </DetailContainer>
     </CardContainer>
   );
