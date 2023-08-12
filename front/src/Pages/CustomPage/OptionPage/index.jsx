@@ -51,8 +51,6 @@ const TabItem = styled.div`
 const TabWrapper = styled.div`
   display: flex;
 
-  width: 100%;
-
   gap: 40px;
   margin-top: 15px;
   padding: 0px 128px;
