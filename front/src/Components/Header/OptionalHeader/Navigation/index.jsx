@@ -16,7 +16,7 @@ const navItems = [
   {
     title: "3 옵션",
     detail: "컴포트2, 현대 스마트 센스 1, 주차보조",
-    path: "/custom/options",
+    path: "/custom/option",
   },
 ];
 
