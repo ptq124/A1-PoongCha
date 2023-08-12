@@ -16,6 +16,7 @@ import ExtraSurvey from "./Pages/SurveyPage/ExtraSurvey/index.jsx";
 import ProgressBar from "./Components/Survey/ProgressBar/index.jsx";
 import TrimPage from "./Pages/CustomPage/TrimPage/index.jsx";
 import ColorPage from "./Pages/CustomPage/ColorPage/index.jsx";
+import OptionPage from "./Pages/CustomPage/OptionPage/index.jsx";
 
 const router = createBrowserRouter([
   {
@@ -70,6 +71,10 @@ const router = createBrowserRouter([
           {
             path: "color",
             element: <ColorPage />,
+          },
+          {
+            path: "option",
+            element: <OptionPage />,
           },
         ],
       },
