@@ -1,41 +1,104 @@
-import React from "react";
-import { styled } from "styled-components";
+import React, { useState } from "react";
+import { css, styled } from "styled-components";
 import SampleImg from "../../../../assets/images/option-popup-sample.svg";
 import CloseIcon from "../../../../assets/icons/close.svg";
 
+const popupData = [
+  "후석 승객 알림",
+  "메탈 리어범퍼스텝",
+  "메탈 도어스커프",
+  "3열 파워폴딩시트",
+  "3열 열선시트",
+  "헤드업 디스플레이",
+];
+const Card = ({ closePopup, crntOptionIdx, index }) => {
+  return (
+    <CardContainer>
+      <ImgContainer>
+        <TagContainer>
+          <Tag>#사용편의</Tag>
+          <Tag>#주행안전</Tag>
+          <Tag>#추위/더위</Tag>
+        </TagContainer>
+        <img src={SampleImg} />
+      </ImgContainer>
+      <DetailContainer>
+        <img src={CloseIcon} onClick={closePopup} />
+        <Header>
+          <OptionInfo>
+            <span className="setName">컴포트 2</span>
+            <span className="optionName">후석 승객 알림</span>
+            <span className="price">1,090,000 원</span>
+          </OptionInfo>
+          <SelectButton></SelectButton>
+        </Header>
+        <Description>
+          초음파 센서를 통해 뒷좌석에 남아있는 승객의 움직임을 감지하여
+          운전자에게 경고함으로써 부주의에 의한 유아 또는 반려 동물 등의 방치
+          사고를 예방하는 신기술입니다.
+        </Description>
+        <SetOptionNavigation>
+          {popupData.map((data, idx) => (
+            <Nav key={idx} $selected={idx === index}>
+              {data}
+            </Nav>
+          ))}
+        </SetOptionNavigation>
+        <NavBullets>
+          {popupData.map((data, idx) => (
+            <Bullet key={idx} $selected={idx === index}></Bullet>
+          ))}
+        </NavBullets>
+      </DetailContainer>
+    </CardContainer>
+  );
+};
 const OptionPopup = ({ popupRef, closePopup }) => {
+  const [crntOptionIdx, setCrntOptionIdx] = useState(0);
   return (
     <Wrapper ref={popupRef}>
-      <CardContainer>
-        <ImgContainer>
-          <TagContainer>
-            <Tag>#사용편의</Tag>
-            <Tag>#주행안전</Tag>
-            <Tag>#추위/더위</Tag>
-          </TagContainer>
-          <img src={SampleImg} />
-        </ImgContainer>
-        <DetailContainer>
-          <img src={CloseIcon} onClick={closePopup} />
-          <Header>
-            <OptionInfo>
-              <span className="setName">컴포트 2</span>
-              <span className="optionName">빌트인 캠(보조배터리 포함)</span>
-              <span className="price">1,090,000 원</span>
-            </OptionInfo>
-            <SelectButton></SelectButton>
-          </Header>
-          <Description>
-            초음파 센서를 통해 뒷좌석에 남아있는 승객의 움직임을 감지하여
-            운전자에게 경고함으로써 부주의에 의한 유아 또는 반려 동물 등의 방치
-            사고를 예방하는 신기술입니다.
-          </Description>
-        </DetailContainer>
-      </CardContainer>
+      <Card closePopup={closePopup} crntOptionIdx={crntOptionIdx} index={0} />
     </Wrapper>
   );
 };
 
+const Bullet = styled.div`
+  width: 8px;
+  height: 8px;
+  border-radius: 55px;
+  background-color: ${({ theme }) => theme.color.grey700};
+  ${({ $selected }) =>
+    $selected &&
+    css`
+      background-color: ${({ theme }) => theme.color.secondary};
+    `}
+`;
+const NavBullets = styled.div`
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+`;
+const Nav = styled.div`
+  width: 50%;
+  ${({ theme }) => theme.font.Body4_Regular};
+  color: ${({ theme }) => theme.color.grey400};
+  margin-bottom: 14px;
+  &:hover {
+    cursor: pointer;
+  }
+  ${({ $selected }) =>
+    $selected &&
+    css`
+      color: ${({ theme }) => theme.color.secondary};
+      ${({ theme }) => theme.font.Body4_Medium};
+    `}
+`;
+const SetOptionNavigation = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  width: 226px;
+  margin-top: 44px;
+`;
 const Description = styled.div`
   ${({ theme }) => theme.font.Body4_Regular};
   color: ${({ theme }) => theme.color.grey200};
