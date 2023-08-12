@@ -41,7 +41,7 @@ const TaggedPage = () => {
           <PlusButton
             key={index}
             $position={data.position}
-            clicked={activeOptionIdx === index}
+            $clicked={activeOptionIdx === index}
             onClick={() => handlePlusBtnClick(index)}
           >
             <img src={PlusIcon} />
@@ -92,8 +92,8 @@ const PlusButton = styled.div`
     width: 18px;
     height: 18px;
   }
-  ${({ clicked }) =>
-    clicked &&
+  ${({ $clicked }) =>
+    $clicked &&
     css`
       background-color: ${({ theme }) => theme.color.secondary};
     `}

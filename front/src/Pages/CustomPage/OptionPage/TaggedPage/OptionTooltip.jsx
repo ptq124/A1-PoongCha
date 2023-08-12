@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { styled } from "styled-components";
 import TooltipTail from "../../../../assets/icons/option-tooltip-tail.svg";
 import ArrowRightIcon from "../../../../assets/icons/arrow-right.svg";
@@ -19,7 +19,6 @@ const OptionTooltip = ({ data }) => {
     </Wrapper>
   );
 };
-
 const Arrow = styled.img`
   width: 24px;
   height: 24px;
