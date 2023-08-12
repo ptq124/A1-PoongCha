@@ -1,9 +1,10 @@
-import React from "react";
-import { styled } from "styled-components";
+import React, { useState } from "react";
+import { css, styled } from "styled-components";
 import TaggedPageSampleImg from "../../../../assets/images/tagged-page-sample.svg";
 import PlusIcon from "../../../../assets/icons/plus.svg";
+import OptionTooltip from "./OptionTooltip";
 
-const data = [
+const optionData = [
   {
     title: "option1",
     position: { x: 23, y: 35 },
@@ -22,26 +23,50 @@ const data = [
   },
 ];
 const TaggedPage = () => {
+  const [activeOptionIdx, setActiveOptionIdx] = useState(null);
+
+  const handlePlusBtnClick = (index) => {
+    if (activeOptionIdx === null || activeOptionIdx !== index)
+      setActiveOptionIdx(index);
+    else setActiveOptionIdx(null);
+  };
   return (
     <Wrapper>
       <SituationScreen>
+        {activeOptionIdx !== null && (
+          <OptionTooltip data={optionData[activeOptionIdx]} />
+        )}
         <img src={TaggedPageSampleImg} />
-        {data.map((data, index) => (
-          <PlusButton key={index} $position={data.position}>
+        {optionData.map((data, index) => (
+          <PlusButton
+            key={index}
+            $position={data.position}
+            clicked={activeOptionIdx === index}
+            onClick={() => handlePlusBtnClick(index)}
+          >
             <img src={PlusIcon} />
           </PlusButton>
         ))}
       </SituationScreen>
       <OptionItemsContainer>
-        {data.map((data, index) => (
+        {optionData.map((data, index) => (
           // 옵션 컴포넌트 들어갈 자리
           <div key={index}></div>
         ))}
       </OptionItemsContainer>
+      <AdditionalComment>
+        *상기 이미지는 이해를 돕기 위한 이미지로 실제 옵션 사진은 상세보기에서
+        확인해주세요.
+      </AdditionalComment>
     </Wrapper>
   );
 };
 
+const AdditionalComment = styled.div`
+  ${({ theme }) => theme.font.Caption1_Regular};
+  color: ${({ theme }) => theme.color.grey500};
+  margin: 36px 0px;
+`;
 const PlusButton = styled.div`
   position: absolute;
   top: ${({ $position }) => $position.y}%;
@@ -67,16 +92,24 @@ const PlusButton = styled.div`
     width: 18px;
     height: 18px;
   }
+  ${({ clicked }) =>
+    clicked &&
+    css`
+      background-color: ${({ theme }) => theme.color.secondary};
+    `}
 `;
 const SituationScreen = styled.div`
   position: relative;
+  & > img {
+    width: 100%;
+  }
 `;
 const OptionItemsContainer = styled.div`
   display: flex;
   gap: 16px;
   width: 100%;
   margin-top: 40px;
-  div {
+  & > div {
     width: 244px;
     height: 314px;
     background-color: beige;
@@ -87,8 +120,5 @@ const Wrapper = styled.div`
   flex-direction: column;
   padding-top: 24px;
   width: 100%;
-  img {
-    width: 100%;
-  }
 `;
 export default TaggedPage;
