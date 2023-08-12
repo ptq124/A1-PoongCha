@@ -3,7 +3,11 @@ import { styled } from "styled-components";
 import TaggedPage from "../TaggedPage";
 
 const AdditionalOption = () => {
-  return <Wrapper></Wrapper>;
+  return (
+    <Wrapper>
+      <TaggedPage />
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.div`

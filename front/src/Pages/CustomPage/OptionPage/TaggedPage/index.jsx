@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { css, styled } from "styled-components";
 import TaggedPageSampleImg from "../../../../assets/images/tagged-page-sample.svg";
 import PlusIcon from "../../../../assets/icons/plus.svg";
 import OptionTooltip from "./OptionTooltip";
+import useOnClickPopUp from "../../../../hooks/useOnClickPopUp";
+import OverlaidPopup from "../../../../Components/Common/OverlaidPopup";
+import OptionPopup from "../OptionPopup";
 
 const optionData = [
   {
@@ -23,6 +26,9 @@ const optionData = [
   },
 ];
 const TaggedPage = () => {
+  const optionPopupRef = useRef();
+  const { isPopupOpen, openPopup, closePopup } =
+    useOnClickPopUp(optionPopupRef);
   const [activeOptionIdx, setActiveOptionIdx] = useState(null);
 
   const handlePlusBtnClick = (index) => {
@@ -32,9 +38,19 @@ const TaggedPage = () => {
   };
   return (
     <Wrapper>
+      {isPopupOpen && (
+        <OverlaidPopup
+          component={
+            <OptionPopup popupRef={optionPopupRef} closePopup={closePopup} />
+          }
+        />
+      )}
       <SituationScreen>
         {activeOptionIdx !== null && (
-          <OptionTooltip data={optionData[activeOptionIdx]} />
+          <OptionTooltip
+            data={optionData[activeOptionIdx]}
+            openPopup={openPopup}
+          />
         )}
         <img src={TaggedPageSampleImg} />
         {optionData.map((data, index) => (

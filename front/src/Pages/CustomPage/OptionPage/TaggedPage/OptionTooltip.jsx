@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 import TooltipTail from "../../../../assets/icons/option-tooltip-tail.svg";
 import ArrowRightIcon from "../../../../assets/icons/arrow-right.svg";
 
-const OptionTooltip = ({ data }) => {
+const OptionTooltip = ({ data, openPopup }) => {
   return (
     <Wrapper $position={data.position}>
       <Content>
@@ -14,7 +14,7 @@ const OptionTooltip = ({ data }) => {
           <div className="price">790,000 원</div>
         </Detail>
       </Content>
-      <Arrow src={ArrowRightIcon} className="arrow" />
+      <Arrow src={ArrowRightIcon} className="arrow" onClick={openPopup} />
       <img src={TooltipTail} className="tail" />
     </Wrapper>
   );
