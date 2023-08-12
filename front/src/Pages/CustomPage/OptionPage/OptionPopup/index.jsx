@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { css, styled } from "styled-components";
-import SampleImg from "../../../../assets/images/option-popup-sample.svg";
-import CloseIcon from "../../../../assets/icons/close.svg";
+import Card from "./Card";
+import ArrowLeftIcon from "../../../../assets/icons/arrow-left-32-white.svg";
+import ArrowRightIcon from "../../../../assets/icons/arrow-right-32-white.svg";
 
 const popupData = [
   "후석 승객 알림",
@@ -11,177 +12,78 @@ const popupData = [
   "3열 열선시트",
   "헤드업 디스플레이",
 ];
-const Card = ({ closePopup, crntOptionIdx, index }) => {
-  return (
-    <CardContainer>
-      <ImgContainer>
-        <TagContainer>
-          <Tag>#사용편의</Tag>
-          <Tag>#주행안전</Tag>
-          <Tag>#추위/더위</Tag>
-        </TagContainer>
-        <img src={SampleImg} />
-      </ImgContainer>
-      <DetailContainer>
-        <img src={CloseIcon} onClick={closePopup} />
-        <Header>
-          <OptionInfo>
-            <span className="setName">컴포트 2</span>
-            <span className="optionName">후석 승객 알림</span>
-            <span className="price">1,090,000 원</span>
-          </OptionInfo>
-          <SelectButton></SelectButton>
-        </Header>
-        <Description>
-          초음파 센서를 통해 뒷좌석에 남아있는 승객의 움직임을 감지하여
-          운전자에게 경고함으로써 부주의에 의한 유아 또는 반려 동물 등의 방치
-          사고를 예방하는 신기술입니다.
-        </Description>
-        <SetOptionNavigation>
-          {popupData.map((data, idx) => (
-            <Nav key={idx} $selected={idx === index}>
-              {data}
-            </Nav>
-          ))}
-        </SetOptionNavigation>
-        <NavBullets>
-          {popupData.map((data, idx) => (
-            <Bullet key={idx} $selected={idx === index}></Bullet>
-          ))}
-        </NavBullets>
-      </DetailContainer>
-    </CardContainer>
-  );
-};
+
 const OptionPopup = ({ popupRef, closePopup }) => {
   const [crntOptionIdx, setCrntOptionIdx] = useState(0);
   return (
     <Wrapper ref={popupRef}>
-      <Card closePopup={closePopup} crntOptionIdx={crntOptionIdx} index={0} />
+      <Window>
+        {crntOptionIdx > 0 && (
+          <LeftArrow className="left">
+            <img src={ArrowLeftIcon} />
+          </LeftArrow>
+        )}
+
+        <Cards crntOptionIdx={crntOptionIdx}>
+          {popupData.map((data, index) => (
+            <Card
+              key={index}
+              index={index}
+              popupData={popupData}
+              closePopup={closePopup}
+              crntOptionIdx={crntOptionIdx}
+            />
+          ))}
+        </Cards>
+        {crntOptionIdx < popupData.length - 1 && (
+          <RightArrow className="right">
+            <img src={ArrowRightIcon} />
+          </RightArrow>
+        )}
+      </Window>
     </Wrapper>
   );
 };
 
-const Bullet = styled.div`
-  width: 8px;
-  height: 8px;
-  border-radius: 55px;
-  background-color: ${({ theme }) => theme.color.grey700};
-  ${({ $selected }) =>
-    $selected &&
-    css`
-      background-color: ${({ theme }) => theme.color.secondary};
-    `}
-`;
-const NavBullets = styled.div`
+const Arrow = styled.div`
+  position: absolute;
   display: flex;
-  gap: 10px;
-  margin-top: 14px;
-`;
-const Nav = styled.div`
-  width: 50%;
-  ${({ theme }) => theme.font.Body4_Regular};
-  color: ${({ theme }) => theme.color.grey400};
-  margin-bottom: 14px;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  z-index: 1000;
   &:hover {
     cursor: pointer;
   }
-  ${({ $selected }) =>
-    $selected &&
-    css`
-      color: ${({ theme }) => theme.color.secondary};
-      ${({ theme }) => theme.font.Body4_Medium};
-    `}
 `;
-const SetOptionNavigation = styled.div`
+const LeftArrow = styled(Arrow)`
+  left: -102px;
+`;
+const RightArrow = styled(Arrow)`
+  right: -102px;
+`;
+const Cards = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  width: 226px;
-  margin-top: 44px;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  gap: 24px;
+  margin-left: -${({ crntOptionIdx }) => crntOptionIdx * 924}px;
 `;
-const Description = styled.div`
-  ${({ theme }) => theme.font.Body4_Regular};
-  color: ${({ theme }) => theme.color.grey200};
-  margin-top: 20px;
-`;
-const SelectButton = styled.div`
-  width: 69px;
-  height: 28px;
-  background-color: beige;
-`;
-const OptionInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  .setName {
-    ${({ theme }) => theme.font.Caption1_Medium};
-    color: ${({ theme }) => theme.color.grey400};
-  }
-  .optionName {
-    ${({ theme }) => theme.font.Head2};
-  }
-  .price {
-    ${({ theme }) => theme.font.Body3_Medium};
-    color: ${({ theme }) => theme.color.grey200};
-  }
-`;
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 56px;
-
-  margin-top: 50px;
-`;
-const DetailContainer = styled.div`
+const Window = styled.div`
   position: relative;
-  width: 344px;
-  padding: 0px 28px;
-  box-sizing: border-box;
-  img {
-    position: absolute;
-    top: 24px;
-    right: 24px;
-    &:hover {
-      cursor: pointer;
-    }
-  }
-`;
-const Tag = styled.div`
-  ${({ theme }) => theme.font.Caption1_Regular};
-  color: ${({ theme }) => theme.color.grey1000};
-  background-color: ${({ theme }) => theme.color.grey200};
-  padding: 6px 10px;
-  border-radius: 100px;
-  box-sizing: border-box;
-`;
-const TagContainer = styled.div`
-  position: absolute;
-  top: 24px;
-  left: 24px;
-
   display: flex;
-  gap: 8px;
-`;
-const ImgContainer = styled.div`
-  position: relative;
-  width: 556px;
-  height: 440px;
-  img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-  }
-`;
-const CardContainer = styled.div`
-  display: flex;
+  align-items: center;
   width: 900px;
   height: 440px;
-  background-color: ${({ theme }) => theme.color.grey1000};
-  border-radius: 12px;
-  overflow: hidden;
+  /* overflow: hidden; */
 `;
 const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 999;
 `;
 export default OptionPopup;
