@@ -1,7 +1,9 @@
 import React from "react";
 import { styled } from "styled-components";
+import { useLocation } from "react-router-dom";
 
 const SelectedItem = () => {
+  const { pathname } = useLocation();
   return (
     <Wrapper>
       <ItemDetail>
@@ -12,7 +14,11 @@ const SelectedItem = () => {
         </TextBox>
       </ItemDetail>
       {/* 데이터에 Recommend Reason Phrase 있는 경우에만 보여줌*/}
-      <RecReasonPhrase>75%의 20대~30대 구매자들이 선택했어요.</RecReasonPhrase>
+      {pathname !== "/result" && (
+        <RecReasonPhrase>
+          75%의 20대~30대 구매자들이 선택했어요.
+        </RecReasonPhrase>
+      )}
     </Wrapper>
   );
 };
