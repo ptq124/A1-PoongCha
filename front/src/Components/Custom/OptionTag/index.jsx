@@ -24,7 +24,9 @@ const OptionTag = ({ selectTag, tagsOption, handleSelectTag }) => {
   );
 };
 
-const TagImg = styled.img``;
+const TagImg = styled.img`
+  height: 22px;
+`;
 
 const Tag = styled.div`
   display: flex;
@@ -36,6 +38,7 @@ const Tag = styled.div`
   gap: 8px;
   padding: 7px 10px;
   cursor: pointer;
+  box-sizing: border-box;
 
   ${({ selected }) =>
     selected

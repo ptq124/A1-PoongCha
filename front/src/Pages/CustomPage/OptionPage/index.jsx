@@ -94,6 +94,7 @@ const TabItem = styled.div`
 
   ${({ theme }) => theme.font.Head2};
   cursor: pointer;
+  padding-bottom: 8px;
 `;
 
 const TabWrapper = styled.div`
