@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { styled, css } from "styled-components";
 import AdditionalOption from "./AdditionalOption";
 import DefaultOption from "./DefaultOption";
-
+import Button from "../../../Components/Common/Button/Button";
+import useButtonNavigation from "../../../hooks/useButtonNavigation";
 const OptionPage = () => {
   const [selectedTab, setSelectedTab] = useState("추가 옵션");
 
@@ -10,6 +11,8 @@ const OptionPage = () => {
     if (selectedTab === "추가 옵션") return <AdditionalOption />;
     if (selectedTab === "기본 포함 옵션") return <DefaultOption />;
   };
+
+  const move = useButtonNavigation();
 
   return (
     <Wrapper>
@@ -28,9 +31,54 @@ const OptionPage = () => {
         </TabItem>
       </TabWrapper>
       {isOptionPage()}
+      <ButtonContainer>
+        <Button
+          text="색상선택"
+          style={BtnStyle1}
+          onClick={() => move("/custom/color")}
+        />
+        <Button
+          text="견적내기"
+          style={BtnStyle2}
+          onClick={() => move("/result")}
+        />
+      </ButtonContainer>
     </Wrapper>
   );
 };
+
+const BtnStyle2 = css`
+  width: 298px;
+  height: 52px;
+
+  color: ${({ theme }) => theme.color.grey1000};
+  background-color: ${({ theme }) => theme.color.primary_default};
+  ${({ theme }) => theme.font.Body3_Medium};
+
+  border: 1px solid ${({ theme }) => theme.color.primary_default};
+  border-radius: 6px;
+`;
+
+const BtnStyle1 = css`
+  width: 298px;
+  height: 52px;
+
+  color: ${({ theme }) => theme.color.grey50};
+  background-color: ${({ theme }) => theme.color.grey1000};
+  ${({ theme }) => theme.font.Body3_Medium};
+
+  border: 1px solid ${({ theme }) => theme.color.grey600};
+  border-radius: 6px;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+
+  margin-top: 50px;
+  gap: 12px;
+  width: 100%;
+`;
 
 const TabItem = styled.div`
   ${({ selected }) =>
@@ -60,7 +108,7 @@ const TabWrapper = styled.div`
 `;
 
 const Wrapper = styled.div`
-  height: 1170px;
+  height: 1070px;
 `;
 
 export default OptionPage;
