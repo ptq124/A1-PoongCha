@@ -11,7 +11,7 @@ import OverlaidPopup from "../../../../Components/Common/OverlaidPopup";
 const optionData = [
   {
     title: "option1",
-    position: { x: 23, y: 35 },
+    position: { x: 5, y: 35 },
     option: "컴포트 II",
     description: "편의성을 위해 구성된 세트 옵션",
     price: "1,090,000원",
@@ -29,7 +29,7 @@ const optionData = [
   },
   {
     title: "option3",
-    position: { x: 50, y: 3 },
+    position: { x: 50, y: 10 },
     option: "컴포트 II",
     description: "편의성을 위해 구성된 세트 옵션",
     price: "1,090,000원",
@@ -38,7 +38,7 @@ const optionData = [
   },
   {
     title: "option4",
-    position: { x: 65, y: 85 },
+    position: { x: 95, y: 85 },
     option: "컴포트 II",
     description: "편의성을 위해 구성된 세트 옵션",
     price: "1,090,000원",

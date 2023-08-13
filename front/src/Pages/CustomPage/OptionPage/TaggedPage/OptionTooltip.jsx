@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { styled } from "styled-components";
+import { css, styled } from "styled-components";
 import TooltipTail from "../../../../assets/icons/option-tooltip-tail.svg";
 import ArrowRightIcon from "../../../../assets/icons/arrow-right.svg";
 
@@ -15,7 +15,7 @@ const OptionTooltip = ({ data, openPopup }) => {
         </Detail>
       </Content>
       <Arrow src={ArrowRightIcon} className="arrow" onClick={openPopup} />
-      <img src={TooltipTail} className="tail" />
+      <img src={TooltipTail} className="tail" $position={data.position} />
     </Wrapper>
   );
 };
@@ -52,8 +52,17 @@ const Content = styled.div`
 `;
 const Wrapper = styled.div`
   position: absolute;
-  top: calc(${({ $position }) => $position.y}% - 110px);
-  left: calc(${({ $position }) => $position.x}% - 124px);
+  top: ${({ $position }) =>
+    $position.y < 23
+      ? `calc(${$position.y}% + 50px)`
+      : `calc(${$position.y}% - 110px)`};
+  left: ${({ $position }) =>
+    $position.x < 13
+      ? `calc(${$position.x}% - 5px)`
+      : $position.x > 85
+      ? `calc(${$position.x}% - 240px)`
+      : `calc(${$position.x}% - 124px)`};
+
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -66,10 +75,21 @@ const Wrapper = styled.div`
   box-sizing: border-box;
   .tail {
     position: absolute;
-    bottom: -9px;
-    left: 130px;
+    top: ${({ $position }) => $position.y < 23 && "-8px"};
+    ${({ $position }) =>
+      $position.y < 23
+        ? css`
+            top: -8px;
+            transform: rotate(180deg);
+          `
+        : css`
+            bottom: -8px;
+          `}
     width: 14px;
     height: 10px;
+
+    left: ${({ $position }) =>
+      $position.x < 13 ? "10px" : $position.x > 85 ? "250px" : "130px"};
   }
 `;
 export default OptionTooltip;

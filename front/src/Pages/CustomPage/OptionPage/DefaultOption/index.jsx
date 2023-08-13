@@ -101,7 +101,7 @@ const DefaultOption = () => {
         handleSelectTag={handleSelectTag}
       />
       <MainContainer>
-        {selectTag === "전체" && (
+        {(selectTag === "전체" || selectTag === "대표") && (
           <Count>
             <div>전체</div>
             <span>{options.length}</span>
