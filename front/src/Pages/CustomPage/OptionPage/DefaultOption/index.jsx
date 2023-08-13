@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { styled } from "styled-components";
 
 import OptionTag from "../../../../Components/Custom/OptionTag";
@@ -9,11 +9,18 @@ import { options } from "../optionData";
 import left from "../../../../assets/icons/chevron-left.svg";
 import right from "../../../../assets/icons/chevron-right.svg";
 import TaggedPage from "../TaggedPage";
+import OverlaidPopup from "../../../../Components/Common/OverlaidPopup";
+import OptionPopup from "../OptionPopup";
+import useOnClickPopUp from "../../../../hooks/useOnClickPopUp";
 
 const DefaultOption = () => {
   const tagsOption = [tags, tagSelectIcons, tagsNotSelectIcons];
   const [selectTag, setSelectTag] = useState("대표");
   const handleSelectTag = (tag) => setSelectTag(tag);
+
+  const optionPopupRef = useRef();
+  const { isPopupOpen, openPopup, closePopup } =
+    useOnClickPopUp(optionPopupRef);
 
   // 탭
   const [selectOption, setSelectOption] = useState([]);
@@ -52,6 +59,7 @@ const DefaultOption = () => {
         data={data}
         selected={hasOption(data.option)}
         onClick={handleSelectOption}
+        openPopup={openPopup}
       />
     ));
   };
@@ -80,6 +88,13 @@ const DefaultOption = () => {
 
   return (
     <Wrapper>
+      {isPopupOpen && (
+        <OverlaidPopup
+          component={
+            <OptionPopup popupRef={optionPopupRef} closePopup={closePopup} />
+          }
+        />
+      )}
       <OptionTag
         selectTag={selectTag}
         tagsOption={tagsOption}

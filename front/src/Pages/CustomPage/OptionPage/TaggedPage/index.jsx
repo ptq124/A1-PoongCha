@@ -88,7 +88,7 @@ const TaggedPage = () => {
       <OptionItemsContainer>
         {optionData.map((data, index) => (
           // 옵션 컴포넌트 들어갈 자리
-          <OptionItem key={index} data={data} />
+          <OptionItem key={index} data={data} openPopup={openPopup} />
         ))}
       </OptionItemsContainer>
       <AdditionalComment>
