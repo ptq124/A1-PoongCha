@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    recommend:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: ${{recommend-default-database-url}}
+      username: ${{recommend-default-database-username}}
+      password: ${{recommend-default-database-password}}
