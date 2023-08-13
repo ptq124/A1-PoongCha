@@ -3,23 +3,44 @@ import { css, styled } from "styled-components";
 import TaggedPageSampleImg from "../../../../assets/images/tagged-page-sample.svg";
 import PlusIcon from "../../../../assets/icons/plus.svg";
 import OptionTooltip from "./OptionTooltip";
+import OptionItem from "../../../../Components/Custom/OptionItem";
 
 const optionData = [
   {
     title: "option1",
     position: { x: 23, y: 35 },
+    option: "컴포트 II",
+    description: "편의성을 위해 구성된 세트 옵션",
+    price: "1,090,000원",
+    img: "https://www.hyundai.com/contents/spec/LX24/dualwidesunroof_s.jpg",
+    tag: "주행안전",
   },
   {
     title: "option2",
     position: { x: 20, y: 80 },
+    option: "컴포트 II",
+    description: "편의성을 위해 구성된 세트 옵션",
+    price: "1,090,000원",
+    img: "https://www.hyundai.com/contents/spec/LX24/dualwidesunroof_s.jpg",
+    tag: "주행안전",
   },
   {
     title: "option3",
     position: { x: 50, y: 3 },
+    option: "컴포트 II",
+    description: "편의성을 위해 구성된 세트 옵션",
+    price: "1,090,000원",
+    img: "https://www.hyundai.com/contents/spec/LX24/dualwidesunroof_s.jpg",
+    tag: "주행안전",
   },
   {
     title: "option4",
     position: { x: 65, y: 85 },
+    option: "컴포트 II",
+    description: "편의성을 위해 구성된 세트 옵션",
+    price: "1,090,000원",
+    img: "https://www.hyundai.com/contents/spec/LX24/dualwidesunroof_s.jpg",
+    tag: "주행안전",
   },
 ];
 const TaggedPage = () => {
@@ -51,7 +72,7 @@ const TaggedPage = () => {
       <OptionItemsContainer>
         {optionData.map((data, index) => (
           // 옵션 컴포넌트 들어갈 자리
-          <div key={index}></div>
+          <OptionItem key={index} data={data} />
         ))}
       </OptionItemsContainer>
       <AdditionalComment>
@@ -112,7 +133,6 @@ const OptionItemsContainer = styled.div`
   & > div {
     width: 244px;
     height: 314px;
-    background-color: beige;
   }
 `;
 const Wrapper = styled.div`
