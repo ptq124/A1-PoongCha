@@ -20,6 +20,6 @@ public class CarTypeAcceptanceTest extends AcceptanceTest {
         var response = 차종_생성_요청(car_type_name, image_url);
 
         // THEN
-        차종_생성_응답_검증(response, "/car-type/1");
+        차종_생성_응답_검증(response, "/api/car-type/1");
     }
 }

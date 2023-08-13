@@ -20,7 +20,7 @@ public class CarTypeSteps {
                         )
                 )
                 .contentType(ContentType.JSON)
-                .post("/car-type")
+                .post("/api/car-type")
                 .then().log().all()
                 .extract();
     }
