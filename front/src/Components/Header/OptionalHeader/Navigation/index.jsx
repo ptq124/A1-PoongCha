@@ -96,6 +96,9 @@ const NavTitle = styled.div`
   ${({ theme }) => theme.font.Body4_Medium};
   color: ${({ $active, theme }) =>
     $active ? theme.color.primary_default : theme.color.grey600};
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Nav = styled.div`

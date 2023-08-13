@@ -58,7 +58,7 @@ const DefaultOption = () => {
         key={index}
         data={data}
         selected={hasOption(data.option)}
-        onClick={handleSelectOption}
+        handleSelectOption={handleSelectOption}
         openPopup={openPopup}
       />
     ));
@@ -140,8 +140,12 @@ const PageBtn = styled.div`
   color: ${({ theme }) => theme.color.grey100};
   gap: 8px;
   margin-top: 63px;
+  cursor: pointer;
 
   span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 27px;
     height: 27px;
     border-radius: 50%;
@@ -149,6 +153,9 @@ const PageBtn = styled.div`
     &.active {
       background-color: ${({ theme }) => theme.color.grey700};
     }
+  }
+  & > img {
+    cursor: pointer;
   }
 `;
 
