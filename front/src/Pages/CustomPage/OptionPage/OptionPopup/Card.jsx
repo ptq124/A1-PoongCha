@@ -3,8 +3,11 @@ import { css, styled } from "styled-components";
 
 import SampleImg from "../../../../assets/images/option-popup-sample.svg";
 import CloseIcon from "../../../../assets/icons/close.svg";
+import Button from "../../../../Components/Common/Button/Button";
+import checkBlue from "../../../../assets/checkcircle/check-16-blue.svg";
+import checkGrey from "../../../../assets/checkcircle/check-16-grey.svg";
 
-const Card = ({ closePopup, index, popupData, handleNavClick }) => {
+const Card = ({ closePopup, index, popupData, handleNavClick, selected }) => {
   return (
     <CardContainer>
       <ImgContainer>
@@ -23,7 +26,12 @@ const Card = ({ closePopup, index, popupData, handleNavClick }) => {
             <span className="optionName">후석 승객 알림</span>
             <span className="price">1,090,000 원</span>
           </OptionInfo>
-          <SelectButton></SelectButton>
+          <Button
+            text="선택"
+            style={BtnStyle}
+            selected={selected}
+            img={<img src={selected ? checkGrey : checkBlue} />}
+          />
         </Header>
         <Description>
           초음파 센서를 통해 뒷좌석에 남아있는 승객의 움직임을 감지하여
@@ -55,6 +63,33 @@ const Card = ({ closePopup, index, popupData, handleNavClick }) => {
   );
 };
 
+const BtnStyle = css`
+  width: 69px;
+  height: 28px;
+
+  border-radius: 20px;
+  border: 1px solid;
+  gap: 6px;
+  ${({ theme }) => theme.font.Caption1_Medium};
+
+  ${({ selected }) =>
+    selected
+      ? css`
+          border-color: ${({ theme }) => theme.color.grey1000};
+          background: ${({ theme }) => theme.color.primary_default};
+          color: ${({ theme }) => theme.color.grey1000};
+        `
+      : css`
+          border-color: ${({ theme }) => theme.color.primary_default};
+          background: ${({ theme }) => theme.color.grey1000};
+          color: ${({ theme }) => theme.color.primary_default};
+        `};
+
+  img {
+    width: 16px;
+    height: 16px;
+  }
+`;
 const Bullet = styled.div`
   width: 8px;
   height: 8px;
@@ -131,7 +166,7 @@ const DetailContainer = styled.div`
   width: 344px;
   padding: 0px 28px;
   box-sizing: border-box;
-  img {
+  & > img {
     position: absolute;
     top: 24px;
     right: 24px;
