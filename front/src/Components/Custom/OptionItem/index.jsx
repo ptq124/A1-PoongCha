@@ -4,7 +4,7 @@ import checkBlue from "../../../assets/checkcircle/check-16-blue.svg";
 import checkGrey from "../../../assets/checkcircle/check-16-grey.svg";
 import Button from "../../Common/Button/Button";
 
-const OptionItem = ({ data, selected, onClick }) => {
+const OptionItem = ({ data, selected, onClick, openPopup }) => {
   const { option, description, price, img, tag } = data;
 
   return (
@@ -12,7 +12,7 @@ const OptionItem = ({ data, selected, onClick }) => {
       <img src={img} />
       <Header>
         <div>{option}</div>
-        <div>더 알아보기</div>
+        <div onClick={openPopup}>더 알아보기</div>
       </Header>
       <Desc>{description}</Desc>
       <Price>{price}</Price>
@@ -87,6 +87,9 @@ const Header = styled.div`
   div:nth-child(2) {
     color: ${({ theme }) => theme.color.secondary};
     ${({ theme }) => theme.font.Body4_Regular};
+    &:hover {
+      cursor: pointer;
+    }
   }
   margin-top: 12px;
   margin-bottom: 6px;

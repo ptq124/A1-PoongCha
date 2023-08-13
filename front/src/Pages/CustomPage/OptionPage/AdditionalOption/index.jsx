@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { styled } from "styled-components";
 
 import OptionTag from "../../../../Components/Custom/OptionTag";
@@ -8,6 +8,10 @@ import { tags, tagSelectIcons, tagsNotSelectIcons } from "../tagIcon";
 import { options } from "../optionData";
 import left from "../../../../assets/icons/chevron-left.svg";
 import right from "../../../../assets/icons/chevron-right.svg";
+import TaggedPage from "../TaggedPage";
+import OverlaidPopup from "../../../../Components/Common/OverlaidPopup";
+import OptionPopup from "../OptionPopup";
+import useOnClickPopUp from "../../../../hooks/useOnClickPopUp";
 
 const AdditionalOption = () => {
   const tagsOption = [
@@ -22,6 +26,9 @@ const AdditionalOption = () => {
     setCurrentPage(1);
   };
 
+  const optionPopupRef = useRef();
+  const { isPopupOpen, openPopup, closePopup } =
+    useOnClickPopUp(optionPopupRef);
   // 탭
   const [selectOption, setSelectOption] = useState([]);
   const handleSelectOption = (option) => {
@@ -60,32 +67,42 @@ const AdditionalOption = () => {
         data={data}
         selected={hasOption(data.option)}
         onClick={handleSelectOption}
+        openPopup={openPopup}
       />
     ));
   };
 
-  const renderTagOptionItems = () => {
+  const renderTagOptionPage = () => {
     const newData = options.filter((data) => data.tag === selectTag);
     const currentData = getDataForPage(newData, currentPage, 8);
     totalPages = Math.ceil(newData.length / 8);
 
-    return currentData.map((data, index) => (
-      <OptionItem
-        key={index}
-        data={data}
-        selected={hasOption(data.option)}
-        onClick={handleSelectOption}
-      />
-    ));
+    return <TaggedPage />;
+    // return <TaggedPage data={currentData} />;
+    // return currentData.map((data, index) => (
+    //   <OptionItem
+    //     key={index}
+    //     data={data}
+    //     selected={hasOption(data.option)}
+    //     onClick={handleSelectOption}
+    //   />
+    // ));
   };
 
   const renderOptionItems = () => {
     if (selectTag === "전체") return renderAllOptionItems();
-    else return renderTagOptionItems();
+    else return renderTagOptionPage();
   };
 
   return (
     <Wrapper>
+      {isPopupOpen && (
+        <OverlaidPopup
+          component={
+            <OptionPopup popupRef={optionPopupRef} closePopup={closePopup} />
+          }
+        />
+      )}
       <OptionTag
         selectTag={selectTag}
         tagsOption={tagsOption}
@@ -99,19 +116,24 @@ const AdditionalOption = () => {
           </Count>
         )}
         <OptionContainer>{renderOptionItems()}</OptionContainer>
-        <PageBtn>
-          <img src={left} onClick={() => handlePageChange(currentPage - 1)} />
-          {Array.from({ length: totalPages }, (_, index) => (
-            <span
-              key={index}
-              onClick={() => handlePageChange(index + 1)}
-              className={currentPage === index + 1 ? "active" : ""}
-            >
-              {index + 1}
-            </span>
-          ))}
-          <img src={right} onClick={() => handlePageChange(currentPage + 1)} />
-        </PageBtn>
+        {selectTag === "전체" && (
+          <PageBtn>
+            <img src={left} onClick={() => handlePageChange(currentPage - 1)} />
+            {Array.from({ length: totalPages }, (_, index) => (
+              <span
+                key={index}
+                onClick={() => handlePageChange(index + 1)}
+                className={currentPage === index + 1 ? "active" : ""}
+              >
+                {index + 1}
+              </span>
+            ))}
+            <img
+              src={right}
+              onClick={() => handlePageChange(currentPage + 1)}
+            />
+          </PageBtn>
+        )}
       </MainContainer>
     </Wrapper>
   );
