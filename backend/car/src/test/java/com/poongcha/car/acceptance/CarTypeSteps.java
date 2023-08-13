@@ -1,6 +1,11 @@
 package com.poongcha.car.acceptance;
 
-import io.restassured.RestAssured;
+import static com.epages.restdocs.apispec.RestAssuredRestDocumentationWrapper.document;
+import static com.poongcha.car.util.DocumentationTest.DEFAULT_RESTDOCS_PATH;
+import static com.poongcha.car.util.DocumentationTest.customRequestFields;
+import static com.poongcha.car.util.DocumentationTest.given;
+import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+
 import io.restassured.http.ContentType;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
@@ -8,10 +13,19 @@ import java.util.Map;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpStatus;
 import org.assertj.core.api.AutoCloseableSoftAssertions;
+import org.springframework.restdocs.payload.JsonFieldType;
 
 public class CarTypeSteps {
     public static ExtractableResponse<Response> 차종_생성_요청(final String car_type_name, final String image_url) {
-        return RestAssured.given().log().all()
+        return given()
+                .filter(document(
+                        DEFAULT_RESTDOCS_PATH,
+                        customRequestFields(
+                                fieldWithPath("carTypeName").type(JsonFieldType.STRING).description("차종명"),
+                                fieldWithPath("imageUrl").type(JsonFieldType.STRING).description("차종 이미지 url")
+                        )
+                ))
+                .log().all()
                 .when()
                 .body(
                         Map.of(
