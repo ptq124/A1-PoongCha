@@ -12,6 +12,7 @@ const getHeaderStyle = (pathname) => {
   let boxShadow;
   switch (pathname) {
     case "/":
+    case "/result":
       position = "absolute";
       backgroundColor = "transparent";
       break;
@@ -48,7 +49,7 @@ const Header = () => {
     <HeaderWrapper $pathname={pathname}>
       <DefaultHeader $pathname={pathname}>
         {getLogoImage()}
-        <SelectOption pathname={pathname} />
+        {pathname !== "/result" && <SelectOption pathname={pathname} />}
       </DefaultHeader>
       <OptionalHeader />
     </HeaderWrapper>
