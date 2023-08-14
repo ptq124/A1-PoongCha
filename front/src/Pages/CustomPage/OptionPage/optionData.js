@@ -38,6 +38,7 @@ export const options = [
     price: "1,090,000원",
     img: "https://www.hyundai.com/contents/spec/LX24/dualwidesunroof_s.jpg",
     tag: "사용편의",
+    position: { x: 40, y: 85 },
   },
   {
     option: "빌트인 캠",
@@ -45,6 +46,7 @@ export const options = [
     price: "1,090,000원",
     img: "https://www.hyundai.com/contents/spec/LX24/dualwidesunroof_s.jpg",
     tag: "사용편의",
+    position: { x: 95, y: 40 },
   },
   {
     option: "듀얼 머플러 패키지",
@@ -52,6 +54,7 @@ export const options = [
     price: "1,090,000원",
     img: "https://www.hyundai.com/contents/spec/LX24/dualwidesunroof_s.jpg",
     tag: "사용편의",
+    position: { x: 20, y: 20 },
   },
   {
     option: "빌트인 공기청정기",
@@ -59,6 +62,7 @@ export const options = [
     price: "1,090,000원",
     img: "https://www.hyundai.com/contents/spec/LX24/dualwidesunroof_s.jpg",
     tag: "추위/더위",
+    position: { x: 10, y: 85 },
   },
   {
     option: "사이드 스탭 ",
@@ -66,6 +70,7 @@ export const options = [
     price: "1,090,000원",
     img: "https://www.hyundai.com/contents/spec/LX24/dualwidesunroof_s.jpg",
     tag: "추위/더위",
+    position: { x: 70, y: 85 },
   },
   {
     option: "적외선 무름워머",
@@ -73,6 +78,7 @@ export const options = [
     price: "1,090,000원",
     img: "https://www.hyundai.com/contents/spec/LX24/dualwidesunroof_s.jpg",
     tag: "추위/더위",
+    position: { x: 30, y: 55 },
   },
   {
     option: "차량 보호 필름",
@@ -80,6 +86,7 @@ export const options = [
     price: "1,090,000원",
     img: "https://www.hyundai.com/contents/spec/LX24/dualwidesunroof_s.jpg",
     tag: "추위/더위",
+    position: { x: 60, y: 70 },
   },
   {
     option: "알콘(alcon) 단조 브레이크 & 20인치 블랙톤 전면 가공 휠 패키지",
@@ -87,6 +94,7 @@ export const options = [
     price: "1,090,000원",
     img: "https://www.hyundai.com/contents/spec/LX24/dualwidesunroof_s.jpg",
     tag: "주차/출차",
+    position: { x: 90, y: 20 },
   },
   {
     option: "디젤 2.2 엔진",
@@ -94,6 +102,7 @@ export const options = [
     price: "1,090,000원",
     img: "https://www.hyundai.com/contents/spec/LX24/dualwidesunroof_s.jpg",
     tag: "주차/출차",
+    position: { x: 30, y: 70 },
   },
   {
     option: "진동 경고 스티어링 휠",
@@ -101,6 +110,7 @@ export const options = [
     price: "1,090,000원",
     img: "https://www.hyundai.com/contents/spec/LX24/dualwidesunroof_s.jpg",
     tag: "주차/출차",
+    position: { x: 70, y: 70 },
   },
   {
     option: "8단 자동변속기",
@@ -108,6 +118,7 @@ export const options = [
     price: "1,090,000원",
     img: "https://www.hyundai.com/contents/spec/LX24/dualwidesunroof_s.jpg",
     tag: "주차/출차",
+    position: { x: 60, y: 30 },
   },
   {
     option: "LED 보조제동등",
@@ -115,6 +126,7 @@ export const options = [
     price: "1,090,000원",
     img: "https://www.hyundai.com/contents/spec/LX24/dualwidesunroof_s.jpg",
     tag: "퍼포먼스",
+    position: { x: 60, y: 70 },
   },
   {
     option: "싱글 트윈팁 머플러",
@@ -122,6 +134,7 @@ export const options = [
     price: "1,090,000원",
     img: "https://www.hyundai.com/contents/spec/LX24/dualwidesunroof_s.jpg",
     tag: "스타일",
+    position: { x: 60, y: 70 },
   },
   {
     option: "싱글 트윈팁 머플러(대표)",
@@ -129,6 +142,7 @@ export const options = [
     price: "1,090,000원",
     img: "https://www.hyundai.com/contents/spec/LX24/dualwidesunroof_s.jpg",
     tag: "대표",
+    position: { x: 60, y: 70 },
   },
   {
     option: "싱글 트윈팁 머플러(대표)",
@@ -136,6 +150,7 @@ export const options = [
     price: "1,090,000원",
     img: "https://www.hyundai.com/contents/spec/LX24/dualwidesunroof_s.jpg",
     tag: "대표",
+    position: { x: 50, y: 50 },
   },
   {
     option: "싱글 트윈팁 머플러(대표)",
@@ -143,5 +158,6 @@ export const options = [
     price: "1,090,000원",
     img: "https://www.hyundai.com/contents/spec/LX24/dualwidesunroof_s.jpg",
     tag: "대표",
+    position: { x: 30, y: 30 },
   },
 ];

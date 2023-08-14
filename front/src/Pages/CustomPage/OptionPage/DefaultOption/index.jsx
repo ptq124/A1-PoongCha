@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { styled } from "styled-components";
 
 import OptionTag from "../../../../Components/Custom/OptionTag";
@@ -62,15 +62,7 @@ const DefaultOption = ({ openPopup }) => {
     const currentData = getDataForPage(newData, currentPage, 8);
     totalPages = Math.ceil(newData.length / 8);
 
-    return <TaggedPage openPopup={openPopup} />;
-    // return currentData.map((data, index) => (
-    //   <OptionItem
-    //     key={index}
-    //     data={data}
-    //     selected={hasOption(data.option)}
-    //     onClick={handleSelectOption}
-    //   />
-    // ));
+    return <TaggedPage openPopup={openPopup} optionData={currentData} />;
   };
 
   const renderOptionItems = () => {
@@ -81,13 +73,6 @@ const DefaultOption = ({ openPopup }) => {
 
   return (
     <Wrapper>
-      {/* {isPopupOpen && (
-        <OverlaidPopup
-          component={
-            <OptionPopup popupRef={optionPopupRef} closePopup={closePopup} />
-          }
-        />
-      )} */}
       <OptionTag
         selectTag={selectTag}
         tagsOption={tagsOption}

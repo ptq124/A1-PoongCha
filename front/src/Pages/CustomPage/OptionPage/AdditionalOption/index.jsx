@@ -71,7 +71,7 @@ const AdditionalOption = ({ openPopup }) => {
     const currentData = getDataForPage(newData, currentPage, 8);
     totalPages = Math.ceil(newData.length / 8);
 
-    return <TaggedPage openPopup={openPopup} />;
+    return <TaggedPage openPopup={openPopup} optionData={currentData} />;
   };
 
   const renderOptionItems = () => {
