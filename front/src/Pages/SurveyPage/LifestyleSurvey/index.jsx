@@ -92,15 +92,12 @@ const LifestyleSurvey = () => {
       <Button
         text="선택 완료"
         style={SurveyBtnStyle}
+        $isActive={selectedOption !== ""}
         onClick={() => move("/survey/end")}
       />
     </>
   );
 };
-
-const Radio = styled.input`
-  display: none;
-`;
 
 const LinkBtnStyle = css`
   color: ${({ theme }) => theme.color.secondary};
@@ -130,6 +127,13 @@ const SurveyBtnStyle = css`
   border-radius: 6px;
   border: 1px solid ${({ theme }) => theme.color.primary_default};
   ${({ theme }) => theme.font.Body3_Medium};
+
+  ${({ $isActive }) =>
+    !$isActive &&
+    css`
+      opacity: 0.3;
+      pointer-events: none;
+    `}
 `;
 
 export default LifestyleSurvey;
