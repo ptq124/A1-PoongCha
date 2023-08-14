@@ -7,7 +7,7 @@ import static com.poongcha.car.util.DocumentationTest.given;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
-import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
+import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 
 import io.restassured.http.ContentType;
 import io.restassured.response.ExtractableResponse;
@@ -153,8 +153,8 @@ public class TrimSteps {
         return given()
                 .filter(document(
                         DEFAULT_RESTDOCS_PATH,
-                        requestParameters(
-                                parameterWithName("car-type").description("차종 ID")
+                        pathParameters(
+                                parameterWithName("car-type-id").description("차종 ID")
                         ),
                         responseFields(
                                 fieldWithPath("[].id").type(JsonFieldType.NUMBER).description("트림 ID"),
@@ -166,8 +166,7 @@ public class TrimSteps {
                 ))
                 .log().all()
                 .when()
-                .queryParam("car-type", carTypeId)
-                .get("/api/trim")
+                .get("/api/car-type/{car-type-id}/trim", carTypeId)
                 .then().log().all()
                 .extract();
     }
@@ -192,11 +191,15 @@ public class TrimSteps {
 
     public static ExtractableResponse<Response> 존재하지_않는_차종_ID로_트림_목록_조회_요청(final long carTypeId) {
         return given()
-                .filter(document(DEFAULT_RESTDOCS_PATH))
+                .filter(document(
+                        DEFAULT_RESTDOCS_PATH,
+                        pathParameters(
+                                parameterWithName("car-type-id").description("차종 ID")
+                        )
+                ))
                 .log().all()
                 .when()
-                .queryParam("car-type", carTypeId)
-                .get("/api/trim")
+                .get("/api/car-type/{car-type-id}/trim", carTypeId)
                 .then().log().all()
                 .extract();
     }
