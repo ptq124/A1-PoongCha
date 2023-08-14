@@ -1,6 +1,6 @@
 import React from "react";
 import { styled } from "styled-components";
-import arrowUp from "../../../../../assets/icons/arrow_up.svg";
+import arrowUp from "@assets/icons/arrow_up.svg";
 
 const DropDonw = ({ popupRef, closePopup }) => {
   return (

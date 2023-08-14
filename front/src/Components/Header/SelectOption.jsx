@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { styled, css } from "styled-components";
-import headerDownArrowBlack from "../../assets/icons/headerDownArrowBlack.svg";
-import headerDownArrow from "../../assets/icons/headerDownArrow.svg";
-import headerDownArrowSmall from "../../assets/icons/headerDownArrowSmall.svg";
+import headerDownArrowBlack from "@assets/icons/headerDownArrowBlack.svg";
+import headerDownArrow from "@assets/icons/headerDownArrow.svg";
+import headerDownArrowSmall from "@assets/icons/headerDownArrowSmall.svg";
 
 const SelectOption = ({ pathname }) => {
   const [isOpen, setIsOpen] = useState(false);

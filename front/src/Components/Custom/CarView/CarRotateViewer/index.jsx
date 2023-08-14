@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { styled, css } from "styled-components";
-import { convertToTwoDigits } from "../../../../utils";
+import { convertToTwoDigits } from "@utils/index";
 
 const CarRotateViewer = () => {
   const imageArray = Array.from({ length: 60 }, (_, index) => ++index);

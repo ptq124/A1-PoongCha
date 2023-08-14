@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { styled, css } from "styled-components";
 import Card from "./Card";
-import Summary from "../../Components/Common/Summary";
-import Button from "../../Components/Common/Button/Button";
-import Accordion from "../../Components/Result/Accordian";
+import Summary from "@Components/Common/Summary";
+import Button from "@Components/Common/Button/Button";
+import Accordion from "@Components/Result/Accordian";
 
 const initialAccordions = [
   { title: "탁송", content: "이곳에 내용이 들어갑니다.", isOpen: false },

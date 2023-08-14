@@ -1,6 +1,6 @@
 import React from "react";
 import { css, styled } from "styled-components";
-import Check24BlueIcon from "../../../assets/checkcircle/check-24-blue.svg";
+import Check24BlueIcon from "@assets/checkcircle/check-24-blue.svg";
 
 const SurveyOption = ({ label, selected, handleOptionSelect, isLong }) => {
   return (

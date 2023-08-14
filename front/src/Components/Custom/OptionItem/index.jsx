@@ -1,8 +1,8 @@
 import React from "react";
 import { styled, css } from "styled-components";
-import checkBlue from "../../../assets/checkcircle/check-16-blue.svg";
-import checkGrey from "../../../assets/checkcircle/check-16-grey.svg";
-import Button from "../../Common/Button/Button";
+import checkBlue from "@assets/checkcircle/check-16-blue.svg";
+import checkGrey from "@assets/checkcircle/check-16-grey.svg";
+import Button from "@Components/Common/Button/Button";
 
 const OptionItem = ({
   data,

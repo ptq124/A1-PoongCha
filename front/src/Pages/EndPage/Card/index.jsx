@@ -1,8 +1,8 @@
 import React from "react";
-import { styled, css } from "styled-components";
-import car from "../../../assets/car.svg";
-import point from "../../../assets/point.svg";
-import logo from "../../../assets/icons/hyundaicardlogo.svg";
+import { styled } from "styled-components";
+import car from "@assets/car.svg";
+import point from "@assets/point.svg";
+import logo from "@assets/icons/hyundaicardlogo.svg";
 
 const Card = () => {
   return (

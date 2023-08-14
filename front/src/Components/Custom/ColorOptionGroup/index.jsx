@@ -1,11 +1,11 @@
 import React, { useRef, useState } from "react";
 import { styled } from "styled-components";
 import ColorOption from "./ColorOption";
-import ArrowDownIcon from "../../../assets/icons/24-chevron-down.svg";
-import ArrowUpIcon from "../../../assets/icons/24-chevron-up.svg";
-import OverlaidPopup from "../../Common/OverlaidPopup";
-import ColorChangePopup from "../../../Pages/CustomPage/ColorPage/ColorChangePopup";
-import useOnClickPopUp from "../../../hooks/useOnClickPopUp";
+import ArrowDownIcon from "@assets/icons/24-chevron-down.svg";
+import ArrowUpIcon from "@assets/icons/24-chevron-up.svg";
+import OverlaidPopup from "@Components/Common/OverlaidPopup";
+import ColorChangePopup from "@Pages/CustomPage/ColorPage/ColorChangePopup";
+import useOnClickPopUp from "@hooks/useOnClickPopUp";
 
 const innerColorOptions = [
   "어비스 블랙펄",

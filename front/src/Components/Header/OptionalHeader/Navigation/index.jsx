@@ -1,9 +1,9 @@
 import React, { useRef, useState } from "react";
 import { css, styled } from "styled-components";
 import { useLocation } from "react-router";
-import Button from "../../../Common/Button/Button";
-import useOnClickPopUp from "../../../../hooks/useOnClickPopUp";
-import useButtonNavigation from "../../../../hooks/useButtonNavigation";
+import Button from "@Components/Common/Button/Button";
+import useOnClickPopUp from "@hooks/useOnClickPopUp";
+import useButtonNavigation from "@hooks/useButtonNavigation";
 import Dropdown from "./DropDown";
 
 const navItems = [

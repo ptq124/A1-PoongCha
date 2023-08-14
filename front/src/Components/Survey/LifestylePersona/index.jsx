@@ -1,8 +1,8 @@
 import React from "react";
 import { styled, css } from "styled-components";
-import check32blue from "../../../assets/checkcircle/check-32-blue.svg";
-import check32grey from "../../../assets/checkcircle/check-32-grey.svg";
-import LifeImg from "../../../assets/lifestyle/lifestyle1.svg";
+import check32blue from "@assets/checkcircle/check-32-blue.svg";
+import check32grey from "@assets/checkcircle/check-32-grey.svg";
+import LifeImg from "@assets/lifestyle/lifestyle1.svg";
 /**
 데이터 전달 값: 라이프 스타일
 태그: []

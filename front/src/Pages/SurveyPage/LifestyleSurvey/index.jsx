@@ -1,13 +1,13 @@
 import React, { useState, useRef } from "react";
 import * as S from "../styles";
 import { css, styled } from "styled-components";
-import Button from "../../../Components/Common/Button/Button";
-import SurveyHeader from "../../../Components/Survey/SurveyHeader";
-import LifestylePersona from "../../../Components/Survey/LifestylePersona";
-import useOnClickPopUp from "../../../hooks/useOnClickPopUp";
+import Button from "@Components/Common/Button/Button";
+import SurveyHeader from "@Components/Survey/SurveyHeader";
+import LifestylePersona from "@Components/Survey/LifestylePersona";
+import useOnClickPopUp from "@hooks/useOnClickPopUp";
 import PopUp from "./PopUp";
-import useButtonNavigation from "../../../hooks/useButtonNavigation";
-import BackgroundOverlay from "../../../Components/Common/OverlaidPopup/BackgroundOverlay";
+import useButtonNavigation from "@hooks/useButtonNavigation";
+import BackgroundOverlay from "@Components/Common/OverlaidPopup/BackgroundOverlay";
 
 const lifestyleSurveyInfo = {
   options: [

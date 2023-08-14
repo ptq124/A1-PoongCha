@@ -1,9 +1,9 @@
 import React from "react";
 import { css, styled } from "styled-components";
 import QNASummary from "./QNASummary";
-import Summary from "../../Components/Common/Summary";
-import Button from "../../Components/Common/Button/Button";
-import useButtonNavigation from "../../hooks/useButtonNavigation";
+import Summary from "@Components/Common/Summary";
+import Button from "@Components/Common/Button/Button";
+import useButtonNavigation from "@hooks/useButtonNavigation";
 
 const EtcPage = () => {
   const move = useButtonNavigation();

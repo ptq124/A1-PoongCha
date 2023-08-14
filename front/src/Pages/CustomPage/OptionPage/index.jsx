@@ -1,14 +1,12 @@
 import React, { useRef, useState } from "react";
 import { styled, css } from "styled-components";
-
 import AllOptions from "./AllOptions";
-import Button from "../../../Components/Common/Button/Button";
-import useButtonNavigation from "../../../hooks/useButtonNavigation";
-
+import Button from "@Components/Common/Button/Button";
+import useButtonNavigation from "@hooks/useButtonNavigation";
 import { options } from "./optionData";
-import useOnClickPopUp from "../../../hooks/useOnClickPopUp";
+import useOnClickPopUp from "@hooks/useOnClickPopUp";
 import OptionPopup from "./OptionPopup";
-import OverlaidPopup from "../../../Components/Common/OverlaidPopup";
+import OverlaidPopup from "@Components/Common/OverlaidPopup";
 
 const OptionPage = () => {
   // 선택한 옵션들 상태관리

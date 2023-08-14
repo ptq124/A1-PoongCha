@@ -2,7 +2,7 @@ import React from "react";
 import { styled } from "styled-components";
 import ModelItemOption from "./ModelItemOption";
 import Tooltip from "../Tooltip";
-import useTooltip from "../../../hooks/useTooltip";
+import useTooltip from "@hooks/useTooltip";
 
 const ModelItemOptionGroup = ({ data, selectedOption, handleOptionSelect }) => {
   const { title, options } = data;

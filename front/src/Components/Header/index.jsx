@@ -1,8 +1,8 @@
 import React from "react";
 import { styled, css } from "styled-components";
 import OptionalHeader from "./OptionalHeader/index";
-import HyundaiLogo from "../../assets/icons/hyundai-logo.svg";
-import HyundaiWhiteLogo from "../../assets/icons/hyundai-logo-white.svg";
+import HyundaiLogo from "@assets/icons/hyundai-logo.svg";
+import HyundaiWhiteLogo from "@assets/icons/hyundai-logo-white.svg";
 import { useLocation } from "react-router-dom";
 import SelectOption from "./SelectOption";
 

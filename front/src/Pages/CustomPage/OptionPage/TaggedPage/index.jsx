@@ -1,9 +1,9 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { css, styled } from "styled-components";
-import TaggedPageSampleImg from "../../../../assets/images/tagged-page-sample.svg";
-import PlusIcon from "../../../../assets/icons/plus.svg";
 import OptionTooltip from "./OptionTooltip";
-import OptionItem from "../../../../Components/Custom/OptionItem";
+import OptionItem from "@Components/Custom/OptionItem";
+import TaggedPageSampleImg from "@assets/images/tagged-page-sample.svg";
+import PlusIcon from "@assets/icons/plus.svg";
 
 const TaggedPage = ({
   handleOpenPopup,

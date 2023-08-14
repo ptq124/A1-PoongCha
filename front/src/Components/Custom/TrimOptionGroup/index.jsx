@@ -1,12 +1,12 @@
 import React, { useRef } from "react";
 import { css, styled } from "styled-components";
-import Button from "../../Common/Button/Button";
+import Button from "@Components/Common/Button/Button";
 import TrimOption from "./TrimOption";
 import Tooltip from "../Tooltip";
-import useTooltip from "../../../hooks/useTooltip";
-import TrimComparisonPopup from "../../../Pages/CustomPage/TrimPage/TrimComparisonPopup";
-import useOnClickPopUp from "../../../hooks/useOnClickPopUp";
-import OverlaidPopup from "../../Common/OverlaidPopup";
+import useTooltip from "@hooks/useTooltip";
+import TrimComparisonPopup from "@Pages/CustomPage/TrimPage/TrimComparisonPopup";
+import useOnClickPopUp from "@hooks/useOnClickPopUp";
+import OverlaidPopup from "@Components/Common/OverlaidPopup";
 
 const TrimOptionGroup = ({ options, selectedOption, handleOptionSelect }) => {
   const { isTooltipOpen, openTooltip, closeTooltip } = useTooltip();
