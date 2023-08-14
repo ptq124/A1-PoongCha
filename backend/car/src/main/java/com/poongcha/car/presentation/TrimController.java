@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
@@ -22,19 +21,19 @@ public class TrimController {
     private final TrimQueryService trimQueryService;
 
     @PostMapping("/api/trim")
-    public ResponseEntity createTrim(@RequestBody TrimCreateRequest trimCreateRequest) {
+    public ResponseEntity createTrim(@RequestBody final TrimCreateRequest trimCreateRequest) {
         long createTrimId = trimCommandService.create(trimCreateRequest);
         return ResponseEntity.created(URI.create("/api/trim/" + createTrimId)).build();
     }
 
     @GetMapping("/api/trim/{id}")
-    public ResponseEntity findTrimById(@PathVariable(value = "id") long id) {
+    public ResponseEntity findTrimById(@PathVariable(value = "id") final long id) {
         TrimDefaultResponse trimDefaultResponse = trimQueryService.findById(id);
         return ResponseEntity.ok().body(trimDefaultResponse);
     }
 
-    @GetMapping("/api/trim")
-    public ResponseEntity<List> findAllTrimByCarTypeId(@RequestParam(value = "car-type") long carTypeId) {
+    @GetMapping("/api/car-type/{car-type-id}/trim")
+    public ResponseEntity<List> findAllTrimByCarTypeId(@PathVariable(value = "car-type-id") final long carTypeId) {
         List<TrimDefaultResponse> trimDefaultResponses = trimQueryService.findAllByCarTypeId(carTypeId);
         return ResponseEntity.ok().body(trimDefaultResponses);
     }
