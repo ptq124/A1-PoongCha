@@ -1,7 +1,6 @@
 package com.poongcha.car.application;
 
 import com.poongcha.car.application.dto.TrimCreateRequest;
-import com.poongcha.car.application.dto.TrimDefaultResponse;
 import com.poongcha.car.application.mapper.TrimMapper;
 import com.poongcha.car.domain.Trim;
 import com.poongcha.car.domain.TrimRepository;

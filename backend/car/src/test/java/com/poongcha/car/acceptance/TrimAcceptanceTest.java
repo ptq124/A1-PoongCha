@@ -11,8 +11,6 @@ import static com.poongcha.car.acceptance.TrimSteps.트림_생성_요청;
 import static com.poongcha.car.acceptance.TrimSteps.트림_생성_응답_검증;
 
 import com.poongcha.car.util.DocumentationTest;
-import io.restassured.response.ExtractableResponse;
-import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
