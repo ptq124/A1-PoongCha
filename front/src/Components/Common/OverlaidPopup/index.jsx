@@ -13,6 +13,7 @@ const OverlaidPopup = ({ component }) => {
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
   position: fixed;
   top: 0;
   left: 0;
@@ -20,6 +21,7 @@ const Wrapper = styled.div`
   width: 100%;
   height: 100%;
   z-index: 998;
-  align-items: center;
+
+  overflow: scroll;
 `;
 export default OverlaidPopup;

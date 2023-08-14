@@ -8,6 +8,7 @@ import useOnClickPopUp from "@hooks/useOnClickPopUp";
 import PopUp from "./PopUp";
 import useButtonNavigation from "@hooks/useButtonNavigation";
 import BackgroundOverlay from "@Components/Common/OverlaidPopup/BackgroundOverlay";
+import OverlaidPopup from "@Components/Common/OverlaidPopup";
 
 const lifestyleSurveyInfo = {
   options: [
@@ -86,10 +87,7 @@ const LifestyleSurvey = () => {
         </S.LifeStyleOptions>
       </S.SurveyContent>
       {isPopupOpen && (
-        <>
-          <BackgroundOverlay />
-          <PopUp popupRef={popupRef} />
-        </>
+        <OverlaidPopup component={<PopUp popupRef={popupRef} />} />
       )}
       <Button
         text="선택 완료"

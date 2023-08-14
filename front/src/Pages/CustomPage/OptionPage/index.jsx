@@ -145,6 +145,7 @@ const TabWrapper = styled.div`
 `;
 
 const Wrapper = styled.div`
+  padding-top: 140px;
   height: 1070px;
 `;
 

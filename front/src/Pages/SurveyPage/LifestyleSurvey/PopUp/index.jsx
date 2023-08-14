@@ -13,7 +13,7 @@ const PopUp = ({ popupRef }) => {
 };
 
 const Wrapper = styled.div`
-  position: absolute;
+  position: relative;
 
   width: 100%;
   max-width: 688px;
@@ -24,6 +24,7 @@ const Wrapper = styled.div`
   border-radius: 20px;
 
   z-index: 12;
+  margin-top: 510px;
 `;
 
 export default PopUp;

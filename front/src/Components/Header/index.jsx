@@ -18,6 +18,7 @@ const getHeaderStyle = (pathname) => {
       break;
     case "/custom/trim":
     case "/custom/color":
+    case "/custom/option":
       position = "fixed";
       backgroundColor = "#FFF";
       boxShadow = "0px 4px 6px 0px rgba(0, 0, 0, 0.08)";
