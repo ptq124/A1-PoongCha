@@ -62,7 +62,6 @@ const OptionPage = () => {
           기본 포함 옵션
         </TabItem>
       </TabWrapper>
-      {selectOption}
       <AllOptions
         tab={selectedTab}
         options={options}
