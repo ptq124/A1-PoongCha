@@ -28,7 +28,7 @@ public class Trim {
     private MinPrice minPrice;
 
     @Column("car_type_id")
-    private AggregateReference<Trim, Long> carType;
+    private AggregateReference<CarType, Long> carType;
 
     public Trim(
             final String trimName,
