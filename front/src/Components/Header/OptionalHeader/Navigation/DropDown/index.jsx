@@ -84,6 +84,9 @@ const FooterContainer = styled.div`
     color: ${({ theme }) => theme.color.grey50};
     ${({ theme }) => theme.font.Extra14};
   }
+  img {
+    cursor: pointer;
+  }
 `;
 
 const OptionInfo = styled.div`
