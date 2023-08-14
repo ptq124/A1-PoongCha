@@ -1,20 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { css, styled } from "styled-components";
+import React, { useState } from "react";
+import { styled } from "styled-components";
 import Card from "./Card";
 import ArrowLeftIcon from "../../../../assets/icons/arrow-left-32-white.svg";
 import ArrowRightIcon from "../../../../assets/icons/arrow-right-32-white.svg";
+import { options } from "../optionData";
 
-const popupData = [
-  "후석 승객 알림",
-  "메탈 리어범퍼스텝",
-  "메탈 도어스커프",
-  "3열 파워폴딩시트",
-  "3열 열선시트",
-  "헤드업 디스플레이",
-];
-
-const OptionPopup = ({ popupRef, closePopup }) => {
+const OptionPopup = ({ popupRef, closePopup, popupOptionName }) => {
   const [crntOptionIdx, setCrntOptionIdx] = useState(0);
+  // 세트 옵션일 경우 popupData = 세트 옵션들 리스트 > 팝업 카드 캐루셀로 나옴
+  const popupData = options.filter((data) => data.option === popupOptionName);
   return (
     <Wrapper ref={popupRef}>
       <Window>

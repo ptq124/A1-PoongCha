@@ -5,7 +5,7 @@ import PlusIcon from "../../../../assets/icons/plus.svg";
 import OptionTooltip from "./OptionTooltip";
 import OptionItem from "../../../../Components/Custom/OptionItem";
 
-const TaggedPage = ({ openPopup, optionData }) => {
+const TaggedPage = ({ handleOpenPopup, handleSelectOption, optionData }) => {
   const [activeOptionIdx, setActiveOptionIdx] = useState(null);
 
   const handlePlusBtnClick = (index) => {
@@ -19,7 +19,7 @@ const TaggedPage = ({ openPopup, optionData }) => {
         {activeOptionIdx !== null && (
           <OptionTooltip
             data={optionData[activeOptionIdx]}
-            openPopup={openPopup}
+            handleOpenPopup={handleOpenPopup}
           />
         )}
         <img src={TaggedPageSampleImg} />
@@ -37,7 +37,12 @@ const TaggedPage = ({ openPopup, optionData }) => {
       <OptionItemsContainer>
         {optionData.map((data, index) => (
           // 옵션 컴포넌트 들어갈 자리
-          <OptionItem key={index} data={data} openPopup={openPopup} />
+          <OptionItem
+            key={index}
+            data={data}
+            handleOpenPopup={handleOpenPopup}
+            handleSelectOption={handleSelectOption}
+          />
         ))}
       </OptionItemsContainer>
       <AdditionalComment>

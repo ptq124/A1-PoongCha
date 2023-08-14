@@ -137,7 +137,7 @@ export const options = [
     position: { x: 60, y: 70 },
   },
   {
-    option: "싱글 트윈팁 머플러(대표)",
+    option: "트윈팁 머플러(대표)",
     description: "편의성을 위해 구성된 세트 옵션",
     price: "1,090,000원",
     img: "https://www.hyundai.com/contents/spec/LX24/dualwidesunroof_s.jpg",
@@ -145,7 +145,7 @@ export const options = [
     position: { x: 60, y: 70 },
   },
   {
-    option: "싱글 트윈팁 머플러(대표)",
+    option: "싱글  머플러(대표)",
     description: "편의성을 위해 구성된 세트 옵션",
     price: "1,090,000원",
     img: "https://www.hyundai.com/contents/spec/LX24/dualwidesunroof_s.jpg",
@@ -153,7 +153,7 @@ export const options = [
     position: { x: 50, y: 50 },
   },
   {
-    option: "싱글 트윈팁 머플러(대표)",
+    option: "싱글 트윈팁 (대표)",
     description: "편의성을 위해 구성된 세트 옵션",
     price: "1,090,000원",
     img: "https://www.hyundai.com/contents/spec/LX24/dualwidesunroof_s.jpg",

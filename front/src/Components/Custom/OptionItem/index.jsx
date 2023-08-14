@@ -4,7 +4,12 @@ import checkBlue from "../../../assets/checkcircle/check-16-blue.svg";
 import checkGrey from "../../../assets/checkcircle/check-16-grey.svg";
 import Button from "../../Common/Button/Button";
 
-const OptionItem = ({ data, selected, handleSelectOption, openPopup }) => {
+const OptionItem = ({
+  data,
+  selected,
+  handleSelectOption,
+  handleOpenPopup,
+}) => {
   const { option, description, price, img, tag } = data;
 
   return (
@@ -12,7 +17,7 @@ const OptionItem = ({ data, selected, handleSelectOption, openPopup }) => {
       <img src={img} />
       <Header>
         <div>{option}</div>
-        <div onClick={openPopup}>더 알아보기</div>
+        <div onClick={() => handleOpenPopup(data.option)}>더 알아보기</div>
       </Header>
       <Desc>{description}</Desc>
       <Price>{price}</Price>
