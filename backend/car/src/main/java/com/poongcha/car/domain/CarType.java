@@ -1,12 +1,15 @@
 package com.poongcha.car.domain;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Embedded;
 import org.springframework.data.relational.core.mapping.Table;
 
 @Getter
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Table(name = "car_types")
 public class CarType {
     @Column(value = "id")
