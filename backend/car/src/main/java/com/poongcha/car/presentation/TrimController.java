@@ -5,12 +5,14 @@ import com.poongcha.car.application.TrimQueryService;
 import com.poongcha.car.application.dto.TrimCreateRequest;
 import com.poongcha.car.application.dto.TrimDefaultResponse;
 import java.net.URI;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
@@ -26,8 +28,14 @@ public class TrimController {
     }
 
     @GetMapping("/api/trim/{id}")
-    public ResponseEntity createTrim(@PathVariable(value = "id") long id) {
+    public ResponseEntity findTrimById(@PathVariable(value = "id") long id) {
         TrimDefaultResponse trimDefaultResponse = trimQueryService.findById(id);
         return ResponseEntity.ok().body(trimDefaultResponse);
+    }
+
+    @GetMapping("/api/trim")
+    public ResponseEntity<List> findAllTrimByCarTypeId(@RequestParam(value = "car-type") long carTypeId) {
+        List<TrimDefaultResponse> trimDefaultResponses = trimQueryService.findAllByCarTypeId(carTypeId);
+        return ResponseEntity.ok().body(trimDefaultResponses);
     }
 }
