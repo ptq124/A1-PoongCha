@@ -5,6 +5,7 @@ import com.poongcha.car.application.CarTypeQueryService;
 import com.poongcha.car.application.dto.CarTypeCreateRequest;
 import com.poongcha.car.application.dto.CarTypeDefaultResponse;
 import java.net.URI;
+import java.util.List;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -30,5 +31,11 @@ public class CarTypeController {
     public ResponseEntity<CarTypeDefaultResponse> findById(@PathVariable(value = "id") final long id) {
         CarTypeDefaultResponse carTypeDefaultResponse = carTypeQueryService.findById(id);
         return ResponseEntity.ok().body(carTypeDefaultResponse);
+    }
+
+    @GetMapping("/api/car-type")
+    public ResponseEntity<List<CarTypeDefaultResponse>> findAll() {
+        List<CarTypeDefaultResponse> carTypeDefaultResponses = carTypeQueryService.findAll();
+        return ResponseEntity.ok().body(carTypeDefaultResponses);
     }
 }
