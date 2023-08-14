@@ -3,7 +3,7 @@ import { css, styled } from "styled-components";
 import TooltipTail from "../../../../assets/icons/option-tooltip-tail.svg";
 import ArrowRightIcon from "../../../../assets/icons/arrow-right.svg";
 
-const OptionTooltip = ({ data, openPopup }) => {
+const OptionTooltip = ({ data, handleOpenPopup }) => {
   return (
     <Wrapper $position={data.position}>
       <Content>
@@ -14,11 +14,33 @@ const OptionTooltip = ({ data, openPopup }) => {
           <div className="price">790,000 원</div>
         </Detail>
       </Content>
-      <Arrow src={ArrowRightIcon} className="arrow" onClick={openPopup} />
-      <img src={TooltipTail} className="tail" $position={data.position} />
+      <Arrow
+        src={ArrowRightIcon}
+        className="arrow"
+        onClick={() => handleOpenPopup(data.option)}
+      />
+      <ArrowTail src={TooltipTail} className="tail" $position={data.position} />
     </Wrapper>
   );
 };
+const ArrowTail = styled.img`
+  position: absolute;
+  top: ${({ $position }) => $position.y < 23 && "-8px"};
+  ${({ $position }) =>
+    $position.y < 23
+      ? css`
+          top: -8px;
+          transform: rotate(180deg);
+        `
+      : css`
+          bottom: -8px;
+        `}
+  width: 14px;
+  height: 10px;
+
+  left: ${({ $position }) =>
+    $position.x < 13 ? "10px" : $position.x > 85 ? "250px" : "130px"};
+`;
 const Arrow = styled.img`
   width: 24px;
   height: 24px;
@@ -73,23 +95,5 @@ const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.color.grey1000};
   padding: 12px;
   box-sizing: border-box;
-  .tail {
-    position: absolute;
-    top: ${({ $position }) => $position.y < 23 && "-8px"};
-    ${({ $position }) =>
-      $position.y < 23
-        ? css`
-            top: -8px;
-            transform: rotate(180deg);
-          `
-        : css`
-            bottom: -8px;
-          `}
-    width: 14px;
-    height: 10px;
-
-    left: ${({ $position }) =>
-      $position.x < 13 ? "10px" : $position.x > 85 ? "250px" : "130px"};
-  }
 `;
 export default OptionTooltip;

@@ -7,12 +7,18 @@ import OptionItem from "../../../../Components/Custom/OptionItem";
 import { tags, tagSelectIcons, tagsNotSelectIcons } from "../tagIcon";
 import left from "../../../../assets/icons/chevron-left.svg";
 import right from "../../../../assets/icons/chevron-right.svg";
+import TaggedPage from "../TaggedPage";
 
-const AllOptions = ({ tab, options }) => {
+const AllOptions = ({
+  tab,
+  options,
+  handleOpenPopup,
+  handleSelectOption,
+  hasOption,
+}) => {
   const [tagsOption, setTagsOption] = useState([]);
   const [selectTag, setSelectTag] = useState(null);
   const handleSelectTag = (tag) => setSelectTag(tag);
-
   useEffect(() => {
     if (tab === "추가 옵션") {
       setTagsOption([
@@ -27,17 +33,6 @@ const AllOptions = ({ tab, options }) => {
       setSelectTag("대표");
     }
   }, [tab]);
-
-  // 탭
-  const [selectOption, setSelectOption] = useState([]);
-  const handleSelectOption = (option) => {
-    if (hasOption(option))
-      setSelectOption((prev) => prev.filter((opt) => opt !== option));
-    else setSelectOption((prev) => [...prev, option]);
-  };
-  const hasOption = (option) => {
-    return selectOption.includes(option);
-  };
 
   // 페이지 네이션
   const getDataForPage = (data, page, itemsPerPage) => {
@@ -54,12 +49,39 @@ const AllOptions = ({ tab, options }) => {
     }
   };
   let totalPages = 0;
-  const isOptionItems = () => {
+  const renderFilteredOption = () => {
     if (selectTag === "전체") {
       const currentData = getDataForPage(options, currentPage, 8);
       totalPages = Math.ceil(options.length / 8);
-      return currentData;
-    } else return options.filter((data) => data.tag === selectTag);
+      return currentData.map((data, index) => (
+        <OptionItem
+          key={index}
+          data={data}
+          selected={hasOption(data.option)}
+          handleSelectOption={handleSelectOption}
+          handleOpenPopup={handleOpenPopup}
+        />
+      ));
+    } else if (selectTag === "대표") {
+      const currentData = options.filter((data) => data.tag === selectTag);
+      return currentData.map((data, index) => (
+        <OptionItem
+          key={index}
+          data={data}
+          selected={hasOption(data.option)}
+          handleSelectOption={handleSelectOption}
+          handleOpenPopup={handleOpenPopup}
+        />
+      ));
+    } else
+      return (
+        <TaggedPage
+          handleOpenPopup={handleOpenPopup}
+          handleSelectOption={handleSelectOption}
+          optionData={options.filter((data) => data.tag === selectTag)}
+          hasOption={hasOption}
+        />
+      );
   };
 
   return (
@@ -76,16 +98,7 @@ const AllOptions = ({ tab, options }) => {
             <span>{options.filter((data) => data.tag !== "대표").length}</span>
           </Count>
         )}
-        <OptionContainer>
-          {isOptionItems().map((data, index) => (
-            <OptionItem
-              key={index}
-              data={data}
-              selected={hasOption(data.option)}
-              handleSelectOption={handleSelectOption}
-            />
-          ))}
-        </OptionContainer>
+        <OptionContainer>{renderFilteredOption()}</OptionContainer>
         {(selectTag === "전체" || selectTag === "대표") && (
           <PageBtn>
             <img src={left} onClick={() => handlePageChange(currentPage - 1)} />

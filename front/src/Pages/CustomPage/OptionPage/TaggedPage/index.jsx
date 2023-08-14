@@ -4,52 +4,13 @@ import TaggedPageSampleImg from "../../../../assets/images/tagged-page-sample.sv
 import PlusIcon from "../../../../assets/icons/plus.svg";
 import OptionTooltip from "./OptionTooltip";
 import OptionItem from "../../../../Components/Custom/OptionItem";
-import useOnClickPopUp from "../../../../hooks/useOnClickPopUp";
-import OptionPopup from "../OptionPopup";
-import OverlaidPopup from "../../../../Components/Common/OverlaidPopup";
 
-const optionData = [
-  {
-    title: "option1",
-    position: { x: 5, y: 35 },
-    option: "컴포트 II",
-    description: "편의성을 위해 구성된 세트 옵션",
-    price: "1,090,000원",
-    img: "https://www.hyundai.com/contents/spec/LX24/dualwidesunroof_s.jpg",
-    tag: "주행안전",
-  },
-  {
-    title: "option2",
-    position: { x: 20, y: 80 },
-    option: "컴포트 II",
-    description: "편의성을 위해 구성된 세트 옵션",
-    price: "1,090,000원",
-    img: "https://www.hyundai.com/contents/spec/LX24/dualwidesunroof_s.jpg",
-    tag: "주행안전",
-  },
-  {
-    title: "option3",
-    position: { x: 50, y: 10 },
-    option: "컴포트 II",
-    description: "편의성을 위해 구성된 세트 옵션",
-    price: "1,090,000원",
-    img: "https://www.hyundai.com/contents/spec/LX24/dualwidesunroof_s.jpg",
-    tag: "주행안전",
-  },
-  {
-    title: "option4",
-    position: { x: 95, y: 85 },
-    option: "컴포트 II",
-    description: "편의성을 위해 구성된 세트 옵션",
-    price: "1,090,000원",
-    img: "https://www.hyundai.com/contents/spec/LX24/dualwidesunroof_s.jpg",
-    tag: "주행안전",
-  },
-];
-const TaggedPage = () => {
-  const optionPopupRef = useRef();
-  const { isPopupOpen, openPopup, closePopup } =
-    useOnClickPopUp(optionPopupRef);
+const TaggedPage = ({
+  handleOpenPopup,
+  handleSelectOption,
+  optionData,
+  hasOption,
+}) => {
   const [activeOptionIdx, setActiveOptionIdx] = useState(null);
 
   const handlePlusBtnClick = (index) => {
@@ -59,18 +20,11 @@ const TaggedPage = () => {
   };
   return (
     <Wrapper>
-      {isPopupOpen && (
-        <OverlaidPopup
-          component={
-            <OptionPopup popupRef={optionPopupRef} closePopup={closePopup} />
-          }
-        />
-      )}
       <SituationScreen>
         {activeOptionIdx !== null && (
           <OptionTooltip
             data={optionData[activeOptionIdx]}
-            openPopup={openPopup}
+            handleOpenPopup={handleOpenPopup}
           />
         )}
         <img src={TaggedPageSampleImg} />
@@ -88,7 +42,13 @@ const TaggedPage = () => {
       <OptionItemsContainer>
         {optionData.map((data, index) => (
           // 옵션 컴포넌트 들어갈 자리
-          <OptionItem key={index} data={data} openPopup={openPopup} />
+          <OptionItem
+            key={index}
+            data={data}
+            selected={hasOption(data.option)}
+            handleOpenPopup={handleOpenPopup}
+            handleSelectOption={handleSelectOption}
+          />
         ))}
       </OptionItemsContainer>
       <AdditionalComment>

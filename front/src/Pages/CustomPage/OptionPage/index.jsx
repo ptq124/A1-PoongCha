@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { styled, css } from "styled-components";
 
 import AllOptions from "./AllOptions";
@@ -6,14 +6,48 @@ import Button from "../../../Components/Common/Button/Button";
 import useButtonNavigation from "../../../hooks/useButtonNavigation";
 
 import { options } from "./optionData";
+import useOnClickPopUp from "../../../hooks/useOnClickPopUp";
+import OptionPopup from "./OptionPopup";
+import OverlaidPopup from "../../../Components/Common/OverlaidPopup";
 
 const OptionPage = () => {
-  const [selectedTab, setSelectedTab] = useState("추가 옵션");
+  // 선택한 옵션들 상태관리
+  const [selectOption, setSelectOption] = useState([]);
+  const handleSelectOption = (option) => {
+    if (hasOption(option))
+      setSelectOption((prev) => prev.filter((opt) => opt !== option));
+    else setSelectOption((prev) => [...prev, option]);
+  };
+  const hasOption = (option) => {
+    return selectOption.includes(option);
+  };
 
+  const [selectedTab, setSelectedTab] = useState("추가 옵션");
+  const optionPopupRef = useRef();
+  const { isPopupOpen, openPopup, closePopup } =
+    useOnClickPopUp(optionPopupRef);
+  const [popupOptionName, setPopupOptionName] = useState(null);
+  const handleOpenPopup = (data) => {
+    setPopupOptionName(data);
+    openPopup();
+  };
   const move = useButtonNavigation();
 
   return (
     <Wrapper>
+      {isPopupOpen && (
+        <OverlaidPopup
+          component={
+            <OptionPopup
+              popupRef={optionPopupRef}
+              closePopup={closePopup}
+              popupOptionName={popupOptionName}
+              handleSelectOption={handleSelectOption}
+              hasOption={hasOption}
+            />
+          }
+        />
+      )}
       <TabWrapper>
         <TabItem
           selected={selectedTab === "추가 옵션"}
@@ -28,7 +62,13 @@ const OptionPage = () => {
           기본 포함 옵션
         </TabItem>
       </TabWrapper>
-      <AllOptions tab={selectedTab} options={options} />
+      <AllOptions
+        tab={selectedTab}
+        options={options}
+        handleOpenPopup={handleOpenPopup}
+        handleSelectOption={handleSelectOption}
+        hasOption={hasOption}
+      />
       <ButtonContainer>
         <Button
           text="색상선택"
