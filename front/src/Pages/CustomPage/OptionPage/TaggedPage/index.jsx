@@ -5,7 +5,12 @@ import PlusIcon from "../../../../assets/icons/plus.svg";
 import OptionTooltip from "./OptionTooltip";
 import OptionItem from "../../../../Components/Custom/OptionItem";
 
-const TaggedPage = ({ handleOpenPopup, handleSelectOption, optionData }) => {
+const TaggedPage = ({
+  handleOpenPopup,
+  handleSelectOption,
+  optionData,
+  hasOption,
+}) => {
   const [activeOptionIdx, setActiveOptionIdx] = useState(null);
 
   const handlePlusBtnClick = (index) => {
@@ -40,6 +45,7 @@ const TaggedPage = ({ handleOpenPopup, handleSelectOption, optionData }) => {
           <OptionItem
             key={index}
             data={data}
+            selected={hasOption(data.option)}
             handleOpenPopup={handleOpenPopup}
             handleSelectOption={handleSelectOption}
           />

@@ -84,12 +84,14 @@ const AllOptions = ({ tab, options, handleOpenPopup }) => {
           handleOpenPopup={handleOpenPopup}
           handleSelectOption={handleSelectOption}
           optionData={options.filter((data) => data.tag === selectTag)}
+          hasOption={hasOption}
         />
       );
   };
 
   return (
     <Wrapper>
+      {selectOption}
       <OptionTag
         selectTag={selectTag}
         tagsOption={tagsOption}
