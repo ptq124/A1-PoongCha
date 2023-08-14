@@ -4,11 +4,11 @@ import checkBlue from "../../../assets/checkcircle/check-16-blue.svg";
 import checkGrey from "../../../assets/checkcircle/check-16-grey.svg";
 import Button from "../../Common/Button/Button";
 
-const OptionItem = ({ data, selected, onClick, openPopup }) => {
+const OptionItem = ({ data, selected, handleSelectOption, openPopup }) => {
   const { option, description, price, img, tag } = data;
 
   return (
-    <Wrapper onClick={() => onClick(option)}>
+    <Wrapper>
       <img src={img} />
       <Header>
         <div>{option}</div>
@@ -21,6 +21,7 @@ const OptionItem = ({ data, selected, onClick, openPopup }) => {
         style={BtnStyle}
         selected={selected}
         img={<img src={selected ? checkGrey : checkBlue} />}
+        onClick={() => handleSelectOption(option)}
       />
     </Wrapper>
   );
@@ -102,6 +103,8 @@ const Wrapper = styled.div`
   > img {
     width: 100%;
   }
+
+  margin-bottom: 40px;
 `;
 
 export default OptionItem;
