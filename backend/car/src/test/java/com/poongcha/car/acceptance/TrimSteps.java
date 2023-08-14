@@ -7,6 +7,7 @@ import static com.poongcha.car.util.DocumentationTest.given;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 
+import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
@@ -90,6 +91,22 @@ public class TrimSteps {
             assertions.assertThat(response.jsonPath().getString("imageUrl")).isEqualTo(imageUrl);
             assertions.assertThat(response.jsonPath().getLong("minPrice")).isEqualTo(minPrice);
             assertions.assertThat(response.jsonPath().getLong("carTypeId")).isEqualTo(carTypeId);
+        }
+    }
+
+    public static ExtractableResponse<Response> 존재하지_않는_트림_ID_조회_요청(final long id) {
+        return given()
+                .filter(document(DEFAULT_RESTDOCS_PATH))
+                .log().all()
+                .when()
+                .get("/api/trim/{id}", id)
+                .then().log().all()
+                .extract();
+    }
+
+    public static void 존재하지_않는_트림_ID_조회_응답_검증(final ExtractableResponse<Response> response) {
+        try (AutoCloseableSoftAssertions assertions = new AutoCloseableSoftAssertions()) {
+            assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.SC_NOT_FOUND);
         }
     }
 }
