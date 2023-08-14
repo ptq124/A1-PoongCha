@@ -1,21 +1,38 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { styled, css } from "styled-components";
 import AdditionalOption from "./AdditionalOption";
 import DefaultOption from "./DefaultOption";
 import Button from "../../../Components/Common/Button/Button";
 import useButtonNavigation from "../../../hooks/useButtonNavigation";
+import useOnClickPopUp from "../../../hooks/useOnClickPopUp";
+import OptionPopup from "./OptionPopup";
+import OverlaidPopup from "../../../Components/Common/OverlaidPopup";
+
 const OptionPage = () => {
   const [selectedTab, setSelectedTab] = useState("추가 옵션");
 
+  const optionPopupRef = useRef();
+  const { isPopupOpen, openPopup, closePopup } =
+    useOnClickPopUp(optionPopupRef);
+
   const isOptionPage = () => {
-    if (selectedTab === "추가 옵션") return <AdditionalOption />;
-    if (selectedTab === "기본 포함 옵션") return <DefaultOption />;
+    if (selectedTab === "추가 옵션")
+      return <AdditionalOption openPopup={openPopup} />;
+    if (selectedTab === "기본 포함 옵션")
+      return <DefaultOption openPopup={openPopup} />;
   };
 
   const move = useButtonNavigation();
 
   return (
     <Wrapper>
+      {isPopupOpen && (
+        <OverlaidPopup
+          component={
+            <OptionPopup popupRef={optionPopupRef} closePopup={closePopup} />
+          }
+        />
+      )}
       <TabWrapper>
         <TabItem
           selected={selectedTab === "추가 옵션"}

@@ -4,9 +4,6 @@ import TaggedPageSampleImg from "../../../../assets/images/tagged-page-sample.sv
 import PlusIcon from "../../../../assets/icons/plus.svg";
 import OptionTooltip from "./OptionTooltip";
 import OptionItem from "../../../../Components/Custom/OptionItem";
-import useOnClickPopUp from "../../../../hooks/useOnClickPopUp";
-import OptionPopup from "../OptionPopup";
-import OverlaidPopup from "../../../../Components/Common/OverlaidPopup";
 
 const optionData = [
   {
@@ -46,10 +43,7 @@ const optionData = [
     tag: "주행안전",
   },
 ];
-const TaggedPage = () => {
-  const optionPopupRef = useRef();
-  const { isPopupOpen, openPopup, closePopup } =
-    useOnClickPopUp(optionPopupRef);
+const TaggedPage = ({ openPopup }) => {
   const [activeOptionIdx, setActiveOptionIdx] = useState(null);
 
   const handlePlusBtnClick = (index) => {
@@ -59,13 +53,6 @@ const TaggedPage = () => {
   };
   return (
     <Wrapper>
-      {isPopupOpen && (
-        <OverlaidPopup
-          component={
-            <OptionPopup popupRef={optionPopupRef} closePopup={closePopup} />
-          }
-        />
-      )}
       <SituationScreen>
         {activeOptionIdx !== null && (
           <OptionTooltip

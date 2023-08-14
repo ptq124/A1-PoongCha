@@ -15,10 +15,28 @@ const OptionTooltip = ({ data, openPopup }) => {
         </Detail>
       </Content>
       <Arrow src={ArrowRightIcon} className="arrow" onClick={openPopup} />
-      <img src={TooltipTail} className="tail" $position={data.position} />
+      <ArrowTail src={TooltipTail} className="tail" $position={data.position} />
     </Wrapper>
   );
 };
+const ArrowTail = styled.img`
+  position: absolute;
+  top: ${({ $position }) => $position.y < 23 && "-8px"};
+  ${({ $position }) =>
+    $position.y < 23
+      ? css`
+          top: -8px;
+          transform: rotate(180deg);
+        `
+      : css`
+          bottom: -8px;
+        `}
+  width: 14px;
+  height: 10px;
+
+  left: ${({ $position }) =>
+    $position.x < 13 ? "10px" : $position.x > 85 ? "250px" : "130px"};
+`;
 const Arrow = styled.img`
   width: 24px;
   height: 24px;
@@ -73,23 +91,5 @@ const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.color.grey1000};
   padding: 12px;
   box-sizing: border-box;
-  .tail {
-    position: absolute;
-    top: ${({ $position }) => $position.y < 23 && "-8px"};
-    ${({ $position }) =>
-      $position.y < 23
-        ? css`
-            top: -8px;
-            transform: rotate(180deg);
-          `
-        : css`
-            bottom: -8px;
-          `}
-    width: 14px;
-    height: 10px;
-
-    left: ${({ $position }) =>
-      $position.x < 13 ? "10px" : $position.x > 85 ? "250px" : "130px"};
-  }
 `;
 export default OptionTooltip;
