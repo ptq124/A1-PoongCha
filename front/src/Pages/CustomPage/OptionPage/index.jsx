@@ -1,16 +1,14 @@
 import React, { useState } from "react";
 import { styled, css } from "styled-components";
-import AdditionalOption from "./AdditionalOption";
-import DefaultOption from "./DefaultOption";
+
+import AllOptions from "./AllOptions";
 import Button from "../../../Components/Common/Button/Button";
 import useButtonNavigation from "../../../hooks/useButtonNavigation";
+
+import { options } from "./optionData";
+
 const OptionPage = () => {
   const [selectedTab, setSelectedTab] = useState("추가 옵션");
-
-  const isOptionPage = () => {
-    if (selectedTab === "추가 옵션") return <AdditionalOption />;
-    if (selectedTab === "기본 포함 옵션") return <DefaultOption />;
-  };
 
   const move = useButtonNavigation();
 
@@ -30,7 +28,7 @@ const OptionPage = () => {
           기본 포함 옵션
         </TabItem>
       </TabWrapper>
-      {isOptionPage()}
+      <AllOptions tab={selectedTab} options={options} />
       <ButtonContainer>
         <Button
           text="색상선택"

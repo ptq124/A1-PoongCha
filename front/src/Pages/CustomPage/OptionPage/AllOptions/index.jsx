@@ -1,26 +1,32 @@
-import React, { useRef, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { styled } from "styled-components";
 
 import OptionTag from "../../../../Components/Custom/OptionTag";
 import OptionItem from "../../../../Components/Custom/OptionItem";
 
 import { tags, tagSelectIcons, tagsNotSelectIcons } from "../tagIcon";
-import { options } from "../optionData";
 import left from "../../../../assets/icons/chevron-left.svg";
 import right from "../../../../assets/icons/chevron-right.svg";
-import TaggedPage from "../TaggedPage";
-import OverlaidPopup from "../../../../Components/Common/OverlaidPopup";
-import OptionPopup from "../OptionPopup";
-import useOnClickPopUp from "../../../../hooks/useOnClickPopUp";
 
-const DefaultOption = () => {
-  const tagsOption = [tags, tagSelectIcons, tagsNotSelectIcons];
-  const [selectTag, setSelectTag] = useState("대표");
+const AllOptions = ({ tab, options }) => {
+  const [tagsOption, setTagsOption] = useState([]);
+  const [selectTag, setSelectTag] = useState(null);
   const handleSelectTag = (tag) => setSelectTag(tag);
 
-  const optionPopupRef = useRef();
-  const { isPopupOpen, openPopup, closePopup } =
-    useOnClickPopUp(optionPopupRef);
+  useEffect(() => {
+    if (tab === "추가 옵션") {
+      setTagsOption([
+        tags.slice(1),
+        tagSelectIcons.slice(1),
+        tagsNotSelectIcons.slice(1),
+      ]);
+      setSelectTag("전체");
+    }
+    if (tab === "기본 포함 옵션") {
+      setTagsOption([tags, tagSelectIcons, tagsNotSelectIcons]);
+      setSelectTag("대표");
+    }
+  }, [tab]);
 
   // 탭
   const [selectOption, setSelectOption] = useState([]);
@@ -41,73 +47,45 @@ const DefaultOption = () => {
   };
 
   const [currentPage, setCurrentPage] = useState(1);
-  let totalPages = 0;
 
   const handlePageChange = (newPage) => {
     if (newPage >= 1 && newPage <= totalPages) {
       setCurrentPage(newPage);
     }
   };
-
-  const renderAllOptionItems = () => {
-    const currentData = getDataForPage(options, currentPage, 8);
-    totalPages = Math.ceil(options.length / 8);
-
-    return currentData.map((data, index) => (
-      <OptionItem
-        key={index}
-        data={data}
-        selected={hasOption(data.option)}
-        handleSelectOption={handleSelectOption}
-        openPopup={openPopup}
-      />
-    ));
-  };
-
-  const renderTagOptionPage = () => {
-    const newData = options.filter((data) => data.tag === selectTag);
-    const currentData = getDataForPage(newData, currentPage, 8);
-    totalPages = Math.ceil(newData.length / 8);
-
-    return <TaggedPage />;
-    // return currentData.map((data, index) => (
-    //   <OptionItem
-    //     key={index}
-    //     data={data}
-    //     selected={hasOption(data.option)}
-    //     onClick={handleSelectOption}
-    //   />
-    // ));
-  };
-
-  const renderOptionItems = () => {
-    if (selectTag === "전체" || selectTag === "대표")
-      return renderAllOptionItems();
-    else return renderTagOptionPage();
+  let totalPages = 0;
+  const isOptionItems = () => {
+    if (selectTag === "전체") {
+      const currentData = getDataForPage(options, currentPage, 8);
+      totalPages = Math.ceil(options.length / 8);
+      return currentData;
+    } else return options.filter((data) => data.tag === selectTag);
   };
 
   return (
     <Wrapper>
-      {isPopupOpen && (
-        <OverlaidPopup
-          component={
-            <OptionPopup popupRef={optionPopupRef} closePopup={closePopup} />
-          }
-        />
-      )}
       <OptionTag
         selectTag={selectTag}
         tagsOption={tagsOption}
         handleSelectTag={handleSelectTag}
-      />
+      ></OptionTag>
       <MainContainer>
-        {(selectTag === "전체" || selectTag === "대표") && (
+        {selectTag === "전체" && (
           <Count>
             <div>전체</div>
-            <span>{options.length}</span>
+            <span>{options.filter((data) => data.tag !== "대표").length}</span>
           </Count>
         )}
-        <OptionContainer>{renderOptionItems()}</OptionContainer>
+        <OptionContainer>
+          {isOptionItems().map((data, index) => (
+            <OptionItem
+              key={index}
+              data={data}
+              selected={hasOption(data.option)}
+              handleSelectOption={handleSelectOption}
+            />
+          ))}
+        </OptionContainer>
         {(selectTag === "전체" || selectTag === "대표") && (
           <PageBtn>
             <img src={left} onClick={() => handlePageChange(currentPage - 1)} />
@@ -149,7 +127,6 @@ const PageBtn = styled.div`
     width: 27px;
     height: 27px;
     border-radius: 50%;
-    text-align: center;
     &.active {
       background-color: ${({ theme }) => theme.color.grey700};
     }
@@ -186,4 +163,4 @@ const Wrapper = styled.div`
   padding: 0px 128px;
 `;
 
-export default DefaultOption;
+export default AllOptions;
