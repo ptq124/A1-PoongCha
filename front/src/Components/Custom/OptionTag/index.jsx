@@ -7,10 +7,9 @@ const OptionTag = ({ selectTag, tagsOption, handleSelectTag }) => {
   const isTagIcons = (select, index) => {
     return select ? tagSelectIcons[index] : tagsNotSelectIcons[index];
   };
-
   return (
     <Wrapper>
-      {tags.map((tag, index) => (
+      {tags?.map((tag, index) => (
         <Tag
           key={index}
           onClick={() => handleSelectTag(tag)}
