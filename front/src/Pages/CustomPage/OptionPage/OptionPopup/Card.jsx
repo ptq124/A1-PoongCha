@@ -7,7 +7,14 @@ import Button from "../../../../Components/Common/Button/Button";
 import checkBlue from "../../../../assets/checkcircle/check-16-blue.svg";
 import checkGrey from "../../../../assets/checkcircle/check-16-grey.svg";
 
-const Card = ({ closePopup, index, popupData, handleNavClick, selected }) => {
+const Card = ({
+  closePopup,
+  index,
+  popupData,
+  handleNavClick,
+  selected,
+  handleSelectOption,
+}) => {
   return (
     <CardContainer>
       <ImgContainer>
@@ -30,6 +37,7 @@ const Card = ({ closePopup, index, popupData, handleNavClick, selected }) => {
             text="선택"
             style={BtnStyle}
             selected={selected}
+            onClick={handleSelectOption}
             img={<img src={selected ? checkGrey : checkBlue} />}
           />
         </Header>

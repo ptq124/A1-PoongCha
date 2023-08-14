@@ -11,6 +11,17 @@ import OptionPopup from "./OptionPopup";
 import OverlaidPopup from "../../../Components/Common/OverlaidPopup";
 
 const OptionPage = () => {
+  // 선택한 옵션들 상태관리
+  const [selectOption, setSelectOption] = useState([]);
+  const handleSelectOption = (option) => {
+    if (hasOption(option))
+      setSelectOption((prev) => prev.filter((opt) => opt !== option));
+    else setSelectOption((prev) => [...prev, option]);
+  };
+  const hasOption = (option) => {
+    return selectOption.includes(option);
+  };
+
   const [selectedTab, setSelectedTab] = useState("추가 옵션");
   const optionPopupRef = useRef();
   const { isPopupOpen, openPopup, closePopup } =
@@ -31,6 +42,8 @@ const OptionPage = () => {
               popupRef={optionPopupRef}
               closePopup={closePopup}
               popupOptionName={popupOptionName}
+              handleSelectOption={handleSelectOption}
+              hasOption={hasOption}
             />
           }
         />
@@ -49,10 +62,13 @@ const OptionPage = () => {
           기본 포함 옵션
         </TabItem>
       </TabWrapper>
+      {selectOption}
       <AllOptions
         tab={selectedTab}
         options={options}
         handleOpenPopup={handleOpenPopup}
+        handleSelectOption={handleSelectOption}
+        hasOption={hasOption}
       />
       <ButtonContainer>
         <Button

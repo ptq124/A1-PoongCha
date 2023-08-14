@@ -5,7 +5,13 @@ import ArrowLeftIcon from "../../../../assets/icons/arrow-left-32-white.svg";
 import ArrowRightIcon from "../../../../assets/icons/arrow-right-32-white.svg";
 import { options } from "../optionData";
 
-const OptionPopup = ({ popupRef, closePopup, popupOptionName }) => {
+const OptionPopup = ({
+  popupRef,
+  closePopup,
+  popupOptionName,
+  handleSelectOption,
+  hasOption,
+}) => {
   const [crntOptionIdx, setCrntOptionIdx] = useState(0);
   // 세트 옵션일 경우 popupData = 세트 옵션들 리스트 > 팝업 카드 캐루셀로 나옴
   const popupData = options.filter((data) => data.option === popupOptionName);
@@ -26,7 +32,8 @@ const OptionPopup = ({ popupRef, closePopup, popupOptionName }) => {
               popupData={popupData}
               closePopup={closePopup}
               handleNavClick={setCrntOptionIdx}
-              selected={false}
+              selected={hasOption(data.option)}
+              handleSelectOption={() => handleSelectOption(data.option)}
             />
           ))}
         </Cards>

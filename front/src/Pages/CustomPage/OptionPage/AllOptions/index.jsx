@@ -9,7 +9,13 @@ import left from "../../../../assets/icons/chevron-left.svg";
 import right from "../../../../assets/icons/chevron-right.svg";
 import TaggedPage from "../TaggedPage";
 
-const AllOptions = ({ tab, options, handleOpenPopup }) => {
+const AllOptions = ({
+  tab,
+  options,
+  handleOpenPopup,
+  handleSelectOption,
+  hasOption,
+}) => {
   const [tagsOption, setTagsOption] = useState([]);
   const [selectTag, setSelectTag] = useState(null);
   const handleSelectTag = (tag) => setSelectTag(tag);
@@ -27,17 +33,6 @@ const AllOptions = ({ tab, options, handleOpenPopup }) => {
       setSelectTag("대표");
     }
   }, [tab]);
-
-  // 탭
-  const [selectOption, setSelectOption] = useState([]);
-  const handleSelectOption = (option) => {
-    if (hasOption(option))
-      setSelectOption((prev) => prev.filter((opt) => opt !== option));
-    else setSelectOption((prev) => [...prev, option]);
-  };
-  const hasOption = (option) => {
-    return selectOption.includes(option);
-  };
 
   // 페이지 네이션
   const getDataForPage = (data, page, itemsPerPage) => {
@@ -91,7 +86,6 @@ const AllOptions = ({ tab, options, handleOpenPopup }) => {
 
   return (
     <Wrapper>
-      {selectOption}
       <OptionTag
         selectTag={selectTag}
         tagsOption={tagsOption}
