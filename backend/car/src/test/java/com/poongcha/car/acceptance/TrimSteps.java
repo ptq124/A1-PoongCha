@@ -6,6 +6,8 @@ import static com.poongcha.car.util.DocumentationTest.customRequestFields;
 import static com.poongcha.car.util.DocumentationTest.given;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
 
 import io.restassured.http.ContentType;
 import io.restassured.response.ExtractableResponse;
@@ -142,6 +144,64 @@ public class TrimSteps {
     }
 
     public static void 존재하지_않는_트림_ID_조회_응답_검증(final ExtractableResponse<Response> response) {
+        try (AutoCloseableSoftAssertions assertions = new AutoCloseableSoftAssertions()) {
+            assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.SC_NOT_FOUND);
+        }
+    }
+
+    public static ExtractableResponse<Response> 차종_ID로_트림_목록_조회_요청(final long carTypeId) {
+        return given()
+                .filter(document(
+                        DEFAULT_RESTDOCS_PATH,
+                        requestParameters(
+                                parameterWithName("car-type").description("차종 ID")
+                        ),
+                        responseFields(
+                                fieldWithPath("[].id").type(JsonFieldType.NUMBER).description("트림 ID"),
+                                fieldWithPath("[].trimName").type(JsonFieldType.STRING).description("트림명"),
+                                fieldWithPath("[].imageUrl").type(JsonFieldType.STRING).description("트림 이미지 URL"),
+                                fieldWithPath("[].minPrice").type(JsonFieldType.NUMBER).description("트림 최소 가격"),
+                                fieldWithPath("[].carTypeId").type(JsonFieldType.NUMBER).description("차종 ID")
+                        )
+                ))
+                .log().all()
+                .when()
+                .queryParam("car-type", carTypeId)
+                .get("/api/trim")
+                .then().log().all()
+                .extract();
+    }
+
+    public static void 차종_ID로_트림_목록_조회_응답_검증(
+            final ExtractableResponse<Response> response,
+            final Long[] ids,
+            final String[] trimNames,
+            final String[] imageUrls,
+            final Long[] minPrices,
+            final Long[] carTypeIds
+    ) {
+        try (AutoCloseableSoftAssertions assertions = new AutoCloseableSoftAssertions()) {
+            assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.SC_OK);
+            assertions.assertThat(response.jsonPath().getList("id", Long.class)).containsExactly(ids);
+            assertions.assertThat(response.jsonPath().getList("trimName", String.class)).containsExactly(trimNames);
+            assertions.assertThat(response.jsonPath().getList("imageUrl", String.class)).containsExactly(imageUrls);
+            assertions.assertThat(response.jsonPath().getList("minPrice", Long.class)).containsExactly(minPrices);
+            assertions.assertThat(response.jsonPath().getList("carTypeId", Long.class)).containsExactly(carTypeIds);
+        }
+    }
+
+    public static ExtractableResponse<Response> 존재하지_않는_차종_ID로_트림_목록_조회_요청(final long carTypeId) {
+        return given()
+                .filter(document(DEFAULT_RESTDOCS_PATH))
+                .log().all()
+                .when()
+                .queryParam("car-type", carTypeId)
+                .get("/api/trim")
+                .then().log().all()
+                .extract();
+    }
+
+    public static void 존재하지_않는_차종_ID로_트림_목록_조회_응답_검증(final ExtractableResponse<Response> response) {
         try (AutoCloseableSoftAssertions assertions = new AutoCloseableSoftAssertions()) {
             assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.SC_NOT_FOUND);
         }

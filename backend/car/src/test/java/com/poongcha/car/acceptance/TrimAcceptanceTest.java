@@ -1,10 +1,14 @@
 package com.poongcha.car.acceptance;
 
 import static com.poongcha.car.acceptance.CarTypeSteps.차종_생성_요청;
+import static com.poongcha.car.acceptance.TrimSteps.존재하지_않는_차종_ID로_트림_목록_조회_요청;
+import static com.poongcha.car.acceptance.TrimSteps.존재하지_않는_차종_ID로_트림_목록_조회_응답_검증;
 import static com.poongcha.car.acceptance.TrimSteps.존재하지_않는_차종으로_트림_생성_요청;
 import static com.poongcha.car.acceptance.TrimSteps.존재하지_않는_차종으로_트림_생성_응답_검증;
 import static com.poongcha.car.acceptance.TrimSteps.존재하지_않는_트림_ID_조회_요청;
 import static com.poongcha.car.acceptance.TrimSteps.존재하지_않는_트림_ID_조회_응답_검증;
+import static com.poongcha.car.acceptance.TrimSteps.차종_ID로_트림_목록_조회_요청;
+import static com.poongcha.car.acceptance.TrimSteps.차종_ID로_트림_목록_조회_응답_검증;
 import static com.poongcha.car.acceptance.TrimSteps.트림_ID_조회_요청;
 import static com.poongcha.car.acceptance.TrimSteps.트림_ID_조회_응답_검증;
 import static com.poongcha.car.acceptance.TrimSteps.트림_생성_요청;
@@ -92,5 +96,64 @@ public class TrimAcceptanceTest extends DocumentationTest {
 
         // THEN
         존재하지_않는_트림_ID_조회_응답_검증(response);
+    }
+
+    @DisplayName("차종 ID로 트림 목록 조회")
+    @Test
+    void 차종_ID로_트림_목록_조회() {
+        // GIVEN
+        var trimName1 = "Le Blanc";
+        var imageUrl1 = "https://www.hyundai.com/contents/vr360/LX06/trim/DS.png";
+        var minPrice1 = 48_000_000L;
+        차종_생성_요청(
+                "palisade",
+                "https://www.hyundai.com/static/images/model/palisade/24my/mo/palisade_highlights_design_m.jpg"
+        );
+        트림_생성_요청(trimName1, imageUrl1, minPrice1, 1L);
+        var trimName2 = "Le Blanc";
+        var imageUrl2 = "https://www.hyundai.com/static/images/model/sonata-hybrid/23fl/mo/sonata_the_edge_hybrid_highlights_hybrid_m.jpg";
+        var minPrice2 = 45_000_000L;
+        차종_생성_요청(
+                "sonata",
+                "https://www.hyundai.com/static/images/model/palisade/24my/mo/palisade_highlights_design_m.jpg"
+        );
+        트림_생성_요청(trimName2, imageUrl2, minPrice2, 2L);
+        var trimName3 = "Premium";
+        var imageUrl3 = "https://www.hyundai.com/static/images/model/sonata-hybrid/23fl/mo/sonata_the_edge_hybrid_highlights_hybrid_m.jpg";
+        var minPrice3 = 52_000_000L;
+        트림_생성_요청(trimName3, imageUrl3, minPrice3, 2L);
+
+        // WHEN
+        var response = 차종_ID로_트림_목록_조회_요청(2L);
+
+        // THEN
+        차종_ID로_트림_목록_조회_응답_검증(
+                response,
+                new Long[]{2L, 3L},
+                new String[]{trimName2, trimName3},
+                new String[]{imageUrl2, imageUrl3},
+                new Long[]{minPrice2, minPrice3},
+                new Long[]{2L, 2L}
+        );
+    }
+
+    @DisplayName("존재하지 않는 차종 ID로 트림 조회")
+    @Test
+    void 존재하지_않는_차종_ID로_트림_목록_조회() {
+        // GIVEN
+        var trimName = "Le Blanc";
+        var imageUrl = "https://www.hyundai.com/contents/vr360/LX06/trim/DS.png";
+        var minPrice = 48_000_000L;
+        차종_생성_요청(
+                "palisade",
+                "https://www.hyundai.com/static/images/model/palisade/24my/mo/palisade_highlights_design_m.jpg"
+        );
+        트림_생성_요청(trimName, imageUrl, minPrice, 1L);
+
+        // WHEN
+        var response = 존재하지_않는_차종_ID로_트림_목록_조회_요청(1341394823482340L);
+
+        // THEN
+        존재하지_않는_차종_ID로_트림_목록_조회_응답_검증(response);
     }
 }
