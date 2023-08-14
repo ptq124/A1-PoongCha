@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
+import org.springframework.data.jdbc.core.mapping.AggregateReference.IdOnlyAggregateReference;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Embedded;
 import org.springframework.data.relational.core.mapping.Table;
@@ -23,11 +24,21 @@ public class Trim {
     @Embedded.Empty
     private ImageUrl imageUrl;
 
-    private AggregateReference<Trim, Long> carTypeId;
+    @Embedded.Empty
+    private MinPrice minPrice;
 
-    public Trim(final TrimName trimName, final ImageUrl imageUrl, final AggregateReference<Trim, Long> carTypeId) {
-        this.trimName = trimName;
-        this.imageUrl = imageUrl;
-        this.carTypeId = carTypeId;
+    @Column("car_type_id")
+    private AggregateReference<Trim, Long> carType;
+
+    public Trim(
+            final String trimName,
+            final String imageUrl,
+            final long minPrice,
+            final long carType
+    ) {
+        this.trimName = new TrimName(trimName);
+        this.imageUrl = new ImageUrl(imageUrl);
+        this.minPrice = new MinPrice(minPrice);
+        this.carType = new IdOnlyAggregateReference<>(carType);
     }
 }
