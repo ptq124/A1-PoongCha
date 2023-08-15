@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useReducer, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import * as S from "../styles";
 import { css } from "styled-components";
 import { initialState, reducer } from "./index.reducer";
@@ -52,16 +52,6 @@ const ExtraSurvey = () => {
     }
   }, [state]);
 
-  const budgetSliderComponent = useMemo(() => {
-    console.log(state.maxBudget);
-    return (
-      <BudgetSliderGroup
-        maxBudget={state["maxBudget"]}
-        setMaxBudget={(newValue) => handleOptionSelect("maxBudget", newValue)}
-      />
-    );
-  }, [state.maxBudget]); // Only recompute when maxBudget changes
-
   return (
     <S.SurveyContent>
       <SurveyHeader surveyType={"Extra"} />
@@ -75,11 +65,10 @@ const ExtraSurvey = () => {
           selectedOption={state[questionKey]}
         />
       ))}
-      {/* <BudgetSliderGroup
+      <BudgetSliderGroup
         maxBudget={state["maxBudget"]}
         setMaxBudget={(newValue) => handleOptionSelect("maxBudget", newValue)}
-      /> */}
-      {budgetSliderComponent}
+      />
       <Button
         text="완료"
         $isActive={isBtnActive}
