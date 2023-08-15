@@ -5,6 +5,7 @@ import com.poongcha.car.application.dto.TrimCreateRequest;
 import com.poongcha.car.application.mapper.TrimMapper;
 import com.poongcha.car.domain.Trim;
 import com.poongcha.car.domain.TrimRepository;
+import com.poongcha.car.exception.BadRequestException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +24,7 @@ public class TrimCommandService {
 
     public long addTrim(final long trimId, final TrimAddCarColorRequest trimAddTrimColorRequest) {
         Trim trim = trimRepository.findById(trimId)
-                .orElseThrow(() -> new IllegalArgumentException("트림이 존재하지 않습니다."));
+                .orElseThrow(() -> new BadRequestException("트림이 존재하지 않습니다."));
         trim.addCarColor(trimAddTrimColorRequest.getColorId());
         return trimRepository.save(trim).getId();
     }
