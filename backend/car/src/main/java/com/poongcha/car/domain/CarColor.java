@@ -9,7 +9,7 @@ import org.springframework.data.relational.core.mapping.Table;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-@Table("car_colors")
+@Table(name = "car_colors")
 public class CarColor {
     @Id
     private Long id;
