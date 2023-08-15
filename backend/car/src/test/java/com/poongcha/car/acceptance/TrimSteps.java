@@ -5,6 +5,7 @@ import static com.poongcha.car.util.DocumentationTest.DEFAULT_RESTDOCS_PATH;
 import static com.poongcha.car.util.DocumentationTest.customRequestFields;
 import static com.poongcha.car.util.DocumentationTest.given;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
@@ -207,6 +208,31 @@ public class TrimSteps {
     public static void 존재하지_않는_차종_ID로_트림_목록_조회_응답_검증(final ExtractableResponse<Response> response) {
         try (AutoCloseableSoftAssertions assertions = new AutoCloseableSoftAssertions()) {
             assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.SC_NOT_FOUND);
+        }
+    }
+
+    public static ExtractableResponse<Response> 트림에_차량_색상_설정_요청(final long carColorId, final long trimId) {
+        return given()
+                .filter(document(
+                        DEFAULT_RESTDOCS_PATH,
+                        requestFields(
+                                fieldWithPath("colorId").type(JsonFieldType.NUMBER).description("차량 색상 ID")
+                        )
+                )).log().all()
+                .when()
+                .contentType(ContentType.JSON)
+                .body(Map.of(
+                        "colorId", carColorId
+                ))
+                .post("/api/trim/{id}/color", trimId)
+                .then().log().all()
+                .extract();
+    }
+
+    public static void 트림에_차량_색상_설정_응답_검증(final ExtractableResponse<Response> response, final String location) {
+        try (AutoCloseableSoftAssertions assertions = new AutoCloseableSoftAssertions()) {
+            assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.SC_CREATED);
+            assertions.assertThat(response.header(HttpHeaders.LOCATION)).isEqualTo(location);
         }
     }
 }

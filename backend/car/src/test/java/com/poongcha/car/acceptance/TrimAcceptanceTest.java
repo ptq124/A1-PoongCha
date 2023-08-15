@@ -1,5 +1,6 @@
 package com.poongcha.car.acceptance;
 
+import static com.poongcha.car.acceptance.CarColorSteps.차량_색상_생성_요청;
 import static com.poongcha.car.acceptance.CarTypeSteps.차종_생성_요청;
 import static com.poongcha.car.acceptance.TrimSteps.존재하지_않는_차종_ID로_트림_목록_조회_요청;
 import static com.poongcha.car.acceptance.TrimSteps.존재하지_않는_차종_ID로_트림_목록_조회_응답_검증;
@@ -13,6 +14,8 @@ import static com.poongcha.car.acceptance.TrimSteps.트림_ID_조회_요청;
 import static com.poongcha.car.acceptance.TrimSteps.트림_ID_조회_응답_검증;
 import static com.poongcha.car.acceptance.TrimSteps.트림_생성_요청;
 import static com.poongcha.car.acceptance.TrimSteps.트림_생성_응답_검증;
+import static com.poongcha.car.acceptance.TrimSteps.트림에_차량_색상_설정_요청;
+import static com.poongcha.car.acceptance.TrimSteps.트림에_차량_색상_설정_응답_검증;
 
 import com.poongcha.car.util.DocumentationTest;
 import org.junit.jupiter.api.DisplayName;
@@ -155,5 +158,31 @@ public class TrimAcceptanceTest extends DocumentationTest {
 
         // THEN
         존재하지_않는_차종_ID로_트림_목록_조회_응답_검증(response);
+    }
+
+    @DisplayName("트림에 차량 색상 설정")
+    @Test
+    void 트림에_차량_색상_설정() {
+        // GIVEN
+        var carTypeName = "sonata";
+        var carTypeImageUrl = "https://www.naver.com/image-url.jpg";
+        차종_생성_요청(carTypeName, carTypeImageUrl);
+        var trimName = "premium";
+        var trimImageUrl = "https://www.hyundai.com/static/images/model/palisade/24my/mo/palisade_highlights_design_m.jpg";
+        var minPrice = 1_200_000;
+        var carTypeId = 1L;
+        트림_생성_요청(trimName, trimImageUrl, minPrice, carTypeId);
+        var carColorName = "red";
+        var imageUrl = "https://www.naver.com/color/red.jpg";
+        var carColorType = "INTERIOR";
+        차량_색상_생성_요청(carColorName, imageUrl, carColorType);
+        var carColorId = 1L;
+        var trimId = 1L;
+
+        // WHEN
+        var response = 트림에_차량_색상_설정_요청(carColorId, trimId);
+
+        // THEN
+        트림에_차량_색상_설정_응답_검증(response, "/api/trim/1/color");
     }
 }
