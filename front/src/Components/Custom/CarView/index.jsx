@@ -287,6 +287,8 @@ const CarSideViewer = styled.img`
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
+  width: 95%;
+  margin-top: 20px;
 `;
 
 const BackgrondTop = styled.div`

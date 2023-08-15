@@ -75,6 +75,8 @@ const Wrapper = styled.div`
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
+  width: 95%;
+  margin-top: 20px;
 `;
 const CarImage = styled.img`
   ${({ $isDisplay }) => {
@@ -82,6 +84,7 @@ const CarImage = styled.img`
       display: ${$isDisplay ? "block" : "none"};
     `;
   }}
+  width:100%;
 `;
 
 export default CarRotateViewer;
