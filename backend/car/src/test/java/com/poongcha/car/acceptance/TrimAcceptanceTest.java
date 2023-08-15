@@ -8,6 +8,8 @@ import static com.poongcha.car.acceptance.TrimSteps.존재하지_않는_차종�
 import static com.poongcha.car.acceptance.TrimSteps.존재하지_않는_차종으로_트림_생성_응답_검증;
 import static com.poongcha.car.acceptance.TrimSteps.존재하지_않는_트림_ID_조회_요청;
 import static com.poongcha.car.acceptance.TrimSteps.존재하지_않는_트림_ID_조회_응답_검증;
+import static com.poongcha.car.acceptance.TrimSteps.존재하지_않는_트림에_차량_색상_설정_요청;
+import static com.poongcha.car.acceptance.TrimSteps.존재하지_않는_트림에_차량_색상_설정_응답_검증;
 import static com.poongcha.car.acceptance.TrimSteps.차종_ID로_트림_목록_조회_요청;
 import static com.poongcha.car.acceptance.TrimSteps.차종_ID로_트림_목록_조회_응답_검증;
 import static com.poongcha.car.acceptance.TrimSteps.트림_ID_조회_요청;
@@ -184,5 +186,22 @@ public class TrimAcceptanceTest extends DocumentationTest {
 
         // THEN
         트림에_차량_색상_설정_응답_검증(response, "/api/trim/1/color");
+    }
+
+    @DisplayName("존재하지 않는 트림에 차량 색상을 설정")
+    @Test
+    void 존재하지_않는_트림에_차량_색상_설정() {
+        var carColorName = "red";
+        var imageUrl = "https://www.naver.com/color/red.jpg";
+        var carColorType = "INTERIOR";
+        차량_색상_생성_요청(carColorName, imageUrl, carColorType);
+        var carColorId = 1L;
+        var trimId = 29812312739123L;
+
+        // WHEN
+        var response = 존재하지_않는_트림에_차량_색상_설정_요청(carColorId, trimId);
+
+        // THEN
+        존재하지_않는_트림에_차량_색상_설정_응답_검증(response, "/api/trim/1/color");
     }
 }
