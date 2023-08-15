@@ -1,0 +1,13 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /home/ec2-user/jar
+    overwrite: yes
+file_exists_behavior: OVERWRITE
+
+hooks:
+  AfterInstall:
+    - location: deploy/scripts/restart-server.sh
+      timeout: 300
+      runas: root
