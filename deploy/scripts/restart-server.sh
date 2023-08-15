@@ -17,6 +17,6 @@ else
   sleep 5
 fi
 
-suudo iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 8080
+sudo iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 8080
 
 sudo nohup java -jar -Dspring.profiles.active=test $JAR_PATH > /dev/null 2> /dev/null < /dev/null &
