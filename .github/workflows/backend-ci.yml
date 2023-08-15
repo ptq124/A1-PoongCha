@@ -2,7 +2,7 @@ name: Backend CI
 
 on:
   pull_request:
-    branches: [ be/setting/10-CICD-구축 ]
+    branches: [ backend ]
 
 jobs:
   backend-ci:
