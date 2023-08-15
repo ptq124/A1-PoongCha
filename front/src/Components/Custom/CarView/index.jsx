@@ -34,7 +34,7 @@ const CarView = () => {
             ) : (
               <CarRotateViewer />
             ))}
-          {isInternalImg && <img src={internal001} />}
+          {isInternalImg && <InternalImg src={internal001} />}
 
           <Button
             style={ExternalBtn}
@@ -123,6 +123,10 @@ const CarView = () => {
     </>
   );
 };
+const InternalImg = styled.img`
+  position: absolute;
+  width: 100%;
+`;
 const LeftBtn = css`
   width: 178px;
   height: 46px;
