@@ -23,7 +23,7 @@ public class TrimCommandService {
     }
 
     public long add(final long trimId, final TrimAddCarColorRequest trimAddTrimColorRequest) {
-        Trim trim = trimRepository.findById(trimId)
+        Trim trim = trimRepository.findByIdWithLock(trimId)
                 .orElseThrow(() -> new BadRequestException("트림이 존재하지 않습니다."));
         trim.addCarColor(trimAddTrimColorRequest.getColorId());
         return trimRepository.save(trim).getId();
