@@ -6,7 +6,6 @@ import com.poongcha.car.application.dto.CarTypeCreateRequest;
 import com.poongcha.car.application.dto.CarTypeDefaultResponse;
 import java.net.URI;
 import java.util.List;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
