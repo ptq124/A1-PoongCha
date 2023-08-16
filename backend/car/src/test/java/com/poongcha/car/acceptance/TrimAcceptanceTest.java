@@ -266,9 +266,9 @@ public class TrimAcceptanceTest extends DocumentationTest {
         var trimId2 = 2L;
         트림에_차량_색상_설정_요청(carColorId2, trimId1);
         트림에_차량_색상_설정_요청(carColorId1, trimId2);
-        차량_색상_생성_요청("orange", "https://www.naver.com/color/orange.jpg", "EXTERIOR");
+        차량_색상_생성_요청("orange", "https://www.naver.com/color/orange.jpg", "INTERIOR");
         양립_불가능한_차량_색상_설정_요청(carColorId2, 3L);
-        차량_색상_생성_요청("green", "https://www.naver.com/color/green.jpg", "EXTERIOR");
+        차량_색상_생성_요청("green", "https://www.naver.com/color/green.jpg", "INTERIOR");
         양립_불가능한_차량_색상_설정_요청(carColorId2, 4L);
 
         // WHEN
