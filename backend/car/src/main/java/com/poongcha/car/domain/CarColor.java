@@ -1,10 +1,15 @@
 package com.poongcha.car.domain;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Embedded;
+import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
 
 @Getter
@@ -22,9 +27,20 @@ public class CarColor {
 
     private CarColorType carColorType;
 
+    @MappedCollection(idColumn = "car_color_id")
+    private Set<IncompatibleCarColor> incompatibleCarColors = new HashSet<>();
+
     public CarColor(final CarColorName carColorName, final ImageUrl imageUrl, final CarColorType carColorType) {
         this.carColorName = carColorName;
         this.imageUrl = imageUrl;
         this.carColorType = carColorType;
+    }
+
+    public void addIncompatibleColor(final List<Long> incompatibleCarColorIds) {
+        List<IncompatibleCarColor> incompatibleCarColorList = incompatibleCarColorIds.stream()
+                .map(IncompatibleCarColor::new)
+                .collect(Collectors.toList());
+
+        incompatibleCarColors.addAll(incompatibleCarColorList);
     }
 }
