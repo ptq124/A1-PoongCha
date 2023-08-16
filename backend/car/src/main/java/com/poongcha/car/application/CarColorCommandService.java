@@ -6,6 +6,7 @@ import com.poongcha.car.application.mapper.CarColorMapper;
 import com.poongcha.car.domain.CarColor;
 import com.poongcha.car.domain.CarColorRepository;
 import com.poongcha.car.exception.BadRequestException;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +29,9 @@ public class CarColorCommandService {
     ) {
         CarColor carColor = carColorRepository.findByIdWithLock(carColorId)
                 .orElseThrow(() -> new BadRequestException("차량 색상이 존재하지 않습니다."));
-        carColor.addIncompatibleColor(carColorAddIncompatibleColorRequest.getIds());
+        List<CarColor> addInCompatibleRequestCarColor = carColorRepository
+                .findAllByIdIn(carColorAddIncompatibleColorRequest.getIds());
+        carColor.addIncompatibleColor(addInCompatibleRequestCarColor);
         return carColorRepository.save(carColor).getId();
     }
 }

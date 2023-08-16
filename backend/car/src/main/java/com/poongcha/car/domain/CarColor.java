@@ -1,5 +1,6 @@
 package com.poongcha.car.domain;
 
+import com.poongcha.car.exception.BadRequestException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -37,12 +38,32 @@ public class CarColor {
         this.carColorType = carColorType;
     }
 
-    public void addIncompatibleColor(final List<Long> incompatibleCarColorIds) {
-        List<IncompatibleCarColor> incompatibleCarColorList = incompatibleCarColorIds.stream()
-                .map(IncompatibleCarColor::new)
-                .collect(Collectors.toList());
+    public void addIncompatibleColor(final List<CarColor> carColors) {
+        validationIncompatibleCarColor(carColors);
+        incompatibleCarColors.addAll(toIncompatibleCarColors(carColors));
+    }
 
-        incompatibleCarColors.addAll(incompatibleCarColorList);
+    private void validationIncompatibleCarColor(final List<CarColor> incompatibleCarColors) {
+        if (isPresentSameIdColor(incompatibleCarColors)) {
+            throw new BadRequestException("같은 ID의 색상은 양립 불가능으로 설정할 수 없습니다.");
+        }
+        if (isPresentSameTypeColor(incompatibleCarColors)) {
+            throw new BadRequestException("같은 색상 타입은 양립 불가능으로 설정할 수 없습니다.");
+        }
+    }
+
+    private boolean isPresentSameIdColor(final List<CarColor> incompatibleCarColors) {
+        return incompatibleCarColors.stream().anyMatch(carColor -> carColor.id.equals(this.id));
+    }
+
+    private boolean isPresentSameTypeColor(final List<CarColor> incompatibleCarColors) {
+        return incompatibleCarColors.stream().anyMatch(carColor -> carColor.carColorType.equals(this.carColorType));
+    }
+
+    private List<IncompatibleCarColor> toIncompatibleCarColors(final List<CarColor> carColors) {
+        return carColors.stream()
+                .map(carColor -> new IncompatibleCarColor(carColor.id))
+                .collect(Collectors.toList());
     }
 
     public List<Long> incompatibleColorIds() {
