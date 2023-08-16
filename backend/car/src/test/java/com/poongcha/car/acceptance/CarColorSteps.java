@@ -81,4 +81,34 @@ public class CarColorSteps {
             assertions.assertThat(response.header(HttpHeaders.LOCATION)).isEqualTo(location);
         }
     }
+
+    public static ExtractableResponse<Response> 존재하지_않는_차량_색상에_양립_불가능한_차량_색상_설정_요청(
+            final long carColorId,
+            final Long... incompatibleIds
+    ) {
+        return given()
+                .filter(document(
+                        DEFAULT_RESTDOCS_PATH,
+                        pathParameters(
+                                parameterWithName("id").description("차량 색상 ID")
+                        ),
+                        customRequestFields(
+                                fieldWithPath("ids").type(JsonFieldType.ARRAY).description("양립 불가능한 차량 색상 ID")
+                        )
+                )).log().all()
+                .when()
+                .body(Map.of(
+                        "ids", incompatibleIds
+                ))
+                .contentType(ContentType.JSON)
+                .post("/api/color/{id}/incompatible", carColorId)
+                .then().log().all()
+                .extract();
+    }
+
+    public static void 존재하지_않는_차량_색상에_양립_불가능한_차량_색상_설정_응답_검증(final ExtractableResponse<Response> response) {
+        try (AutoCloseableSoftAssertions assertions = new AutoCloseableSoftAssertions()) {
+            assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.SC_BAD_REQUEST);
+        }
+    }
 }
