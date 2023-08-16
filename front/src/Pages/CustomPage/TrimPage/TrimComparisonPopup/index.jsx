@@ -40,10 +40,11 @@ const Header = styled.div`
   }
 `;
 const Wrapper = styled.div`
-  position: absolute;
+  position: relative;
   text-align: center;
+
   width: 900px;
-  height: 800px;
+  height: 1335px;
 
   background-color: ${({ theme }) => theme.color.grey1000};
 
@@ -51,9 +52,10 @@ const Wrapper = styled.div`
   z-index: 12;
 
   padding: 24px;
+  margin-top: 600px;
+  margin-bottom: 100px;
 
   box-sizing: border-box;
-  overflow-y: scroll;
   z-index: 999;
 `;
 export default TrimComparisonPopup;
