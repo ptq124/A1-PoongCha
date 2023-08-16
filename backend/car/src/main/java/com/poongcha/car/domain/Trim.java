@@ -1,7 +1,9 @@
 package com.poongcha.car.domain;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -50,5 +52,12 @@ public class Trim {
 
     public void addCarColor(final long carColorId) {
         trimCarColors.add(new TrimCarColor(carColorId));
+    }
+
+    public List<Long> carColorIds() {
+        return trimCarColors.stream()
+                .map(TrimCarColor::getCarColor)
+                .map(AggregateReference::getId)
+                .collect(Collectors.toUnmodifiableList());
     }
 }
