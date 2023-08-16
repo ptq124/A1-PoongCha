@@ -3,15 +3,15 @@ import { css, styled } from "styled-components";
 import TooltipTail from "@assets/icons/option-tooltip-tail.svg";
 import ArrowRightIcon from "@assets/icons/arrow-right.svg";
 
-const OptionTooltip = ({ data, handleOpenPopup }) => {
+const OptionTooltip = ({ tag, data, handleOpenPopup }) => {
   return (
     <Wrapper $position={data.position}>
       <Content>
         <Img></Img>
         <Detail>
-          <div className="tag">주행안전</div>
-          <div className="option">현대 스마트 센스 1</div>
-          <div className="price">790,000 원</div>
+          <div className="tag">{tag}</div>
+          <div className="option">{data.option}</div>
+          <div className="price">{data.price}</div>
         </Detail>
       </Content>
       <Arrow

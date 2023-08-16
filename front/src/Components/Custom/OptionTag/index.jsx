@@ -1,7 +1,7 @@
 import React from "react";
 import { styled, css } from "styled-components";
 
-const OptionTag = ({ selectTag, tagsOption, handleSelectTag }) => {
+const OptionTag = ({ selectedTag, tagsOption, handleSelectTag }) => {
   const [tags, tagSelectIcons, tagsNotSelectIcons] = tagsOption;
 
   const isTagIcons = (select, index) => {
@@ -13,9 +13,9 @@ const OptionTag = ({ selectTag, tagsOption, handleSelectTag }) => {
         <Tag
           key={index}
           onClick={() => handleSelectTag(tag)}
-          selected={selectTag === tag}
+          selected={selectedTag === tag}
         >
-          <TagImg src={isTagIcons(selectTag === tag, index)} />
+          <TagImg src={isTagIcons(selectedTag === tag, index)} />
           {tag}
         </Tag>
       ))}

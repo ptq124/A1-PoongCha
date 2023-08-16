@@ -1,42 +1,43 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { css, styled } from "styled-components";
 import OptionTooltip from "./OptionTooltip";
 import OptionItem from "@Components/Custom/OptionItem";
 import TaggedPageSampleImg from "@assets/images/tagged-page-sample.svg";
 import PlusIcon from "@assets/icons/plus.svg";
-import useTooltip from "@hooks/useTooltip";
 
 const TaggedPage = ({
+  tag,
   handleOpenPopup,
   handleSelectOption,
   optionData,
   checkOptionSelected,
 }) => {
-  const [activeOptionIdx, setActiveOptionIdx] = useState(null);
-
-  const handlePlusBtnClick = (index) => {
-    if (activeOptionIdx === null || activeOptionIdx !== index) {
-      setActiveOptionIdx(index);
+  const [activeOption, setActiveOption] = useState(null);
+  const handlePlusBtnClick = (option) => {
+    if (activeOption === null || activeOption !== option) {
+      setActiveOption(option);
     } else {
-      setActiveOptionIdx(null);
+      setActiveOption(null);
     }
   };
   return (
     <Wrapper>
       <SituationScreen>
-        {activeOptionIdx !== null && (
-          <OptionTooltip
-            data={optionData[activeOptionIdx]}
-            handleOpenPopup={handleOpenPopup}
-          />
-        )}
+        {activeOption !== null &&
+          optionData.map((data) => data.option).includes(activeOption) && (
+            <OptionTooltip
+              tag={tag}
+              data={optionData.find((elem) => elem.option === activeOption)}
+              handleOpenPopup={handleOpenPopup}
+            />
+          )}
         <img src={TaggedPageSampleImg} />
         {optionData.map((data, index) => (
           <PlusButton
             key={index}
             $position={data.position}
-            $clicked={activeOptionIdx === index}
-            onClick={() => handlePlusBtnClick(index)}
+            $clicked={activeOption === data.option}
+            onClick={() => handlePlusBtnClick(data.option)}
           >
             <img src={PlusIcon} />
           </PlusButton>

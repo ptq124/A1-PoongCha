@@ -17,8 +17,8 @@ const AllOptions = ({
   checkOptionSelected,
 }) => {
   const [tagsOption, setTagsOption] = useState([]);
-  const [selectTag, setSelectTag] = useState(null);
-  const handleSelectTag = (tag) => setSelectTag(tag);
+  const [selectedTag, setSelectedTag] = useState(null);
+  const handleSelectTag = (tag) => setSelectedTag(tag);
   useEffect(() => {
     if (tab === "추가 옵션") {
       setTagsOption([
@@ -26,11 +26,11 @@ const AllOptions = ({
         tagSelectIcons.slice(1),
         tagsNotSelectIcons.slice(1),
       ]);
-      setSelectTag("전체");
+      setSelectedTag("전체");
     }
     if (tab === "기본 포함 옵션") {
       setTagsOption([tags, tagSelectIcons, tagsNotSelectIcons]);
-      setSelectTag("대표");
+      setSelectedTag("대표");
     }
   }, [tab]);
 
@@ -38,9 +38,9 @@ const AllOptions = ({
   const optionPopupRef = useRef();
   const { isPopupOpen, openPopup, closePopup } =
     useOnClickPopUp(optionPopupRef);
-  const [popupOptionName, setPopupOptionName] = useState(null);
-  const handleOpenPopup = (data) => {
-    setPopupOptionName(data);
+  const [popupOption, setPopupOption] = useState(null);
+  const handleOpenPopup = (option) => {
+    setPopupOption(option);
     openPopup();
   };
 
@@ -60,7 +60,7 @@ const AllOptions = ({
   };
   let totalPages = 0;
   const renderFilteredOption = () => {
-    if (selectTag === "전체") {
+    if (selectedTag === "전체") {
       const currentData = getDataForPage(options, currentPage, 8);
       totalPages = Math.ceil(options.length / 8);
       return currentData.map((data, index) => (
@@ -72,8 +72,10 @@ const AllOptions = ({
           handleOpenPopup={handleOpenPopup}
         />
       ));
-    } else if (selectTag === "대표") {
-      const currentData = options.filter((data) => data.tag === selectTag);
+    } else if (selectedTag === "대표") {
+      const currentData = options.filter((data) =>
+        data.tag.includes(selectedTag)
+      );
       return currentData.map((data, index) => (
         <OptionItem
           key={index}
@@ -86,9 +88,10 @@ const AllOptions = ({
     } else
       return (
         <TaggedPage
+          tag={selectedTag}
           handleOpenPopup={handleOpenPopup}
           handleSelectOption={handleSelectOption}
-          optionData={options.filter((data) => data.tag === selectTag)}
+          optionData={options.filter((data) => data.tag.includes(selectedTag))}
           checkOptionSelected={checkOptionSelected}
         />
       );
@@ -102,7 +105,7 @@ const AllOptions = ({
             <OptionPopup
               popupRef={optionPopupRef}
               closePopup={closePopup}
-              popupOptionName={popupOptionName}
+              data={options.find((elem) => elem.option === popupOption)}
               handleSelectOption={handleSelectOption}
               checkOptionSelected={checkOptionSelected}
             />
@@ -110,19 +113,19 @@ const AllOptions = ({
         />
       )}
       <OptionTag
-        selectTag={selectTag}
+        selectedTag={selectedTag}
         tagsOption={tagsOption}
         handleSelectTag={handleSelectTag}
       ></OptionTag>
       <MainContainer>
-        {selectTag === "전체" && (
+        {selectedTag === "전체" && (
           <Count>
             <div>전체</div>
             <span>{options.filter((data) => data.tag !== "대표").length}</span>
           </Count>
         )}
         <OptionContainer>{renderFilteredOption()}</OptionContainer>
-        {(selectTag === "전체" || selectTag === "대표") && (
+        {(selectedTag === "전체" || selectedTag === "대표") && (
           <PageBtn>
             <img src={left} onClick={() => handlePageChange(currentPage - 1)} />
             {Array.from({ length: totalPages }, (_, index) => (

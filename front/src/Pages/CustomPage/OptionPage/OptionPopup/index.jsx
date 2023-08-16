@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import { options } from "../optionData";
 import Card from "./Card";
@@ -8,13 +8,25 @@ import ArrowRightIcon from "@assets/icons/arrow-right-32-white.svg";
 const OptionPopup = ({
   popupRef,
   closePopup,
-  popupOptionName,
+  data,
   handleSelectOption,
   checkOptionSelected,
 }) => {
   const [crntOptionIdx, setCrntOptionIdx] = useState(0);
-  // 세트 옵션일 경우 popupData = 세트 옵션들 리스트 > 팝업 카드 캐루셀로 나옴
-  const popupData = options.filter((data) => data.option === popupOptionName);
+  const [setData, setSetData] = useState([]);
+
+  useEffect(() => {
+    // data의 세트 옵션들 서버에서 불러오기
+    if (data.set !== null) {
+      setSetData(options.filter((option) => option.set === data.set));
+    } else {
+      setSetData([data]);
+    }
+  }, []);
+  useEffect(() => {
+    setCrntOptionIdx(setData.findIndex((elem) => elem.option === data.option));
+  }, [setData]);
+
   return (
     <Wrapper ref={popupRef}>
       <Window>
@@ -25,19 +37,19 @@ const OptionPopup = ({
         )}
 
         <Cards $crntOptionIdx={crntOptionIdx}>
-          {popupData.map((data, index) => (
+          {setData.map((data, index) => (
             <Card
               key={index}
               index={index}
-              popupData={popupData}
+              setData={setData}
+              selected={checkOptionSelected(data.option)}
               closePopup={closePopup}
               handleNavClick={setCrntOptionIdx}
-              selected={checkOptionSelected(data.option)}
               handleSelectOption={() => handleSelectOption(data.option)}
             />
           ))}
         </Cards>
-        {crntOptionIdx < popupData.length - 1 && (
+        {crntOptionIdx < setData.length - 1 && (
           <RightArrow onClick={() => setCrntOptionIdx((prev) => prev + 1)}>
             <img src={ArrowRightIcon} />
           </RightArrow>
@@ -90,5 +102,6 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
+  overflow-x: clip;
 `;
 export default OptionPopup;

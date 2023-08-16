@@ -7,14 +7,14 @@ import { options } from "./optionData";
 
 const OptionPage = () => {
   // 선택한 옵션들 상태관리
-  const [selectOption, setSelectOption] = useState([]);
+  const [selectedOptions, setSelectedOptions] = useState([]);
   const handleSelectOption = (option) => {
     if (checkOptionSelected(option))
-      setSelectOption((prev) => prev.filter((opt) => opt !== option));
-    else setSelectOption((prev) => [...prev, option]);
+      setSelectedOptions((prev) => prev.filter((opt) => opt !== option));
+    else setSelectedOptions((prev) => [...prev, option]);
   };
   const checkOptionSelected = (option) => {
-    return selectOption.includes(option);
+    return selectedOptions.includes(option);
   };
 
   const [selectedTab, setSelectedTab] = useState("추가 옵션");
