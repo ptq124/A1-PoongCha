@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { css, styled } from "styled-components";
-import OptionTooltip from "./OptionTooltip";
+import OptionModal from "./OptionModal";
 import OptionItem from "@Components/Custom/OptionItem";
 import TaggedPageSampleImg from "@assets/images/tagged-page-sample.svg";
 import PlusIcon from "@assets/icons/plus.svg";
@@ -13,20 +13,35 @@ const TaggedPage = ({
   checkOptionSelected,
 }) => {
   const [activeOption, setActiveOption] = useState(null);
-  const handlePlusBtnClick = (option) => {
-    if (activeOption === null || activeOption !== option) {
-      setActiveOption(option);
-    } else {
-      setActiveOption(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalFixed, setIsModalFixed] = useState(false);
+  const handlePlusBtnHover = (option) => {
+    if (isModalFixed && activeOption !== option) {
+      setIsModalFixed(false);
+    }
+    setIsModalOpen(true);
+    setActiveOption(option);
+  };
+  const handlePlusBtnLeave = () => {
+    if (!isModalFixed) {
+      setIsModalOpen(false);
+      setTimeout(() => {
+        setActiveOption(null);
+      }, 200);
     }
   };
+  const handlePlusBtnClick = () => {
+    setIsModalFixed(!isModalFixed);
+  };
+
   return (
     <Wrapper>
       <SituationScreen>
         {activeOption !== null &&
           optionData.map((data) => data.option).includes(activeOption) && (
-            <OptionTooltip
+            <OptionModal
               tag={tag}
+              isOpen={isModalOpen}
               data={optionData.find((elem) => elem.option === activeOption)}
               handleOpenPopup={handleOpenPopup}
             />
@@ -37,7 +52,9 @@ const TaggedPage = ({
             key={index}
             $position={data.position}
             $clicked={activeOption === data.option}
-            onClick={() => handlePlusBtnClick(data.option)}
+            onMouseEnter={() => handlePlusBtnHover(data.option)}
+            onMouseLeave={handlePlusBtnLeave}
+            onClick={handlePlusBtnClick}
           >
             <img src={PlusIcon} />
           </PlusButton>

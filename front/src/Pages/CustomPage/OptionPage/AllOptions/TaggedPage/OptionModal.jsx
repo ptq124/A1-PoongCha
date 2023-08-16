@@ -1,11 +1,11 @@
 import React from "react";
-import { css, styled } from "styled-components";
+import { css, keyframes, styled } from "styled-components";
 import TooltipTail from "@assets/icons/option-tooltip-tail.svg";
 import ArrowRightIcon from "@assets/icons/arrow-right.svg";
 
-const OptionTooltip = ({ tag, data, handleOpenPopup }) => {
+const OptionModal = ({ tag, isOpen, data, handleOpenPopup }) => {
   return (
-    <Wrapper $position={data.position}>
+    <Wrapper $position={data.position} $isOpen={isOpen}>
       <Content>
         <Img></Img>
         <Detail>
@@ -72,6 +72,22 @@ const Content = styled.div`
   display: flex;
   gap: 8px;
 `;
+const fadeIn = keyframes`
+  from {
+    opacity:0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+const fadeOut = keyframes`
+  from {
+    opacity:1;
+  }
+  to {
+    opacity:0;
+  }
+`;
 const Wrapper = styled.div`
   position: absolute;
   top: ${({ $position }) =>
@@ -91,9 +107,16 @@ const Wrapper = styled.div`
 
   width: 270px;
   height: 96px;
-  border-radius: 8px;
+
   background-color: ${({ theme }) => theme.color.grey1000};
+  border-radius: 8px;
+
   padding: 12px;
   box-sizing: border-box;
+
+  z-index: 997;
+
+  animation: ${({ $isOpen }) => ($isOpen ? fadeIn : fadeOut)} 0.2s linear;
 `;
-export default OptionTooltip;
+
+export default OptionModal;
