@@ -1,6 +1,6 @@
-import React, { useRef } from "react";
+import React from "react";
 import { styled } from "styled-components";
-import CarView from "../../../Components/Custom/CarView";
+import CarView from "@Components/Custom/CarView";
 import TrimCustomSideBar from "./TrimCustomSideBar";
 
 const TrimPage = () => {

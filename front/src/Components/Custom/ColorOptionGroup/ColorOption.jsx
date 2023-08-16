@@ -1,6 +1,6 @@
 import React from "react";
 import { styled } from "styled-components";
-import Check24Icon from "../../../assets/checkcircle/check-24-white.svg";
+import Check24Icon from "@assets/checkcircle/check-24-white.svg";
 
 const ColorOption = ({ data, selected, onClick }) => {
   let isLabeled = true;

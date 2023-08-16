@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import * as S from "../styles";
 import { css } from "styled-components";
-import Button from "../../../Components/Common/Button/Button";
-import SurveyHeader from "../../../Components/Survey/SurveyHeader";
-import SurveyOptionGroup from "../../../Components/Survey/SurveyOptionGroup";
-import useButtonNavigation from "../../../hooks/useButtonNavigation";
+import Button from "@Components/Common/Button/Button";
+import SurveyHeader from "@Components/Survey/SurveyHeader";
+import SurveyOptionGroup from "@Components/Survey/SurveyOptionGroup";
+import useButtonNavigation from "@hooks/useButtonNavigation";
 
 const surveyData = {
   age: {

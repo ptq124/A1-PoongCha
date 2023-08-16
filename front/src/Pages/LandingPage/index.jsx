@@ -1,8 +1,8 @@
 import React from "react";
 import { styled, css } from "styled-components";
 import CoverVideo from "./CoverVideo";
-import Button from "../../Components/Common/Button/Button";
-import useButtonNavigation from "../../hooks/useButtonNavigation";
+import Button from "@Components/Common/Button/Button";
+import useButtonNavigation from "@hooks/useButtonNavigation";
 
 const LandingPage = () => {
   const move = useButtonNavigation();

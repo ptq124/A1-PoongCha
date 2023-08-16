@@ -1,7 +1,7 @@
 import React from "react";
 import { styled } from "styled-components";
-import closeIcon from "../../../../assets/icons/close.svg";
-import ImgSample from "../../../../assets/images/trim-comparison-popup-sample.png";
+import closeIcon from "@assets/icons/close.svg";
+import ImgSample from "@assets/images/trim-comparison-popup-sample.png";
 
 const TrimComparisonPopup = ({ popupRef, closePopup }) => {
   return (

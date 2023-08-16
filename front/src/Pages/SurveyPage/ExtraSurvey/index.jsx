@@ -1,12 +1,12 @@
 import React, { useEffect, useReducer, useState } from "react";
 import * as S from "../styles";
 import { css } from "styled-components";
-import SurveyHeader from "../../../Components/Survey/SurveyHeader";
-import SurveyOptionGroup from "../../../Components/Survey/SurveyOptionGroup";
-import Button from "../../../Components/Common/Button/Button";
-import BudgetSliderGroup from "./BudgetSliderGroup";
 import { initialState, reducer } from "./index.reducer";
-import useButtonNavigation from "../../../hooks/useButtonNavigation";
+import SurveyHeader from "@Components/Survey/SurveyHeader";
+import SurveyOptionGroup from "@Components/Survey/SurveyOptionGroup";
+import Button from "@Components/Common/Button/Button";
+import BudgetSliderGroup from "./BudgetSliderGroup";
+import useButtonNavigation from "@hooks/useButtonNavigation";
 
 const surveyData = {
   drivingRecord: {

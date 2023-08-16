@@ -1,8 +1,8 @@
 import React, { useRef } from "react";
 import { css, styled } from "styled-components";
 import DefaultOptionPopup from "../DefaultOptionPopup";
-import Button from "../../Common/Button/Button";
-import useOnClickPopUp from "../../../hooks/useOnClickPopUp";
+import Button from "@Components/Common/Button/Button";
+import useOnClickPopUp from "@hooks/useOnClickPopUp";
 
 const DefaultOption = ({ option }) => {
   const popupRef = useRef();

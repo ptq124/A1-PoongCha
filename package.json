@@ -1,0 +1,5 @@
+{
+  "devDependencies": {
+    "vite-plugin-alias": "^0.1.0"
+  }
+}

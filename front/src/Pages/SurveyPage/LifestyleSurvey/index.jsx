@@ -1,13 +1,13 @@
 import React, { useState, useRef } from "react";
 import * as S from "../styles";
-import { css, styled } from "styled-components";
-import Button from "../../../Components/Common/Button/Button";
-import SurveyHeader from "../../../Components/Survey/SurveyHeader";
-import LifestylePersona from "../../../Components/Survey/LifestylePersona";
-import useOnClickPopUp from "../../../hooks/useOnClickPopUp";
+import { css } from "styled-components";
+import Button from "@Components/Common/Button/Button";
+import SurveyHeader from "@Components/Survey/SurveyHeader";
+import LifestylePersona from "@Components/Survey/LifestylePersona";
+import useOnClickPopUp from "@hooks/useOnClickPopUp";
 import PopUp from "./PopUp";
-import useButtonNavigation from "../../../hooks/useButtonNavigation";
-import BackgroundOverlay from "../../../Components/Common/OverlaidPopup/BackgroundOverlay";
+import useButtonNavigation from "@hooks/useButtonNavigation";
+import OverlaidPopup from "@Components/Common/OverlaidPopup";
 
 const lifestyleSurveyInfo = {
   options: [
@@ -86,23 +86,17 @@ const LifestyleSurvey = () => {
         </S.LifeStyleOptions>
       </S.SurveyContent>
       {isPopupOpen && (
-        <>
-          <BackgroundOverlay />
-          <PopUp popupRef={popupRef} />
-        </>
+        <OverlaidPopup component={<PopUp popupRef={popupRef} />} />
       )}
       <Button
         text="선택 완료"
         style={SurveyBtnStyle}
+        $isActive={selectedOption !== ""}
         onClick={() => move("/survey/end")}
       />
     </>
   );
 };
-
-const Radio = styled.input`
-  display: none;
-`;
 
 const LinkBtnStyle = css`
   color: ${({ theme }) => theme.color.secondary};
@@ -132,6 +126,13 @@ const SurveyBtnStyle = css`
   border-radius: 6px;
   border: 1px solid ${({ theme }) => theme.color.primary_default};
   ${({ theme }) => theme.font.Body3_Medium};
+
+  ${({ $isActive }) =>
+    !$isActive &&
+    css`
+      opacity: 0.3;
+      pointer-events: none;
+    `}
 `;
 
 export default LifestyleSurvey;

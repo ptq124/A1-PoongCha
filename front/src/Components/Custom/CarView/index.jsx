@@ -2,18 +2,16 @@ import React, { useRef, useState } from "react";
 import { styled, css } from "styled-components";
 import { useLocation } from "react-router";
 import CarRotateViewer from "./CarRotateViewer";
-import Button from "../../Common/Button/Button";
-
-import rotate from "../../../assets/icons/rotate.svg";
-import external from "../../../assets/icons/외장.svg";
-import internal from "../../../assets/icons/내장.svg";
-import degree360 from "../../../assets/icons/360.svg";
-import useOnClickPopUp from "../../../hooks/useOnClickPopUp";
-import OverlaidPopup from "../../Common/OverlaidPopup";
-import close from "../../../assets/icons/close.svg";
-import useButtonNavigation from "../../../hooks/useButtonNavigation";
-
-import internal001 from "../../../assets/images/internal001.svg";
+import Button from "@Components/Common/Button/Button";
+import rotate from "@assets/icons/rotate.svg";
+import external from "@assets/icons/외장.svg";
+import internal from "@assets/icons/내장.svg";
+import degree360 from "@assets/icons/360.svg";
+import useOnClickPopUp from "@hooks/useOnClickPopUp";
+import OverlaidPopup from "@Components/Common/OverlaidPopup";
+import close from "@assets/icons/close.svg";
+import useButtonNavigation from "@hooks/useButtonNavigation";
+import internal001 from "@assets/images/internal001.svg";
 
 const CarView = () => {
   const { pathname } = useLocation();
@@ -36,7 +34,7 @@ const CarView = () => {
             ) : (
               <CarRotateViewer />
             ))}
-          {isInternalImg && <img src={internal001} />}
+          {isInternalImg && <InternalImg src={internal001} />}
 
           <Button
             style={ExternalBtn}
@@ -125,6 +123,10 @@ const CarView = () => {
     </>
   );
 };
+const InternalImg = styled.img`
+  position: absolute;
+  width: 100%;
+`;
 const LeftBtn = css`
   width: 178px;
   height: 46px;
@@ -289,6 +291,8 @@ const CarSideViewer = styled.img`
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
+  width: 95%;
+  margin-top: 20px;
 `;
 
 const BackgrondTop = styled.div`

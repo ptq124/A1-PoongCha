@@ -1,7 +1,7 @@
 import React from "react";
-import { styled } from "styled-components";
-import PalisadeImg from "../../../assets/images/etc-end-palisade.svg";
 import { useLocation } from "react-router";
+import { styled } from "styled-components";
+import PalisadeImg from "@assets/images/etc-end-palisade.svg";
 
 const QNASummary = () => {
   const { state } = useLocation();

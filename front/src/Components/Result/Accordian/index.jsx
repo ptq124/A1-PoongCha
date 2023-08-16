@@ -1,6 +1,6 @@
 import React from "react";
 import { styled } from "styled-components";
-import up from "../../../assets/icons/arrow_up.svg";
+import up from "@assets/icons/arrow_up.svg";
 
 const Accordion = ({ title, content, isOpen, toggleAccordion }) => {
   return (

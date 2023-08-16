@@ -1,9 +1,9 @@
 import React from "react";
 import { styled } from "styled-components";
-import life from "../../../../../assets/lifestyle/lifestyle1.svg";
-import trimSideImg from "../../../../../assets/trimsideimg/trimSideNavy.svg";
-import option1 from "../../../../../assets/extraoption/fca-2-s-jpg.svg";
-import option2 from "../../../../../assets/extraoption/roa-s-jpg.svg";
+import life from "@assets/lifestyle/lifestyle1.svg";
+import trimSideImg from "@assets/trimsideimg/trimSideNavy.svg";
+import option1 from "@assets/extraoption/fca-2-s-jpg.svg";
+import option2 from "@assets/extraoption/roa-s-jpg.svg";
 
 const Detail = () => {
   return (

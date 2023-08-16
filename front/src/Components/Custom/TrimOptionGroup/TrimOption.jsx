@@ -1,7 +1,7 @@
 import React from "react";
 import { styled } from "styled-components";
-import Check28BlueIcon from "../../../assets/checkcircle/check-28-blue.svg";
-import Check28GreyIcon from "../../../assets/checkcircle/check-28-grey.svg";
+import Check28BlueIcon from "@assets/checkcircle/check-28-blue.svg";
+import Check28GreyIcon from "@assets/checkcircle/check-28-grey.svg";
 import DefaultOption from "./DefaultOption";
 
 const TrimOption = ({ data, selected, handleOptionSelect }) => {

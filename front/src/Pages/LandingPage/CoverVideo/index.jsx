@@ -1,6 +1,6 @@
 import React from "react";
 import { styled } from "styled-components";
-import video from "../../../assets/video/Home_mp4.mp4";
+import video from "@assets/video/Home_mp4.mp4";
 
 const CoverVideo = () => {
   return (

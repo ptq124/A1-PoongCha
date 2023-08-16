@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
-import Card from "./Card";
-import ArrowLeftIcon from "../../../../assets/icons/arrow-left-32-white.svg";
-import ArrowRightIcon from "../../../../assets/icons/arrow-right-32-white.svg";
 import { options } from "../optionData";
+import Card from "./Card";
+import ArrowLeftIcon from "@assets/icons/arrow-left-32-white.svg";
+import ArrowRightIcon from "@assets/icons/arrow-right-32-white.svg";
 
 const OptionPopup = ({
   popupRef,

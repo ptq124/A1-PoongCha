@@ -7,7 +7,7 @@ import {
   SLIDER_HANDLE_SIZE,
   SLIDER_IDX_COUNT,
   SLIDER_UNIT_WIDTH,
-} from "../../../utils/constants";
+} from "@utils/constants";
 
 const BudgetSliderGroup = ({ maxBudget, setMaxBudget }) => {
   const sliderRef = useRef();
