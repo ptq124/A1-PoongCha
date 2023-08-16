@@ -8,7 +8,6 @@ const ProgressBar = () => {
   useEffect(() => {
     setProgressStatus(pathname === "/survey/age" ? 0.5 : 1);
   }, [pathname]);
-  // const progressStatus = pathname === "/survey/age" ? 0.5 : 1;
 
   return (
     <Wrapper>

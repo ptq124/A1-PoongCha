@@ -1,6 +1,6 @@
 import React from "react";
 import { useLocation } from "react-router";
-import { styled } from "styled-components";
+import { keyframes, styled } from "styled-components";
 import PalisadeImg from "@assets/images/etc-end-palisade.svg";
 
 const QNASummary = () => {
@@ -71,13 +71,22 @@ const BottomFiller = styled.div`
 
   background-color: ${({ theme }) => theme.color.grey300};
 `;
+const slideImg = keyframes`
+  from {
+    left:450px;
+  }
+  to {
+    left: 278px;
+  }
+`;
 const Img = styled.img`
   position: absolute;
   left: 278px;
 
-  width: 538px;
-  height: 334px;
+  width: 600px;
   z-index: 2;
+
+  animation: ${slideImg} 0.7s ease-out;
 `;
 const Wrapper = styled.div`
   display: flex;
