@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import { keyframes, styled } from "styled-components";
 
 const ProgressBar = () => {
   const { pathname } = useLocation();
-  const progressStatus = pathname === "/survey/age" ? 0.5 : 1;
+  const [progressStatus, setProgressStatus] = useState(0);
+  useEffect(() => {
+    setProgressStatus(pathname === "/survey/age" ? 0.5 : 1);
+  }, [pathname]);
+  // const progressStatus = pathname === "/survey/age" ? 0.5 : 1;
 
   return (
     <Wrapper>
