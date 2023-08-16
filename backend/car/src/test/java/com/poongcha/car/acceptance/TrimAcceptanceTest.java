@@ -1,20 +1,32 @@
 package com.poongcha.car.acceptance;
 
+import static com.poongcha.car.acceptance.CarColorSteps.차량_색상_생성_요청;
 import static com.poongcha.car.acceptance.CarTypeSteps.차종_생성_요청;
 import static com.poongcha.car.acceptance.TrimSteps.존재하지_않는_차종_ID로_트림_목록_조회_요청;
 import static com.poongcha.car.acceptance.TrimSteps.존재하지_않는_차종_ID로_트림_목록_조회_응답_검증;
+import static com.poongcha.car.acceptance.TrimSteps.존재하지_않는_차종에_차량_색상_조회_요청;
+import static com.poongcha.car.acceptance.TrimSteps.존재하지_않는_차종에_차량_색상_조회_응답_검증;
 import static com.poongcha.car.acceptance.TrimSteps.존재하지_않는_차종으로_트림_생성_요청;
 import static com.poongcha.car.acceptance.TrimSteps.존재하지_않는_차종으로_트림_생성_응답_검증;
 import static com.poongcha.car.acceptance.TrimSteps.존재하지_않는_트림_ID_조회_요청;
 import static com.poongcha.car.acceptance.TrimSteps.존재하지_않는_트림_ID_조회_응답_검증;
+import static com.poongcha.car.acceptance.TrimSteps.존재하지_않는_트림에_차량_색상_설정_요청;
+import static com.poongcha.car.acceptance.TrimSteps.존재하지_않는_트림에_차량_색상_설정_응답_검증;
 import static com.poongcha.car.acceptance.TrimSteps.차종_ID로_트림_목록_조회_요청;
 import static com.poongcha.car.acceptance.TrimSteps.차종_ID로_트림_목록_조회_응답_검증;
+import static com.poongcha.car.acceptance.TrimSteps.차종에_차량_색상_조회_요청;
+import static com.poongcha.car.acceptance.TrimSteps.차종에_차량_색상_조회_응답_검증;
 import static com.poongcha.car.acceptance.TrimSteps.트림_ID_조회_요청;
 import static com.poongcha.car.acceptance.TrimSteps.트림_ID_조회_응답_검증;
 import static com.poongcha.car.acceptance.TrimSteps.트림_생성_요청;
 import static com.poongcha.car.acceptance.TrimSteps.트림_생성_응답_검증;
+import static com.poongcha.car.acceptance.TrimSteps.트림에_존재하지_않는_차량_색상_설정_요청;
+import static com.poongcha.car.acceptance.TrimSteps.트림에_존재하지_않는_차량_색상_설정_응답_검증;
+import static com.poongcha.car.acceptance.TrimSteps.트림에_차량_색상_설정_요청;
+import static com.poongcha.car.acceptance.TrimSteps.트림에_차량_색상_설정_응답_검증;
 
 import com.poongcha.car.util.DocumentationTest;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -155,5 +167,155 @@ public class TrimAcceptanceTest extends DocumentationTest {
 
         // THEN
         존재하지_않는_차종_ID로_트림_목록_조회_응답_검증(response);
+    }
+
+    @DisplayName("트림에 차량 색상 설정")
+    @Test
+    void 트림에_차량_색상_설정() {
+        // GIVEN
+        var carTypeName = "sonata";
+        var carTypeImageUrl = "https://www.naver.com/image-url.jpg";
+        차종_생성_요청(carTypeName, carTypeImageUrl);
+        var trimName = "premium";
+        var trimImageUrl = "https://www.hyundai.com/static/images/model/palisade/24my/mo/palisade_highlights_design_m.jpg";
+        var minPrice = 1_200_000;
+        var carTypeId = 1L;
+        트림_생성_요청(trimName, trimImageUrl, minPrice, carTypeId);
+        var carColorName = "red";
+        var imageUrl = "https://www.naver.com/color/red.jpg";
+        var carColorType = "INTERIOR";
+        차량_색상_생성_요청(carColorName, imageUrl, carColorType);
+        var carColorId = 1L;
+        var trimId = 1L;
+
+        // WHEN
+        var response = 트림에_차량_색상_설정_요청(carColorId, trimId);
+
+        // THEN
+        트림에_차량_색상_설정_응답_검증(response, "/api/trim/1/color");
+    }
+
+    @DisplayName("존재하지 않는 트림에 차량 색상을 설정")
+    @Test
+    void 존재하지_않는_트림에_차량_색상_설정() {
+        var carColorName = "red";
+        var imageUrl = "https://www.naver.com/color/red.jpg";
+        var carColorType = "INTERIOR";
+        차량_색상_생성_요청(carColorName, imageUrl, carColorType);
+        var carColorId = 1L;
+        var trimId = 29812312739123L;
+
+        // WHEN
+        var response = 존재하지_않는_트림에_차량_색상_설정_요청(carColorId, trimId);
+
+        // THEN
+        존재하지_않는_트림에_차량_색상_설정_응답_검증(response);
+    }
+
+    @DisplayName("트림에 존재하지 않는 차량 색상을 설정")
+    @Test
+    void 트림에_존재하지_않는_차량_색상_설정() {
+        // GIVEN
+        var carTypeName = "sonata";
+        var carTypeImageUrl = "https://www.naver.com/image-url.jpg";
+        차종_생성_요청(carTypeName, carTypeImageUrl);
+        var trimName = "premium";
+        var trimImageUrl = "https://www.hyundai.com/static/images/model/palisade/24my/mo/palisade_highlights_design_m.jpg";
+        var minPrice = 1_200_000;
+        var carTypeId = 1L;
+        트림_생성_요청(trimName, trimImageUrl, minPrice, carTypeId);
+        var trimId = 1L;
+        var carColorId = 2981231223739123L;
+
+        // WHEN
+        var response = 트림에_존재하지_않는_차량_색상_설정_요청(carColorId, trimId);
+
+        // THEN
+        트림에_존재하지_않는_차량_색상_설정_응답_검증(response);
+    }
+
+    @DisplayName("차종에 차량 색상을 조회한다.")
+    @Test
+    void 차종에_차량_색상_조회() {
+        // GIVEN
+        var carTypeName = "sonata";
+        var carTypeImageUrl = "https://www.naver.com/image-url.jpg";
+        차종_생성_요청(carTypeName, carTypeImageUrl);
+        var trimName = "premium";
+        var trimImageUrl = "https://www.hyundai.com/static/images/model/palisade/24my/mo/palisade_highlights_design_m.jpg";
+        var minPrice = 1_200_000;
+        var carTypeId = 1L;
+        트림_생성_요청(trimName, trimImageUrl, minPrice, carTypeId);
+        var carColorName1 = "red";
+        var carColorImageUrl1 = "https://www.naver.com/color/red.jpg";
+        var carColorType1 = "INTERIOR";
+        차량_색상_생성_요청(carColorName1, carColorImageUrl1, carColorType1);
+
+        var trimName2 = "Le Blanc";
+        var trimImageUrl2 = "https://www.hyundai.com/static/images/model/palisade/24my/mo/palisade_highlights_design_m.jpg";
+        var minPrice2 = 2_200_000;
+        트림_생성_요청(trimName2, trimImageUrl2, minPrice2, carTypeId);
+        var carColorName2 = "blue";
+        var carColorImageUrl2 = "https://www.naver.com/color/blue.jpg";
+        var carColorType2 = "EXTERIOR";
+        차량_색상_생성_요청(carColorName2, carColorImageUrl2, carColorType2);
+        long carColorId1 = 1L;
+        var trimId1 = 1L;
+        long carColorId2 = 2L;
+        var trimId2 = 2L;
+        트림에_차량_색상_설정_요청(carColorId2, trimId1);
+        트림에_차량_색상_설정_요청(carColorId1, trimId2);
+
+        // WHEN
+        var response = 차종에_차량_색상_조회_요청(carTypeId);
+
+        // THEN
+        차종에_차량_색상_조회_응답_검증(
+                response,
+                List.of((int) trimId1, (int) trimId2),
+                List.of(List.of((int) carColorId2), List.of((int) carColorId1)),
+                List.of(List.of(carColorName2), List.of(carColorName1)),
+                List.of(List.of(carColorImageUrl2), List.of(carColorImageUrl1)),
+                List.of(List.of(carColorType2), List.of(carColorType1))
+        );
+    }
+
+    @DisplayName("존재하지 않는 차종에 차량 색상을 조회.")
+    @Test
+    void 존재하지_않는_차종에_차량_색상_조회() {
+        // GIVEN
+        var carTypeName = "sonata";
+        var carTypeImageUrl = "https://www.naver.com/image-url.jpg";
+        차종_생성_요청(carTypeName, carTypeImageUrl);
+        var trimName = "premium";
+        var trimImageUrl = "https://www.hyundai.com/static/images/model/palisade/24my/mo/palisade_highlights_design_m.jpg";
+        var minPrice = 1_200_000;
+        var carTypeId = 1L;
+        트림_생성_요청(trimName, trimImageUrl, minPrice, carTypeId);
+        var carColorName1 = "red";
+        var carColorImageUrl1 = "https://www.naver.com/color/red.jpg";
+        var carColorType1 = "INTERIOR";
+        차량_색상_생성_요청(carColorName1, carColorImageUrl1, carColorType1);
+
+        var trimName2 = "Le Blanc";
+        var trimImageUrl2 = "https://www.hyundai.com/static/images/model/palisade/24my/mo/palisade_highlights_design_m.jpg";
+        var minPrice2 = 2_200_000;
+        트림_생성_요청(trimName2, trimImageUrl2, minPrice2, carTypeId);
+        var carColorName2 = "blue";
+        var carColorImageUrl2 = "https://www.naver.com/color/blue.jpg";
+        var carColorType2 = "EXTERIOR";
+        차량_색상_생성_요청(carColorName2, carColorImageUrl2, carColorType2);
+        long carColorId1 = 1L;
+        var trimId1 = 1L;
+        long carColorId2 = 2L;
+        var trimId2 = 2L;
+        트림에_차량_색상_설정_요청(carColorId2, trimId1);
+        트림에_차량_색상_설정_요청(carColorId1, trimId2);
+
+        // WHEN
+        var response = 존재하지_않는_차종에_차량_색상_조회_요청(129831823912387L);
+
+        // THEN
+        존재하지_않는_차종에_차량_색상_조회_응답_검증(response);
     }
 }

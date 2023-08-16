@@ -10,7 +10,6 @@ import static org.springframework.restdocs.payload.PayloadDocumentation.response
 import io.restassured.http.ContentType;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
-import java.util.List;
 import java.util.Map;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpStatus;

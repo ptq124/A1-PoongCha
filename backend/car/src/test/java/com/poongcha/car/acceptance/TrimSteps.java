@@ -5,6 +5,7 @@ import static com.poongcha.car.util.DocumentationTest.DEFAULT_RESTDOCS_PATH;
 import static com.poongcha.car.util.DocumentationTest.customRequestFields;
 import static com.poongcha.car.util.DocumentationTest.given;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
@@ -12,6 +13,7 @@ import static org.springframework.restdocs.request.RequestDocumentation.pathPara
 import io.restassured.http.ContentType;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
+import java.util.List;
 import java.util.Map;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpStatus;
@@ -205,6 +207,142 @@ public class TrimSteps {
     }
 
     public static void 존재하지_않는_차종_ID로_트림_목록_조회_응답_검증(final ExtractableResponse<Response> response) {
+        try (AutoCloseableSoftAssertions assertions = new AutoCloseableSoftAssertions()) {
+            assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.SC_NOT_FOUND);
+        }
+    }
+
+    public static ExtractableResponse<Response> 트림에_차량_색상_설정_요청(final long carColorId, final long trimId) {
+        return given()
+                .filter(document(
+                        DEFAULT_RESTDOCS_PATH,
+                        requestFields(
+                                fieldWithPath("colorId").type(JsonFieldType.NUMBER).description("차량 색상 ID")
+                        )
+                )).log().all()
+                .when()
+                .contentType(ContentType.JSON)
+                .body(Map.of(
+                        "colorId", carColorId
+                ))
+                .post("/api/trim/{id}/color", trimId)
+                .then().log().all()
+                .extract();
+    }
+
+    public static void 트림에_차량_색상_설정_응답_검증(final ExtractableResponse<Response> response, final String location) {
+        try (AutoCloseableSoftAssertions assertions = new AutoCloseableSoftAssertions()) {
+            assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.SC_CREATED);
+            assertions.assertThat(response.header(HttpHeaders.LOCATION)).isEqualTo(location);
+        }
+    }
+
+    public static ExtractableResponse<Response> 존재하지_않는_트림에_차량_색상_설정_요청(final long carColorId, final long trimId) {
+        return given()
+                .filter(document(
+                        DEFAULT_RESTDOCS_PATH,
+                        requestFields(
+                                fieldWithPath("colorId").type(JsonFieldType.NUMBER).description("차량 색상 ID")
+                        )
+                )).log().all()
+                .when()
+                .contentType(ContentType.JSON)
+                .body(Map.of(
+                        "colorId", carColorId
+                ))
+                .post("/api/trim/{id}/color", trimId)
+                .then().log().all()
+                .extract();
+    }
+
+    public static void 존재하지_않는_트림에_차량_색상_설정_응답_검증(final ExtractableResponse<Response> response) {
+        try (AutoCloseableSoftAssertions assertions = new AutoCloseableSoftAssertions()) {
+            assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.SC_BAD_REQUEST);
+        }
+    }
+
+    public static ExtractableResponse<Response> 트림에_존재하지_않는_차량_색상_설정_요청(final long carColorId, final long trimId) {
+        return given()
+                .filter(document(
+                        DEFAULT_RESTDOCS_PATH,
+                        requestFields(
+                                fieldWithPath("colorId").type(JsonFieldType.NUMBER).description("차량 색상 ID")
+                        )
+                )).log().all()
+                .when()
+                .contentType(ContentType.JSON)
+                .body(Map.of(
+                        "colorId", carColorId
+                ))
+                .post("/api/trim/{id}/color", trimId)
+                .then().log().all()
+                .extract();
+    }
+
+    public static void 트림에_존재하지_않는_차량_색상_설정_응답_검증(final ExtractableResponse<Response> response) {
+        try (AutoCloseableSoftAssertions assertions = new AutoCloseableSoftAssertions()) {
+            assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.SC_BAD_REQUEST);
+        }
+    }
+
+    public static ExtractableResponse<Response> 차종에_차량_색상_조회_요청(final long carTypeId) {
+        return given()
+                .filter(document(
+                        DEFAULT_RESTDOCS_PATH,
+                        pathParameters(parameterWithName("id").description("차종 ID")),
+                        responseFields(
+                                fieldWithPath("[].id").type(JsonFieldType.NUMBER).description("트림 ID"),
+                                fieldWithPath("[].colors").type(JsonFieldType.ARRAY).description("차량 색상 정보"),
+                                fieldWithPath("[].colors[].id").type(JsonFieldType.NUMBER).description("차량 색상 ID"),
+                                fieldWithPath("[].colors[].name").type(JsonFieldType.STRING).description("차량 색상 이름"),
+                                fieldWithPath("[].colors[].image").type(JsonFieldType.STRING)
+                                        .description("차량 색상 이미지 URL"),
+                                fieldWithPath("[].colors[].type").type(JsonFieldType.STRING).description("차량 색상 타입")
+                        )
+                )).log().all()
+                .when()
+                .get("/api/car-type/{id}/color", carTypeId)
+                .then().log().all()
+                .extract();
+    }
+
+    public static void 차종에_차량_색상_조회_응답_검증(
+            final ExtractableResponse<Response> response,
+            final List trimIds,
+            final List<List> carColorIds,
+            final List<List> carColorNames,
+            final List<List> carColorImages,
+            final List<List> carColorTypes
+    ) {
+        try (AutoCloseableSoftAssertions assertions = new AutoCloseableSoftAssertions()) {
+            assertions.assertThat(response.statusCode())
+                    .isEqualTo(HttpStatus.SC_OK);
+            assertions.assertThat(response.jsonPath().getList("id")).usingRecursiveComparison()
+                    .isEqualTo(trimIds);
+            assertions.assertThat(response.jsonPath().getList("colors.id")).usingRecursiveComparison()
+                    .isEqualTo(carColorIds);
+            assertions.assertThat(response.jsonPath().getList("colors.name")).usingRecursiveComparison()
+                    .isEqualTo(carColorNames);
+            assertions.assertThat(response.jsonPath().getList("colors.image")).usingRecursiveComparison()
+                    .isEqualTo(carColorImages);
+            assertions.assertThat(response.jsonPath().getList("colors.type")).usingRecursiveComparison()
+                    .isEqualTo(carColorTypes);
+        }
+    }
+
+    public static ExtractableResponse<Response> 존재하지_않는_차종에_차량_색상_조회_요청(final long carTypeId) {
+        return given()
+                .filter(document(
+                        DEFAULT_RESTDOCS_PATH,
+                        pathParameters(parameterWithName("id").description("차종 ID"))
+                )).log().all()
+                .when()
+                .get("/api/car-type/{id}/color", carTypeId)
+                .then().log().all()
+                .extract();
+    }
+
+    public static void 존재하지_않는_차종에_차량_색상_조회_응답_검증(final ExtractableResponse<Response> response) {
         try (AutoCloseableSoftAssertions assertions = new AutoCloseableSoftAssertions()) {
             assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.SC_NOT_FOUND);
         }

@@ -1,7 +1,10 @@
 package com.poongcha.car.application;
 
+import com.poongcha.car.application.dto.TrimCarColorResponse;
 import com.poongcha.car.application.dto.TrimDefaultResponse;
+import com.poongcha.car.application.mapper.CarColorMapper;
 import com.poongcha.car.application.mapper.TrimMapper;
+import com.poongcha.car.domain.CarColorRepository;
 import com.poongcha.car.domain.Trim;
 import com.poongcha.car.domain.TrimRepository;
 import com.poongcha.car.exception.HttpNotFoundException;
@@ -16,7 +19,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class TrimQueryService {
     private final TrimRepository trimRepository;
+    private final CarColorRepository carColorRepository;
     private final TrimMapper trimMapper;
+    private final CarColorMapper carColorMapper;
 
     public TrimDefaultResponse findById(final long id) {
         Trim trim = trimRepository.findById(id)
@@ -32,5 +37,22 @@ public class TrimQueryService {
         return trims.stream()
                 .map(trimMapper::toDefaultResponse)
                 .collect(Collectors.toUnmodifiableList());
+    }
+
+    public List<TrimCarColorResponse> findCarTypeColors(final long carTypeId) {
+        List<Trim> carTypes = trimRepository.findAllByCarType(carTypeId);
+        if(carTypes.isEmpty()) {
+            throw new HttpNotFoundException("차종이 존재하지 않습니다.");
+        }
+        return carTypes.stream()
+                .map(this::toTrimCarColorResponse)
+                .collect(Collectors.toUnmodifiableList());
+    }
+
+    private TrimCarColorResponse toTrimCarColorResponse(final Trim trim) {
+        return new TrimCarColorResponse(
+                trim.getId(),
+                carColorMapper.toCarColorDefaultResponses(carColorRepository.findAllByIdIn(trim.carColorIds()))
+        );
     }
 }

@@ -1,5 +1,9 @@
 package com.poongcha.car.domain;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +12,7 @@ import org.springframework.data.jdbc.core.mapping.AggregateReference;
 import org.springframework.data.jdbc.core.mapping.AggregateReference.IdOnlyAggregateReference;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Embedded;
+import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
 
 @Getter
@@ -30,6 +35,9 @@ public class Trim {
     @Column("car_type_id")
     private AggregateReference<CarType, Long> carType;
 
+    @MappedCollection(idColumn = "trim_id")
+    private Set<TrimCarColor> trimCarColors = new HashSet<>();
+
     public Trim(
             final String trimName,
             final String imageUrl,
@@ -40,5 +48,16 @@ public class Trim {
         this.imageUrl = new ImageUrl(imageUrl);
         this.minPrice = new MinPrice(minPrice);
         this.carType = new IdOnlyAggregateReference<>(carType);
+    }
+
+    public void addCarColor(final long carColorId) {
+        trimCarColors.add(new TrimCarColor(carColorId));
+    }
+
+    public List<Long> carColorIds() {
+        return trimCarColors.stream()
+                .map(TrimCarColor::getCarColor)
+                .map(AggregateReference::getId)
+                .collect(Collectors.toUnmodifiableList());
     }
 }
