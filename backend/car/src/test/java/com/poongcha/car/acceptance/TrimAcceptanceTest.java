@@ -1,5 +1,6 @@
 package com.poongcha.car.acceptance;
 
+import static com.poongcha.car.acceptance.CarColorSteps.양립_불가능한_차량_색상_설정_요청;
 import static com.poongcha.car.acceptance.CarColorSteps.차량_색상_생성_요청;
 import static com.poongcha.car.acceptance.CarTypeSteps.차종_생성_요청;
 import static com.poongcha.car.acceptance.TrimSteps.존재하지_않는_차종_ID로_트림_목록_조회_요청;
@@ -265,6 +266,10 @@ public class TrimAcceptanceTest extends DocumentationTest {
         var trimId2 = 2L;
         트림에_차량_색상_설정_요청(carColorId2, trimId1);
         트림에_차량_색상_설정_요청(carColorId1, trimId2);
+        차량_색상_생성_요청("orange", "https://www.naver.com/color/orange.jpg", "EXTERIOR");
+        양립_불가능한_차량_색상_설정_요청(carColorId2, 3L);
+        차량_색상_생성_요청("green", "https://www.naver.com/color/green.jpg", "EXTERIOR");
+        양립_불가능한_차량_색상_설정_요청(carColorId2, 4L);
 
         // WHEN
         var response = 차종에_차량_색상_조회_요청(carTypeId);
@@ -276,7 +281,8 @@ public class TrimAcceptanceTest extends DocumentationTest {
                 List.of(List.of((int) carColorId2), List.of((int) carColorId1)),
                 List.of(List.of(carColorName2), List.of(carColorName1)),
                 List.of(List.of(carColorImageUrl2), List.of(carColorImageUrl1)),
-                List.of(List.of(carColorType2), List.of(carColorType1))
+                List.of(List.of(carColorType2), List.of(carColorType1)),
+                List.of(List.of(List.of(3, 4)), List.of(List.of()))
         );
     }
 
