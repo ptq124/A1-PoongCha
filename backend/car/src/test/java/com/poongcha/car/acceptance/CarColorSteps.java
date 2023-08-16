@@ -1,9 +1,11 @@
 package com.poongcha.car.acceptance;
 
 import static com.epages.restdocs.apispec.RestAssuredRestDocumentationWrapper.document;
+import static com.poongcha.car.util.DocumentationTest.DEFAULT_RESTDOCS_PATH;
+import static com.poongcha.car.util.DocumentationTest.customRequestFields;
+import static com.poongcha.car.util.DocumentationTest.given;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 
-import com.poongcha.car.util.DocumentationTest;
 import io.restassured.http.ContentType;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
@@ -11,11 +13,9 @@ import java.util.Map;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpStatus;
 import org.assertj.core.api.AutoCloseableSoftAssertions;
-import org.junit.jupiter.api.DisplayName;
 import org.springframework.restdocs.payload.JsonFieldType;
 
-@DisplayName("차량 색상 관련 기능")
-public class CarColorSteps extends DocumentationTest {
+public class CarColorSteps {
     public static ExtractableResponse<Response> 차량_색상_생성_요청(
             final String carColorName,
             final String imageUrl,
