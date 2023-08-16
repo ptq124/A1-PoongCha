@@ -4,6 +4,7 @@ import OptionTooltip from "./OptionTooltip";
 import OptionItem from "@Components/Custom/OptionItem";
 import TaggedPageSampleImg from "@assets/images/tagged-page-sample.svg";
 import PlusIcon from "@assets/icons/plus.svg";
+import useTooltip from "@hooks/useTooltip";
 
 const TaggedPage = ({
   handleOpenPopup,
@@ -14,9 +15,11 @@ const TaggedPage = ({
   const [activeOptionIdx, setActiveOptionIdx] = useState(null);
 
   const handlePlusBtnClick = (index) => {
-    if (activeOptionIdx === null || activeOptionIdx !== index)
+    if (activeOptionIdx === null || activeOptionIdx !== index) {
       setActiveOptionIdx(index);
-    else setActiveOptionIdx(null);
+    } else {
+      setActiveOptionIdx(null);
+    }
   };
   return (
     <Wrapper>
@@ -41,7 +44,6 @@ const TaggedPage = ({
       </SituationScreen>
       <OptionItemsContainer>
         {optionData.map((data, index) => (
-          // 옵션 컴포넌트 들어갈 자리
           <OptionItem
             key={index}
             data={data}

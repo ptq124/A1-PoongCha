@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { css, styled } from "styled-components";
 import { useLocation } from "react-router";
 import Button from "@Components/Common/Button/Button";
@@ -47,7 +47,7 @@ const Navigation = () => {
         <BtnsContainer>
           <Button
             text="요금 상세"
-            style={amoutDetailBtnStyle}
+            style={amountDetailBtnStyle}
             onClick={openPopup}
           />
           <Button
@@ -62,7 +62,7 @@ const Navigation = () => {
   );
 };
 
-const amoutDetailBtnStyle = css`
+const amountDetailBtnStyle = css`
   height: 40px;
 
   background-color: ${({ theme }) => theme.color.grey1000};
