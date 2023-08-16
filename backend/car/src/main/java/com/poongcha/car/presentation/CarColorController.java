@@ -15,7 +15,7 @@ public class CarColorController {
     private final CarColorCommandService carColorCommandService;
 
     @PostMapping("/api/color")
-    private ResponseEntity createCarColor(@RequestBody CarColorCreateRequest carColorCreateRequest) {
+    private ResponseEntity createCarColor(@RequestBody final CarColorCreateRequest carColorCreateRequest) {
         long createCarColorId = carColorCommandService.create(carColorCreateRequest);
         return ResponseEntity.created(URI.create("/api/color/" + createCarColorId)).build();
     }
