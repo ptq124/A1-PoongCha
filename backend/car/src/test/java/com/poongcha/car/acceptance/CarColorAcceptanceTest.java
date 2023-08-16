@@ -1,5 +1,7 @@
 package com.poongcha.car.acceptance;
 
+import static com.poongcha.car.acceptance.CarColorSteps.같은_ID로_양립_불가능한_차량_색상_설정_요청;
+import static com.poongcha.car.acceptance.CarColorSteps.같은_ID로_양립_불가능한_차량_색상_설정_응답_검증;
 import static com.poongcha.car.acceptance.CarColorSteps.양립_불가능한_차량_색상_설정_요청;
 import static com.poongcha.car.acceptance.CarColorSteps.양립_불가능한_차량_색상_설정_응답_검증;
 import static com.poongcha.car.acceptance.CarColorSteps.존재하지_않는_차량_색상에_양립_불가능한_차량_색상_설정_요청;
@@ -35,7 +37,7 @@ public class CarColorAcceptanceTest extends DocumentationTest {
         차량_색상_생성_요청("red", "www.naver.com/color/red.png", "INTERIOR");
         차량_색상_생성_요청("green", "www.naver.com/color/green.png", "EXTERIOR");
         차량_색상_생성_요청("blue", "www.naver.com/color/blue.png", "EXTERIOR");
-        차량_색상_생성_요청("orange", "www.naver.com/color/orange.png", "INTERIOR");
+        차량_색상_생성_요청("orange", "www.naver.com/color/orange.png", "EXTERIOR");
         var carColorId = 1L;
         var incompatibleCarColor1 = 2L;
         var compatibleCarColor = 3L;
@@ -60,5 +62,19 @@ public class CarColorAcceptanceTest extends DocumentationTest {
 
         // THEN
         존재하지_않는_차량_색상에_양립_불가능한_차량_색상_설정_응답_검증(response);
+    }
+
+    @DisplayName("같은 ID로 양립 불가능한 차량 색상 설정")
+    @Test
+    void 같은_ID로_양립_불가능한_차량_색상_설정() {
+        // GIVEN
+        차량_색상_생성_요청("red", "www.naver.com/color/red.png", "INTERIOR");
+        var carColorId = 1L;
+
+        // WHEN
+        var response = 같은_ID로_양립_불가능한_차량_색상_설정_요청(carColorId, carColorId);
+
+        // THEN
+        같은_ID로_양립_불가능한_차량_색상_설정_응답_검증(response);
     }
 }
