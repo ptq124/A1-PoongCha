@@ -329,4 +329,22 @@ public class TrimSteps {
                     .isEqualTo(carColorTypes);
         }
     }
+
+    public static ExtractableResponse<Response> 존재하지_않는_차종에_차량_색상_조회_요청(final long carTypeId) {
+        return given()
+                .filter(document(
+                        DEFAULT_RESTDOCS_PATH,
+                        pathParameters(parameterWithName("id").description("차종 ID"))
+                )).log().all()
+                .when()
+                .get("/api/car-type/{id}/color", carTypeId)
+                .then().log().all()
+                .extract();
+    }
+
+    public static void 존재하지_않는_차종에_차량_색상_조회_응답_검증(final ExtractableResponse<Response> response) {
+        try (AutoCloseableSoftAssertions assertions = new AutoCloseableSoftAssertions()) {
+            assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.SC_NOT_FOUND);
+        }
+    }
 }
