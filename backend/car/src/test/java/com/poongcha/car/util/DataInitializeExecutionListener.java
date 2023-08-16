@@ -2,6 +2,7 @@ package com.poongcha.car.util;
 
 import com.poongcha.car.domain.CarColor;
 import com.poongcha.car.domain.CarType;
+import com.poongcha.car.domain.IncompatibleCarColor;
 import com.poongcha.car.domain.Trim;
 import com.poongcha.car.domain.TrimCarColor;
 import java.sql.PreparedStatement;
@@ -20,6 +21,7 @@ public class DataInitializeExecutionListener extends AbstractTestExecutionListen
         reset(operation, Trim.class.getAnnotation(Table.class).name());
         reset(operation, CarColor.class.getAnnotation(Table.class).name());
         reset(operation, TrimCarColor.class.getAnnotation(Table.class).name());
+        reset(operation, IncompatibleCarColor.class.getAnnotation(Table.class).name());
     }
 
     private static void reset(
