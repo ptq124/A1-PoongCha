@@ -1,18 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { styled } from "styled-components";
 import OptionTag from "@Components/Custom/OptionTag";
 import OptionItem from "@Components/Custom/OptionItem";
-import TaggedPage from "../TaggedPage";
+import TaggedPage from "./TaggedPage";
 import { tags, tagSelectIcons, tagsNotSelectIcons } from "../tagIcon";
 import left from "@assets/icons/chevron-left.svg";
 import right from "@assets/icons/chevron-right.svg";
+import useOnClickPopUp from "@hooks/useOnClickPopUp";
+import OverlaidPopup from "@Components/Common/OverlaidPopup";
+import OptionPopup from "../OptionPopup";
 
 const AllOptions = ({
   tab,
   options,
-  handleOpenPopup,
   handleSelectOption,
-  hasOption,
+  checkOptionSelected,
 }) => {
   const [tagsOption, setTagsOption] = useState([]);
   const [selectTag, setSelectTag] = useState(null);
@@ -32,7 +34,17 @@ const AllOptions = ({
     }
   }, [tab]);
 
-  // 페이지 네이션
+  // 더 알아보기 팝업
+  const optionPopupRef = useRef();
+  const { isPopupOpen, openPopup, closePopup } =
+    useOnClickPopUp(optionPopupRef);
+  const [popupOptionName, setPopupOptionName] = useState(null);
+  const handleOpenPopup = (data) => {
+    setPopupOptionName(data);
+    openPopup();
+  };
+
+  // 페이지네이션
   const getDataForPage = (data, page, itemsPerPage) => {
     const startIndex = (page - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
@@ -55,7 +67,7 @@ const AllOptions = ({
         <OptionItem
           key={index}
           data={data}
-          selected={hasOption(data.option)}
+          selected={checkOptionSelected(data.option)}
           handleSelectOption={handleSelectOption}
           handleOpenPopup={handleOpenPopup}
         />
@@ -66,7 +78,7 @@ const AllOptions = ({
         <OptionItem
           key={index}
           data={data}
-          selected={hasOption(data.option)}
+          selected={checkOptionSelected(data.option)}
           handleSelectOption={handleSelectOption}
           handleOpenPopup={handleOpenPopup}
         />
@@ -77,13 +89,26 @@ const AllOptions = ({
           handleOpenPopup={handleOpenPopup}
           handleSelectOption={handleSelectOption}
           optionData={options.filter((data) => data.tag === selectTag)}
-          hasOption={hasOption}
+          checkOptionSelected={checkOptionSelected}
         />
       );
   };
 
   return (
     <Wrapper>
+      {isPopupOpen && (
+        <OverlaidPopup
+          component={
+            <OptionPopup
+              popupRef={optionPopupRef}
+              closePopup={closePopup}
+              popupOptionName={popupOptionName}
+              handleSelectOption={handleSelectOption}
+              checkOptionSelected={checkOptionSelected}
+            />
+          }
+        />
+      )}
       <OptionTag
         selectTag={selectTag}
         tagsOption={tagsOption}

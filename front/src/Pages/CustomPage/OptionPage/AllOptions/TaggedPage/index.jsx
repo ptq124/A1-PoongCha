@@ -10,7 +10,7 @@ const TaggedPage = ({
   handleOpenPopup,
   handleSelectOption,
   optionData,
-  hasOption,
+  checkOptionSelected,
 }) => {
   const [activeOptionIdx, setActiveOptionIdx] = useState(null);
 
@@ -47,7 +47,7 @@ const TaggedPage = ({
           <OptionItem
             key={index}
             data={data}
-            selected={hasOption(data.option)}
+            selected={checkOptionSelected(data.option)}
             handleOpenPopup={handleOpenPopup}
             handleSelectOption={handleSelectOption}
           />

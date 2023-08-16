@@ -10,7 +10,7 @@ const OptionPopup = ({
   closePopup,
   popupOptionName,
   handleSelectOption,
-  hasOption,
+  checkOptionSelected,
 }) => {
   const [crntOptionIdx, setCrntOptionIdx] = useState(0);
   // 세트 옵션일 경우 popupData = 세트 옵션들 리스트 > 팝업 카드 캐루셀로 나옴
@@ -32,7 +32,7 @@ const OptionPopup = ({
               popupData={popupData}
               closePopup={closePopup}
               handleNavClick={setCrntOptionIdx}
-              selected={hasOption(data.option)}
+              selected={checkOptionSelected(data.option)}
               handleSelectOption={() => handleSelectOption(data.option)}
             />
           ))}

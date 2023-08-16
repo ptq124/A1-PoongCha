@@ -3,9 +3,9 @@ import { css, styled } from "styled-components";
 import TooltipTail from "@assets/icons/option-tooltip-tail.svg";
 import ArrowRightIcon from "@assets/icons/arrow-right.svg";
 
-const OptionTooltip = ({ data, handleOpenPopup, onMouseLeave }) => {
+const OptionTooltip = ({ data, handleOpenPopup }) => {
   return (
-    <Wrapper $position={data.position} onMouseLeave={onMouseLeave}>
+    <Wrapper $position={data.position}>
       <Content>
         <Img></Img>
         <Detail>
