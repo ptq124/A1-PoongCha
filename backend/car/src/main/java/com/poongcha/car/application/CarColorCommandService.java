@@ -29,6 +29,6 @@ public class CarColorCommandService {
         CarColor carColor = carColorRepository.findByIdWithLock(carColorId)
                 .orElseThrow(() -> new BadRequestException("차량 색상이 존재하지 않습니다."));
         carColor.addIncompatibleColor(carColorAddIncompatibleColorRequest.getIds());
-        return carColor.getId();
+        return carColorRepository.save(carColor).getId();
     }
 }
