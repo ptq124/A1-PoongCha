@@ -297,7 +297,9 @@ public class TrimSteps {
                                 fieldWithPath("[].colors[].name").type(JsonFieldType.STRING).description("차량 색상 이름"),
                                 fieldWithPath("[].colors[].image").type(JsonFieldType.STRING)
                                         .description("차량 색상 이미지 URL"),
-                                fieldWithPath("[].colors[].type").type(JsonFieldType.STRING).description("차량 색상 타입")
+                                fieldWithPath("[].colors[].type").type(JsonFieldType.STRING).description("차량 색상 타입"),
+                                fieldWithPath("[].colors[].incompatibleColorIds[]").type(JsonFieldType.ARRAY)
+                                        .description("양립 불가능 색상 ID 목록")
                         )
                 )).log().all()
                 .when()
@@ -312,7 +314,8 @@ public class TrimSteps {
             final List<List> carColorIds,
             final List<List> carColorNames,
             final List<List> carColorImages,
-            final List<List> carColorTypes
+            final List<List> carColorTypes,
+            final List<List> incompatibleColorIds
     ) {
         try (AutoCloseableSoftAssertions assertions = new AutoCloseableSoftAssertions()) {
             assertions.assertThat(response.statusCode())
@@ -327,6 +330,8 @@ public class TrimSteps {
                     .isEqualTo(carColorImages);
             assertions.assertThat(response.jsonPath().getList("colors.type")).usingRecursiveComparison()
                     .isEqualTo(carColorTypes);
+            assertions.assertThat(response.jsonPath().getList("colors.incompatibleColorIds")).usingRecursiveComparison()
+                    .isEqualTo(incompatibleColorIds);
         }
     }
 

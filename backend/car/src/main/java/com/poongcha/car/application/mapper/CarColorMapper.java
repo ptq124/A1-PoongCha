@@ -25,7 +25,8 @@ public class CarColorMapper {
                 carColor.getId(),
                 carColor.getCarColorName().getValue(),
                 carColor.getImageUrl().getValue(),
-                carColor.getCarColorType().name()
+                carColor.getCarColorType().name(),
+                carColor.incompatibleColorIds()
         );
     }
 

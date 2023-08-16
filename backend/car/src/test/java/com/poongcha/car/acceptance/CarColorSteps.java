@@ -5,6 +5,8 @@ import static com.poongcha.car.util.DocumentationTest.DEFAULT_RESTDOCS_PATH;
 import static com.poongcha.car.util.DocumentationTest.customRequestFields;
 import static com.poongcha.car.util.DocumentationTest.given;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 
 import io.restassured.http.ContentType;
 import io.restassured.response.ExtractableResponse;
@@ -46,6 +48,127 @@ public class CarColorSteps {
         try (AutoCloseableSoftAssertions assertions = new AutoCloseableSoftAssertions()) {
             assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.SC_CREATED);
             assertions.assertThat(response.header(HttpHeaders.LOCATION)).isEqualTo(location);
+        }
+    }
+
+    public static ExtractableResponse<Response> 양립_불가능한_차량_색상_설정_요청(
+            final long carColorId,
+            final long... incompatibleCarColor
+    ) {
+        return given()
+                .filter(document(
+                        DEFAULT_RESTDOCS_PATH,
+                        pathParameters(
+                                parameterWithName("id").description("차량 색상 ID")
+                        ),
+                        customRequestFields(
+                                fieldWithPath("ids").type(JsonFieldType.ARRAY).description("양립 불가능한 차량 색상 ID")
+                        )
+                )).log().all()
+                .when()
+                .body(Map.of(
+                        "ids", incompatibleCarColor
+                ))
+                .contentType(ContentType.JSON)
+                .post("/api/color/{id}/incompatible", carColorId)
+                .then().log().all()
+                .extract();
+    }
+
+    public static void 양립_불가능한_차량_색상_설정_응답_검증(final ExtractableResponse<Response> response, final String location) {
+        try (AutoCloseableSoftAssertions assertions = new AutoCloseableSoftAssertions()) {
+            assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.SC_CREATED);
+            assertions.assertThat(response.header(HttpHeaders.LOCATION)).isEqualTo(location);
+        }
+    }
+
+    public static ExtractableResponse<Response> 존재하지_않는_차량_색상에_양립_불가능한_차량_색상_설정_요청(
+            final long carColorId,
+            final Long... incompatibleIds
+    ) {
+        return given()
+                .filter(document(
+                        DEFAULT_RESTDOCS_PATH,
+                        pathParameters(
+                                parameterWithName("id").description("차량 색상 ID")
+                        ),
+                        customRequestFields(
+                                fieldWithPath("ids").type(JsonFieldType.ARRAY).description("양립 불가능한 차량 색상 ID")
+                        )
+                )).log().all()
+                .when()
+                .body(Map.of(
+                        "ids", incompatibleIds
+                ))
+                .contentType(ContentType.JSON)
+                .post("/api/color/{id}/incompatible", carColorId)
+                .then().log().all()
+                .extract();
+    }
+
+    public static void 존재하지_않는_차량_색상에_양립_불가능한_차량_색상_설정_응답_검증(final ExtractableResponse<Response> response) {
+        try (AutoCloseableSoftAssertions assertions = new AutoCloseableSoftAssertions()) {
+            assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.SC_BAD_REQUEST);
+        }
+    }
+
+    public static ExtractableResponse<Response> 같은_ID로_양립_불가능한_차량_색상_설정_요청(
+            final long carColorId,
+            final long... sameColorId
+    ) {
+        return given()
+                .filter(document(
+                        DEFAULT_RESTDOCS_PATH,
+                        pathParameters(
+                                parameterWithName("id").description("차량 색상 ID")
+                        ),
+                        customRequestFields(
+                                fieldWithPath("ids").type(JsonFieldType.ARRAY).description("양립 불가능한 차량 색상 ID")
+                        )
+                )).log().all()
+                .when()
+                .body(Map.of(
+                        "ids", sameColorId
+                ))
+                .contentType(ContentType.JSON)
+                .post("/api/color/{id}/incompatible", carColorId)
+                .then().log().all()
+                .extract();
+    }
+
+    public static void 같은_ID로_양립_불가능한_차량_색상_설정_응답_검증(final ExtractableResponse<Response> response) {
+        try (AutoCloseableSoftAssertions assertions = new AutoCloseableSoftAssertions()) {
+            assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.SC_BAD_REQUEST);
+        }
+    }
+
+    public static ExtractableResponse<Response> 같은_차량_색상_타입으로_양립_불가능한_차량_색상_설정_요청(
+            final long carColorId,
+            final long... sameColorId
+    ) {
+        return given()
+                .filter(document(
+                        DEFAULT_RESTDOCS_PATH,
+                        pathParameters(
+                                parameterWithName("id").description("차량 색상 ID")
+                        ),
+                        customRequestFields(
+                                fieldWithPath("ids").type(JsonFieldType.ARRAY).description("양립 불가능한 차량 색상 ID")
+                        )
+                )).log().all()
+                .when()
+                .body(Map.of(
+                        "ids", sameColorId
+                ))
+                .contentType(ContentType.JSON)
+                .post("/api/color/{id}/incompatible", carColorId)
+                .then().log().all()
+                .extract();
+    }
+
+    public static void 같은_차량_색상_타입으로_양립_불가능한_차량_색상_설정_응답_검증(final ExtractableResponse<Response> response) {
+        try (AutoCloseableSoftAssertions assertions = new AutoCloseableSoftAssertions()) {
+            assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.SC_BAD_REQUEST);
         }
     }
 }
