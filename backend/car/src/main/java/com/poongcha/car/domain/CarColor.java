@@ -8,6 +8,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.jdbc.core.mapping.AggregateReference;
 import org.springframework.data.relational.core.mapping.Embedded;
 import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
@@ -42,5 +43,12 @@ public class CarColor {
                 .collect(Collectors.toList());
 
         incompatibleCarColors.addAll(incompatibleCarColorList);
+    }
+
+    public List<Long> incompatibleColorIds() {
+        return this.incompatibleCarColors.stream()
+                .map(IncompatibleCarColor::getIncompatibleCarColor)
+                .map(AggregateReference::getId)
+                .collect(Collectors.toUnmodifiableList());
     }
 }
