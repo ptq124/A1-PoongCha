@@ -80,9 +80,9 @@ public class CarColorAcceptanceTest extends DocumentationTest {
         같은_ID로_양립_불가능한_차량_색상_설정_응답_검증(response);
     }
 
-    @DisplayName("같은 차량 타입으로 양립 불가능한 차량 색상 설정")
+    @DisplayName("같은 차량 색상 타입으로 양립 불가능한 차량 색상 설정")
     @Test
-    void 같은_차량_타입으로_양립_불가능한_차량_색상_설정() {
+    void 같은_차량_색상_타입으로_양립_불가능한_차량_색상_설정() {
         // GIVEN
         차량_색상_생성_요청("red", "www.naver.com/color/red.png", "INTERIOR");
         차량_색상_생성_요청("blue", "www.naver.com/color/blue.png", "EXTERIOR");
