@@ -34,12 +34,29 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
 
+      - name: 🔎 Cache SonarCloud packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+
+      - name: ⚙️ Cache Gradle packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+          restore-keys: ${{ runner.os }}-gradle
+
       - name: 🔐 Grant execute permission for gradlew
         run: chmod +x ./gradlew
         working-directory: backend/boot-loader/
         shell: bash
 
-      - name: 🛠 Build with Gradle with test profile
-        run: sudo ./gradlew build -Pprofile=test
+      - name: 🛠 Build and analyze
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: sudo ./gradlew build -Pprofile=test sonar --info
         working-directory: backend/boot-loader/
         shell: bash
