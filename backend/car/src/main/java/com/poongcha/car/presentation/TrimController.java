@@ -1,7 +1,7 @@
 package com.poongcha.car.presentation;
 
-import com.poongcha.car.application.TrimCommandService;
-import com.poongcha.car.application.TrimQueryService;
+import com.poongcha.car.application.trim.TrimCommandService;
+import com.poongcha.car.application.trim.TrimQueryService;
 import com.poongcha.car.application.dto.TrimAddCarColorRequest;
 import com.poongcha.car.application.dto.TrimCarColorResponse;
 import com.poongcha.car.application.dto.TrimCreateRequest;

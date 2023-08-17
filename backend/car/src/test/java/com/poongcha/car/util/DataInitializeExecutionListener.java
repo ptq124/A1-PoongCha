@@ -1,12 +1,12 @@
 package com.poongcha.car.util;
 
-import com.poongcha.car.domain.CarColor;
-import com.poongcha.car.domain.CarComponent;
-import com.poongcha.car.domain.CarComponentGroup;
-import com.poongcha.car.domain.CarType;
-import com.poongcha.car.domain.IncompatibleCarColor;
-import com.poongcha.car.domain.Trim;
-import com.poongcha.car.domain.TrimCarColor;
+import com.poongcha.car.domain.carcolor.CarColor;
+import com.poongcha.car.domain.carcomponent.CarComponent;
+import com.poongcha.car.domain.carcomponentgroup.CarComponentGroup;
+import com.poongcha.car.domain.cartype.CarType;
+import com.poongcha.car.domain.carcolor.IncompatibleCarColor;
+import com.poongcha.car.domain.trim.Trim;
+import com.poongcha.car.domain.trim.TrimCarColor;
 import java.sql.PreparedStatement;
 import org.springframework.context.ApplicationContext;
 import org.springframework.data.relational.core.mapping.Table;

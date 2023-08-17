@@ -1,6 +1,6 @@
 package com.poongcha.car.presentation;
 
-import com.poongcha.car.application.CarComponentCommandService;
+import com.poongcha.car.application.carcomponent.CarComponentCommandService;
 import com.poongcha.car.application.dto.CarComponentCreateRequest;
 import java.net.URI;
 import lombok.RequiredArgsConstructor;

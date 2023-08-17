@@ -1,6 +1,6 @@
 package com.poongcha.car.presentation;
 
-import com.poongcha.car.application.CarComponentGroupCommandService;
+import com.poongcha.car.application.carcomponentgroup.CarComponentGroupCommandService;
 import com.poongcha.car.application.dto.CarComponentGroupAddCarComponentRequest;
 import com.poongcha.car.application.dto.CarComponentGroupCreateRequest;
 import java.net.URI;

@@ -1,6 +1,6 @@
 package com.poongcha.car.presentation;
 
-import com.poongcha.car.application.CarColorCommandService;
+import com.poongcha.car.application.carcolor.CarColorCommandService;
 import com.poongcha.car.application.dto.CarColorAddIncompatibleColorRequest;
 import com.poongcha.car.application.dto.CarColorCreateRequest;
 import java.net.URI;

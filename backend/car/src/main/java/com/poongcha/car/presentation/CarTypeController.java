@@ -1,7 +1,7 @@
 package com.poongcha.car.presentation;
 
-import com.poongcha.car.application.CarTypeCommandService;
-import com.poongcha.car.application.CarTypeQueryService;
+import com.poongcha.car.application.cartype.CarTypeCommandService;
+import com.poongcha.car.application.cartype.CarTypeQueryService;
 import com.poongcha.car.application.dto.CarTypeAddCarComponentGroupRequest;
 import com.poongcha.car.application.dto.CarTypeCreateRequest;
 import com.poongcha.car.application.dto.CarTypeDefaultResponse;
