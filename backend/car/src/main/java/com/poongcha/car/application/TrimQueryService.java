@@ -41,7 +41,7 @@ public class TrimQueryService {
 
     public List<TrimCarColorResponse> findCarTypeColors(final long carTypeId) {
         List<Trim> carTypes = trimRepository.findAllByCarType(carTypeId);
-        if(carTypes.isEmpty()) {
+        if (carTypes.isEmpty()) {
             throw new HttpNotFoundException("차종이 존재하지 않습니다.");
         }
         return carTypes.stream()
@@ -52,7 +52,7 @@ public class TrimQueryService {
     private TrimCarColorResponse toTrimCarColorResponse(final Trim trim) {
         return new TrimCarColorResponse(
                 trim.getId(),
-                carColorMapper.toCarColorDefaultResponses(carColorRepository.findAllByIdIn(trim.carColorIds()))
+                carColorMapper.toCarColorDefaultResponses(trim, carColorRepository.findAllByIdIn(trim.carColorIds()))
         );
     }
 }

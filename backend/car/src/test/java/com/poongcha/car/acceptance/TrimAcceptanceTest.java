@@ -190,7 +190,13 @@ public class TrimAcceptanceTest extends DocumentationTest {
         var trimId = 1L;
 
         // WHEN
-        var response = 트림에_차량_색상_설정_요청(carColorId, trimId);
+        var response = 트림에_차량_색상_설정_요청(
+                carColorId,
+                trimId,
+                "https://www.naver.com/color/exterior.jpg",
+                "https://www.naver.com/color/interior.jpg",
+                "https://www.naver.com/color/rotation"
+        );
 
         // THEN
         트림에_차량_색상_설정_응답_검증(response, "/api/trim/1/color");
@@ -264,8 +270,20 @@ public class TrimAcceptanceTest extends DocumentationTest {
         var trimId1 = 1L;
         long carColorId2 = 2L;
         var trimId2 = 2L;
-        트림에_차량_색상_설정_요청(carColorId2, trimId1);
-        트림에_차량_색상_설정_요청(carColorId1, trimId2);
+        트림에_차량_색상_설정_요청(
+                carColorId2,
+                trimId1,
+                "https://www.naver.com/color/exterior.jpg",
+                "https://www.naver.com/color/interior.jpg",
+                "https://www.naver.com/color/rotation"
+        );
+        트림에_차량_색상_설정_요청(
+                carColorId1,
+                trimId2,
+                "https://www.naver.com/color/exterior.jpg",
+                "https://www.naver.com/color/interior.jpg",
+                "https://www.naver.com/color/rotation"
+        );
         차량_색상_생성_요청("orange", "https://www.naver.com/color/orange.jpg", "INTERIOR");
         양립_불가능한_차량_색상_설정_요청(carColorId2, 3L);
         차량_색상_생성_요청("green", "https://www.naver.com/color/green.jpg", "INTERIOR");
@@ -315,8 +333,20 @@ public class TrimAcceptanceTest extends DocumentationTest {
         var trimId1 = 1L;
         long carColorId2 = 2L;
         var trimId2 = 2L;
-        트림에_차량_색상_설정_요청(carColorId2, trimId1);
-        트림에_차량_색상_설정_요청(carColorId1, trimId2);
+        트림에_차량_색상_설정_요청(
+                carColorId2,
+                trimId1,
+                "https://www.naver.com/color/exterior.jpg",
+                "https://www.naver.com/color/interior.jpg",
+                "https://www.naver.com/color/rotation"
+        );
+        트림에_차량_색상_설정_요청(
+                carColorId1,
+                trimId2,
+                "https://www.naver.com/color/exterior.jpg",
+                "https://www.naver.com/color/interior.jpg",
+                "https://www.naver.com/color/rotation"
+        );
 
         // WHEN
         var response = 존재하지_않는_차종에_차량_색상_조회_요청(129831823912387L);

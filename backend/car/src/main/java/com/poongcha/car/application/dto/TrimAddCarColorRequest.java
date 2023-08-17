@@ -10,4 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class TrimAddCarColorRequest {
     private long colorId;
+    private String trimExteriorImageUrl;
+    private String trimInteriorImageUrl;
+    private String trimRotationImageBaseUrl;
 }
