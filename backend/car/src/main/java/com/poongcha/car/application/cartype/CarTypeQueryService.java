@@ -9,7 +9,7 @@ import com.poongcha.car.domain.carcomponentgroup.CarComponentGroupRepository;
 import com.poongcha.car.domain.carcomponent.CarComponentRepository;
 import com.poongcha.car.domain.cartype.CarType;
 import com.poongcha.car.domain.cartype.CarTypeRepository;
-import com.poongcha.car.exception.HttpNotFoundException;
+import com.poongcha.car.exception.NotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +25,7 @@ public class CarTypeQueryService {
 
     public CarTypeDefaultResponse findById(final long id) {
         CarType carType = carTypeRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("CarType ID " + id + " 이 존재하지 않습니다."));
+                .orElseThrow(() -> new NotFoundException("CarType ID " + id + " 이 존재하지 않습니다."));
         return carTypeMapper.toDefaultResponse(carType);
     }
 
@@ -37,7 +37,7 @@ public class CarTypeQueryService {
     }
 
     public List<CarComponentGroupResponse> findCarComponentGroupBy(final long id) {
-        CarType carType = carTypeRepository.findById(id).orElseThrow(() -> new HttpNotFoundException("차종을 찾을 수 없습니다."));
+        CarType carType = carTypeRepository.findById(id).orElseThrow(() -> new NotFoundException("차종을 찾을 수 없습니다."));
         List<CarComponentGroup> carComponentGroups = carComponentGroupRepository
                 .findAllByIdIn(carType.carComponentGroupIds());
         return carComponentGroups.stream()
