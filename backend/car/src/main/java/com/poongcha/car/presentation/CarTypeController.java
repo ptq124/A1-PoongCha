@@ -49,4 +49,9 @@ public class CarTypeController {
                 URI.create("/api/car-type/" + addCarComponentGroupCarTypeId + "/component-group")
         ).build();
     }
+
+    @GetMapping("/api/car-type/{id}/component-group")
+    public ResponseEntity addCarComponentGroup(@PathVariable(name = "id") long id) {
+        return ResponseEntity.ok(carTypeQueryService.findCarComponentGroupBy(id));
+    }
 }

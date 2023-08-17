@@ -2,6 +2,7 @@ package com.poongcha.car.domain;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,5 +38,11 @@ public class CarType {
         carComponentGroupIds.forEach(
                 carComponentGroupId -> carTypeCarComponentGroups.add(new CarTypeCarComponentGroup(carComponentGroupId))
         );
+    }
+
+    public List<Long> carComponentGroupIds() {
+        return carTypeCarComponentGroups.stream()
+                .map(carTypeCarComponentGroup -> carTypeCarComponentGroup.getCarComponentGroup().getId())
+                .collect(Collectors.toList());
     }
 }
