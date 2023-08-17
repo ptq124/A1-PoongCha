@@ -1,6 +1,8 @@
 package com.poongcha.car.util;
 
 import com.poongcha.car.domain.CarColor;
+import com.poongcha.car.domain.CarComponent;
+import com.poongcha.car.domain.CarComponentGroup;
 import com.poongcha.car.domain.CarType;
 import com.poongcha.car.domain.IncompatibleCarColor;
 import com.poongcha.car.domain.Trim;
@@ -22,6 +24,8 @@ public class DataInitializeExecutionListener extends AbstractTestExecutionListen
         reset(operation, CarColor.class.getAnnotation(Table.class).name());
         reset(operation, TrimCarColor.class.getAnnotation(Table.class).name());
         reset(operation, IncompatibleCarColor.class.getAnnotation(Table.class).name());
+        reset(operation, CarComponentGroup.class.getAnnotation(Table.class).name());
+        reset(operation, CarComponent.class.getAnnotation(Table.class).name());
     }
 
     private static void reset(

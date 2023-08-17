@@ -1,9 +1,16 @@
 package com.poongcha.car.application;
 
+import com.poongcha.car.application.dto.CarComponentGroupResponse;
+import com.poongcha.car.application.dto.CarComponentResponse;
 import com.poongcha.car.application.dto.CarTypeDefaultResponse;
 import com.poongcha.car.application.mapper.CarTypeMapper;
+import com.poongcha.car.domain.CarComponent;
+import com.poongcha.car.domain.CarComponentGroup;
+import com.poongcha.car.domain.CarComponentGroupRepository;
+import com.poongcha.car.domain.CarComponentRepository;
 import com.poongcha.car.domain.CarType;
 import com.poongcha.car.domain.CarTypeRepository;
+import com.poongcha.car.exception.HttpNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +20,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class CarTypeQueryService {
     private final CarTypeRepository carTypeRepository;
+    private final CarComponentGroupRepository carComponentGroupRepository;
+    private final CarComponentRepository carComponentRepository;
     private final CarTypeMapper carTypeMapper;
 
     public CarTypeDefaultResponse findById(final long id) {
@@ -26,5 +35,34 @@ public class CarTypeQueryService {
         return carTypes.stream()
                 .map(carTypeMapper::toDefaultResponse)
                 .collect(Collectors.toUnmodifiableList());
+    }
+
+    public List<CarComponentGroupResponse> findCarComponentGroupBy(final long id) {
+        CarType carType = carTypeRepository.findById(id).orElseThrow(() -> new HttpNotFoundException("차종을 찾을 수 없습니다."));
+        List<CarComponentGroup> carComponentGroups = carComponentGroupRepository
+                .findAllByIdIn(carType.carComponentGroupIds());
+        return carComponentGroups.stream()
+                .map(carComponentGroup -> createCarComponentGroupResponse(
+                        carComponentGroup,
+                        carComponentRepository.findAllByIdIn(carComponentGroup.carComponentIds())
+                )).collect(Collectors.toList());
+    }
+
+    private CarComponentGroupResponse createCarComponentGroupResponse(
+            final CarComponentGroup carComponentGroup,
+            final List<CarComponent> carComponents
+    ) {
+        return new CarComponentGroupResponse(
+                carComponentGroup.getId(),
+                carComponentGroup.getCarComponentGroupName().getValue(),
+                carComponentGroup.getSelectionHelpTooltip().getValue(),
+                carComponents.stream()
+                        .map(carComponent -> new CarComponentResponse(
+                                carComponent.getId(),
+                                carComponent.getCarComponentName().getValue(),
+                                carComponent.getDescriptionImageUrl().getValue(),
+                                carComponent.getAdditionalPrice().getValue()
+                        )).collect(Collectors.toList())
+        );
     }
 }
