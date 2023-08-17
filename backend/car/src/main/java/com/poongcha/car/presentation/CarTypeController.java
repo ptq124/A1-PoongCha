@@ -2,6 +2,7 @@ package com.poongcha.car.presentation;
 
 import com.poongcha.car.application.cartype.CarTypeCommandService;
 import com.poongcha.car.application.cartype.CarTypeQueryService;
+import com.poongcha.car.application.dto.CarComponentGroupResponse;
 import com.poongcha.car.application.dto.CarTypeAddCarComponentGroupRequest;
 import com.poongcha.car.application.dto.CarTypeCreateRequest;
 import com.poongcha.car.application.dto.CarTypeDefaultResponse;
@@ -22,36 +23,36 @@ public class CarTypeController {
     private final CarTypeQueryService carTypeQueryService;
 
     @PostMapping("/api/car-type")
-    public ResponseEntity createCarType(@RequestBody final CarTypeCreateRequest carTypeCreateRequest) {
+    public ResponseEntity<Void> createCarType(@RequestBody final CarTypeCreateRequest carTypeCreateRequest) {
         long createCarTypeId = carTypeCommandService.create(carTypeCreateRequest);
         return ResponseEntity.created(URI.create("/api/car-type/" + createCarTypeId)).build();
     }
 
     @GetMapping("/api/car-type/{id}")
-    public ResponseEntity<CarTypeDefaultResponse> findById(@PathVariable(value = "id") final long id) {
-        CarTypeDefaultResponse carTypeDefaultResponse = carTypeQueryService.findById(id);
-        return ResponseEntity.ok().body(carTypeDefaultResponse);
+    public ResponseEntity<CarTypeDefaultResponse> findById(@PathVariable(value = "id") final long carTypeId) {
+        return ResponseEntity.ok().body(carTypeQueryService.findById(carTypeId));
     }
 
     @GetMapping("/api/car-type")
     public ResponseEntity<List<CarTypeDefaultResponse>> findAll() {
-        List<CarTypeDefaultResponse> carTypeDefaultResponses = carTypeQueryService.findAll();
-        return ResponseEntity.ok().body(carTypeDefaultResponses);
+        return ResponseEntity.ok().body(carTypeQueryService.findAll());
     }
 
     @PostMapping("/api/car-type/{id}/component-group")
-    public ResponseEntity addCarComponentGroup(
-            @PathVariable(name = "id") long id,
-            @RequestBody CarTypeAddCarComponentGroupRequest carTypeAddCarComponentGroupRequest
+    public ResponseEntity<Void> addCarComponentGroup(
+            @PathVariable(name = "id") final long carTypeId,
+            @RequestBody final CarTypeAddCarComponentGroupRequest carTypeAddCarComponentGroupRequest
     ) {
-        long addCarComponentGroupCarTypeId = carTypeCommandService.add(id, carTypeAddCarComponentGroupRequest);
-        return ResponseEntity.created(
-                URI.create("/api/car-type/" + addCarComponentGroupCarTypeId + "/component-group")
-        ).build();
+        long addCarComponentGroupCarTypeId = carTypeCommandService.add(carTypeId, carTypeAddCarComponentGroupRequest);
+        return ResponseEntity
+                .created(URI.create("/api/car-type/" + addCarComponentGroupCarTypeId + "/component-group"))
+                .build();
     }
 
     @GetMapping("/api/car-type/{id}/component-group")
-    public ResponseEntity addCarComponentGroup(@PathVariable(name = "id") long id) {
-        return ResponseEntity.ok(carTypeQueryService.findCarComponentGroupBy(id));
+    public ResponseEntity<List<CarComponentGroupResponse>> addCarComponentGroup(
+            @PathVariable(name = "id") final long carTypeId
+    ) {
+        return ResponseEntity.ok().body(carTypeQueryService.findCarComponentGroupBy(carTypeId));
     }
 }

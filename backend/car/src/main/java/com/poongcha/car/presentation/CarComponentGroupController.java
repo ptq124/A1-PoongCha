@@ -17,7 +17,7 @@ public class CarComponentGroupController {
     private final CarComponentGroupCommandService carComponentGroupCommandService;
 
     @PostMapping("/api/component-group")
-    private ResponseEntity createCarComponentGroup(
+    private ResponseEntity<Void> createCarComponentGroup(
             @RequestBody final CarComponentGroupCreateRequest carComponentGroupCreateRequest
     ) {
         long createCarComponentGroupId = carComponentGroupCommandService.create(carComponentGroupCreateRequest);
@@ -25,11 +25,14 @@ public class CarComponentGroupController {
     }
 
     @PostMapping("/api/component-group/{id}")
-    private ResponseEntity addCarComponent(
-            @PathVariable("id") final long id,
+    private ResponseEntity<Void> addCarComponent(
+            @PathVariable("id") final long carComponentId,
             @RequestBody final CarComponentGroupAddCarComponentRequest carComponentGroupAddCarComponentRequest
     ) {
-        long addCarComponentGroupId = carComponentGroupCommandService.add(id, carComponentGroupAddCarComponentRequest);
+        long addCarComponentGroupId = carComponentGroupCommandService.add(
+                carComponentId,
+                carComponentGroupAddCarComponentRequest
+        );
         return ResponseEntity.created(URI.create("/api/component-group/" + addCarComponentGroupId)).build();
     }
 }

@@ -17,13 +17,13 @@ public class CarColorController {
     private final CarColorCommandService carColorCommandService;
 
     @PostMapping("/api/color")
-    private ResponseEntity createCarColor(@RequestBody final CarColorCreateRequest carColorCreateRequest) {
+    private ResponseEntity<Void> createCarColor(@RequestBody final CarColorCreateRequest carColorCreateRequest) {
         long createCarColorId = carColorCommandService.create(carColorCreateRequest);
         return ResponseEntity.created(URI.create("/api/color/" + createCarColorId)).build();
     }
 
     @PostMapping("/api/color/{id}/incompatible")
-    private ResponseEntity addIncompatibleColor(
+    private ResponseEntity<Void> addIncompatibleColor(
             @PathVariable(value = "id") final long carColorId,
             @RequestBody final CarColorAddIncompatibleColorRequest carColorAddIncompatibleColorRequest
     ) {
