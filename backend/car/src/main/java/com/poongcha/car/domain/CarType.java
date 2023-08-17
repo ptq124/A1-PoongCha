@@ -1,11 +1,14 @@
 package com.poongcha.car.domain;
 
+import java.util.List;
+import java.util.Set;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Embedded;
+import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
 
 @Getter
@@ -22,8 +25,17 @@ public class CarType {
     @Embedded.Empty
     private ImageUrl imageUrl;
 
+    @MappedCollection(idColumn = "car_type_id")
+    private Set<CarTypeCarComponentGroup> carTypeCarComponentGroups;
+
     public CarType(final String carTypeName, final String imageUrl) {
         this.carTypeName = new CarTypeName(carTypeName);
         this.imageUrl = new ImageUrl(imageUrl);
+    }
+
+    public void addCarComponentGroup(final List<Long> carComponentGroupIds) {
+        carComponentGroupIds.forEach(
+                carComponentGroupId -> carTypeCarComponentGroups.add(new CarTypeCarComponentGroup(carComponentGroupId))
+        );
     }
 }

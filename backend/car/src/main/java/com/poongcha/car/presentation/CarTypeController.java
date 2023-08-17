@@ -2,6 +2,7 @@ package com.poongcha.car.presentation;
 
 import com.poongcha.car.application.CarTypeCommandService;
 import com.poongcha.car.application.CarTypeQueryService;
+import com.poongcha.car.application.dto.CarTypeAddCarComponentGroupRequest;
 import com.poongcha.car.application.dto.CarTypeCreateRequest;
 import com.poongcha.car.application.dto.CarTypeDefaultResponse;
 import java.net.URI;
@@ -36,5 +37,16 @@ public class CarTypeController {
     public ResponseEntity<List<CarTypeDefaultResponse>> findAll() {
         List<CarTypeDefaultResponse> carTypeDefaultResponses = carTypeQueryService.findAll();
         return ResponseEntity.ok().body(carTypeDefaultResponses);
+    }
+
+    @PostMapping("/api/car-type/{id}/component-group")
+    public ResponseEntity addCarComponentGroup(
+            @PathVariable(name = "id") long id,
+            @RequestBody CarTypeAddCarComponentGroupRequest carTypeAddCarComponentGroupRequest
+    ) {
+        long addCarComponentGroupCarTypeId = carTypeCommandService.add(id, carTypeAddCarComponentGroupRequest);
+        return ResponseEntity.created(
+                URI.create("/api/car-type/" + addCarComponentGroupCarTypeId + "/component-group")
+        ).build();
     }
 }
