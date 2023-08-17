@@ -1,10 +1,12 @@
 package com.poongcha.car.presentation;
 
 import com.poongcha.car.application.CarComponentGroupCommandService;
+import com.poongcha.car.application.dto.CarComponentGroupAddCarComponentRequest;
 import com.poongcha.car.application.dto.CarComponentGroupCreateRequest;
 import java.net.URI;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,9 +18,18 @@ public class CarComponentGroupController {
 
     @PostMapping("/api/component-group")
     private ResponseEntity createCarComponentGroup(
-            @RequestBody CarComponentGroupCreateRequest carComponentGroupCreateRequest
+            @RequestBody final CarComponentGroupCreateRequest carComponentGroupCreateRequest
     ) {
         long createCarComponentGroupId = carComponentGroupCommandService.create(carComponentGroupCreateRequest);
         return ResponseEntity.created(URI.create("/api/component-group/" + createCarComponentGroupId)).build();
+    }
+
+    @PostMapping("/api/component-group/{id}")
+    private ResponseEntity addCarComponent(
+            @PathVariable("id") final long id,
+            @RequestBody final CarComponentGroupAddCarComponentRequest carComponentGroupAddCarComponentRequest
+    ) {
+        long addCarComponentGroupId = carComponentGroupCommandService.add(id, carComponentGroupAddCarComponentRequest);
+        return ResponseEntity.created(URI.create("/api/component-group/" + addCarComponentGroupId)).build();
     }
 }

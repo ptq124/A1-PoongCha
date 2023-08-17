@@ -1,11 +1,15 @@
 package com.poongcha.car.domain;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Embedded;
+import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
 
 @Getter
@@ -22,11 +26,20 @@ public class CarComponentGroup {
     @Embedded.Empty
     private SelectionHelpTooltip selectionHelpTooltip;
 
+    @MappedCollection(idColumn = "car_component_group_id")
+    private Set<CarComponentGroupCarComponent> carComponentGroupCarComponents = new HashSet<>();
+
     public CarComponentGroup(
             final CarComponentGroupName carComponentGroupName,
             final SelectionHelpTooltip selectionHelpTooltip
     ) {
         this.carComponentGroupName = carComponentGroupName;
         this.selectionHelpTooltip = selectionHelpTooltip;
+    }
+
+    public void addCarComponent(final List<Long> carComponentIds) {
+        carComponentIds.forEach(
+                carComponentId -> carComponentGroupCarComponents.add(new CarComponentGroupCarComponent(carComponentId))
+        );
     }
 }
