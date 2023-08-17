@@ -5,11 +5,15 @@ import static com.poongcha.car.util.DocumentationTest.DEFAULT_RESTDOCS_PATH;
 import static com.poongcha.car.util.DocumentationTest.customRequestFields;
 import static com.poongcha.car.util.DocumentationTest.given;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 
 import io.restassured.http.ContentType;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
+import java.util.List;
 import java.util.Map;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpStatus;
@@ -110,6 +114,41 @@ public class CarTypeSteps {
                     .containsExactly(carTypeNames);
             assertions.assertThat(response.jsonPath().getList("imageUrl", String.class))
                     .containsExactly(imageUrls);
+        }
+    }
+
+    public static ExtractableResponse<Response> 차량_타입에_차량_컴포넌트_그룹_추가_요청(
+            final long carTypeId,
+            final List<Long> carComponentGroupIds
+    ) {
+        return given()
+                .filter(document(
+                        DEFAULT_RESTDOCS_PATH,
+                        pathParameters(
+                                parameterWithName("id").description("차종 ID")
+                        ),
+                        requestFields(
+                                fieldWithPath("carComponentGroupIds").type(JsonFieldType.ARRAY)
+                                        .description("차량 컴포넌트 그룹 ID 목록")
+                        )
+                )).log().all()
+                .when()
+                .body(Map.of(
+                        "carComponentGroupIds", carComponentGroupIds
+                ))
+                .contentType(ContentType.JSON)
+                .post("/api/car-type/{id}/component-group", carTypeId)
+                .then().log().all()
+                .extract();
+    }
+
+    public static void 차량_타입에_차량_컴포넌트_그룹_추가_응답_검증(
+            final ExtractableResponse<Response> response,
+            final String location
+    ) {
+        try (AutoCloseableSoftAssertions assertions = new AutoCloseableSoftAssertions()) {
+            assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.SC_CREATED);
+            assertions.assertThat(response.headers().get(HttpHeaders.LOCATION).getValue()).isEqualTo(location);
         }
     }
 }
