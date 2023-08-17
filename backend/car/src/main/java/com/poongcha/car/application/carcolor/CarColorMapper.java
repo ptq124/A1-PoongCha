@@ -2,6 +2,7 @@ package com.poongcha.car.application.carcolor;
 
 import com.poongcha.car.application.dto.CarColorCreateRequest;
 import com.poongcha.car.application.dto.CarColorDefaultResponse;
+import com.poongcha.car.application.dto.TrimCarColorResponse;
 import com.poongcha.car.domain.carcolor.CarColor;
 import com.poongcha.car.domain.carcolor.CarColorName;
 import com.poongcha.car.domain.carcolor.CarColorType;
@@ -18,6 +19,13 @@ public class CarColorMapper {
                 new CarColorName(carColorCreateRequest.getCarColorName()),
                 new ImageUrl(carColorCreateRequest.getImageUrl()),
                 CarColorType.valueOf(carColorCreateRequest.getCarColorType())
+        );
+    }
+
+    public TrimCarColorResponse toTrimCarColorResponse(final Trim trim, final List<CarColor> carColors) {
+        return new TrimCarColorResponse(
+                trim.getId(),
+                toCarColorDefaultResponses(trim, carColors)
         );
     }
 

@@ -21,22 +21,21 @@ public class TrimCommandService {
 
     public long create(final TrimCreateRequest trimCreateRequest) {
         Trim trim = trimMapper.toEntity(trimCreateRequest);
+
         return trimRepository.save(trim).getId();
     }
 
     public long add(final long trimId, final TrimAddCarColorRequest trimAddTrimColorRequest) {
         Trim trim = trimRepository.findByIdWithLock(trimId)
                 .orElseThrow(() -> new BadRequestException("트림이 존재하지 않습니다."));
-        addTrimColor(trimAddTrimColorRequest, trim);
-        return trimRepository.save(trim).getId();
-    }
 
-    private void addTrimColor(final TrimAddCarColorRequest trimAddTrimColorRequest, final Trim trim) {
         trim.addCarColor(
                 trimAddTrimColorRequest.getColorId(),
                 new TrimExteriorImageUrl(trimAddTrimColorRequest.getTrimExteriorImageUrl()),
                 new TrimInteriorImageUrl(trimAddTrimColorRequest.getTrimInteriorImageUrl()),
                 new TrimRotationImageBaseUrl(trimAddTrimColorRequest.getTrimRotationImageBaseUrl())
         );
+
+        return trimRepository.save(trim).getId();
     }
 }

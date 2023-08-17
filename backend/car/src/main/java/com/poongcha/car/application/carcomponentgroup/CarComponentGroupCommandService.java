@@ -1,6 +1,5 @@
 package com.poongcha.car.application.carcomponentgroup;
 
-import com.poongcha.car.application.carcomponentgroup.CarComponentGroupMapper;
 import com.poongcha.car.application.dto.CarComponentGroupAddCarComponentRequest;
 import com.poongcha.car.application.dto.CarComponentGroupCreateRequest;
 import com.poongcha.car.domain.carcomponentgroup.CarComponentGroup;
@@ -19,6 +18,7 @@ public class CarComponentGroupCommandService {
 
     public long create(final CarComponentGroupCreateRequest carComponentGroupCreateRequest) {
         CarComponentGroup carComponentGroup = carComponentGroupMapper.toEntity(carComponentGroupCreateRequest);
+
         return carComponentGroupRepository.save(carComponentGroup).getId();
     }
 
@@ -28,8 +28,9 @@ public class CarComponentGroupCommandService {
     ) {
         CarComponentGroup carComponentGroup = carComponentGroupRepository.findByIdWithLock(carComponentGroupId)
                 .orElseThrow(() -> new BadRequestException("차량 컴포넌트 그룹을 찾을 수 없습니다."));
+
         carComponentGroup.addCarComponent(carComponentGroupAddCarComponentRequest.getCarComponentIds());
-        carComponentGroupRepository.save(carComponentGroup);
-        return carComponentGroup.getId();
+
+        return carComponentGroupRepository.save(carComponentGroup).getId();
     }
 }

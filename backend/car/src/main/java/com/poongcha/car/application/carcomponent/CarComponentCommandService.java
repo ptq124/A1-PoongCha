@@ -16,6 +16,7 @@ public class CarComponentCommandService {
 
     public long create(final CarComponentCreateRequest carComponentCreateRequest) {
         CarComponent carComponent = carComponentMapper.toEntity(carComponentCreateRequest);
+
         return carComponentRepository.save(carComponent).getId();
     }
 }

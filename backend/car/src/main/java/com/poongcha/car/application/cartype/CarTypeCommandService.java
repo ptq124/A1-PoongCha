@@ -18,6 +18,7 @@ public class CarTypeCommandService {
 
     public long create(final CarTypeCreateRequest carTypeCreateRequest) {
         CarType carType = carTypeMapper.toEntity(carTypeCreateRequest);
+
         return carTypeRepository.save(carType).getId();
     }
 
@@ -25,8 +26,11 @@ public class CarTypeCommandService {
             final long id,
             final CarTypeAddCarComponentGroupRequest carTypeAddCarComponentGroupRequest
     ) {
-        CarType carType = carTypeRepository.findById(id).orElseThrow(() -> new BadRequestException("차종을 찾을 수 없습니다."));
+        CarType carType = carTypeRepository.findById(id)
+                .orElseThrow(() -> new BadRequestException("차종을 찾을 수 없습니다."));
+
         carType.addCarComponentGroup(carTypeAddCarComponentGroupRequest.getCarComponentGroupIds());
+
         return carTypeRepository.save(carType).getId();
     }
 }

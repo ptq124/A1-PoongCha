@@ -19,6 +19,7 @@ public class CarColorCommandService {
 
     public long create(final CarColorCreateRequest carColorCreateRequest) {
         CarColor carColor = carColorMapper.toEntity(carColorCreateRequest);
+
         return carColorRepository.save(carColor).getId();
     }
 
@@ -28,9 +29,12 @@ public class CarColorCommandService {
     ) {
         CarColor carColor = carColorRepository.findByIdWithLock(carColorId)
                 .orElseThrow(() -> new BadRequestException("차량 색상이 존재하지 않습니다."));
+
         List<CarColor> addInCompatibleRequestCarColor = carColorRepository
                 .findAllByIdIn(carColorAddIncompatibleColorRequest.getIds());
+
         carColor.addIncompatibleColor(addInCompatibleRequestCarColor);
+
         return carColorRepository.save(carColor).getId();
     }
 }
