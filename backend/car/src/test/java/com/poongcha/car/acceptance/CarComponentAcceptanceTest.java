@@ -2,6 +2,8 @@ package com.poongcha.car.acceptance;
 
 import static com.poongcha.car.acceptance.CarComponentSteps.차량_컴포넌트_그룹_생성_요청;
 import static com.poongcha.car.acceptance.CarComponentSteps.차량_컴포넌트_그룹_생성_응답_검증;
+import static com.poongcha.car.acceptance.CarComponentSteps.차량_컴포넌트_생성_요청;
+import static com.poongcha.car.acceptance.CarComponentSteps.차량_컴포넌트_생성_응답_검증;
 
 import com.poongcha.car.util.DocumentationTest;
 import org.junit.jupiter.api.DisplayName;
@@ -21,5 +23,20 @@ public class CarComponentAcceptanceTest extends DocumentationTest {
 
         // THEN
         차량_컴포넌트_그룹_생성_응답_검증(response, "/api/component-group/1");
+    }
+
+    @DisplayName("차량 컴포넌트 생성")
+    @Test
+    void 차량_컴포넌트_생성() {
+        // GIVEN
+        var carComponentName = "4WD";
+        var descriptionImageUrl = "www.naver.com/image/4wd.png";
+        var additionalPrice = 2_000_000;
+
+        // WHEN
+        var response = 차량_컴포넌트_생성_요청(carComponentName, descriptionImageUrl, additionalPrice);
+
+        // THEN
+        차량_컴포넌트_생성_응답_검증(response, "/api/component/1");
     }
 }

@@ -47,4 +47,40 @@ public class CarComponentSteps {
             assertions.assertThat(response.header(HttpHeaders.LOCATION)).isEqualTo(location);
         }
     }
+
+    public static ExtractableResponse<Response> 차량_컴포넌트_생성_요청(
+            final String carComponentName,
+            final String descriptionImageUrl,
+            final int additionalPrice
+    ) {
+        return given()
+                .filter(document(
+                        DEFAULT_RESTDOCS_PATH,
+                        requestFields(
+                                fieldWithPath("carComponentName").type(JsonFieldType.STRING)
+                                        .description("차량 컴포넌트 이름"),
+                                fieldWithPath("descriptionImageUrl").type(JsonFieldType.STRING)
+                                        .description("설명 이미지 URL"),
+                                fieldWithPath("additionalPrice").type(JsonFieldType.NUMBER)
+                                        .description("컴포넌트 추가금")
+                        )
+                )).log().all()
+                .when()
+                .body(Map.of(
+                        "carComponentName", carComponentName,
+                        "descriptionImageUrl", descriptionImageUrl,
+                        "additionalPrice", additionalPrice
+                ))
+                .contentType(ContentType.JSON)
+                .post("/api/component")
+                .then().log().all()
+                .extract();
+    }
+
+    public static void 차량_컴포넌트_생성_응답_검증(final ExtractableResponse<Response> response, final String location) {
+        try (AutoCloseableSoftAssertions assertions = new AutoCloseableSoftAssertions()) {
+            assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.SC_CREATED);
+            assertions.assertThat(response.header(HttpHeaders.LOCATION)).isEqualTo(location);
+        }
+    }
 }
