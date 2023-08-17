@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { css, styled } from "styled-components";
-import closeIcon from "../../../../assets/icons/close.svg";
-import SampleImg1 from "../../../../assets/images/model-item-popup-sample1.png";
-import SampleImg2 from "../../../../assets/images/model-item-popup-sample2.png";
+import closeIcon from "@assets/icons/close.svg";
+import SampleImg1 from "@assets/images/model-item-popup-sample1.png";
+import SampleImg2 from "@assets/images/model-item-popup-sample2.png";
 
 const navOptions = ["엔진", "바디타입", "구동방식"];
 const ModelItemsDescriptionPopup = ({ popupRef, closePopup }) => {

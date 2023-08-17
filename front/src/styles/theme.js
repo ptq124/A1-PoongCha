@@ -1,4 +1,5 @@
 import { css } from "styled-components";
+import "./fonts.css"
 
 const color = {
   primary_default: "#00428E",

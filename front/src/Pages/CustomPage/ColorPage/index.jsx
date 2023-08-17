@@ -1,6 +1,6 @@
 import React from "react";
 import { styled } from "styled-components";
-import CarView from "../../../Components/Custom/CarView";
+import CarView from "@Components/Custom/CarView";
 import ColorCustomSideBar from "./ColorCustomSIdeBar";
 
 const ColorPage = () => {

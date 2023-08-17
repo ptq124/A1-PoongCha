@@ -1,7 +1,7 @@
 import React from "react";
 import { styled } from "styled-components";
-import CloseXIcon from "../../../assets/icons/close.svg";
-import SampleImg from "../../../assets/images/default-option-popup-sample.svg";
+import CloseXIcon from "@assets/icons/close.svg";
+import SampleImg from "@assets/images/default-option-popup-sample.svg";
 
 const DefaultOptionPopup = ({ popupRef, closePopup }) => {
   return (

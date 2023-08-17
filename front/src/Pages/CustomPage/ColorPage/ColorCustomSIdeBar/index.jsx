@@ -1,8 +1,8 @@
 import React from "react";
 import { css, styled } from "styled-components";
-import ColorOptionGroup from "../../../../Components/Custom/ColorOptionGroup";
-import Button from "../../../../Components/Common/Button/Button";
-import useButtonNavigation from "../../../../hooks/useButtonNavigation";
+import ColorOptionGroup from "@Components/Custom/ColorOptionGroup";
+import Button from "@Components/Common/Button/Button";
+import useButtonNavigation from "@hooks/useButtonNavigation";
 
 const ColorCustomSideBar = () => {
   const move = useButtonNavigation();

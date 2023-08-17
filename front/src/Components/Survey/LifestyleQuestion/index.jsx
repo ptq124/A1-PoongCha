@@ -1,10 +1,15 @@
 import React from "react";
 import { styled, css } from "styled-components";
-import check32blue from "../../../assets/checkcircle/check-32-blue.svg";
-import check32grey from "../../../assets/checkcircle/check-32-grey.svg";
-import LifeImg from "../../../assets/lifestyle/lifestyle1.svg";
-
-const LifestyleQuestion = (option, selected, handleSelected, openPopup) => {
+import check32blue from "@assets/checkcircle/check-32-blue.svg";
+import check32grey from "@assets/checkcircle/check-32-grey.svg";
+import LifeImg from "@assets/lifestyle/lifestyle1.svg";
+/**
+데이터 전달 값: 라이프 스타일
+태그: []
+문구: 텍스트
+프로필 사진: 이미지
+*/
+const LifestylePersona = ({ selected, openPopup, data, onClick }) => {
   return (
     <Wrapper
       selected={option.index === selected}

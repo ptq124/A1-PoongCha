@@ -4,7 +4,6 @@ const useOnClickPopUp = (ref) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const openPopup = () => {
     setIsPopupOpen(true);
-    document.body.style.overflow = "hidden";
   };
   const closePopup = () => {
     setIsPopupOpen(false);

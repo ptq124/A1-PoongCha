@@ -1,12 +1,9 @@
 import React from "react";
 import * as S from "../styles";
-import { styled, css } from "styled-components";
-import Button from "../../../Components/Common/Button/Button";
+import { css } from "styled-components";
+import Button from "@Components/Common/Button/Button";
 import BudgetSliderGroup from "./BudgetSliderGroup";
-import useButtonNavigation from "../../../hooks/useButtonNavigation";
-import Survey from "../../../Components/Survey";
-import ExtraQuestion from "../../../Components/Survey/ExtraQuestion";
-import { useOutletContext } from "react-router-dom";
+import useButtonNavigation from "@hooks/useButtonNavigation";
 
 const surveyData = {
   drivingRecord: {

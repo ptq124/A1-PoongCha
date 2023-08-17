@@ -1,7 +1,7 @@
 import React from "react";
 import { css, styled } from "styled-components";
-import closeIcon from "../../../../assets/icons/close.svg";
-import Button from "../../../../Components/Common/Button/Button";
+import closeIcon from "@assets/icons/close.svg";
+import Button from "@Components/Common/Button/Button";
 
 const TrimChangePopup = ({ popupRef, closePopup, changeTrim }) => {
   return (

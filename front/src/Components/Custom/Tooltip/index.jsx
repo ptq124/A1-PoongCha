@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
-import LightBulbIcon from "../../../assets/icons/tooltip-lightbulb.svg";
-import TooltipTail from "../../../assets/icons/tooltip-tail.svg";
+import LightBulbIcon from "@assets/icons/tooltip-lightbulb.svg";
+import TooltipTail from "@assets/icons/tooltip-tail.svg";
 
 const Tooltip = ({ offset }) => {
   const [isTooltipVisible, setIsTooltipVisible] = useState(false);

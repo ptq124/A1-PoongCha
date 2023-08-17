@@ -1,7 +1,7 @@
 import React from "react";
 import { styled } from "styled-components";
-import cover from "../../../../../assets/lifestyle/lifestylecover.svg";
-import logo from "../../../../../assets/icons/hyundai-logo-white.svg";
+import cover from "@assets/lifestyle/lifestylecover.svg";
+import logo from "@assets/icons/hyundai-logo-white.svg";
 
 const Cover = () => {
   return (

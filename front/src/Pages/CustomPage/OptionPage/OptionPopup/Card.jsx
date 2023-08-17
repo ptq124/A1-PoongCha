@@ -1,11 +1,10 @@
 import React from "react";
 import { css, styled } from "styled-components";
-
-import SampleImg from "../../../../assets/images/option-popup-sample.svg";
-import CloseIcon from "../../../../assets/icons/close.svg";
-import Button from "../../../../Components/Common/Button/Button";
-import checkBlue from "../../../../assets/checkcircle/check-16-blue.svg";
-import checkGrey from "../../../../assets/checkcircle/check-16-grey.svg";
+import SampleImg from "@assets/images/option-popup-sample.svg";
+import CloseIcon from "@assets/icons/close.svg";
+import Button from "@Components/Common/Button/Button";
+import checkBlue from "@assets/checkcircle/check-16-blue.svg";
+import checkGrey from "@assets/checkcircle/check-16-grey.svg";
 
 const Card = ({
   closePopup,

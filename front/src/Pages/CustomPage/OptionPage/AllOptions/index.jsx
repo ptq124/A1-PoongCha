@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { styled } from "styled-components";
-
-import OptionTag from "../../../../Components/Custom/OptionTag";
-import OptionItem from "../../../../Components/Custom/OptionItem";
-
-import { tags, tagSelectIcons, tagsNotSelectIcons } from "../tagIcon";
-import left from "../../../../assets/icons/chevron-left.svg";
-import right from "../../../../assets/icons/chevron-right.svg";
+import OptionTag from "@Components/Custom/OptionTag";
+import OptionItem from "@Components/Custom/OptionItem";
 import TaggedPage from "../TaggedPage";
+import { tags, tagSelectIcons, tagsNotSelectIcons } from "../tagIcon";
+import left from "@assets/icons/chevron-left.svg";
+import right from "@assets/icons/chevron-right.svg";
 
 const AllOptions = ({
   tab,

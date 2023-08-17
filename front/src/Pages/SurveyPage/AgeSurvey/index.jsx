@@ -1,11 +1,8 @@
 import React from "react";
 import * as S from "../styles";
 import { css } from "styled-components";
-import Button from "../../../Components/Common/Button/Button";
-import useButtonNavigation from "../../../hooks/useButtonNavigation";
-import Survey from "../../../Components/Survey";
-import AgeQuestion from "../../../Components/Survey/AgeQuestion";
-import { useOutletContext } from "react-router-dom";
+import Button from "@Components/Common/Button/Button";
+import useButtonNavigation from "@hooks/useButtonNavigation";
 
 const surveyData = {
   options: ["20대", "30대", "40대", "50대 이상"],
