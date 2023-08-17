@@ -53,6 +53,11 @@ jobs:
         working-directory: backend/boot-loader/
         shell: bash
 
+      - name: 🛠 Build with Gradle
+        run: sudo ./gradlew build
+        working-directory: backend/boot-loader/
+        shell: bash
+
       - name: 🛠 Build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
