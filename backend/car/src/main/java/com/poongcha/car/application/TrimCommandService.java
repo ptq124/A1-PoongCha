@@ -4,7 +4,10 @@ import com.poongcha.car.application.dto.TrimAddCarColorRequest;
 import com.poongcha.car.application.dto.TrimCreateRequest;
 import com.poongcha.car.application.mapper.TrimMapper;
 import com.poongcha.car.domain.Trim;
+import com.poongcha.car.domain.TrimExteriorImageUrl;
+import com.poongcha.car.domain.TrimInteriorImageUrl;
 import com.poongcha.car.domain.TrimRepository;
+import com.poongcha.car.domain.TrimRotationImageBaseUrl;
 import com.poongcha.car.exception.BadRequestException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,7 +28,16 @@ public class TrimCommandService {
     public long add(final long trimId, final TrimAddCarColorRequest trimAddTrimColorRequest) {
         Trim trim = trimRepository.findByIdWithLock(trimId)
                 .orElseThrow(() -> new BadRequestException("트림이 존재하지 않습니다."));
-        trim.addCarColor(trimAddTrimColorRequest.getColorId());
+        addTrimColor(trimAddTrimColorRequest, trim);
         return trimRepository.save(trim).getId();
+    }
+
+    private void addTrimColor(final TrimAddCarColorRequest trimAddTrimColorRequest, final Trim trim) {
+        trim.addCarColor(
+                trimAddTrimColorRequest.getColorId(),
+                new TrimExteriorImageUrl(trimAddTrimColorRequest.getTrimExteriorImageUrl()),
+                new TrimInteriorImageUrl(trimAddTrimColorRequest.getTrimInteriorImageUrl()),
+                new TrimRotationImageBaseUrl(trimAddTrimColorRequest.getTrimRotationImageBaseUrl())
+        );
     }
 }

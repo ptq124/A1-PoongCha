@@ -2,6 +2,7 @@ package com.poongcha.car.domain;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import lombok.AccessLevel;
@@ -50,8 +51,46 @@ public class Trim {
         this.carType = new IdOnlyAggregateReference<>(carType);
     }
 
-    public void addCarColor(final long carColorId) {
-        trimCarColors.add(new TrimCarColor(carColorId));
+    public void addCarColor(
+            final long carColorId,
+            final TrimExteriorImageUrl trimExteriorImageUrl,
+            final TrimInteriorImageUrl trimInteriorImageUrl,
+            final TrimRotationImageBaseUrl trimRotationImageBaseUrl
+    ) {
+        TrimCarColor trimCarColor = new TrimCarColor(
+                carColorId,
+                trimExteriorImageUrl,
+                trimInteriorImageUrl,
+                trimRotationImageBaseUrl
+        );
+        trimCarColors.add(trimCarColor);
+    }
+
+    public String exteriorImageUrl(final long carColorId) {
+        return trimCarColorBy(carColorId)
+                .map(TrimCarColor::getTrimExteriorImageUrl)
+                .map(TrimExteriorImageUrl::getValue)
+                .orElse(null);
+    }
+
+    public String interiorImageUrl(final long carColorId) {
+        return trimCarColorBy(carColorId)
+                .map(TrimCarColor::getTrimInteriorImageUrl)
+                .map(TrimInteriorImageUrl::getValue)
+                .orElse(null);
+    }
+
+    public String rotationImageUrl(final Long carColorId) {
+        return trimCarColorBy(carColorId)
+                .map(TrimCarColor::getTrimRotationImageBaseUrl)
+                .map(TrimRotationImageBaseUrl::getValue)
+                .orElse(null);
+    }
+
+    private Optional<TrimCarColor> trimCarColorBy(final long carColorId) {
+        return trimCarColors.stream()
+                .filter(trimCarColor -> trimCarColor.isEqualCarColorId(carColorId))
+                .findFirst();
     }
 
     public List<Long> carColorIds() {
