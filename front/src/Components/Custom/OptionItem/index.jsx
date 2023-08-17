@@ -10,8 +10,7 @@ const OptionItem = ({
   handleSelectOption,
   handleOpenPopup,
 }) => {
-  const { option, description, price, img, tag } = data;
-
+  const { id, option, description, price, img, tag } = data;
   return (
     <Wrapper>
       <img src={img} />
@@ -26,7 +25,7 @@ const OptionItem = ({
         style={BtnStyle}
         selected={selected}
         img={<img src={selected ? checkGrey : checkBlue} />}
-        onClick={() => handleSelectOption(option)}
+        onClick={() => handleSelectOption(id)}
       />
     </Wrapper>
   );

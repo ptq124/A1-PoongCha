@@ -1,17 +1,17 @@
 import React from "react";
-import { css, styled } from "styled-components";
+import { css, keyframes, styled } from "styled-components";
 import TooltipTail from "@assets/icons/option-tooltip-tail.svg";
 import ArrowRightIcon from "@assets/icons/arrow-right.svg";
 
-const OptionTooltip = ({ data, handleOpenPopup, onMouseLeave }) => {
+const OptionModal = ({ tag, isOpen, data, handleOpenPopup }) => {
   return (
-    <Wrapper $position={data.position} onMouseLeave={onMouseLeave}>
+    <Wrapper $position={data.position} $isOpen={isOpen}>
       <Content>
         <Img></Img>
         <Detail>
-          <div className="tag">주행안전</div>
-          <div className="option">현대 스마트 센스 1</div>
-          <div className="price">790,000 원</div>
+          <div className="tag">{tag}</div>
+          <div className="option">{data.option}</div>
+          <div className="price">{data.price}</div>
         </Detail>
       </Content>
       <Arrow
@@ -72,6 +72,22 @@ const Content = styled.div`
   display: flex;
   gap: 8px;
 `;
+const fadeIn = keyframes`
+  from {
+    opacity:0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+const fadeOut = keyframes`
+  from {
+    opacity:1;
+  }
+  to {
+    opacity:0;
+  }
+`;
 const Wrapper = styled.div`
   position: absolute;
   top: ${({ $position }) =>
@@ -91,9 +107,16 @@ const Wrapper = styled.div`
 
   width: 270px;
   height: 96px;
-  border-radius: 8px;
+
   background-color: ${({ theme }) => theme.color.grey1000};
+  border-radius: 8px;
+
   padding: 12px;
   box-sizing: border-box;
+
+  z-index: 997;
+
+  animation: ${({ $isOpen }) => ($isOpen ? fadeIn : fadeOut)} 0.2s linear;
 `;
-export default OptionTooltip;
+
+export default OptionModal;

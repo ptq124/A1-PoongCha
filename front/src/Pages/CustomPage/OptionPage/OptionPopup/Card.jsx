@@ -7,20 +7,21 @@ import checkBlue from "@assets/checkcircle/check-16-blue.svg";
 import checkGrey from "@assets/checkcircle/check-16-grey.svg";
 
 const Card = ({
-  closePopup,
   index,
-  popupData,
-  handleNavClick,
+  setData,
   selected,
+  closePopup,
+  handleNavClick,
   handleSelectOption,
 }) => {
+  const crntCardData = setData[index];
   return (
     <CardContainer>
       <ImgContainer>
         <TagContainer>
-          <Tag>#사용편의</Tag>
-          <Tag>#주행안전</Tag>
-          <Tag>#추위/더위</Tag>
+          {crntCardData.tag.map((tag, index) => (
+            <Tag key={index}>{tag}</Tag>
+          ))}
         </TagContainer>
         <img src={SampleImg} />
       </ImgContainer>
@@ -28,9 +29,11 @@ const Card = ({
         <img src={CloseIcon} onClick={closePopup} />
         <Header>
           <OptionInfo>
-            <span className="setName">컴포트 2</span>
-            <span className="optionName">후석 승객 알림</span>
-            <span className="price">1,090,000 원</span>
+            {crntCardData.set && (
+              <span className="setName">{crntCardData.set}</span>
+            )}
+            <span className="optionName">{crntCardData.option}</span>
+            <span className="price">{crntCardData.price}</span>
           </OptionInfo>
           <Button
             text="선택"
@@ -45,21 +48,21 @@ const Card = ({
           운전자에게 경고함으로써 부주의에 의한 유아 또는 반려 동물 등의 방치
           사고를 예방하는 신기술입니다.
         </Description>
-        {popupData.length !== 1 && (
+        {setData.length !== 1 && (
           <>
             <SetOptionNavigation>
-              {popupData.map((data, idx) => (
+              {setData.map((data, idx) => (
                 <Nav
                   key={idx}
                   $selected={idx === index}
                   onClick={() => handleNavClick(idx)}
                 >
-                  {data}
+                  {data.option}
                 </Nav>
               ))}
             </SetOptionNavigation>
             <NavBullets>
-              {popupData.map((data, idx) => (
+              {setData.map((data, idx) => (
                 <Bullet key={idx} $selected={idx === index}></Bullet>
               ))}
             </NavBullets>

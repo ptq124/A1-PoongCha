@@ -43,7 +43,10 @@ const ColorChangePopup = ({ popupRef, closePopup }) => {
         <Button
           text="변경하기"
           style={ChangeBtnStyle}
-          onClick={() => move("/custom/trim")}
+          onClick={() => {
+            closePopup();
+            move("/custom/trim");
+          }}
         />
       </BtnContainer>
     </Wrapper>

@@ -103,6 +103,8 @@ const SurveyBtnStyle = css`
       opacity: 0.3;
       pointer-events: none;
     `}
+
+  transition:opacity 0.4s ease;
 `;
 
 export default ExtraSurvey;

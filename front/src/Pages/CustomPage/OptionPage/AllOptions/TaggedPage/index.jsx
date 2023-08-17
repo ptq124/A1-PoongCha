@@ -1,42 +1,60 @@
 import React, { useState } from "react";
 import { css, styled } from "styled-components";
-import OptionTooltip from "./OptionTooltip";
+import OptionModal from "./OptionModal";
 import OptionItem from "@Components/Custom/OptionItem";
 import TaggedPageSampleImg from "@assets/images/tagged-page-sample.svg";
 import PlusIcon from "@assets/icons/plus.svg";
-import useTooltip from "@hooks/useTooltip";
 
 const TaggedPage = ({
+  tag,
   handleOpenPopup,
   handleSelectOption,
   optionData,
-  hasOption,
+  checkOptionSelected,
 }) => {
-  const [activeOptionIdx, setActiveOptionIdx] = useState(null);
-
-  const handlePlusBtnClick = (index) => {
-    if (activeOptionIdx === null || activeOptionIdx !== index) {
-      setActiveOptionIdx(index);
-    } else {
-      setActiveOptionIdx(null);
+  const [activeOption, setActiveOption] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalFixed, setIsModalFixed] = useState(false);
+  const handlePlusBtnHover = (id) => {
+    if (isModalFixed && activeOption !== id) {
+      setIsModalFixed(false);
+    }
+    setIsModalOpen(true);
+    setActiveOption(id);
+  };
+  const handlePlusBtnLeave = () => {
+    if (!isModalFixed) {
+      setIsModalOpen(false);
+      setTimeout(() => {
+        setActiveOption(null);
+      }, 200);
     }
   };
+  const handlePlusBtnClick = () => {
+    setIsModalFixed(!isModalFixed);
+  };
+
   return (
     <Wrapper>
       <SituationScreen>
-        {activeOptionIdx !== null && (
-          <OptionTooltip
-            data={optionData[activeOptionIdx]}
-            handleOpenPopup={handleOpenPopup}
-          />
-        )}
+        {activeOption !== null &&
+          optionData.map((data) => data.id).includes(activeOption) && (
+            <OptionModal
+              tag={tag}
+              isOpen={isModalOpen}
+              data={optionData.find((elem) => elem.id === activeOption)}
+              handleOpenPopup={handleOpenPopup}
+            />
+          )}
         <img src={TaggedPageSampleImg} />
         {optionData.map((data, index) => (
           <PlusButton
             key={index}
             $position={data.position}
-            $clicked={activeOptionIdx === index}
-            onClick={() => handlePlusBtnClick(index)}
+            $clicked={activeOption === data.id}
+            onMouseEnter={() => handlePlusBtnHover(data.id)}
+            onMouseLeave={handlePlusBtnLeave}
+            onClick={handlePlusBtnClick}
           >
             <img src={PlusIcon} />
           </PlusButton>
@@ -47,7 +65,7 @@ const TaggedPage = ({
           <OptionItem
             key={index}
             data={data}
-            selected={hasOption(data.option)}
+            selected={checkOptionSelected(data.id)}
             handleOpenPopup={handleOpenPopup}
             handleSelectOption={handleSelectOption}
           />
