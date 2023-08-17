@@ -212,18 +212,33 @@ public class TrimSteps {
         }
     }
 
-    public static ExtractableResponse<Response> 트림에_차량_색상_설정_요청(final long carColorId, final long trimId) {
+    public static ExtractableResponse<Response> 트림에_차량_색상_설정_요청(
+            final long carColorId,
+            final long trimId,
+            final String trimExteriorImageUrl,
+            final String trimInteriorImageUrl,
+            final String trimRotationImageBaseUrl
+    ) {
         return given()
                 .filter(document(
                         DEFAULT_RESTDOCS_PATH,
                         requestFields(
-                                fieldWithPath("colorId").type(JsonFieldType.NUMBER).description("차량 색상 ID")
+                                fieldWithPath("colorId").type(JsonFieldType.NUMBER).description("차량 색상 ID"),
+                                fieldWithPath("trimExteriorImageUrl").type(JsonFieldType.STRING)
+                                        .description("차량 외장 이미지 URL"),
+                                fieldWithPath("trimInteriorImageUrl").type(JsonFieldType.STRING)
+                                        .description("차량 내장 이미지 URL"),
+                                fieldWithPath("trimRotationImageBaseUrl").type(JsonFieldType.STRING)
+                                        .description("차량 회전 이미지 URL")
                         )
                 )).log().all()
                 .when()
                 .contentType(ContentType.JSON)
                 .body(Map.of(
-                        "colorId", carColorId
+                        "colorId", carColorId,
+                        "trimExteriorImageUrl", trimExteriorImageUrl,
+                        "trimInteriorImageUrl", trimInteriorImageUrl,
+                        "trimRotationImageBaseUrl", trimRotationImageBaseUrl
                 ))
                 .post("/api/trim/{id}/color", trimId)
                 .then().log().all()
@@ -298,6 +313,15 @@ public class TrimSteps {
                                 fieldWithPath("[].colors[].image").type(JsonFieldType.STRING)
                                         .description("차량 색상 이미지 URL"),
                                 fieldWithPath("[].colors[].type").type(JsonFieldType.STRING).description("차량 색상 타입"),
+                                fieldWithPath("[].colors[].trimExteriorImageUrl").optional()
+                                        .type(JsonFieldType.STRING)
+                                        .description("차량 외장 이미지 URL"),
+                                fieldWithPath("[].colors[].trimInteriorImageUrl").optional()
+                                        .type(JsonFieldType.STRING)
+                                        .description("차량 내장 이미지 URL"),
+                                fieldWithPath("[].colors[].trimRotationImageBaseUrl").optional()
+                                        .type(JsonFieldType.STRING)
+                                        .description("차량 회전 이미지 URL"),
                                 fieldWithPath("[].colors[].incompatibleColorIds[]").type(JsonFieldType.ARRAY)
                                         .description("양립 불가능 색상 ID 목록")
                         )
