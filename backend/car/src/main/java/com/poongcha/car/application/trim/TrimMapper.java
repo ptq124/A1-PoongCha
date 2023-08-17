@@ -2,7 +2,10 @@ package com.poongcha.car.application.trim;
 
 import com.poongcha.car.application.dto.TrimCreateRequest;
 import com.poongcha.car.application.dto.TrimDefaultResponse;
+import com.poongcha.car.domain.common.ImageUrl;
+import com.poongcha.car.domain.trim.MinPrice;
 import com.poongcha.car.domain.trim.Trim;
+import com.poongcha.car.domain.trim.TrimName;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
@@ -11,9 +14,9 @@ import org.springframework.stereotype.Component;
 public class TrimMapper {
     public Trim toEntity(final TrimCreateRequest trimCreateRequest) {
         return new Trim(
-                trimCreateRequest.getTrimName(),
-                trimCreateRequest.getImageUrl(),
-                trimCreateRequest.getMinPrice(),
+                new TrimName(trimCreateRequest.getTrimName()),
+                new ImageUrl(trimCreateRequest.getImageUrl()),
+                new MinPrice(trimCreateRequest.getMinPrice()),
                 trimCreateRequest.getCarTypeId()
         );
     }

@@ -42,50 +42,43 @@ public class Trim {
     private Set<TrimCarColor> trimCarColors = new HashSet<>();
 
     public Trim(
-            final String trimName,
-            final String imageUrl,
-            final long minPrice,
+            final TrimName trimName,
+            final ImageUrl imageUrl,
+            final MinPrice minPrice,
             final long carType
     ) {
-        this.trimName = new TrimName(trimName);
-        this.imageUrl = new ImageUrl(imageUrl);
-        this.minPrice = new MinPrice(minPrice);
+        this.trimName = trimName;
+        this.imageUrl = imageUrl;
+        this.minPrice = minPrice;
         this.carType = new IdOnlyAggregateReference<>(carType);
     }
 
     public void addCarColor(
             final long carColorId,
-            final TrimExteriorImageUrl trimExteriorImageUrl,
-            final TrimInteriorImageUrl trimInteriorImageUrl,
-            final TrimRotationImageBaseUrl trimRotationImageBaseUrl
+            final TrimImageUrl trimImageUrl
     ) {
-        TrimCarColor trimCarColor = new TrimCarColor(
-                carColorId,
-                trimExteriorImageUrl,
-                trimInteriorImageUrl,
-                trimRotationImageBaseUrl
-        );
+        TrimCarColor trimCarColor = new TrimCarColor(carColorId, trimImageUrl);
         trimCarColors.add(trimCarColor);
     }
 
     public String exteriorImageUrl(final long carColorId) {
         return trimCarColorBy(carColorId)
-                .map(TrimCarColor::getTrimExteriorImageUrl)
-                .map(TrimExteriorImageUrl::getValue)
+                .map(TrimCarColor::getTrimImageUrl)
+                .map(TrimImageUrl::getExterior)
                 .orElse(null);
     }
 
     public String interiorImageUrl(final long carColorId) {
         return trimCarColorBy(carColorId)
-                .map(TrimCarColor::getTrimInteriorImageUrl)
-                .map(TrimInteriorImageUrl::getValue)
+                .map(TrimCarColor::getTrimImageUrl)
+                .map(TrimImageUrl::getInterior)
                 .orElse(null);
     }
 
     public String rotationImageUrl(final Long carColorId) {
         return trimCarColorBy(carColorId)
-                .map(TrimCarColor::getTrimRotationImageBaseUrl)
-                .map(TrimRotationImageBaseUrl::getValue)
+                .map(TrimCarColor::getTrimImageUrl)
+                .map(TrimImageUrl::getRotation)
                 .orElse(null);
     }
 

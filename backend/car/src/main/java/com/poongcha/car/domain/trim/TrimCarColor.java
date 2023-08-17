@@ -18,24 +18,11 @@ public class TrimCarColor {
     private AggregateReference<CarColor, Long> carColor;
 
     @Embedded.Nullable
-    private TrimExteriorImageUrl trimExteriorImageUrl;
+    private TrimImageUrl trimImageUrl;
 
-    @Embedded.Nullable
-    private TrimInteriorImageUrl trimInteriorImageUrl;
-
-    @Embedded.Nullable
-    private TrimRotationImageBaseUrl trimRotationImageBaseUrl;
-
-    public TrimCarColor(
-            final long carColorId,
-            final TrimExteriorImageUrl trimExteriorImageUrl,
-            final TrimInteriorImageUrl trimInteriorImageUrl,
-            final TrimRotationImageBaseUrl trimRotationImageBaseUrl
-    ) {
+    public TrimCarColor(final long carColorId, final TrimImageUrl trimImageUrl) {
         this.carColor = new IdOnlyAggregateReference<>(carColorId);
-        this.trimExteriorImageUrl = trimExteriorImageUrl;
-        this.trimInteriorImageUrl = trimInteriorImageUrl;
-        this.trimRotationImageBaseUrl = trimRotationImageBaseUrl;
+        this.trimImageUrl = trimImageUrl;
     }
 
     public boolean isEqualCarColorId(final long id) {

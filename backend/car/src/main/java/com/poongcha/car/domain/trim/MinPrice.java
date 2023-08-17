@@ -1,12 +1,15 @@
 package com.poongcha.car.domain.trim;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.data.relational.core.mapping.Column;
 
 @Getter
-@RequiredArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor
 public class MinPrice {
     @Column("min_price")
-    private final long value;
+    private long value;
 }

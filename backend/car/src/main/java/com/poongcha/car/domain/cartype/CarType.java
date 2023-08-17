@@ -1,6 +1,7 @@
 package com.poongcha.car.domain.cartype;
 
 import com.poongcha.car.domain.common.ImageUrl;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -28,11 +29,11 @@ public class CarType {
     private ImageUrl imageUrl;
 
     @MappedCollection(idColumn = "car_type_id")
-    private Set<CarTypeCarComponentGroup> carTypeCarComponentGroups;
+    private Set<CarTypeCarComponentGroup> carTypeCarComponentGroups = new HashSet<>();
 
-    public CarType(final String carTypeName, final String imageUrl) {
-        this.carTypeName = new CarTypeName(carTypeName);
-        this.imageUrl = new ImageUrl(imageUrl);
+    public CarType(final CarTypeName carTypeName, final ImageUrl imageUrl) {
+        this.carTypeName = carTypeName;
+        this.imageUrl = imageUrl;
     }
 
     public void addCarComponentGroup(final List<Long> carComponentGroupIds) {

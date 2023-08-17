@@ -1,12 +1,15 @@
 package com.poongcha.car.domain.carcolor;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.data.relational.core.mapping.Column;
 
 @Getter
-@RequiredArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor
 public class CarColorName {
     @Column("car_color_name")
-    private final String value;
+    private String value;
 }

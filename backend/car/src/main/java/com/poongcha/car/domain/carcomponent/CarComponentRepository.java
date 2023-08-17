@@ -1,6 +1,5 @@
 package com.poongcha.car.domain.carcomponent;
 
-import com.poongcha.car.domain.carcomponent.CarComponent;
 import java.util.List;
 import org.springframework.data.repository.Repository;
 

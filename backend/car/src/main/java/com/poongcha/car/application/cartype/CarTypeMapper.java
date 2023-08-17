@@ -7,6 +7,8 @@ import com.poongcha.car.application.dto.CarTypeDefaultResponse;
 import com.poongcha.car.domain.carcomponent.CarComponent;
 import com.poongcha.car.domain.carcomponentgroup.CarComponentGroup;
 import com.poongcha.car.domain.cartype.CarType;
+import com.poongcha.car.domain.cartype.CarTypeName;
+import com.poongcha.car.domain.common.ImageUrl;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
@@ -14,7 +16,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class CarTypeMapper {
     public CarType toEntity(final CarTypeCreateRequest carTypeCreateRequest) {
-        return new CarType(carTypeCreateRequest.getCarTypeName(), carTypeCreateRequest.getImageUrl());
+        return new CarType(
+                new CarTypeName(carTypeCreateRequest.getCarTypeName()),
+                new ImageUrl(carTypeCreateRequest.getImageUrl())
+        );
     }
 
     public CarTypeDefaultResponse toDefaultResponse(final CarType carType) {

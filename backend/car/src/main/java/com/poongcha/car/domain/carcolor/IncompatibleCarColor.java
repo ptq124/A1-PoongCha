@@ -1,6 +1,5 @@
 package com.poongcha.car.domain.carcolor;
 
-import com.poongcha.car.domain.carcolor.CarColor;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
