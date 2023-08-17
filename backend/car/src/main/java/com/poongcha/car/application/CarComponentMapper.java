@@ -1,17 +1,19 @@
 package com.poongcha.car.application;
 
-import com.poongcha.car.application.dto.CarComponentGroupCreateRequest;
-import com.poongcha.car.domain.CarComponentGroup;
-import com.poongcha.car.domain.CarComponentGroupName;
-import com.poongcha.car.domain.SelectionHelpTooltip;
+import com.poongcha.car.application.dto.CarComponentCreateRequest;
+import com.poongcha.car.domain.AdditionalPrice;
+import com.poongcha.car.domain.CarComponent;
+import com.poongcha.car.domain.CarComponentName;
+import com.poongcha.car.domain.DescriptionImageUrl;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CarComponentMapper {
-    public CarComponentGroup toEntity(final CarComponentGroupCreateRequest carComponentGroupCreateRequest) {
-        return new CarComponentGroup(
-                new CarComponentGroupName(carComponentGroupCreateRequest.getCarComponentGroupName()),
-                new SelectionHelpTooltip(carComponentGroupCreateRequest.getSelectionHelpTooltip())
+    public CarComponent toEntity(final CarComponentCreateRequest carComponentCreateRequest) {
+        return new CarComponent(
+                new CarComponentName(carComponentCreateRequest.getCarComponentName()),
+                new DescriptionImageUrl(carComponentCreateRequest.getDescriptionImageUrl()),
+                new AdditionalPrice(carComponentCreateRequest.getAdditionalPrice())
         );
     }
 }
