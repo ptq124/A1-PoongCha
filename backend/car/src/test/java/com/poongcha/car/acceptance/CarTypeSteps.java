@@ -151,4 +151,39 @@ public class CarTypeSteps {
             assertions.assertThat(response.headers().get(HttpHeaders.LOCATION).getValue()).isEqualTo(location);
         }
     }
+
+    public static ExtractableResponse<Response> 차량_타입의_차량_컴포넌트_그룹_조회_요청(final long carTypeId) {
+        return given()
+                .filter(document(
+                        DEFAULT_RESTDOCS_PATH,
+                        pathParameters(
+                                parameterWithName("id").description("차종 ID")
+                        ),
+                        responseFields(
+                                fieldWithPath("[].id").type(JsonFieldType.NUMBER).description("차량 컴포넌트 그룹 ID"),
+                                fieldWithPath("[].name").type(JsonFieldType.STRING).description("차량 컴포넌트 그룹 이름"),
+                                fieldWithPath("[].selectionHelpTooltip").type(JsonFieldType.STRING)
+                                        .description("차량 컴포넌트 그룹 선택 도움말"),
+                                fieldWithPath("[].component[].id").type(JsonFieldType.NUMBER)
+                                        .description("차량 컴포넌트 ID"),
+                                fieldWithPath("[].component[].name").type(JsonFieldType.STRING)
+                                        .description("차량 컴포넌트 이름"),
+                                fieldWithPath("[].component[].descriptionImageUrl").type(JsonFieldType.STRING)
+                                        .description("차량 컴포넌트 설명 이미지 URL"),
+                                fieldWithPath("[].component[].additionalPrice").type(JsonFieldType.NUMBER)
+                                        .description("차량 컴포넌트 추가 금액")
+                        )
+                )).log().all()
+                .when()
+                .contentType(ContentType.JSON)
+                .get("/api/car-type/{id}/component-group", carTypeId)
+                .then().log().all()
+                .extract();
+    }
+
+    public static void 차량_타입의_차량_컴포넌트_그룹_조회_응답_검증(final ExtractableResponse<Response> response) {
+        try (AutoCloseableSoftAssertions assertions = new AutoCloseableSoftAssertions()) {
+            assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.SC_OK);
+        }
+    }
 }
