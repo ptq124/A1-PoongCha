@@ -8,13 +8,27 @@ import { options } from "./optionData";
 const OptionPage = () => {
   // 선택한 옵션들 상태관리
   const [selectedOptions, setSelectedOptions] = useState([]);
-  const handleSelectOption = (option) => {
-    if (checkOptionSelected(option))
-      setSelectedOptions((prev) => prev.filter((opt) => opt !== option));
-    else setSelectedOptions((prev) => [...prev, option]);
+  const handleSelectOption = (optionId) => {
+    const option = options.find((opt) => opt.id === optionId);
+
+    if (checkOptionSelected(optionId)) {
+      const poppedOptionSet = [optionId, ...(option.set ? option.set : [])];
+
+      setSelectedOptions((prev) =>
+        prev.filter((optId) => !poppedOptionSet.includes(optId))
+      );
+    } else {
+      const pushedOptionSet = [
+        optionId,
+        ...(option.set
+          ? option.set.filter((opt) => !selectedOptions.includes(opt))
+          : []),
+      ];
+      setSelectedOptions((prev) => [...prev, ...pushedOptionSet]);
+    }
   };
-  const checkOptionSelected = (option) => {
-    return selectedOptions.includes(option);
+  const checkOptionSelected = (optionId) => {
+    return selectedOptions.includes(optionId);
   };
 
   const [selectedTab, setSelectedTab] = useState("추가 옵션");

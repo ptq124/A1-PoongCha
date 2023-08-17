@@ -67,7 +67,7 @@ const AllOptions = ({
         <OptionItem
           key={index}
           data={data}
-          selected={checkOptionSelected(data.option)}
+          selected={checkOptionSelected(data.id)}
           handleSelectOption={handleSelectOption}
           handleOpenPopup={handleOpenPopup}
         />
@@ -80,7 +80,7 @@ const AllOptions = ({
         <OptionItem
           key={index}
           data={data}
-          selected={checkOptionSelected(data.option)}
+          selected={checkOptionSelected(data.id)}
           handleSelectOption={handleSelectOption}
           handleOpenPopup={handleOpenPopup}
         />

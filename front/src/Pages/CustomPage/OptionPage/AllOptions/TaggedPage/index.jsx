@@ -15,12 +15,12 @@ const TaggedPage = ({
   const [activeOption, setActiveOption] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalFixed, setIsModalFixed] = useState(false);
-  const handlePlusBtnHover = (option) => {
-    if (isModalFixed && activeOption !== option) {
+  const handlePlusBtnHover = (id) => {
+    if (isModalFixed && activeOption !== id) {
       setIsModalFixed(false);
     }
     setIsModalOpen(true);
-    setActiveOption(option);
+    setActiveOption(id);
   };
   const handlePlusBtnLeave = () => {
     if (!isModalFixed) {
@@ -38,11 +38,11 @@ const TaggedPage = ({
     <Wrapper>
       <SituationScreen>
         {activeOption !== null &&
-          optionData.map((data) => data.option).includes(activeOption) && (
+          optionData.map((data) => data.id).includes(activeOption) && (
             <OptionModal
               tag={tag}
               isOpen={isModalOpen}
-              data={optionData.find((elem) => elem.option === activeOption)}
+              data={optionData.find((elem) => elem.id === activeOption)}
               handleOpenPopup={handleOpenPopup}
             />
           )}
@@ -51,8 +51,8 @@ const TaggedPage = ({
           <PlusButton
             key={index}
             $position={data.position}
-            $clicked={activeOption === data.option}
-            onMouseEnter={() => handlePlusBtnHover(data.option)}
+            $clicked={activeOption === data.id}
+            onMouseEnter={() => handlePlusBtnHover(data.id)}
             onMouseLeave={handlePlusBtnLeave}
             onClick={handlePlusBtnClick}
           >
@@ -65,7 +65,7 @@ const TaggedPage = ({
           <OptionItem
             key={index}
             data={data}
-            selected={checkOptionSelected(data.option)}
+            selected={checkOptionSelected(data.id)}
             handleOpenPopup={handleOpenPopup}
             handleSelectOption={handleSelectOption}
           />

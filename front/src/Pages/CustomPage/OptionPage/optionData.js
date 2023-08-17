@@ -7,7 +7,7 @@ export const options = [
     img: "https://www.hyundai.com/contents/spec/LX24/dualwidesunroof_s.jpg",
     tag: ["사용편의", "추위/더위", "스타일"],
     position: { x: 5, y: 35 },
-    set:"컴포트 2",
+    set:[2, 3, 4, 5, 6],
   },
   {
     id:2,
@@ -17,7 +17,7 @@ export const options = [
     img: "https://www.hyundai.com/contents/spec/LX24/dualwidesunroof_s.jpg",
     tag: ["추위/더위", "주차/출차", "스타일"],
     position: { x: 20, y: 80 },
-    set:"컴포트 2",
+    set:null,
   },
   {
     id:3,
@@ -27,7 +27,7 @@ export const options = [
     img: "https://www.hyundai.com/contents/spec/LX24/dualwidesunroof_s.jpg",
     tag: ["주행안전", "주차/출차","추위/더위"],
     position: { x: 50, y: 10 },
-    set:"컴포트 2",
+    set:null,
   },
   {
     id:4,
@@ -37,7 +37,7 @@ export const options = [
     img: "https://www.hyundai.com/contents/spec/LX24/dualwidesunroof_s.jpg",
     tag: ["주행안전","스타일"],
     position: { x: 95, y: 85 },
-    set:"컴포트 2",
+    set:null,
   },
   {
     id:5,
@@ -47,7 +47,7 @@ export const options = [
     img: "https://www.hyundai.com/contents/spec/LX24/dualwidesunroof_s.jpg",
     tag: ["사용편의"],
     position: { x: 40, y: 85 },
-    set:"컴포트 2",
+    set:null,
   },
   {
     id:6,

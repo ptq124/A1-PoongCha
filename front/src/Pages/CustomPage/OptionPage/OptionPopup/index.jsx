@@ -18,14 +18,13 @@ const OptionPopup = ({
   useEffect(() => {
     // data의 세트 옵션들 서버에서 불러오기
     if (data.set !== null) {
-      setSetData(options.filter((option) => option.set === data.set));
+      setSetData(
+        data.set.map((optId) => options.find((opt) => opt.id === optId))
+      );
     } else {
       setSetData([data]);
     }
   }, []);
-  useEffect(() => {
-    setCrntOptionIdx(setData.findIndex((elem) => elem.option === data.option));
-  }, [setData]);
 
   return (
     <Wrapper ref={popupRef}>
@@ -42,10 +41,10 @@ const OptionPopup = ({
               key={index}
               index={index}
               setData={setData}
-              selected={checkOptionSelected(data.option)}
+              selected={checkOptionSelected(data.id)}
               closePopup={closePopup}
               handleNavClick={setCrntOptionIdx}
-              handleSelectOption={() => handleSelectOption(data.option)}
+              handleSelectOption={() => handleSelectOption(data.id)}
             />
           ))}
         </Cards>
