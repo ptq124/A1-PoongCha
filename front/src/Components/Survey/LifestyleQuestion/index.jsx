@@ -9,7 +9,7 @@ import LifeImg from "@assets/lifestyle/lifestyle1.svg";
 문구: 텍스트
 프로필 사진: 이미지
 */
-const LifestylePersona = ({ selected, openPopup, data, onClick }) => {
+const LifestyleQuestion = (option, selected, handleSelected, openPopup) => {
   return (
     <Wrapper
       selected={option.index === selected}

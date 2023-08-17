@@ -15,11 +15,9 @@ const Survey = ({
   style,
 }) => {
   const { selected, handleSelected } = useRadio(initialState);
-
   useEffect(() => {
     reducerHandler(reducerKey, selected);
   }, [selected]);
-
   return (
     <Wrapper>
       <Title questionnaire={questionnaire} />

@@ -6,6 +6,9 @@ import useOnClickPopUp from "@hooks/useOnClickPopUp";
 import PopUp from "./PopUp";
 import useButtonNavigation from "@hooks/useButtonNavigation";
 import OverlaidPopup from "@Components/Common/OverlaidPopup";
+import { useOutletContext } from "react-router-dom";
+import Survey from "@Components/Survey";
+import LifestyleQuestion from "@Components/Survey/LifestyleQuestion";
 
 const lifestyleSurveyInfo = {
   options: [
@@ -59,7 +62,6 @@ const LifestyleSurvey = () => {
   const move = useButtonNavigation();
 
   const [handleOptionSelect, state] = useOutletContext();
-
   const questionnaire = () => {
     return (
       <>
@@ -94,7 +96,7 @@ const LifestyleSurvey = () => {
       <Button
         text="선택 완료"
         style={SurveyBtnStyle}
-        $isActive={selectedOption !== ""}
+        $isActive={state.lifestyle !== ""}
         onClick={() => move("/survey/end")}
       />
     </>
