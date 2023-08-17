@@ -1,13 +1,14 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import * as S from "../styles";
 import { css, styled } from "styled-components";
 import Button from "../../../Components/Common/Button/Button";
-import SurveyHeader from "../../../Components/Survey/SurveyHeader";
-import LifestylePersona from "../../../Components/Survey/LifestylePersona";
 import useOnClickPopUp from "../../../hooks/useOnClickPopUp";
 import PopUp from "./PopUp";
 import useButtonNavigation from "../../../hooks/useButtonNavigation";
 import BackgroundOverlay from "../../../Components/Common/OverlaidPopup/BackgroundOverlay";
+import Survey from "../../../Components/Survey";
+import LifestyleQuestion from "../../../Components/Survey/LifestyleQuestion";
+import { useOutletContext } from "react-router-dom";
 
 const lifestyleSurveyInfo = {
   options: [
@@ -55,35 +56,40 @@ const lifestyleSurveyInfo = {
 };
 
 const LifestyleSurvey = () => {
-  const [selectedOption, setSelectedOption] = useState("");
-  const handleOptionChange = (index) => {
-    setSelectedOption(index);
-  };
   const popupRef = useRef();
-  const { isPopupOpen, openPopup, closePopup } = useOnClickPopUp(popupRef);
+  const { isPopupOpen, openPopup } = useOnClickPopUp(popupRef);
 
   const move = useButtonNavigation();
 
-  return (
-    <>
-      <S.SurveyContent>
-        <SurveyHeader surveyType={"Lifestyle"} />
+  const [handleOptionSelect, state] = useOutletContext();
+
+  const questionnaire = () => {
+    return (
+      <>
+        유사한 <strong>라이프스타일</strong>을 선택하면
+        <br />
+        차량 조합을 추천해 드려요.
         <Button
           text="원하는 라이프스타일이 없다면?"
           style={LinkBtnStyle}
           onClick={() => move("/survey/extra")}
         />
-        <S.LifeStyleOptions>
-          {lifestyleSurveyInfo.options.map((_, index) => (
-            <LifestylePersona
-              key={index}
-              selected={selectedOption === index}
-              openPopup={openPopup}
-              data={lifestyleSurveyInfo.options[index]}
-              onClick={() => handleOptionChange(index)}
-            />
-          ))}
-        </S.LifeStyleOptions>
+      </>
+    );
+  };
+
+  return (
+    <>
+      <S.SurveyContent>
+        <Survey
+          questionnaire={questionnaire()}
+          label={LifestyleQuestion}
+          options={lifestyleSurveyInfo.options}
+          openPopup={openPopup}
+          reducerHandler={handleOptionSelect}
+          reducerKey={"lifestyle"}
+          style={lifeStyle}
+        />
       </S.SurveyContent>
       {isPopupOpen && (
         <>
@@ -99,6 +105,10 @@ const LifestyleSurvey = () => {
     </>
   );
 };
+const lifeStyle = css`
+  gap: 16px;
+  margin-top: 32px;
+`;
 
 const Radio = styled.input`
   display: none;

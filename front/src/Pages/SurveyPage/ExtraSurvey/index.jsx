@@ -1,12 +1,12 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React from "react";
 import * as S from "../styles";
-import { css } from "styled-components";
-import SurveyHeader from "../../../Components/Survey/SurveyHeader";
-import SurveyOptionGroup from "../../../Components/Survey/SurveyOptionGroup";
+import { styled, css } from "styled-components";
 import Button from "../../../Components/Common/Button/Button";
 import BudgetSliderGroup from "./BudgetSliderGroup";
-import { initialState, reducer } from "./index.reducer";
 import useButtonNavigation from "../../../hooks/useButtonNavigation";
+import Survey from "../../../Components/Survey";
+import ExtraQuestion from "../../../Components/Survey/ExtraQuestion";
+import { useOutletContext } from "react-router-dom";
 
 const surveyData = {
   drivingRecord: {
@@ -29,55 +29,61 @@ const surveyData = {
 
 const ExtraSurvey = () => {
   const move = useButtonNavigation();
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const handleOptionSelect = (questionKey, option) => {
-    dispatch({
-      type: "SELECT_OPTION",
-      questionKey,
-      option,
-    });
-  };
 
-  // 완료 버튼 활성화 관련 기능
-  const [isBtnActive, setIsBtnActive] = useState(false);
-  const updateButtonStatusIfAllAnswered = () => {
-    if (Object.values(state).includes("")) {
-      return;
-    }
-    setIsBtnActive(true);
-  };
-  useEffect(() => {
-    if (!isBtnActive) {
-      updateButtonStatusIfAllAnswered();
-    }
-  }, [state]);
+  const [handleOptionSelect, state] = useOutletContext();
+
+  const isActive = () => state.purpose && state.viewpoint;
 
   return (
     <S.SurveyContent>
-      <SurveyHeader surveyType={"Extra"} />
+      <Title>
+        당신의 <strong>라이프스타일</strong>을 알려주세요.
+      </Title>
+      <Subtitle>당신의 라이프스타일을 반영한 차를 추천해 드릴게요.</Subtitle>
       {Object.entries(surveyData).map(([questionKey, data]) => (
-        <SurveyOptionGroup
+        <Survey
           key={questionKey}
-          data={data}
-          handleOptionSelect={(newValue) => {
-            handleOptionSelect(questionKey, newValue);
-          }}
-          selectedOption={state[questionKey]}
+          questionnaire={data.title}
+          label={ExtraQuestion}
+          options={data.options}
+          reducerHandler={handleOptionSelect}
+          reducerKey={questionKey}
+          initialState={state[questionKey]}
+          style={extraStyle}
         />
       ))}
       <BudgetSliderGroup
-        maxBudget={state["maxBudget"]}
+        maxBudget={state.maxBudget}
         setMaxBudget={(newValue) => handleOptionSelect("maxBudget", newValue)}
       />
       <Button
         text="완료"
-        $isActive={isBtnActive}
+        $isActive={isActive()}
         style={SurveyBtnStyle}
         onClick={() => move("/survey/etc_end", state)}
       />
     </S.SurveyContent>
   );
 };
+const extraStyle = css`
+  gap: 12px;
+
+  margin-top: 18px;
+`;
+
+const Subtitle = styled.div`
+  color: ${({ theme }) => theme.color.grey300};
+  ${({ theme }) => theme.font.Body4_Regular};
+
+  margin-top: 8px;
+  margin-bottom: 40px;
+`;
+const Title = styled.div`
+  ${({ theme }) => theme.font.Extra1};
+  strong {
+    font-family: "HyundaiSansHeadMediumKR";
+  }
+`;
 
 const SurveyBtnStyle = css`
   width: 608px;
