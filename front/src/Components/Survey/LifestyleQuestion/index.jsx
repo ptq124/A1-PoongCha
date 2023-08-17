@@ -11,22 +11,29 @@ import LifeImg from "@assets/lifestyle/lifestyle1.svg";
 */
 const LifestylePersona = ({ selected, openPopup, data, onClick }) => {
   return (
-    <Wrapper selected={selected} onClick={onClick}>
+    <Wrapper
+      selected={option.index === selected}
+      onClick={() => handleSelected(option.index)}
+    >
       <TagWrapper>
-        {data.tags.map((tag, index) => (
-          <LifestyleTag selected={selected} key={index}>
+        {option.tags.map((tag, index) => (
+          <LifestyleTag selected={option.index === selected} key={index}>
             {tag}
           </LifestyleTag>
         ))}
       </TagWrapper>
-      <LifestylePhrase selected={selected}>
-        <span>{data.phrase}</span>
-        <CheckImg src={selected ? check32blue : check32grey} />
+      <LifestylePhrase selected={option.index === selected}>
+        <span>{option.phrase}</span>
+        <CheckImg src={option.index === selected ? check32blue : check32grey} />
       </LifestylePhrase>
-      <LifestyleDetail onClick={openPopup} selected={selected}>
+      <LifestyleDetail onClick={openPopup} selected={option.index === selected}>
         라이프스타일 엿보기
       </LifestyleDetail>
-      <LifestyleImg selected={selected} src={LifeImg} alt="Lifestyle" />
+      <LifestyleImg
+        selected={option.index === selected}
+        src={LifeImg}
+        alt="Lifestyle"
+      />
     </Wrapper>
   );
 };
@@ -170,4 +177,4 @@ const LifestyleImg = styled.img`
   box-sizing: border-box;
 `;
 
-export default LifestylePersona;
+export default LifestyleQuestion;

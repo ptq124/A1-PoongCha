@@ -1,32 +1,35 @@
-import React, { useState } from "react";
+import React from "react";
 import * as S from "../styles";
 import { css } from "styled-components";
 import Button from "@Components/Common/Button/Button";
-import SurveyHeader from "@Components/Survey/SurveyHeader";
-import SurveyOptionGroup from "@Components/Survey/SurveyOptionGroup";
 import useButtonNavigation from "@hooks/useButtonNavigation";
 
 const surveyData = {
-  age: {
-    title: "",
-    options: ["20대", "30대", "40대", "50대 이상"],
-  },
+  options: ["20대", "30대", "40대", "50대 이상"],
+};
+
+const questionnaire = () => {
+  return (
+    <>
+      <strong>나이</strong>를 알려주세요.
+    </>
+  );
 };
 
 const AgeSurvey = () => {
   const move = useButtonNavigation();
-  const [selectedOption, setSelectedOption] = useState("20대");
-  const handleOptionSelect = (option) => {
-    setSelectedOption(option);
-  };
+  const [handleOptionSelect, state] = useOutletContext();
+
   return (
     <S.SurveyContent>
-      <SurveyHeader surveyType={"Age"} />
-
-      <SurveyOptionGroup
-        data={surveyData["age"]}
-        handleOptionSelect={handleOptionSelect}
-        selectedOption={selectedOption}
+      <Survey
+        questionnaire={questionnaire()}
+        label={AgeQuestion}
+        options={surveyData.options}
+        reducerHandler={handleOptionSelect}
+        reducerKey={"age"}
+        initialState={state.age}
+        style={ageStyle}
       />
       <Button
         text="다음"
@@ -36,6 +39,11 @@ const AgeSurvey = () => {
     </S.SurveyContent>
   );
 };
+
+const ageStyle = css`
+  gap: 12px;
+  margin-top: 24px;
+`;
 
 const SurveyBtnStyle = css`
   width: 608px;

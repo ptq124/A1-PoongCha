@@ -1,28 +1,27 @@
 import React from "react";
 import { css, styled } from "styled-components";
-import Check24BlueIcon from "@assets/checkcircle/check-24-blue.svg";
+import Check24BlueIcon from "../../../assets/checkcircle/check-24-blue.svg";
 
-const SurveyOption = ({ label, selected, handleOptionSelect, isLong }) => {
+const ExtraQuestion = (option, selected, handleSelected) => {
   return (
     <>
-      <SurveyOptionLabel
-        selected={selected}
-        $isLong={isLong}
-        onClick={handleOptionSelect}
+      <Label
+        selected={option === selected}
+        onClick={() => handleSelected(option)}
       >
-        {label}
-        {selected && <img src={Check24BlueIcon} alt="check" />}
-      </SurveyOptionLabel>
+        {option}
+        {option === selected && <img src={Check24BlueIcon} alt="check" />}
+      </Label>
     </>
   );
 };
 
-const SurveyOptionLabel = styled.label`
+const Label = styled.label`
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  width: ${(props) => (props.$isLong ? "100%" : "298px")};
+  //width
+  width: 298px;
   height: 56px;
 
   border-radius: 6px;
@@ -49,4 +48,4 @@ const SurveyOptionLabel = styled.label`
         `}
 `;
 
-export default SurveyOption;
+export default ExtraQuestion;
