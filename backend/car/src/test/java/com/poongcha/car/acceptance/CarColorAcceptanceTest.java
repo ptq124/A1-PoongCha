@@ -40,13 +40,9 @@ public class CarColorAcceptanceTest extends DocumentationTest {
         차량_색상_생성_요청("green", "www.naver.com/color/green.png", "EXTERIOR");
         차량_색상_생성_요청("blue", "www.naver.com/color/blue.png", "EXTERIOR");
         차량_색상_생성_요청("orange", "www.naver.com/color/orange.png", "EXTERIOR");
-        var carColorId = 1L;
-        var incompatibleCarColor1 = 2L;
-        var compatibleCarColor = 3L;
-        var incompatibleCarColor2 = 4L;
 
         // WHEN
-        var response = 양립_불가능한_차량_색상_설정_요청(carColorId, incompatibleCarColor1, incompatibleCarColor2);
+        var response = 양립_불가능한_차량_색상_설정_요청(1L, 2L, 4L);
 
         // THEN
         양립_불가능한_차량_색상_설정_응답_검증(response, "/api/color/1");
@@ -71,10 +67,9 @@ public class CarColorAcceptanceTest extends DocumentationTest {
     void 같은_ID로_양립_불가능한_차량_색상_설정() {
         // GIVEN
         차량_색상_생성_요청("red", "www.naver.com/color/red.png", "INTERIOR");
-        var carColorId = 1L;
 
         // WHEN
-        var response = 같은_ID로_양립_불가능한_차량_색상_설정_요청(carColorId, carColorId);
+        var response = 같은_ID로_양립_불가능한_차량_색상_설정_요청(1L, 1L);
 
         // THEN
         같은_ID로_양립_불가능한_차량_색상_설정_응답_검증(response);
@@ -87,12 +82,9 @@ public class CarColorAcceptanceTest extends DocumentationTest {
         차량_색상_생성_요청("red", "www.naver.com/color/red.png", "INTERIOR");
         차량_색상_생성_요청("blue", "www.naver.com/color/blue.png", "EXTERIOR");
         차량_색상_생성_요청("orange", "www.naver.com/color/orange.png", "INTERIOR");
-        var carColorId = 1L;
-        var incompatibleCarColor1 = 2L;
-        var incompatibleCarColor2 = 3L;
 
         // WHEN
-        var response = 같은_차량_색상_타입으로_양립_불가능한_차량_색상_설정_요청(carColorId, incompatibleCarColor1, incompatibleCarColor2);
+        var response = 같은_차량_색상_타입으로_양립_불가능한_차량_색상_설정_요청(1L, 2L, 3L);
 
         // THEN
         같은_차량_색상_타입으로_양립_불가능한_차량_색상_설정_응답_검증(response);
