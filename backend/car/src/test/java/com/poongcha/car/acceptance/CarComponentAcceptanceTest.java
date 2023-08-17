@@ -2,10 +2,13 @@ package com.poongcha.car.acceptance;
 
 import static com.poongcha.car.acceptance.CarComponentSteps.차량_컴포넌트_그룹_생성_요청;
 import static com.poongcha.car.acceptance.CarComponentSteps.차량_컴포넌트_그룹_생성_응답_검증;
+import static com.poongcha.car.acceptance.CarComponentSteps.차량_컴포넌트_그룹에_차량_컴포넌트_추가_요청;
+import static com.poongcha.car.acceptance.CarComponentSteps.차량_컴포넌트_그룹에_차량_컴포넌트_추가_응답_검증;
 import static com.poongcha.car.acceptance.CarComponentSteps.차량_컴포넌트_생성_요청;
 import static com.poongcha.car.acceptance.CarComponentSteps.차량_컴포넌트_생성_응답_검증;
 
 import com.poongcha.car.util.DocumentationTest;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -38,5 +41,24 @@ public class CarComponentAcceptanceTest extends DocumentationTest {
 
         // THEN
         차량_컴포넌트_생성_응답_검증(response, "/api/component/1");
+    }
+
+    @DisplayName("차량 컴포넌트 그룹에 차량 컴포넌트 추가")
+    @Test
+    void 차량_컴포넌트_그룹에_차량_컴포넌트_추가() {
+        // GIVEN
+        var carComponentName = "4WD";
+        var descriptionImageUrl = "www.naver.com/image/4wd.png";
+        var additionalPrice = 2_000_000;
+        차량_컴포넌트_생성_요청(carComponentName, descriptionImageUrl, additionalPrice);
+        var carComponentGroupName = "엔진";
+        var selectionHelpTooltip = "디젤은 연비가 좋고 가솔린은 승차감이 더 부드럽고 조용해요";
+        차량_컴포넌트_그룹_생성_요청(carComponentGroupName, selectionHelpTooltip);
+
+        // WHEN
+        var response = 차량_컴포넌트_그룹에_차량_컴포넌트_추가_요청(1L, List.of(1L));
+
+        // THEN
+        차량_컴포넌트_그룹에_차량_컴포넌트_추가_응답_검증(response, "/api/component-group/1");
     }
 }
