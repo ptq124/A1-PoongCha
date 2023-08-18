@@ -1,6 +1,7 @@
 package com.poongcha.car.domain.caroptiongroup;
 
 import com.poongcha.car.domain.common.AdditionalPrice;
+import com.poongcha.car.exception.BadRequestException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -60,11 +61,29 @@ public class CarOptionGroup {
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    public void addIncompatibleCarOptionGroup(final List<CarOptionGroup> incompatibleCarOptionGroups) {
+    public void addIncompatibleCarOptionGroup(final int size, final List<CarOptionGroup> incompatibleCarOptionGroups) {
+        validationAddIncompatibleCarOptionGroup(size, incompatibleCarOptionGroups);
+
         incompatibleCarOptionGroups.forEach(carOptionGroup -> {
                     this.incompatibleCarOptionGroups.add(new IncompatibleCarOptionGroup(carOptionGroup.id));
                     carOptionGroup.incompatibleCarOptionGroups.add(new IncompatibleCarOptionGroup(this.id));
                 }
         );
+    }
+
+    private void validationAddIncompatibleCarOptionGroup(
+            final int incompatibleCarOptionGroupRequestSize,
+            final List<CarOptionGroup> incompatibleCarOptionGroups
+    ) {
+        if (
+                incompatibleCarOptionGroupRequestSize != incompatibleCarOptionGroups.size()
+                        || isContainSameId(incompatibleCarOptionGroups)
+        ) {
+            throw new BadRequestException("양립 불가능한 차량 옵션 그룹 설정에 실패했습니다.");
+        }
+    }
+
+    private boolean isContainSameId(final List<CarOptionGroup> incompatibleCarOptionGroups) {
+        return incompatibleCarOptionGroups.stream().anyMatch(carOptionGroup -> carOptionGroup.id.equals(this.id));
     }
 }

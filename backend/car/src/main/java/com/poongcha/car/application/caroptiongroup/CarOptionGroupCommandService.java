@@ -34,7 +34,10 @@ public class CarOptionGroupCommandService {
                 optionGroupAddIncompatibleOptionGroupRequest.getIncompatibleOptionGroupIds()
         );
 
-        carOptionGroup.addIncompatibleCarOptionGroup(inCompatibleCarOptionGroups);
+        carOptionGroup.addIncompatibleCarOptionGroup(
+                optionGroupAddIncompatibleOptionGroupRequest.getIncompatibleOptionGroupIds().size(),
+                inCompatibleCarOptionGroups
+        );
 
         carOptionGroupRepository.saveAll(inCompatibleCarOptionGroups);
         return carOptionGroupRepository.save(carOptionGroup).getId();
