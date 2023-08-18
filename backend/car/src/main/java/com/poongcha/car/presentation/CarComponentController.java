@@ -1,6 +1,6 @@
 package com.poongcha.car.presentation;
 
-import com.poongcha.car.application.CarComponentCommandService;
+import com.poongcha.car.application.carcomponent.CarComponentCommandService;
 import com.poongcha.car.application.dto.CarComponentCreateRequest;
 import java.net.URI;
 import lombok.RequiredArgsConstructor;
@@ -15,8 +15,8 @@ public class CarComponentController {
     private final CarComponentCommandService carComponentCommandService;
 
     @PostMapping("/api/component")
-    private ResponseEntity createCarComponent(
-            @RequestBody CarComponentCreateRequest carComponentCreateRequest
+    private ResponseEntity<Void> createCarComponent(
+            @RequestBody final CarComponentCreateRequest carComponentCreateRequest
     ) {
         long createCarComponentGroupId = carComponentCommandService.create(carComponentCreateRequest);
         return ResponseEntity.created(URI.create("/api/component/" + createCarComponentGroupId)).build();

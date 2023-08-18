@@ -1,11 +1,11 @@
 package com.poongcha.car.presentation;
 
-import com.poongcha.car.application.TrimCommandService;
-import com.poongcha.car.application.TrimQueryService;
 import com.poongcha.car.application.dto.TrimAddCarColorRequest;
 import com.poongcha.car.application.dto.TrimCarColorResponse;
 import com.poongcha.car.application.dto.TrimCreateRequest;
 import com.poongcha.car.application.dto.TrimDefaultResponse;
+import com.poongcha.car.application.trim.TrimCommandService;
+import com.poongcha.car.application.trim.TrimQueryService;
 import java.net.URI;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -23,25 +23,25 @@ public class TrimController {
     private final TrimQueryService trimQueryService;
 
     @PostMapping("/api/trim")
-    public ResponseEntity createTrim(@RequestBody final TrimCreateRequest trimCreateRequest) {
+    public ResponseEntity<Void> createTrim(@RequestBody final TrimCreateRequest trimCreateRequest) {
         long createTrimId = trimCommandService.create(trimCreateRequest);
         return ResponseEntity.created(URI.create("/api/trim/" + createTrimId)).build();
     }
 
     @GetMapping("/api/trim/{id}")
-    public ResponseEntity findTrimById(@PathVariable(value = "id") final long id) {
-        TrimDefaultResponse trimDefaultResponse = trimQueryService.findById(id);
-        return ResponseEntity.ok().body(trimDefaultResponse);
+    public ResponseEntity<TrimDefaultResponse> findTrimById(@PathVariable(value = "id") final long id) {
+        return ResponseEntity.ok().body(trimQueryService.findById(id));
     }
 
     @GetMapping("/api/car-type/{car-type-id}/trim")
-    public ResponseEntity<List> findAllTrimByCarTypeId(@PathVariable(value = "car-type-id") final long carTypeId) {
-        List<TrimDefaultResponse> trimDefaultResponses = trimQueryService.findAllByCarTypeId(carTypeId);
-        return ResponseEntity.ok().body(trimDefaultResponses);
+    public ResponseEntity<List<TrimDefaultResponse>> findAllTrimByCarTypeId(
+            @PathVariable(value = "car-type-id") final long carTypeId
+    ) {
+        return ResponseEntity.ok().body(trimQueryService.findAllByCarTypeId(carTypeId));
     }
 
     @PostMapping("/api/trim/{id}/color")
-    public ResponseEntity addTrimColor(
+    public ResponseEntity<Void> addTrimColor(
             @PathVariable(value = "id") final long trimId,
             @RequestBody final TrimAddCarColorRequest trimAddCarColorRequest
     ) {
@@ -53,7 +53,6 @@ public class TrimController {
     public ResponseEntity<List<TrimCarColorResponse>> findCarTypeColors(
             @PathVariable(value = "id") final long carTypeId
     ) {
-        List<TrimCarColorResponse> carTypeCarColors = trimQueryService.findCarTypeColors(carTypeId);
-        return ResponseEntity.ok().body(carTypeCarColors);
+        return ResponseEntity.ok().body(trimQueryService.findCarTypeColors(carTypeId));
     }
 }

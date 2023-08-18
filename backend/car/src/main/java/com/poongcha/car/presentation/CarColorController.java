@@ -1,6 +1,6 @@
 package com.poongcha.car.presentation;
 
-import com.poongcha.car.application.CarColorCommandService;
+import com.poongcha.car.application.carcolor.CarColorCommandService;
 import com.poongcha.car.application.dto.CarColorAddIncompatibleColorRequest;
 import com.poongcha.car.application.dto.CarColorCreateRequest;
 import java.net.URI;
@@ -17,13 +17,13 @@ public class CarColorController {
     private final CarColorCommandService carColorCommandService;
 
     @PostMapping("/api/color")
-    private ResponseEntity createCarColor(@RequestBody final CarColorCreateRequest carColorCreateRequest) {
+    private ResponseEntity<Void> createCarColor(@RequestBody final CarColorCreateRequest carColorCreateRequest) {
         long createCarColorId = carColorCommandService.create(carColorCreateRequest);
         return ResponseEntity.created(URI.create("/api/color/" + createCarColorId)).build();
     }
 
     @PostMapping("/api/color/{id}/incompatible")
-    private ResponseEntity addIncompatibleColor(
+    private ResponseEntity<Void> addIncompatibleColor(
             @PathVariable(value = "id") final long carColorId,
             @RequestBody final CarColorAddIncompatibleColorRequest carColorAddIncompatibleColorRequest
     ) {

@@ -63,7 +63,7 @@ public class TrimSteps {
     public static ExtractableResponse<Response> 존재하지_않는_차종으로_트림_생성_요청(
             final String trimName,
             final String imageUrl,
-            final int minPrice,
+            final long minPrice,
             final long carTypeId
     ) {
         return given()
