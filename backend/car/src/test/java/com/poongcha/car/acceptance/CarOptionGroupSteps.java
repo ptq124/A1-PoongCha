@@ -20,7 +20,8 @@ public class CarOptionGroupSteps {
             final String carOptionGroupName,
             final String installationLocation,
             final long additionalPrice,
-            final String summaryDescription
+            final String summaryDescription,
+            final long[] ids
     ) {
         return given()
                 .filter(document(
@@ -33,7 +34,9 @@ public class CarOptionGroupSteps {
                                 fieldWithPath("additionalPrice").type(JsonFieldType.NUMBER)
                                         .description("차량 옵션 그룹 가격"),
                                 fieldWithPath("summaryDescription").type(JsonFieldType.STRING)
-                                        .description("차량 옵션 그룹 설명")
+                                        .description("차량 옵션 그룹 설명"),
+                                fieldWithPath("carOptionIds").type(JsonFieldType.ARRAY)
+                                        .description("차량 옵션 ID 목록")
                         )
                 )).log().all()
                 .when()
@@ -41,7 +44,8 @@ public class CarOptionGroupSteps {
                         "carOptionGroupName", carOptionGroupName,
                         "installationLocation", installationLocation,
                         "additionalPrice", additionalPrice,
-                        "summaryDescription", summaryDescription
+                        "summaryDescription", summaryDescription,
+                        "carOptionIds", ids
                 ))
                 .contentType(ContentType.JSON)
                 .post("/api/option-group")
