@@ -1,5 +1,7 @@
 package com.poongcha.car.acceptance;
 
+import static com.poongcha.car.acceptance.CarOptionGroupSteps.존재하지_않는_차량_옵션_ID로_차량_옵션_그룹_생성_요청;
+import static com.poongcha.car.acceptance.CarOptionGroupSteps.존재하지_않는_차량_옵션_ID로_차량_옵션_그룹_생성_응답_검증;
 import static com.poongcha.car.acceptance.CarOptionGroupSteps.차량_옵션_그룹_생성_요청;
 import static com.poongcha.car.acceptance.CarOptionGroupSteps.차량_옵션_그룹_생성_응답_검증;
 import static com.poongcha.car.acceptance.CarOptionSteps.차량_옵션_생성_요청;
@@ -46,7 +48,7 @@ public class CarOptionGroupAcceptanceTest extends DocumentationTest {
     @DisplayName("차량 옵션 그룹 ID 조회")
     @Test
     void 차량_옵션_그룹_ID_조회() {
-        // WHEN
+        // GIVEN
         차량_옵션_생성_요청(
                 "후석 승객 알림",
                 "www.naver.com/option/image.png",
@@ -70,5 +72,20 @@ public class CarOptionGroupAcceptanceTest extends DocumentationTest {
 
         // THEN
         차량_옵션_그룹_생성_응답_검증(response, "/api/option-group/1");
+    }
+
+    @DisplayName("존재하지 않는 차량 옵션 ID로 차량 옵션 그룹 생성")
+    @Test
+    void 존재하지_않는_차량_옵션_ID로_차량_옵션_그룹_생성() {
+        // WHEN
+        var response = 존재하지_않는_차량_옵션_ID로_차량_옵션_그룹_생성_요청(
+                compote2CarOptionGroupName,
+                additionalPrice,
+                summaryDescription,
+                new long[]{1L, 2L}
+        );
+
+        // THEN
+        존재하지_않는_차량_옵션_ID로_차량_옵션_그룹_생성_응답_검증(response);
     }
 }
