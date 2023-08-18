@@ -1,40 +1,56 @@
-import React from "react";
+import React, { useRef } from "react";
 import { styled, css } from "styled-components";
 import check32blue from "@assets/checkcircle/check-32-blue.svg";
 import check32grey from "@assets/checkcircle/check-32-grey.svg";
 import LifeImg from "@assets/lifestyle/lifestyle1.svg";
+import useOnClickPopUp from "@hooks/useOnClickPopUp";
+import OverlaidPopup from "@Components/Common/OverlaidPopup";
+import PopUp from "@Pages/SurveyPage/LifestyleSurvey/PopUp";
 /**
 데이터 전달 값: 라이프 스타일
 태그: []
 문구: 텍스트
 프로필 사진: 이미지
 */
-const LifestyleQuestion = (option, selected, handleSelected, openPopup) => {
+const LifestyleQuestion = (option, selected, handleSelected) => {
+  const popupRef = useRef();
+  const { isPopupOpen, openPopup } = useOnClickPopUp(popupRef);
+
   return (
-    <Wrapper
-      selected={option.index === selected}
-      onClick={() => handleSelected(option.index)}
-    >
-      <TagWrapper>
-        {option.tags.map((tag, index) => (
-          <LifestyleTag selected={option.index === selected} key={index}>
-            {tag}
-          </LifestyleTag>
-        ))}
-      </TagWrapper>
-      <LifestylePhrase selected={option.index === selected}>
-        <span>{option.phrase}</span>
-        <CheckImg src={option.index === selected ? check32blue : check32grey} />
-      </LifestylePhrase>
-      <LifestyleDetail onClick={openPopup} selected={option.index === selected}>
-        라이프스타일 엿보기
-      </LifestyleDetail>
-      <LifestyleImg
+    <>
+      {isPopupOpen && (
+        <OverlaidPopup component={<PopUp popupRef={popupRef} />} />
+      )}
+      <Wrapper
         selected={option.index === selected}
-        src={LifeImg}
-        alt="Lifestyle"
-      />
-    </Wrapper>
+        onClick={() => handleSelected(option.index)}
+      >
+        <TagWrapper>
+          {option.tags.map((tag, index) => (
+            <LifestyleTag selected={option.index === selected} key={index}>
+              {tag}
+            </LifestyleTag>
+          ))}
+        </TagWrapper>
+        <LifestylePhrase selected={option.index === selected}>
+          <span>{option.phrase}</span>
+          <CheckImg
+            src={option.index === selected ? check32blue : check32grey}
+          />
+        </LifestylePhrase>
+        <LifestyleDetail
+          onClick={openPopup}
+          selected={option.index === selected}
+        >
+          라이프스타일 엿보기
+        </LifestyleDetail>
+        <LifestyleImg
+          selected={option.index === selected}
+          src={LifeImg}
+          alt="Lifestyle"
+        />
+      </Wrapper>
+    </>
   );
 };
 

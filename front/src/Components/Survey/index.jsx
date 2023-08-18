@@ -8,7 +8,6 @@ const Survey = ({
   questionnaire,
   label,
   options,
-  openPopup,
   newStateHandler,
   initialState,
   style,
@@ -22,9 +21,7 @@ const Survey = ({
       <Title questionnaire={questionnaire} />
       <FlexBox $style={style}>
         {options.map((option, index) => (
-          <div key={index}>
-            {label(option, selected, handleSelected, openPopup)}
-          </div>
+          <div key={index}>{label(option, selected, handleSelected)}</div>
         ))}
       </FlexBox>
     </Wrapper>

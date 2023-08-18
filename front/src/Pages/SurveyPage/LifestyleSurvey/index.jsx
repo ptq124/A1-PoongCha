@@ -56,9 +56,6 @@ const lifestyleSurveyInfo = {
 };
 
 const LifestyleSurvey = () => {
-  const popupRef = useRef();
-  const { isPopupOpen, openPopup } = useOnClickPopUp(popupRef);
-
   const move = useButtonNavigation();
 
   const [handleOptionSelect, state] = useOutletContext();
@@ -84,16 +81,12 @@ const LifestyleSurvey = () => {
           questionnaire={questionnaire()}
           label={LifestyleQuestion}
           options={lifestyleSurveyInfo.options}
-          openPopup={openPopup}
           newStateHandler={(newState) =>
             handleOptionSelect("lifestyle", newState)
           }
           style={lifeStyle}
         />
       </S.SurveyContent>
-      {isPopupOpen && (
-        <OverlaidPopup component={<PopUp popupRef={popupRef} />} />
-      )}
       <Button
         text="선택 완료"
         style={SurveyBtnStyle}
