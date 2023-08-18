@@ -1,31 +1,32 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { styled, css } from "styled-components";
 import AllOptions from "./AllOptions";
 import Button from "@Components/Common/Button/Button";
 import useButtonNavigation from "@hooks/useButtonNavigation";
-import { options } from "./optionData";
+import { optionData } from "./optionData";
 
 const OptionPage = () => {
   // 선택한 옵션들 상태관리
   const [selectedOptions, setSelectedOptions] = useState([]);
-  const handleSelectOption = (optionId) => {
-    const option = options.find((opt) => opt.id === optionId);
-
-    if (checkOptionSelected(optionId)) {
-      const poppedOptionSet = [optionId, ...(option.set ? option.set : [])];
-
-      setSelectedOptions((prev) =>
-        prev.filter((optId) => !poppedOptionSet.includes(optId))
-      );
-    } else {
-      const pushedOptionSet = [
-        optionId,
-        ...(option.set
-          ? option.set.filter((opt) => !selectedOptions.includes(opt))
-          : []),
-      ];
-      setSelectedOptions((prev) => [...prev, ...pushedOptionSet]);
-    }
+  const handleSelectOption = (id) => {
+    // if (checkOptionSelected(id)) {
+    //   setSelectedOptions((prev) => )
+    // }
+    // const option = options.find((opt) => opt.id === optionId);
+    // if (checkOptionSelected(optionId)) {
+    //   const poppedOptionSet = [optionId, ...(option.set ? option.set : [])];
+    //   setSelectedOptions((prev) =>
+    //     prev.filter((optId) => !poppedOptionSet.includes(optId))
+    //   );
+    // } else {
+    //   const pushedOptionSet = [
+    //     optionId,
+    //     ...(option.set
+    //       ? option.set.filter((opt) => !selectedOptions.includes(opt))
+    //       : []),
+    //   ];
+    //   setSelectedOptions((prev) => [...prev, ...pushedOptionSet]);
+    // }
   };
   const checkOptionSelected = (optionId) => {
     return selectedOptions.includes(optionId);
