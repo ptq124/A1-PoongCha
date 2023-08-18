@@ -73,8 +73,11 @@ const extraRadioGroupStyle = {
     display: flex;
     flex-direction: column;
     align-items: center;
-
     margin-bottom: 52px;
+  `,
+  title: css`
+    width: 100%;
+    ${({ theme }) => theme.font.Body2_Medium};
   `,
   options: css`
     display: flex;
