@@ -11,5 +11,5 @@ import org.springframework.data.relational.core.mapping.Column;
 @AllArgsConstructor
 public class TooltipDescription {
     @Column("tooltip_description")
-    private String tooltipDescription;
+    private String value;
 }
