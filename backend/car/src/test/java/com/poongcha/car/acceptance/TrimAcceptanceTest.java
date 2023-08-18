@@ -33,21 +33,21 @@ import org.junit.jupiter.api.Test;
 
 @DisplayName("트림 인수 테스트")
 public class TrimAcceptanceTest extends DocumentationTest {
-    private String trimNameLeBlanc = "Le Blanc";
-    private String imageUrlLeBlanc = "https://www.hyundai.com/contents/vr360/LX06/trim/DS.png";
-    private long minPriceLeBlanc = 48_000_000;
-    private String trimNameCalligraphy = "Calligraphy";
-    private String imageUrlCalligraphy = "https://www.hyundai.com/static/images/model/sonata-hybrid/23fl/mo/sonata_the_edge_hybrid_highlights_hybrid_m.jpg";
-    private long minPriceCalligraphy = 45_000_000;
-    private String trimNamePremium = "Premium";
-    private String imageUrlPremium = "https://www.hyundai.com/static/images/model/sonata-hybrid/23fl/mo/sonata_the_edge_hybrid_highlights_hybrid_m.jpg";
-    private long minPricePremium = 52_000_000;
-    private String carColorNameRed = "red";
-    private String imageUrlRed = "https://www.naver.com/color/red.jpg";
-    private String carColorTypeInterior = "INTERIOR";
-    private String carColorNameBlue = "blue";
-    private String imageUrlBlue = "https://www.naver.com/color/blue.jpg";
-    private String carColorTypeExterior = "EXTERIOR";
+    private final String trimNameLeBlanc = "Le Blanc";
+    private final String imageUrlLeBlanc = "https://www.hyundai.com/contents/vr360/LX06/trim/DS.png";
+    private final long minPriceLeBlanc = 48_000_000;
+    private final String trimNameCalligraphy = "Calligraphy";
+    private final String imageUrlCalligraphy = "https://www.hyundai.com/static/images/model/sonata-hybrid/23fl/mo/sonata_the_edge_hybrid_highlights_hybrid_m.jpg";
+    private final long minPriceCalligraphy = 45_000_000;
+    private final String trimNamePremium = "Premium";
+    private final String imageUrlPremium = "https://www.hyundai.com/static/images/model/sonata-hybrid/23fl/mo/sonata_the_edge_hybrid_highlights_hybrid_m.jpg";
+    private final long minPricePremium = 52_000_000;
+    private final String carColorNameRed = "red";
+    private final String imageUrlRed = "https://www.naver.com/color/red.jpg";
+    private final String carColorTypeInterior = "INTERIOR";
+    private final String carColorNameBlue = "blue";
+    private final String imageUrlBlue = "https://www.naver.com/color/blue.jpg";
+    private final String carColorTypeExterior = "EXTERIOR";
 
     @DisplayName("트림 생성")
     @Test

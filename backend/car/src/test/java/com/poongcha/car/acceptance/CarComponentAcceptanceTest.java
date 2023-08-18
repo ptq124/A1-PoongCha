@@ -14,11 +14,11 @@ import org.junit.jupiter.api.Test;
 
 @DisplayName("차량 컴포넌트 관련 기능")
 public class CarComponentAcceptanceTest extends DocumentationTest {
-    private String carComponentName4WD = "4WD";
-    private String carComponentDescriptionImageUrl4WD = "www.naver.com/image/4wd.png";
-    private int carComponentAdditionalPrice4WD = 2_000_000;
-    private String carComponentGroupNameEngine = "엔진";
-    private String selectionHelpTooltipEngine = "디젤은 연비가 좋고 가솔린은 승차감이 더 부드럽고 조용해요";
+    private final String carComponentName4WD = "4WD";
+    private final String carComponentDescriptionImageUrl4WD = "www.naver.com/image/4wd.png";
+    private final int carComponentAdditionalPrice4WD = 2_000_000;
+    private final String carComponentGroupNameEngine = "엔진";
+    private final String selectionHelpTooltipEngine = "디젤은 연비가 좋고 가솔린은 승차감이 더 부드럽고 조용해요";
 
     @DisplayName("차량 컴포넌트 그룹 생성")
     @Test

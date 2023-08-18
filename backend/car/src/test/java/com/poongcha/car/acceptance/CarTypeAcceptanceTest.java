@@ -21,15 +21,15 @@ import org.junit.jupiter.api.Test;
 
 @DisplayName("차종 인수 테스트")
 public class CarTypeAcceptanceTest extends DocumentationTest {
-    private String palisadeCarTypeName = "palisade";
-    private String palisadeImageUrl = "https://www.hyundai.com/static/images/model/palisade/24my/mo/palisade_highlights_design_m.jpg";
-    private String sonataCarTypeName = "sonata";
-    private String sonataImageUrl = "https://www.hyundai.com/static/images/model/sonata-hybrid/23fl/mo/sonata_the_edge_hybrid_highlights_hybrid_m.jpg";
-    private String carComponentName4WD = "4WD";
-    private String carComponentDescriptionImageUrl4WD = "www.naver.com/image/4wd.png";
-    private int carComponentAdditionalPrice4WD = 2_000_000;
-    private String carComponentGroupNameEngine = "엔진";
-    private String selectionHelpTooltipEngine = "디젤은 연비가 좋고 가솔린은 승차감이 더 부드럽고 조용해요";
+    private final String palisadeCarTypeName = "palisade";
+    private final String palisadeImageUrl = "https://www.hyundai.com/static/images/model/palisade/24my/mo/palisade_highlights_design_m.jpg";
+    private final String sonataCarTypeName = "sonata";
+    private final String sonataImageUrl = "https://www.hyundai.com/static/images/model/sonata-hybrid/23fl/mo/sonata_the_edge_hybrid_highlights_hybrid_m.jpg";
+    private final String carComponentName4WD = "4WD";
+    private final String carComponentDescriptionImageUrl4WD = "www.naver.com/image/4wd.png";
+    private final int carComponentAdditionalPrice4WD = 2_000_000;
+    private final String carComponentGroupNameEngine = "엔진";
+    private final String selectionHelpTooltipEngine = "디젤은 연비가 좋고 가솔린은 승차감이 더 부드럽고 조용해요";
 
     @DisplayName("차종 생성")
     @Test
