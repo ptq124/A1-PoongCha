@@ -1,23 +1,52 @@
-import React from "react";
+import React, { useRef } from "react";
 import { styled } from "styled-components";
 import Check28BlueIcon from "@assets/checkcircle/check-28-blue.svg";
 import Check28GreyIcon from "@assets/checkcircle/check-28-grey.svg";
 import DefaultOption from "./DefaultOption";
+import OverlaidPopup from "@Components/Common/OverlaidPopup";
+import TrimChangePopup from "@Pages/CustomPage/TrimPage/TrimChangePopup";
+import useOnClickPopUp from "@hooks/useOnClickPopUp";
 
-const TrimOption = ({ data, selected, handleOptionSelect }) => {
+const TrimOption = (option, selectedItem, handleSelectItem) => {
+  const TrimChangePopupRef = useRef();
+  const {
+    isPopupOpen: isTrimChangePopupOpen,
+    openPopup: openTrimChangePopup,
+    closePopup: closeTrimChangePopup,
+  } = useOnClickPopUp(TrimChangePopupRef);
+  const handleTrimChangeAttempt = (newState) => {
+    if (newState === selectedItem) return;
+    if (true) {
+      // 일단 항상 팝업 띄우도록 설정
+      openTrimChangePopup();
+    } else {
+      setOptionSelect("trim", newValue);
+    }
+  };
   return (
     <Wrapper>
+      {isTrimChangePopupOpen && (
+        <OverlaidPopup
+          component={
+            <TrimChangePopup
+              popupRef={TrimChangePopupRef}
+              closePopup={closeTrimChangePopup}
+              changeTrim={() => handleSelectItem(option.name)}
+            />
+          }
+        />
+      )}
       <TrimOptionUpper>
         <TrimInfo>
           <NameAndModelItem>
-            <span className="trimName">{data.name}</span>
+            <span className="trimName">{option.name}</span>
             <span className="modelItemSummary">디젤 2.2 • 7인승 • 2WD</span>
           </NameAndModelItem>
-          <span className="comment">{data.information}</span>
-          <span className="price">{data.minPrice.toLocaleString()}원</span>
+          <span className="comment">{option.information}</span>
+          <span className="price">{option.minPrice.toLocaleString()}원</span>
         </TrimInfo>
-        <CheckBtn onClick={handleOptionSelect}>
-          {selected ? (
+        <CheckBtn onClick={() => handleTrimChangeAttempt(option.name)}>
+          {option.name === selectedItem ? (
             <img src={Check28BlueIcon} alt="checked" />
           ) : (
             <img src={Check28GreyIcon} alt="checked" />
@@ -28,7 +57,7 @@ const TrimOption = ({ data, selected, handleOptionSelect }) => {
       <TrimDefaultOptions>
         <span className="defaultOptionTitle">기본 옵션</span>
         <DefaultOptions>
-          {data.defaultOptions.map((option, index) => (
+          {option.defaultOptions.map((option, index) => (
             <DefaultOption key={index} option={option} />
           ))}
         </DefaultOptions>
