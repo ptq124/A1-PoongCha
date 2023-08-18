@@ -1,6 +1,6 @@
-package com.poongcha.car.application.caroptiongroup.dto;
+package com.poongcha.car.application.dto;
 
-import com.poongcha.car.application.caroption.dto.CarOptionResponse;
+import com.poongcha.car.application.dto.CarOptionResponse;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

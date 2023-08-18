@@ -2,8 +2,9 @@ package com.poongcha.car.presentation;
 
 import com.poongcha.car.application.caroptiongroup.CarOptionGroupCommandService;
 import com.poongcha.car.application.caroptiongroup.CarOptionGroupQueryService;
-import com.poongcha.car.application.caroptiongroup.dto.CarOptionGroupCreateRequest;
-import com.poongcha.car.application.caroptiongroup.dto.CarOptionGroupResponse;
+import com.poongcha.car.application.dto.CarOptionGroupCreateRequest;
+import com.poongcha.car.application.dto.CarOptionGroupResponse;
+import com.poongcha.car.application.dto.OptionGroupAddIncompatibleOptionGroupRequest;
 import java.net.URI;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -31,5 +32,18 @@ public class CarOptionGroupController {
     @GetMapping("/api/option-group/{id}")
     public ResponseEntity<CarOptionGroupResponse> findById(@PathVariable("id") final long carOptionGroupId) {
         return ResponseEntity.ok().body(carOptionGroupQueryService.findById(carOptionGroupId));
+    }
+
+    @PostMapping("/api/option-group/{id}/incompatible")
+    public ResponseEntity<Void> createCarOptionGroup(
+            @PathVariable("id") final long carOptionGroupId,
+            @RequestBody final OptionGroupAddIncompatibleOptionGroupRequest optionGroupAddIncompatibleOptionGroupRequest
+    ) {
+        long createCarOptionGroupId = carOptionGroupCommandService.add(
+                carOptionGroupId,
+                optionGroupAddIncompatibleOptionGroupRequest
+        );
+
+        return ResponseEntity.created(URI.create("/api/option-group/" + createCarOptionGroupId)).build();
     }
 }

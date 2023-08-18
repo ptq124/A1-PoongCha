@@ -1,4 +1,4 @@
-package com.poongcha.car.application.caroptiongroup.dto;
+package com.poongcha.car.application.dto;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

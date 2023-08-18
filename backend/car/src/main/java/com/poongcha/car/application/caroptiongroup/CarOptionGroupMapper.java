@@ -1,8 +1,8 @@
 package com.poongcha.car.application.caroptiongroup;
 
 import com.poongcha.car.application.caroption.CarOptionMapper;
-import com.poongcha.car.application.caroptiongroup.dto.CarOptionGroupCreateRequest;
-import com.poongcha.car.application.caroptiongroup.dto.CarOptionGroupResponse;
+import com.poongcha.car.application.dto.CarOptionGroupCreateRequest;
+import com.poongcha.car.application.dto.CarOptionGroupResponse;
 import com.poongcha.car.domain.caroption.CarOption;
 import com.poongcha.car.domain.caroptiongroup.CarOptionGroup;
 import com.poongcha.car.domain.caroptiongroup.CarOptionGroupName;

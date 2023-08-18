@@ -1,7 +1,7 @@
 package com.poongcha.car.presentation;
 
 import com.poongcha.car.application.caroption.CarOptionCommandService;
-import com.poongcha.car.application.caroption.dto.CarOptionCreateRequest;
+import com.poongcha.car.application.dto.CarOptionCreateRequest;
 import java.net.URI;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

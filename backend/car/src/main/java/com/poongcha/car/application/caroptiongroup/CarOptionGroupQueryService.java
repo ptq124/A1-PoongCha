@@ -1,6 +1,6 @@
 package com.poongcha.car.application.caroptiongroup;
 
-import com.poongcha.car.application.caroptiongroup.dto.CarOptionGroupResponse;
+import com.poongcha.car.application.dto.CarOptionGroupResponse;
 import com.poongcha.car.domain.caroption.CarOption;
 import com.poongcha.car.domain.caroption.CarOptionRepository;
 import com.poongcha.car.domain.caroptiongroup.CarOptionGroup;

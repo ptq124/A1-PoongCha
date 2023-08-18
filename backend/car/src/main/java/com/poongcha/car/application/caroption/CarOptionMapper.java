@@ -1,7 +1,7 @@
 package com.poongcha.car.application.caroption;
 
-import com.poongcha.car.application.caroption.dto.CarOptionCreateRequest;
-import com.poongcha.car.application.caroption.dto.CarOptionResponse;
+import com.poongcha.car.application.dto.CarOptionCreateRequest;
+import com.poongcha.car.application.dto.CarOptionResponse;
 import com.poongcha.car.domain.caroption.CarOption;
 import com.poongcha.car.domain.caroption.CarOptionName;
 import com.poongcha.car.domain.caroption.DetailDescription;
