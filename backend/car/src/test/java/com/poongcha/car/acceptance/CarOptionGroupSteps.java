@@ -116,6 +116,8 @@ public class CarOptionGroupSteps {
                                         .description("차량 옵션 그룹 가격"),
                                 fieldWithPath("summaryDescription").type(JsonFieldType.STRING)
                                         .description("차량 옵션 그룹 요약 설명"),
+                                fieldWithPath("incompatibleCarOptionGroupIds").type(JsonFieldType.ARRAY)
+                                        .description("양립 불가능한 차량 옵션 그룹 ID 목록"),
                                 fieldWithPath("options").type(JsonFieldType.ARRAY)
                                         .description("차량 옵션 목록"),
                                 fieldWithPath("options[].id").type(JsonFieldType.NUMBER)
@@ -143,6 +145,7 @@ public class CarOptionGroupSteps {
             final String carOptionGroupName,
             final long additionalPrice,
             final String summaryDescription,
+            final List<Integer> incompatibleCarOptionGroupIds,
             final List<Integer> optionIds,
             final List<String> optionNames,
             final List<String> imageUrls,
@@ -155,6 +158,8 @@ public class CarOptionGroupSteps {
             assertions.assertThat(response.jsonPath().getString("name")).isEqualTo(carOptionGroupName);
             assertions.assertThat(response.jsonPath().getLong("additionalPrice")).isEqualTo(additionalPrice);
             assertions.assertThat(response.jsonPath().getString("summaryDescription")).isEqualTo(summaryDescription);
+            assertions.assertThat(response.jsonPath().getList("incompatibleCarOptionGroupIds"))
+                    .usingRecursiveComparison().isEqualTo(incompatibleCarOptionGroupIds);
             assertions.assertThat(response.jsonPath().getList("options.id")).usingRecursiveComparison()
                     .isEqualTo(optionIds);
             assertions.assertThat(response.jsonPath().getList("options.name")).usingRecursiveComparison()

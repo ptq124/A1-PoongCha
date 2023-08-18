@@ -73,6 +73,10 @@ public class CarOptionGroupAcceptanceTest extends DocumentationTest {
         차량_옵션_생성_요청(optionName2, imageUrl2, installationLocation2, detailDescription2);
 
         차량_옵션_그룹_생성_요청(compote2CarOptionGroupName, additionalPrice, summaryDescription, new long[]{1L, 2L});
+        차량_옵션_그룹_생성_요청(compote2CarOptionGroupName, additionalPrice, summaryDescription, new long[]{1L, 2L});
+        차량_옵션_그룹_생성_요청(compote2CarOptionGroupName, additionalPrice, summaryDescription, new long[]{1L, 2L});
+
+        양립_불가능한_차량_옵션_설정_요청(1, List.of(2L, 3L));
 
         // WHEN
         var response = 차량_옵션_그룹_ID_조회_요청(1L);
@@ -84,6 +88,7 @@ public class CarOptionGroupAcceptanceTest extends DocumentationTest {
                 compote2CarOptionGroupName,
                 additionalPrice,
                 summaryDescription,
+                List.of(2, 3),
                 List.of(1, 2),
                 List.of(optionName1, optionName2),
                 List.of(imageUrl1, imageUrl2),
