@@ -166,4 +166,25 @@ public class CarOptionGroupSteps {
                     .usingRecursiveComparison().isEqualTo(installationLocations);
         }
     }
+
+    public static ExtractableResponse<Response> 존재하지_않는_차량_옵션_그룹_ID_조회_요청(final long id) {
+        return given()
+                .filter(document(
+                        DEFAULT_RESTDOCS_PATH,
+                        pathParameters(
+                                parameterWithName("id").description("차량 컴포넌트 그룹 ID")
+                        )
+                ))
+                .log().all()
+                .when()
+                .get("/api/option-group/{id}", id)
+                .then().log().all()
+                .extract();
+    }
+
+    public static void 존재하지_않는_차량_옵션_그룹_ID_조회_응답_검증(final ExtractableResponse<Response> response) {
+        try (AutoCloseableSoftAssertions assertions = new AutoCloseableSoftAssertions()) {
+            assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.SC_NOT_FOUND);
+        }
+    }
 }
