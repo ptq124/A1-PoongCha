@@ -5,31 +5,19 @@ import Button from "@Components/Common/Button/Button";
 import useButtonNavigation from "@hooks/useButtonNavigation";
 import { optionData } from "./optionData";
 
+const tabData = ["추가 옵션", "기본 포함 옵션"];
 const OptionPage = () => {
   // 선택한 옵션들 상태관리
   const [selectedOptions, setSelectedOptions] = useState([]);
   const handleSelectOption = (id) => {
-    // if (checkOptionSelected(id)) {
-    //   setSelectedOptions((prev) => )
-    // }
-    // const option = options.find((opt) => opt.id === optionId);
-    // if (checkOptionSelected(optionId)) {
-    //   const poppedOptionSet = [optionId, ...(option.set ? option.set : [])];
-    //   setSelectedOptions((prev) =>
-    //     prev.filter((optId) => !poppedOptionSet.includes(optId))
-    //   );
-    // } else {
-    //   const pushedOptionSet = [
-    //     optionId,
-    //     ...(option.set
-    //       ? option.set.filter((opt) => !selectedOptions.includes(opt))
-    //       : []),
-    //   ];
-    //   setSelectedOptions((prev) => [...prev, ...pushedOptionSet]);
-    // }
+    if (checkOptionSelected(id)) {
+      setSelectedOptions((prev) => prev.filter((optId) => optId !== id));
+    } else {
+      setSelectedOptions((prev) => [...prev, id]);
+    }
   };
-  const checkOptionSelected = (optionId) => {
-    return selectedOptions.includes(optionId);
+  const checkOptionSelected = (id) => {
+    return selectedOptions.includes(id);
   };
 
   const [selectedTab, setSelectedTab] = useState("추가 옵션");
@@ -38,22 +26,18 @@ const OptionPage = () => {
   return (
     <Wrapper>
       <TabWrapper>
-        <TabItem
-          selected={selectedTab === "추가 옵션"}
-          onClick={() => setSelectedTab("추가 옵션")}
-        >
-          추가 옵션
-        </TabItem>
-        <TabItem
-          selected={selectedTab === "기본 포함 옵션"}
-          onClick={() => setSelectedTab("기본 포함 옵션")}
-        >
-          기본 포함 옵션
-        </TabItem>
+        {tabData.map((tab) => (
+          <TabItem
+            selected={selectedTab === tab}
+            onClick={() => setSelectedTab(tab)}
+          >
+            {tab}
+          </TabItem>
+        ))}
       </TabWrapper>
       <AllOptions
         tab={selectedTab}
-        options={options}
+        optionData={optionData}
         handleSelectOption={handleSelectOption}
         checkOptionSelected={checkOptionSelected}
       />

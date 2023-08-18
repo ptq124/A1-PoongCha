@@ -5,6 +5,7 @@ import HyundaiLogo from "@assets/icons/hyundai-logo.svg";
 import HyundaiWhiteLogo from "@assets/icons/hyundai-logo-white.svg";
 import { useLocation } from "react-router-dom";
 import SelectOption from "./SelectOption";
+import useButtonNavigation from "@hooks/useButtonNavigation";
 
 const getHeaderStyle = (pathname) => {
   let position;
@@ -36,13 +37,22 @@ const getHeaderStyle = (pathname) => {
 };
 const Header = () => {
   const { pathname } = useLocation();
+  const move = useButtonNavigation();
 
   const getLogoImage = () => {
     switch (pathname) {
       case "/":
-        return <img src={HyundaiWhiteLogo} alt="Hyundai White Logo" />;
+        return (
+          <img
+            src={HyundaiWhiteLogo}
+            alt="Hyundai White Logo"
+            onClick={() => move("/")}
+          />
+        );
       default:
-        return <img src={HyundaiLogo} alt="Hyundai Logo" />;
+        return (
+          <img src={HyundaiLogo} alt="Hyundai Logo" onClick={() => move("/")} />
+        );
     }
   };
 
