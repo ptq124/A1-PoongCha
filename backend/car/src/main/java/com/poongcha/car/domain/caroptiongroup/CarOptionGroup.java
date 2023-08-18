@@ -25,8 +25,6 @@ public class CarOptionGroup {
     @Embedded.Nullable
     private CarOptionGroupName name;
 
-    private InstallationLocation installationLocation;
-
     @Embedded.Nullable
     private AdditionalPrice additionalPrice;
 
@@ -38,13 +36,11 @@ public class CarOptionGroup {
 
     public CarOptionGroup(
             final CarOptionGroupName name,
-            final InstallationLocation installationLocation,
             final AdditionalPrice additionalPrice,
             final SummaryDescription summaryDescription,
             final Long[] optionIds
     ) {
         this.name = name;
-        this.installationLocation = installationLocation;
         this.additionalPrice = additionalPrice;
         this.summaryDescription = summaryDescription;
         this.carOptions.addAll(

@@ -1,4 +1,4 @@
-package com.poongcha.car.domain.caroptiongroup;
+package com.poongcha.car.domain.caroption;
 
 public enum InstallationLocation {
     HANDLE, MIRROR, DEFAULT

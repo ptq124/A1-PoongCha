@@ -20,6 +20,8 @@ public class CarOption {
     @Embedded.Nullable
     private CarOptionName carOptionName;
 
+    private InstallationLocation installationLocation;
+
     @Embedded.Nullable
     private ImageUrl imageUrl;
 
@@ -29,10 +31,12 @@ public class CarOption {
     public CarOption(
             final CarOptionName carOptionName,
             final ImageUrl imageUrl,
+            final InstallationLocation installationLocation,
             final DetailDescription detailDescription
     ) {
         this.carOptionName = carOptionName;
         this.imageUrl = imageUrl;
+        this.installationLocation = installationLocation;
         this.detailDescription = detailDescription;
     }
 }

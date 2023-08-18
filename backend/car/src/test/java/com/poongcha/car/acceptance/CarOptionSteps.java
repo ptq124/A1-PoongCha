@@ -19,6 +19,7 @@ public class CarOptionSteps {
     public static ExtractableResponse<Response> 차량_옵션_생성_요청(
             final String carOptionName,
             final String imageUrl,
+            final String installationLocation,
             final String detailDescription
     ) {
         return given()
@@ -29,6 +30,8 @@ public class CarOptionSteps {
                                         .description("차량 옵션 이름"),
                                 fieldWithPath("imageUrl").type(JsonFieldType.STRING)
                                         .description("차량 옵션 이미지 URL"),
+                                fieldWithPath("installationLocation").type(JsonFieldType.STRING)
+                                        .description("설치 위치"),
                                 fieldWithPath("detailDescription").type(JsonFieldType.STRING)
                                         .description("차량 옵션 자세한 설명")
                         )
@@ -37,6 +40,7 @@ public class CarOptionSteps {
                 .body(Map.of(
                         "carOptionName", carOptionName,
                         "imageUrl", imageUrl,
+                        "installationLocation", installationLocation,
                         "detailDescription", detailDescription
                 ))
                 .contentType(ContentType.JSON)

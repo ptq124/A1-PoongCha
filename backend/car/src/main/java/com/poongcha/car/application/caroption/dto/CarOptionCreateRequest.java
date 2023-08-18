@@ -11,5 +11,6 @@ import lombok.NoArgsConstructor;
 public class CarOptionCreateRequest {
     private String carOptionName;
     private String imageUrl;
+    private String installationLocation;
     private String detailDescription;
 }

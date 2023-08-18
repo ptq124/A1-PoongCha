@@ -18,7 +18,6 @@ import org.springframework.restdocs.payload.JsonFieldType;
 public class CarOptionGroupSteps {
     public static ExtractableResponse<Response> 차량_옵션_그룹_생성_요청(
             final String carOptionGroupName,
-            final String installationLocation,
             final long additionalPrice,
             final String summaryDescription,
             final long[] ids
@@ -29,8 +28,6 @@ public class CarOptionGroupSteps {
                         customRequestFields(
                                 fieldWithPath("carOptionGroupName").type(JsonFieldType.STRING)
                                         .description("차량 옵션 그룹 이름"),
-                                fieldWithPath("installationLocation").type(JsonFieldType.STRING)
-                                        .description("설치 위치"),
                                 fieldWithPath("additionalPrice").type(JsonFieldType.NUMBER)
                                         .description("차량 옵션 그룹 가격"),
                                 fieldWithPath("summaryDescription").type(JsonFieldType.STRING)
@@ -42,7 +39,6 @@ public class CarOptionGroupSteps {
                 .when()
                 .body(Map.of(
                         "carOptionGroupName", carOptionGroupName,
-                        "installationLocation", installationLocation,
                         "additionalPrice", additionalPrice,
                         "summaryDescription", summaryDescription,
                         "carOptionIds", ids

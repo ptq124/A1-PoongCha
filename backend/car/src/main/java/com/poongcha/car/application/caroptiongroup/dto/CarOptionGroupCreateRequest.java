@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CarOptionGroupCreateRequest {
     private String carOptionGroupName;
-    private String installationLocation;
     private long additionalPrice;
     private String summaryDescription;
     private Long[] carOptionIds;
