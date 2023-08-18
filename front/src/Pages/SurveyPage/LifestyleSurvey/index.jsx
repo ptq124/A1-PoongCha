@@ -85,8 +85,9 @@ const LifestyleSurvey = () => {
           label={LifestyleQuestion}
           options={lifestyleSurveyInfo.options}
           openPopup={openPopup}
-          reducerHandler={handleOptionSelect}
-          reducerKey={"lifestyle"}
+          newStateHandler={(newState) =>
+            handleOptionSelect("lifestyle", newState)
+          }
           style={lifeStyle}
         />
       </S.SurveyContent>

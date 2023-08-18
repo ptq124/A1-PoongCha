@@ -46,8 +46,10 @@ const ExtraSurvey = () => {
           questionnaire={data.title}
           label={ExtraQuestion}
           options={data.options}
-          reducerHandler={handleOptionSelect}
-          reducerKey={questionKey}
+          newStateHandler={(newState) =>
+            handleOptionSelect(questionKey, newState)
+          }
+          // reducerKey={questionKey}
           initialState={state[questionKey]}
           style={extraStyle}
         />
