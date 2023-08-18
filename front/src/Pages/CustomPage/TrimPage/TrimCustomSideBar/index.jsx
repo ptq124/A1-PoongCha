@@ -16,7 +16,6 @@ import TrimComparisonPopup from "../TrimComparisonPopup";
 const TrimCustomSideBar = () => {
   const move = useButtonNavigation();
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [clickedTrim, setClickedTrim] = useState();
   const setOptionSelect = (questionKey, option) => {
     dispatch({
       type: "SELECT_OPTION",
@@ -81,6 +80,7 @@ const TrimCustomSideBar = () => {
             onClick={openModelItemDescriptionPopup}
           />
         </LinkBtnContainer>
+        {/* 엔진/바디/구동방식 선택하기 */}
         <ModelItems>
           {Object.entries(modelItemData).map(([questionKey, data]) => (
             <Survey
@@ -96,6 +96,7 @@ const TrimCustomSideBar = () => {
             />
           ))}
         </ModelItems>
+        {/* 트림 선택하기 */}
         <Survey
           questionnaire={trimQuestionnaire()}
           label={TrimOption}
