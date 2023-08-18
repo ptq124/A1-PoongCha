@@ -35,6 +35,7 @@ public class CarOptionGroupMapper {
                 carOptionGroup.getName().getValue(),
                 carOptionGroup.getAdditionalPrice().getValue(),
                 carOptionGroup.getSummaryDescription().getValue(),
+                carOptionGroup.incompatibleCarOptionGroupIds(),
                 carOptionMapper.toCarOptionResponse(carOptions)
         );
     }

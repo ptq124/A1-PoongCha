@@ -86,4 +86,10 @@ public class CarOptionGroup {
     private boolean isContainSameId(final List<CarOptionGroup> incompatibleCarOptionGroups) {
         return incompatibleCarOptionGroups.stream().anyMatch(carOptionGroup -> carOptionGroup.id.equals(this.id));
     }
+
+    public List<Long> incompatibleCarOptionGroupIds() {
+        return this.incompatibleCarOptionGroups.stream()
+                .map(IncompatibleCarOptionGroup::incompatibleCarOptionGroupId)
+                .collect(Collectors.toUnmodifiableList());
+    }
 }

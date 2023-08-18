@@ -18,4 +18,8 @@ public class IncompatibleCarOptionGroup {
     public IncompatibleCarOptionGroup(final long incompatibleCarOptionGroupId) {
         this.incompatibleCarOptionGroup = new IdOnlyAggregateReference<>(incompatibleCarOptionGroupId);
     }
+
+    public long incompatibleCarOptionGroupId() {
+        return this.incompatibleCarOptionGroup.getId();
+    }
 }

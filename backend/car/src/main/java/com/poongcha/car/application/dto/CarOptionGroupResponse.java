@@ -1,6 +1,5 @@
 package com.poongcha.car.application.dto;
 
-import com.poongcha.car.application.dto.CarOptionResponse;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,5 +11,6 @@ public class CarOptionGroupResponse {
     private String name;
     private long additionalPrice;
     private String summaryDescription;
+    private List<Long> incompatibleCarOptionGroupIds;
     private List<CarOptionResponse> options;
 }
