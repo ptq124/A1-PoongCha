@@ -12,9 +12,11 @@ import PopUp from "@Pages/SurveyPage/LifestyleSurvey/PopUp";
 문구: 텍스트
 프로필 사진: 이미지
 */
-const LifestyleQuestion = (option, selected, handleSelected) => {
+const LifestyleQuestion = (option, selectedItem, handleSelectItem) => {
   const popupRef = useRef();
   const { isPopupOpen, openPopup } = useOnClickPopUp(popupRef);
+
+  const isSelected = option.index === selectedItem;
 
   return (
     <>
@@ -22,33 +24,24 @@ const LifestyleQuestion = (option, selected, handleSelected) => {
         <OverlaidPopup component={<PopUp popupRef={popupRef} />} />
       )}
       <Wrapper
-        selected={option.index === selected}
-        onClick={() => handleSelected(option.index)}
+        selected={isSelected}
+        onClick={() => handleSelectItem(option.index)}
       >
         <TagWrapper>
           {option.tags.map((tag, index) => (
-            <LifestyleTag selected={option.index === selected} key={index}>
+            <LifestyleTag selected={isSelected} key={index}>
               {tag}
             </LifestyleTag>
           ))}
         </TagWrapper>
-        <LifestylePhrase selected={option.index === selected}>
+        <LifestylePhrase selected={isSelected}>
           <span>{option.phrase}</span>
-          <CheckImg
-            src={option.index === selected ? check32blue : check32grey}
-          />
+          <CheckImg src={isSelected ? check32blue : check32grey} />
         </LifestylePhrase>
-        <LifestyleDetail
-          onClick={openPopup}
-          selected={option.index === selected}
-        >
+        <LifestyleDetail onClick={openPopup} selected={isSelected}>
           라이프스타일 엿보기
         </LifestyleDetail>
-        <LifestyleImg
-          selected={option.index === selected}
-          src={LifeImg}
-          alt="Lifestyle"
-        />
+        <LifestyleImg selected={isSelected} src={LifeImg} alt="Lifestyle" />
       </Wrapper>
     </>
   );

@@ -1,11 +1,23 @@
+import useTooltip from "@hooks/useTooltip";
 import React from "react";
 import { css, styled } from "styled-components";
+import Tooltip from "../Tooltip";
 
-const ModelItemOption = ({ label, selected, handleOptionSelect }) => {
+const ModelItemOption = (option, selectedItem, handleSelectItem) => {
+  const { isTooltipOpen, openTooltip, closeTooltip } = useTooltip();
+
   return (
-    <Label selected={selected} onClick={handleOptionSelect}>
-      {label}
-    </Label>
+    <>
+      {isTooltipOpen && <Tooltip offset={78} />}
+      <Label
+        selected={option === selectedItem}
+        onClick={() => handleSelectItem(option)}
+        onMouseEnter={openTooltip}
+        onMouseLeave={closeTooltip}
+      >
+        {option}
+      </Label>
+    </>
   );
 };
 const Label = styled.label`
@@ -13,7 +25,7 @@ const Label = styled.label`
   align-items: center;
   justify-content: center;
 
-  width: 50%;
+  width: 141.5px;
   height: 40px;
 
   color: ${({ theme }) => theme.color.primary_default};

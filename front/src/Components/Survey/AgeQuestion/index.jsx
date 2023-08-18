@@ -2,15 +2,15 @@ import React from "react";
 import { css, styled } from "styled-components";
 import Check24BlueIcon from "@assets/checkcircle/check-24-blue.svg";
 
-const AgeQuestion = (option, selected, handleSelected) => {
+const AgeQuestion = (option, selectedItem, handleSelectItem) => {
   return (
     <>
       <Label
-        selected={option === selected}
-        onClick={() => handleSelected(option)}
+        selected={option === selectedItem}
+        onClick={() => handleSelectItem(option)}
       >
         {option}
-        {option === selected && <img src={Check24BlueIcon} alt="check" />}
+        {option === selectedItem && <img src={Check24BlueIcon} alt="check" />}
       </Label>
     </>
   );

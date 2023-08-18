@@ -6,6 +6,7 @@ import useButtonNavigation from "@hooks/useButtonNavigation";
 import { useOutletContext } from "react-router-dom";
 import Survey from "@Components/Survey";
 import AgeQuestion from "@Components/Survey/AgeQuestion";
+import PageIndicator from "@Components/Survey/PageIndicator";
 
 const surveyData = {
   options: ["20대", "30대", "40대", "50대 이상"],
@@ -14,7 +15,10 @@ const surveyData = {
 const questionnaire = () => {
   return (
     <>
-      <strong>나이</strong>를 알려주세요.
+      <span>
+        <strong>나이</strong>를 알려주세요.
+      </span>
+      <PageIndicator />
     </>
   );
 };
@@ -31,7 +35,7 @@ const AgeSurvey = () => {
         options={surveyData.options}
         newStateHandler={(newState) => handleOptionSelect("age", newState)}
         initialState={state.age}
-        style={ageStyle}
+        style={ageRadioGroupStyle}
       />
       <Button
         text="다음"
@@ -42,11 +46,30 @@ const AgeSurvey = () => {
   );
 };
 
-const ageStyle = css`
-  gap: 12px;
-  margin-top: 24px;
-`;
-
+const ageRadioGroupStyle = {
+  wrapper: css`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 52px;
+  `,
+  title: css`
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    ${({ theme }) => theme.font.Extra1};
+    strong {
+      font-family: "HyundaiSansHeadMediumKR";
+    }
+  `,
+  options: css`
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 24px;
+  `,
+};
 const SurveyBtnStyle = css`
   width: 608px;
   height: 52px;

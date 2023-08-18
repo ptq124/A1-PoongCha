@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import { styled } from "styled-components";
-
 import useRadio from "../../hooks/useRadio";
-import Title from "./Title";
 
 const Survey = ({
   questionnaire,
@@ -12,36 +10,30 @@ const Survey = ({
   initialState,
   style,
 }) => {
-  const { selected, handleSelected } = useRadio(initialState);
+  const { selectedItem, handleSelectItem } = useRadio(initialState);
   useEffect(() => {
-    newStateHandler(selected);
-  }, [selected]);
+    newStateHandler(selectedItem);
+  }, [selectedItem]);
   return (
-    <Wrapper>
-      <Title questionnaire={questionnaire} />
-      <FlexBox $style={style}>
+    <Wrapper $style={style.wrapper}>
+      <Title $style={style.title}>{questionnaire}</Title>
+      <Options $style={style.options}>
         {options.map((option, index) => (
-          <div key={index}>{label(option, selected, handleSelected)}</div>
+          <div key={index}>{label(option, selectedItem, handleSelectItem)}</div>
         ))}
-      </FlexBox>
+      </Options>
     </Wrapper>
   );
 };
 
-const FlexBox = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-
+const Title = styled.div`
   ${({ $style }) => $style}
 `;
-
+const Options = styled.div`
+  ${({ $style }) => $style}
+`;
 const Wrapper = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  margin-bottom: 52px;
+  ${({ $style }) => $style}
 `;
 
 export default Survey;

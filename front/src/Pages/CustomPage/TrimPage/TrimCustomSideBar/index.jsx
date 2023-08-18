@@ -1,9 +1,8 @@
-import React, { useReducer, useState, useRef } from "react";
+import React, { useReducer, useState, useRef, useEffect } from "react";
 import { css, styled } from "styled-components";
 import { initialState, reducer } from "./index.reducer";
 import Button from "@Components/Common/Button/Button";
 import TrimOptionGroup from "@Components/Custom/TrimOptionGroup";
-import ModelItemOptionGroup from "@Components/Custom/ModelItemOptionGroup";
 import useButtonNavigation from "@hooks/useButtonNavigation";
 import helpIcon from "@assets/icons/help-circle.svg";
 import useOnClickPopUp from "@hooks/useOnClickPopUp";
@@ -11,6 +10,8 @@ import OverlaidPopup from "@Components/Common/OverlaidPopup";
 import ModelItemsDescriptionPopup from "../ModelItemsDescriptionPopup";
 import TrimChangePopup from "../TrimChangePopup";
 import { TrimOptions, modelItemData } from "./mockData";
+import ModelItemOption from "@Components/Custom/ModelItemOptionGroup/ModelItemOption";
+import Survey from "@Components/Survey";
 
 const TrimCustomSideBar = () => {
   const move = useButtonNavigation();
@@ -83,13 +84,16 @@ const TrimCustomSideBar = () => {
         </LinkBtnContainer>
         <ModelItems>
           {Object.entries(modelItemData).map(([questionKey, data]) => (
-            <ModelItemOptionGroup
+            <Survey
               key={questionKey}
-              data={data}
-              handleOptionSelect={(newValue) => {
-                setOptionSelect(questionKey, newValue);
-              }}
-              selectedOption={state[questionKey]}
+              questionnaire={data.title}
+              label={ModelItemOption}
+              options={data.options}
+              newStateHandler={(newState) =>
+                setOptionSelect(questionKey, newState)
+              }
+              initialState={state[questionKey]}
+              style={modelItemRadioGroupStyle}
             />
           ))}
         </ModelItems>
@@ -110,6 +114,26 @@ const TrimCustomSideBar = () => {
   );
 };
 
+const modelItemRadioGroupStyle = {
+  wrapper: css`
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin: 0px 12px;
+  `,
+  title: css`
+    ${({ theme }) => theme.font.Body4_Medium};
+  `,
+  options: css`
+    position: relative;
+    display: flex;
+    width: 100%;
+    margin-top: 4px;
+    & > div {
+      width: 50%;
+    }
+  `,
+};
 const LinkBtnContainer = styled.div`
   display: flex;
   gap: 2px;

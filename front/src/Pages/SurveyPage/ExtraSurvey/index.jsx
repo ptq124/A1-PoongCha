@@ -49,9 +49,8 @@ const ExtraSurvey = () => {
           newStateHandler={(newState) =>
             handleOptionSelect(questionKey, newState)
           }
-          // reducerKey={questionKey}
           initialState={state[questionKey]}
-          style={extraStyle}
+          style={extraRadioGroupStyle}
         />
       ))}
       <BudgetSliderGroup
@@ -67,11 +66,23 @@ const ExtraSurvey = () => {
     </S.SurveyContent>
   );
 };
-const extraStyle = css`
-  gap: 12px;
 
-  margin-top: 18px;
-`;
+const extraRadioGroupStyle = {
+  wrapper: css`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin-bottom: 52px;
+  `,
+  options: css`
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 24px;
+  `,
+};
 
 const Subtitle = styled.div`
   color: ${({ theme }) => theme.color.grey300};
