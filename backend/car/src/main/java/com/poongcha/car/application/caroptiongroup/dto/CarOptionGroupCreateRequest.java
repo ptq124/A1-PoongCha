@@ -13,4 +13,5 @@ public class CarOptionGroupCreateRequest {
     private String installationLocation;
     private long additionalPrice;
     private String summaryDescription;
+    private Long[] carOptionIds;
 }

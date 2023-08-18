@@ -15,7 +15,8 @@ public class CarOptionGroupMapper {
                 new CarOptionGroupName(carOptionGroupCreateRequest.getCarOptionGroupName()),
                 InstallationLocation.valueOf(carOptionGroupCreateRequest.getInstallationLocation()),
                 new AdditionalPrice(carOptionGroupCreateRequest.getAdditionalPrice()),
-                new SummaryDescription(carOptionGroupCreateRequest.getSummaryDescription())
+                new SummaryDescription(carOptionGroupCreateRequest.getSummaryDescription()),
+                carOptionGroupCreateRequest.getCarOptionIds()
         );
     }
 }
