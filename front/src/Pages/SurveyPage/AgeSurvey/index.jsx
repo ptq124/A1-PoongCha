@@ -4,7 +4,7 @@ import { css } from "styled-components";
 import Button from "@Components/Common/Button/Button";
 import useButtonNavigation from "@hooks/useButtonNavigation";
 import { useOutletContext } from "react-router-dom";
-import Survey from "@Components/Survey";
+import RadioGroup from "@Components/Survey";
 import AgeQuestion from "@Components/Survey/AgeQuestion";
 import PageIndicator from "@Components/Survey/PageIndicator";
 
@@ -12,7 +12,7 @@ const surveyData = {
   options: ["20대", "30대", "40대", "50대 이상"],
 };
 
-const questionnaire = () => {
+const ageRadioGroupTitle = () => {
   return (
     <>
       <span>
@@ -29,8 +29,8 @@ const AgeSurvey = () => {
 
   return (
     <S.SurveyContent>
-      <Survey
-        questionnaire={questionnaire()}
+      <RadioGroup
+        title={ageRadioGroupTitle()}
         label={AgeQuestion}
         options={surveyData.options}
         newStateHandler={(newState) => handleOptionSelect("age", newState)}

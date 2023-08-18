@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { styled } from "styled-components";
 import useRadio from "../../hooks/useRadio";
 
-const Survey = ({
-  questionnaire,
+const RadioGroup = ({
+  title,
   label,
   options,
   newStateHandler,
@@ -16,7 +16,7 @@ const Survey = ({
   }, [selectedItem]);
   return (
     <Wrapper $style={style.wrapper}>
-      <Title $style={style.title}>{questionnaire}</Title>
+      <Title $style={style.title}>{title}</Title>
       <Options $style={style.options}>
         {options.map((option, index) => (
           <div key={index}>{label(option, selectedItem, handleSelectItem)}</div>
@@ -36,4 +36,4 @@ const Wrapper = styled.div`
   ${({ $style }) => $style}
 `;
 
-export default Survey;
+export default RadioGroup;

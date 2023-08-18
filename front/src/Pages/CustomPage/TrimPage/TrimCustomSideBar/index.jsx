@@ -1,4 +1,4 @@
-import React, { useReducer, useState, useRef, useEffect } from "react";
+import React, { useReducer, useRef } from "react";
 import { css, styled } from "styled-components";
 import { initialState, reducer } from "./index.reducer";
 import Button from "@Components/Common/Button/Button";
@@ -9,7 +9,7 @@ import OverlaidPopup from "@Components/Common/OverlaidPopup";
 import ModelItemsDescriptionPopup from "../ModelItemsDescriptionPopup";
 import { TrimOptions, modelItemData } from "./mockData";
 import ModelItemOption from "@Components/Custom/ModelItemOptionGroup/ModelItemOption";
-import Survey from "@Components/Survey";
+import RadioGroup from "@Components/Survey";
 import TrimOption from "@Components/Custom/TrimOptionGroup/TrimOption";
 import TrimComparisonPopup from "../TrimComparisonPopup";
 
@@ -37,7 +37,7 @@ const TrimCustomSideBar = () => {
     openPopup: openTrimComparisonPopup,
     closePopup: closeTrimComparisonPopup,
   } = useOnClickPopUp(trimComparisonPopupRef);
-  const trimQuestionnaire = () => {
+  const trimRadioGroupTitle = () => {
     return (
       <>
         <span>트림</span>
@@ -83,9 +83,9 @@ const TrimCustomSideBar = () => {
         {/* 엔진/바디/구동방식 선택하기 */}
         <ModelItems>
           {Object.entries(modelItemData).map(([questionKey, data]) => (
-            <Survey
+            <RadioGroup
               key={questionKey}
-              questionnaire={data.title}
+              title={data.title}
               label={ModelItemOption}
               options={data.options}
               newStateHandler={(newState) =>
@@ -97,8 +97,8 @@ const TrimCustomSideBar = () => {
           ))}
         </ModelItems>
         {/* 트림 선택하기 */}
-        <Survey
-          questionnaire={trimQuestionnaire()}
+        <RadioGroup
+          title={trimRadioGroupTitle()}
           label={TrimOption}
           options={TrimOptions}
           newStateHandler={(newState) => {

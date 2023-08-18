@@ -5,8 +5,8 @@ import Button from "@Components/Common/Button/Button";
 import BudgetSliderGroup from "./BudgetSliderGroup";
 import useButtonNavigation from "@hooks/useButtonNavigation";
 import { useOutletContext } from "react-router-dom";
-import Survey from "@Components/Survey";
 import ExtraQuestion from "@Components/Survey/ExtraQuestion";
+import RadioGroup from "@Components/Survey";
 
 const surveyData = {
   drivingRecord: {
@@ -41,9 +41,9 @@ const ExtraSurvey = () => {
       </Title>
       <Subtitle>당신의 라이프스타일을 반영한 차를 추천해 드릴게요.</Subtitle>
       {Object.entries(surveyData).map(([questionKey, data]) => (
-        <Survey
+        <RadioGroup
           key={questionKey}
-          questionnaire={data.title}
+          title={data.title}
           label={ExtraQuestion}
           options={data.options}
           newStateHandler={(newState) =>
