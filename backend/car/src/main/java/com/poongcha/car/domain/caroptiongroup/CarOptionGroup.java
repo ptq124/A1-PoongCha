@@ -3,6 +3,7 @@ package com.poongcha.car.domain.caroptiongroup;
 import com.poongcha.car.domain.common.AdditionalPrice;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import lombok.AccessLevel;
@@ -48,5 +49,11 @@ public class CarOptionGroup {
                         .map(CarOptionGroupCarOption::new)
                         .collect(Collectors.toList())
         );
+    }
+
+    public List<Long> optionIds() {
+        return this.carOptions.stream()
+                .map(CarOptionGroupCarOption::optionId)
+                .collect(Collectors.toUnmodifiableList());
     }
 }

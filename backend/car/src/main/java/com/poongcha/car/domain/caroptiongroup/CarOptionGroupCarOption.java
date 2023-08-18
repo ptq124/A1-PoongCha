@@ -19,4 +19,8 @@ public class CarOptionGroupCarOption {
     public CarOptionGroupCarOption(final Long carOptionId) {
         this.carOption = new IdOnlyAggregateReference<>(carOptionId);
     }
+
+    public long optionId() {
+        return carOption.getId();
+    }
 }
