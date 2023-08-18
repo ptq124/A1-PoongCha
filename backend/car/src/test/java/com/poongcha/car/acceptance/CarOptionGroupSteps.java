@@ -221,4 +221,66 @@ public class CarOptionGroupSteps {
             assertions.assertThat(response.header(HttpHeaders.LOCATION)).isEqualTo(location);
         }
     }
+
+    public static ExtractableResponse<Response> 같은_ID로_양립_불가능한_차량_옵션_설정_요청(
+            final long id,
+            final List<Long> incompatibleOptionGroupIds
+    ) {
+        return given()
+                .filter(document(
+                        DEFAULT_RESTDOCS_PATH,
+                        pathParameters(
+                                parameterWithName("id").description("차량 옵션 그룹 ID")
+                        ),
+                        requestFields(
+                                fieldWithPath("incompatibleOptionGroupIds").type(JsonFieldType.ARRAY)
+                                        .description("양립 불가능한 차량 옵션 그룹 id 목록")
+                        )
+                )).log().all()
+                .when()
+                .body(Map.of(
+                        "incompatibleOptionGroupIds", incompatibleOptionGroupIds
+                ))
+                .contentType(ContentType.JSON)
+                .post("/api/option-group/{id}/incompatible", id)
+                .then().log().all()
+                .extract();
+    }
+
+    public static void 같은_ID로_양립_불가능한_차량_옵션_설정_응답_검증(final ExtractableResponse<Response> response) {
+        try (AutoCloseableSoftAssertions assertions = new AutoCloseableSoftAssertions()) {
+            assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.SC_BAD_REQUEST);
+        }
+    }
+
+    public static ExtractableResponse<Response> 존재하지_않는_ID로_양립_불가능한_차량_옵션_설정_요청(
+            final long id,
+            final List<Long> incompatibleOptionGroupIds
+    ) {
+        return given()
+                .filter(document(
+                        DEFAULT_RESTDOCS_PATH,
+                        pathParameters(
+                                parameterWithName("id").description("차량 옵션 그룹 ID")
+                        ),
+                        requestFields(
+                                fieldWithPath("incompatibleOptionGroupIds").type(JsonFieldType.ARRAY)
+                                        .description("양립 불가능한 차량 옵션 그룹 id 목록")
+                        )
+                )).log().all()
+                .when()
+                .body(Map.of(
+                        "incompatibleOptionGroupIds", incompatibleOptionGroupIds
+                ))
+                .contentType(ContentType.JSON)
+                .post("/api/option-group/{id}/incompatible", id)
+                .then().log().all()
+                .extract();
+    }
+
+    public static void 존재하지_않는_ID로_양립_불가능한_차량_옵션_설정_응답_검증(final ExtractableResponse<Response> response) {
+        try (AutoCloseableSoftAssertions assertions = new AutoCloseableSoftAssertions()) {
+            assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.SC_BAD_REQUEST);
+        }
+    }
 }

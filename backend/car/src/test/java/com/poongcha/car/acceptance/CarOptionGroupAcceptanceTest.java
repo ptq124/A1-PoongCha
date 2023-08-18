@@ -1,7 +1,11 @@
 package com.poongcha.car.acceptance;
 
+import static com.poongcha.car.acceptance.CarOptionGroupSteps.같은_ID로_양립_불가능한_차량_옵션_설정_요청;
+import static com.poongcha.car.acceptance.CarOptionGroupSteps.같은_ID로_양립_불가능한_차량_옵션_설정_응답_검증;
 import static com.poongcha.car.acceptance.CarOptionGroupSteps.양립_불가능한_차량_옵션_설정_요청;
 import static com.poongcha.car.acceptance.CarOptionGroupSteps.양립_불가능한_차량_옵션_설정_응답_검증;
+import static com.poongcha.car.acceptance.CarOptionGroupSteps.존재하지_않는_ID로_양립_불가능한_차량_옵션_설정_요청;
+import static com.poongcha.car.acceptance.CarOptionGroupSteps.존재하지_않는_ID로_양립_불가능한_차량_옵션_설정_응답_검증;
 import static com.poongcha.car.acceptance.CarOptionGroupSteps.존재하지_않는_차량_옵션_ID로_차량_옵션_그룹_생성_요청;
 import static com.poongcha.car.acceptance.CarOptionGroupSteps.존재하지_않는_차량_옵션_ID로_차량_옵션_그룹_생성_응답_검증;
 import static com.poongcha.car.acceptance.CarOptionGroupSteps.존재하지_않는_차량_옵션_그룹_ID_조회_요청;
@@ -153,5 +157,59 @@ public class CarOptionGroupAcceptanceTest extends DocumentationTest {
 
         // THEN
         양립_불가능한_차량_옵션_설정_응답_검증(response, "/api/option-group/" + 1L);
+    }
+
+    @DisplayName("같은 ID로 양립 불가능한 차량 옵션 설정")
+    @Test
+    void 같은_ID로_양립_불가능한_차량_옵션_설정() {
+        // GIVEN
+        String optionName1 = "후석 승객 알림";
+        String imageUrl1 = "www.naver.com/option/image.png";
+        String detailDescription1 = "초음파 센서를 통해 뒷좌석에 남아있는 승객의 움직임을 감지하여 운전자에게 경고함으로써 부주의에 의한 유아 또는 반려 동물 등의 방치 사고를 예방하는 신기술입니다.";
+        String installationLocation1 = handleInstallationLocation;
+        차량_옵션_생성_요청(optionName1, imageUrl1, installationLocation1, detailDescription1);
+
+        String optionName2 = "전방 추돌 방지 알림";
+        String imageUrl2 = "www.naver.com/option/image.png";
+        String installationLocation2 = "DEFAULT";
+        String detailDescription2 = "카메라를를 통해 전방 차량을 감지해 추돌을 방지해주는 옵션";
+        차량_옵션_생성_요청(optionName2, imageUrl2, installationLocation2, detailDescription2);
+
+        차량_옵션_그룹_생성_요청(compote2CarOptionGroupName, additionalPrice, summaryDescription, new long[]{1L, 2L});
+
+        차량_옵션_그룹_생성_요청("전방 추돌 방지 알림", 1_000_000, "전방 추돌 방지 옵션", new long[]{2L});
+
+        // WHEN
+        var response = 같은_ID로_양립_불가능한_차량_옵션_설정_요청(1L, List.of(1L));
+
+        // THEN
+        같은_ID로_양립_불가능한_차량_옵션_설정_응답_검증(response);
+    }
+
+    @DisplayName("존재하지 않는 ID로 양립 불가능한 차량 옵션 설정")
+    @Test
+    void 존재하지_않는_ID로_양립_불가능한_차량_옵션_설정() {
+        // GIVEN
+        String optionName1 = "후석 승객 알림";
+        String imageUrl1 = "www.naver.com/option/image.png";
+        String detailDescription1 = "초음파 센서를 통해 뒷좌석에 남아있는 승객의 움직임을 감지하여 운전자에게 경고함으로써 부주의에 의한 유아 또는 반려 동물 등의 방치 사고를 예방하는 신기술입니다.";
+        String installationLocation1 = handleInstallationLocation;
+        차량_옵션_생성_요청(optionName1, imageUrl1, installationLocation1, detailDescription1);
+
+        String optionName2 = "전방 추돌 방지 알림";
+        String imageUrl2 = "www.naver.com/option/image.png";
+        String installationLocation2 = "DEFAULT";
+        String detailDescription2 = "카메라를를 통해 전방 차량을 감지해 추돌을 방지해주는 옵션";
+        차량_옵션_생성_요청(optionName2, imageUrl2, installationLocation2, detailDescription2);
+
+        차량_옵션_그룹_생성_요청(compote2CarOptionGroupName, additionalPrice, summaryDescription, new long[]{1L, 2L});
+
+        차량_옵션_그룹_생성_요청("전방 추돌 방지 알림", 1_000_000, "전방 추돌 방지 옵션", new long[]{2L});
+
+        // WHEN
+        var response = 존재하지_않는_ID로_양립_불가능한_차량_옵션_설정_요청(1L, List.of(19283123492489L));
+
+        // THEN
+        존재하지_않는_ID로_양립_불가능한_차량_옵션_설정_응답_검증(response);
     }
 }
