@@ -5,6 +5,7 @@ import static com.poongcha.car.util.DocumentationTest.DEFAULT_RESTDOCS_PATH;
 import static com.poongcha.car.util.DocumentationTest.customRequestFields;
 import static com.poongcha.car.util.DocumentationTest.given;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
@@ -185,6 +186,39 @@ public class CarOptionGroupSteps {
     public static void 존재하지_않는_차량_옵션_그룹_ID_조회_응답_검증(final ExtractableResponse<Response> response) {
         try (AutoCloseableSoftAssertions assertions = new AutoCloseableSoftAssertions()) {
             assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.SC_NOT_FOUND);
+        }
+    }
+
+    public static ExtractableResponse<Response> 양립_불가능한_차량_옵션_설정_요청(
+            final long id,
+            final List<Long> incompatibleOptionGroupIds
+    ) {
+        return given()
+                .filter(document(
+                        DEFAULT_RESTDOCS_PATH,
+                        pathParameters(
+                                parameterWithName("id").description("차량 옵션 그룹 ID")
+                        ),
+                        requestFields(
+                                fieldWithPath("incompatibleOptionGroupIds").type(JsonFieldType.ARRAY)
+                                        .description("양립 불가능한 차량 옵션 그룹 id 목록")
+                        )
+                )).log().all()
+                .when()
+                .body(Map.of(
+                        "incompatibleOptionGroupIds", incompatibleOptionGroupIds
+                ))
+                .contentType(ContentType.JSON)
+                .post("/api/option-group/{id}/incompatible", id)
+                .then().log().all()
+                .extract();
+    }
+
+
+    public static void 양립_불가능한_차량_옵션_설정_응답_검증(final ExtractableResponse<Response> response, final String location) {
+        try (AutoCloseableSoftAssertions assertions = new AutoCloseableSoftAssertions()) {
+            assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.SC_CREATED);
+            assertions.assertThat(response.header(HttpHeaders.LOCATION)).isEqualTo(location);
         }
     }
 }
