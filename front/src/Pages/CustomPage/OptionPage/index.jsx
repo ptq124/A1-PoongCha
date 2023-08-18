@@ -35,6 +35,7 @@ const OptionPage = () => {
           </TabItem>
         ))}
       </TabWrapper>
+      <TagContainer tab={selectedTab} handleSelectTab={setSelectedTab} />
       <AllOptions
         tab={selectedTab}
         optionData={optionData}
