@@ -7,15 +7,6 @@ import OverlaidPopup from "@Components/Common/OverlaidPopup";
 import ColorChangePopup from "@Pages/CustomPage/ColorPage/ColorChangePopup";
 import useOnClickPopUp from "@hooks/useOnClickPopUp";
 
-const innerColorOptions = [
-  "어비스 블랙펄",
-  "어비스 블랙펄",
-  "어비스 블랙펄",
-  "어비스 블랙펄",
-  "어비스 블랙펄",
-];
-const extraColorOptions = ["Exclusive", "Prestige", "Caligraphy"];
-
 const ColorOptionGroup = ({ option, handleColorOption, data, curData }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const popupRef = useRef();

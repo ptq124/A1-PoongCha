@@ -11,7 +11,6 @@ import useOnClickPopUp from "@hooks/useOnClickPopUp";
 import OverlaidPopup from "@Components/Common/OverlaidPopup";
 import close from "@assets/icons/close.svg";
 import useButtonNavigation from "@hooks/useButtonNavigation";
-import internal001 from "@assets/images/internal001.svg";
 
 const CarView = ({ data }) => {
   const { pathname } = useLocation();
