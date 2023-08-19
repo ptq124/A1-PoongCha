@@ -9,7 +9,7 @@ import OverlaidPopup from "@Components/Common/OverlaidPopup";
 import ModelItemsDescriptionPopup from "../ModelItemsDescriptionPopup";
 import { TrimOptions, modelItemData } from "./mockData";
 import ModelItemOption from "@Components/Custom/ModelItemOptionGroup/ModelItemOption";
-import RadioGroup from "@Components/Survey";
+import RadioGroup from "@Components/Common/RadioGroup";
 import TrimOption from "@Components/Custom/TrimOptionGroup/TrimOption";
 import TrimComparisonPopup from "../TrimComparisonPopup";
 

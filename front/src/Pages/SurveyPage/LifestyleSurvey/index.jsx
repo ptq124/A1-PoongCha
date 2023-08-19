@@ -6,7 +6,7 @@ import useButtonNavigation from "@hooks/useButtonNavigation";
 import { useOutletContext } from "react-router-dom";
 import LifestyleQuestion from "@Components/Survey/LifestyleQuestion";
 import PageIndicator from "@Components/Survey/PageIndicator";
-import RadioGroup from "@Components/Survey";
+import RadioGroup from "@Components/Common/RadioGroup";
 
 const lifestyleSurveyInfo = {
   options: [

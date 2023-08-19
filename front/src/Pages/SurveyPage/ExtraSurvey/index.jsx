@@ -6,7 +6,7 @@ import BudgetSliderGroup from "./BudgetSliderGroup";
 import useButtonNavigation from "@hooks/useButtonNavigation";
 import { useOutletContext } from "react-router-dom";
 import ExtraQuestion from "@Components/Survey/ExtraQuestion";
-import RadioGroup from "@Components/Survey";
+import RadioGroup from "@Components/Common/RadioGroup";
 
 const surveyData = {
   drivingRecord: {

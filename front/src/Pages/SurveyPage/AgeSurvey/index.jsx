@@ -4,7 +4,7 @@ import { css } from "styled-components";
 import Button from "@Components/Common/Button/Button";
 import useButtonNavigation from "@hooks/useButtonNavigation";
 import { useOutletContext } from "react-router-dom";
-import RadioGroup from "@Components/Survey";
+import RadioGroup from "@Components/Common/RadioGroup";
 import AgeQuestion from "@Components/Survey/AgeQuestion";
 import PageIndicator from "@Components/Survey/PageIndicator";
 
