@@ -1,4 +1,4 @@
-package com.poongcha.car.application.caroptiongrouptooltip.dto;
+package com.poongcha.car.application.dto;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor
-public class CarOptionGroupTooltipCreateRequest {
+public class CarOptionBrandCreateRequest {
+    private String brandName;
     private String imageUrl;
-    private String tooltipDescription;
 }
