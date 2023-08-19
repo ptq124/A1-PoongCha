@@ -1,10 +1,15 @@
 import React from "react";
+import { useLocation } from "react-router";
 import { styled } from "styled-components";
 
-const PageIndicator = ({ crntPage, totalPage }) => {
+const path = ["/survey/age", "/survey/lifestyle"];
+
+const PageIndicator = () => {
+  const { pathname } = useLocation();
+
   return (
     <PageIndicatorWrapper>
-      {crntPage}/{totalPage}
+      {path.findIndex((path) => path === pathname) + 1}/{path.length}
     </PageIndicatorWrapper>
   );
 };

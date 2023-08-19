@@ -1,12 +1,12 @@
 import { useState } from "react";
 
 const useRadio = (value = "") => {
-  const [selected, setSelected] = useState(value);
-  const handleSelected = (select) => {
-    setSelected(select);
+  const [selectedItem, setSelectedItem] = useState(value);
+  const handleSelectItem = (value) => {
+    setSelectedItem(value);
   };
 
-  return { selected, handleSelected };
+  return { selectedItem, handleSelectItem };
 };
 
 export default useRadio;

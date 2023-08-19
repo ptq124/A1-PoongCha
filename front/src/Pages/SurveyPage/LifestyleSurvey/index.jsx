@@ -1,14 +1,12 @@
-import React, { useRef } from "react";
+import React from "react";
 import * as S from "../styles";
 import { css } from "styled-components";
 import Button from "@Components/Common/Button/Button";
-import useOnClickPopUp from "@hooks/useOnClickPopUp";
-import PopUp from "./PopUp";
 import useButtonNavigation from "@hooks/useButtonNavigation";
-import OverlaidPopup from "@Components/Common/OverlaidPopup";
 import { useOutletContext } from "react-router-dom";
-import Survey from "@Components/Survey";
-import LifestyleQuestion from "@Components/Survey/LifestyleQuestion";
+import LifestyleQuestionLabel from "@Components/Survey/LifestyleQuestionLabel";
+import PageIndicator from "@Components/Survey/PageIndicator";
+import RadioGroup from "@Components/Common/RadioGroup";
 
 const lifestyleSurveyInfo = {
   options: [
@@ -56,23 +54,25 @@ const lifestyleSurveyInfo = {
 };
 
 const LifestyleSurvey = () => {
-  const popupRef = useRef();
-  const { isPopupOpen, openPopup } = useOnClickPopUp(popupRef);
-
   const move = useButtonNavigation();
 
   const [handleOptionSelect, state] = useOutletContext();
-  const questionnaire = () => {
+  const lifestyleRadioGroupTitle = () => {
     return (
       <>
-        유사한 <strong>라이프스타일</strong>을 선택하면
-        <br />
-        차량 조합을 추천해 드려요.
-        <Button
-          text="원하는 라이프스타일이 없다면?"
-          style={LinkBtnStyle}
-          onClick={() => move("/survey/extra")}
-        />
+        <div>
+          <span>
+            유사한 <strong>라이프스타일</strong>을 선택하면
+            <br />
+            차량 조합을 추천해 드려요.
+          </span>
+          <Button
+            text="원하는 라이프스타일이 없다면?"
+            style={LinkBtnStyle}
+            onClick={() => move("/survey/extra")}
+          />
+        </div>
+        <PageIndicator />
       </>
     );
   };
@@ -80,20 +80,16 @@ const LifestyleSurvey = () => {
   return (
     <>
       <S.SurveyContent>
-        <Survey
-          questionnaire={questionnaire()}
-          label={LifestyleQuestion}
+        <RadioGroup
+          title={lifestyleRadioGroupTitle()}
+          label={LifestyleQuestionLabel}
           options={lifestyleSurveyInfo.options}
-          openPopup={openPopup}
           newStateHandler={(newState) =>
             handleOptionSelect("lifestyle", newState)
           }
-          style={lifeStyle}
+          style={lifestyleRadioGroupStyle}
         />
       </S.SurveyContent>
-      {isPopupOpen && (
-        <OverlaidPopup component={<PopUp popupRef={popupRef} />} />
-      )}
       <Button
         text="선택 완료"
         style={SurveyBtnStyle}
@@ -103,10 +99,31 @@ const LifestyleSurvey = () => {
     </>
   );
 };
-const lifeStyle = css`
-  gap: 16px;
-  margin-top: 32px;
-`;
+
+const lifestyleRadioGroupStyle = {
+  wrapper: css`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 52px;
+  `,
+  title: css`
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    ${({ theme }) => theme.font.Extra1};
+    strong {
+      font-family: "HyundaiSansHeadMediumKR";
+    }
+  `,
+  options: css`
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 32px;
+  `,
+};
 
 const LinkBtnStyle = css`
   color: ${({ theme }) => theme.color.secondary};

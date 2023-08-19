@@ -58,6 +58,7 @@ const TooltipBody = styled.div`
 `;
 const Wrapper = styled.div`
   position: absolute;
+  left: -12px;
   bottom: ${({ $offset }) => $offset}px;
 
   opacity: ${({ $isVisible }) => ($isVisible ? 1 : 0)};

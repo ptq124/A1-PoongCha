@@ -5,8 +5,8 @@ import Button from "@Components/Common/Button/Button";
 import BudgetSliderGroup from "./BudgetSliderGroup";
 import useButtonNavigation from "@hooks/useButtonNavigation";
 import { useOutletContext } from "react-router-dom";
-import Survey from "@Components/Survey";
-import ExtraQuestion from "@Components/Survey/ExtraQuestion";
+import ExtraQuestionLabel from "@Components/Survey/ExtraQuestionLabel";
+import RadioGroup from "@Components/Common/RadioGroup";
 
 const surveyData = {
   drivingRecord: {
@@ -41,17 +41,16 @@ const ExtraSurvey = () => {
       </Title>
       <Subtitle>당신의 라이프스타일을 반영한 차를 추천해 드릴게요.</Subtitle>
       {Object.entries(surveyData).map(([questionKey, data]) => (
-        <Survey
+        <RadioGroup
           key={questionKey}
-          questionnaire={data.title}
-          label={ExtraQuestion}
+          title={data.title}
+          label={ExtraQuestionLabel}
           options={data.options}
           newStateHandler={(newState) =>
             handleOptionSelect(questionKey, newState)
           }
-          // reducerKey={questionKey}
           initialState={state[questionKey]}
-          style={extraStyle}
+          style={extraRadioGroupStyle}
         />
       ))}
       <BudgetSliderGroup
@@ -67,11 +66,26 @@ const ExtraSurvey = () => {
     </S.SurveyContent>
   );
 };
-const extraStyle = css`
-  gap: 12px;
 
-  margin-top: 18px;
-`;
+const extraRadioGroupStyle = {
+  wrapper: css`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 52px;
+  `,
+  title: css`
+    width: 100%;
+    ${({ theme }) => theme.font.Body2_Medium};
+  `,
+  options: css`
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 24px;
+  `,
+};
 
 const Subtitle = styled.div`
   color: ${({ theme }) => theme.color.grey300};
