@@ -1,15 +1,15 @@
-export const optionData = [
+export const additionalOptionData = [
   {
     id:1,
     carOptionGroupName: "세트 옵션",
     tagIds: [1, 2, 3],
-    price:1090000,
+    additionalPrice:1090000,
     summaryDescription:"편의성을 위해 구성된 세트 옵션",
     position: {x:0, y:0},
     brand : {
       id : 1,
       name : "H Genuine Accessories",
-      imageUrl : www.naver.com,
+      imageUrl : "www.naver.com",
     },
     options: [
       {
@@ -36,13 +36,13 @@ export const optionData = [
   id:2,
   carOptionGroupName : "단일 옵션 1",
   tagIds:[1,2],
-  price: 1090000,
+  additionalPrice: 1090000,
   summaryDescription:"전방 충돌 감지 / 크루즈 컨트롤 / 차로 유지 등의 ADAS 세트 옵션",
   position:{x:10, y:10},
   brand : {
     id : 1,
     name : "H Genuine Accessories",
-    imageUrl : www.naver.com,
+    imageUrl : "www.naver.com",
   },
   options: [
     {
@@ -57,13 +57,13 @@ export const optionData = [
   id:2,
   carOptionGroupName : "단일 옵션 1",
   tagIds:[1,2],
-  price: 1090000,
+  additionalPrice: 1090000,
   summaryDescription:"전방 충돌 감지 / 크루즈 컨트롤 / 차로 유지 등의 ADAS 세트 옵션",
   position:{x:20, y:20},
   brand : {
     id : 1,
     name : "H Genuine Accessories",
-    imageUrl : www.naver.com,
+    imageUrl : "www.naver.com",
   },
   options: [
     {
@@ -75,3 +75,8 @@ export const optionData = [
   ]
  },
 ];
+
+export const defaultOptionData = [
+
+
+]

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
-import { options } from "../optionData";
+// import { options } from "../optionData";
 import Card from "./Card";
 import ArrowLeftIcon from "@assets/icons/arrow-left-32-white.svg";
 import ArrowRightIcon from "@assets/icons/arrow-right-32-white.svg";

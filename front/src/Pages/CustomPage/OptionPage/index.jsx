@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { styled, css } from "styled-components";
 import AllOptions from "./AllOptions";
 import Button from "@Components/Common/Button/Button";
 import useButtonNavigation from "@hooks/useButtonNavigation";
-import { optionData } from "./optionData";
+import { additionalOptionData, defaultOptionData } from "./optionData";
+import { tags, tagSelectIcons, tagsNotSelectIcons } from "./tagIcon";
+import OptionTagGroup from "@Components/Custom/OptionTagGroup";
 
 const tabData = ["추가 옵션", "기본 포함 옵션"];
 const OptionPage = () => {
-  // 선택한 옵션들 상태관리
+  // 선택한 옵션들 상태관리 (옵션 id 값 저장)
   const [selectedOptions, setSelectedOptions] = useState([]);
+  const [selectedTag, setSelectedTag] = useState(0);
   const handleSelectOption = (id) => {
     if (checkOptionSelected(id)) {
       setSelectedOptions((prev) => prev.filter((optId) => optId !== id));
@@ -21,27 +24,31 @@ const OptionPage = () => {
   };
 
   const [selectedTab, setSelectedTab] = useState("추가 옵션");
+  const handleSelectTab = (tab) => {
+    setSelectedTab(tab);
+    setSelectedTag(0);
+  };
   const move = useButtonNavigation();
 
   return (
     <Wrapper>
-      <TabWrapper>
+      <TabContainer>
         {tabData.map((tab) => (
           <TabItem
             selected={selectedTab === tab}
-            onClick={() => setSelectedTab(tab)}
+            onClick={() => handleSelectTab(tab)}
           >
             {tab}
           </TabItem>
         ))}
-      </TabWrapper>
-      <TagContainer tab={selectedTab} handleSelectTab={setSelectedTab} />
-      <AllOptions
+      </TabContainer>
+      <OptionTagGroup />
+      {/* <AllOptions
         tab={selectedTab}
         optionData={optionData}
         handleSelectOption={handleSelectOption}
         checkOptionSelected={checkOptionSelected}
-      />
+      /> */}
       <ButtonContainer>
         <Button
           text="색상선택"
@@ -57,7 +64,7 @@ const OptionPage = () => {
     </Wrapper>
   );
 };
-
+const TagContainer = styled.div``;
 const BtnStyle2 = css`
   width: 298px;
   height: 52px;
@@ -108,7 +115,7 @@ const TabItem = styled.div`
   padding-bottom: 8px;
 `;
 
-const TabWrapper = styled.div`
+const TabContainer = styled.div`
   display: flex;
 
   gap: 40px;

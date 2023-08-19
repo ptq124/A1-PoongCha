@@ -1,7 +1,7 @@
 import React from "react";
 import { styled, css } from "styled-components";
 
-const OptionTag = ({ selectedTag, tagsOption, handleSelectTag }) => {
+const OptionTagGroup = ({ selectedTag, tagsOption, handleSelectTag }) => {
   const [tags, tagSelectIcons, tagsNotSelectIcons] = tagsOption;
 
   const isTagIcons = (select, index) => {
@@ -65,4 +65,4 @@ const Wrapper = styled.div`
   border-bottom: 1.5px solid;
   border-bottom-color: ${({ theme }) => theme.color.grey700};
 `;
-export default OptionTag;
+export default OptionTagGroup;
