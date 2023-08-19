@@ -5,21 +5,28 @@ import CloseIcon from "@assets/icons/close.svg";
 import Button from "@Components/Common/Button/Button";
 import checkBlue from "@assets/checkcircle/check-16-blue.svg";
 import checkGrey from "@assets/checkcircle/check-16-grey.svg";
+import { tagData } from "../tagData";
 
 const Card = ({
-  index,
-  setData,
+  data,
+  crntCardIdx,
   selected,
   closePopup,
   handleNavClick,
   handleSelectOption,
 }) => {
-  const crntCardData = setData[index];
+  const crntCardData = data.options[crntCardIdx];
+  const tags = tagData
+    .filter((tag) => data.tagIds.includes(tag.id))
+    .map((tag) => tag.name);
+  const isSetOption = data.options.length > 1;
+  const isAdditionalOption = data.additionalPrice !== 0;
+
   return (
     <CardContainer>
       <ImgContainer>
         <TagContainer>
-          {crntCardData.tag.map((tag, index) => (
+          {tags.map((tag, index) => (
             <Tag key={index}>{tag}</Tag>
           ))}
         </TagContainer>
@@ -29,41 +36,51 @@ const Card = ({
         <img src={CloseIcon} onClick={closePopup} />
         <Header>
           <OptionInfo>
-            {crntCardData.set && (
-              <span className="setName">{crntCardData.set}</span>
+            {isSetOption && (
+              <span className="setName">{data.carOptionGroupName}</span>
             )}
-            <span className="optionName">{crntCardData.option}</span>
-            <span className="price">{crntCardData.price}</span>
+            <span className="optionName">{crntCardData.name}</span>
+            {isAdditionalOption && (
+              <span className="price">
+                {data.additionalPrice.toLocaleString()}원
+              </span>
+            )}
           </OptionInfo>
-          <Button
-            text="선택"
-            style={BtnStyle}
-            selected={selected}
-            onClick={handleSelectOption}
-            img={<img src={selected ? checkGrey : checkBlue} />}
-          />
+          {isAdditionalOption && (
+            <Button
+              text="선택"
+              style={BtnStyle}
+              selected={selected}
+              onClick={handleSelectOption}
+              img={<img src={selected ? checkGrey : checkBlue} />}
+            />
+          )}
         </Header>
         <Description>
           초음파 센서를 통해 뒷좌석에 남아있는 승객의 움직임을 감지하여
           운전자에게 경고함으로써 부주의에 의한 유아 또는 반려 동물 등의 방치
           사고를 예방하는 신기술입니다.
         </Description>
-        {setData.length !== 1 && (
+        {isSetOption && (
           <>
             <SetOptionNavigation>
-              {setData.map((data, idx) => (
+              {data.options.map((option, index) => (
                 <Nav
-                  key={idx}
-                  $selected={idx === index}
-                  onClick={() => handleNavClick(idx)}
+                  key={index}
+                  $selected={index === crntCardIdx}
+                  onClick={() => handleNavClick(index)}
                 >
-                  {data.option}
+                  {option.name}
                 </Nav>
               ))}
             </SetOptionNavigation>
             <NavBullets>
-              {setData.map((data, idx) => (
-                <Bullet key={idx} $selected={idx === index}></Bullet>
+              {data.options.map((option, index) => (
+                <Bullet
+                  key={index}
+                  $selected={index === crntCardIdx}
+                  onClick={() => handleNavClick(index)}
+                ></Bullet>
               ))}
             </NavBullets>
           </>
@@ -115,6 +132,9 @@ const NavBullets = styled.div`
   display: flex;
   gap: 10px;
   margin-top: 14px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 const Nav = styled.div`
   width: 50%;
@@ -141,11 +161,6 @@ const Description = styled.div`
   ${({ theme }) => theme.font.Body4_Regular};
   color: ${({ theme }) => theme.color.grey200};
   margin-top: 20px;
-`;
-const SelectButton = styled.div`
-  width: 69px;
-  height: 28px;
-  background-color: beige;
 `;
 const OptionInfo = styled.div`
   display: flex;

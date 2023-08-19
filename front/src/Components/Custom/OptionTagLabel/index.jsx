@@ -2,9 +2,9 @@ import React from "react";
 import { css, styled } from "styled-components";
 
 const OptionTagLabel = ({ tag, selectedTag, handleSelectTag }) => {
-  const isSelected = selectedTag === tag.id;
+  const isSelected = selectedTag === tag.name;
   return (
-    <Wrapper $isSelected={isSelected} onClick={() => handleSelectTag(tag.id)}>
+    <Wrapper $isSelected={isSelected} onClick={() => handleSelectTag(tag.name)}>
       <TagImg src={isSelected ? tag.activeIcon : tag.inactiveIcon}></TagImg>
       {tag.name}
     </Wrapper>

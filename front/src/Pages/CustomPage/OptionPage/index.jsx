@@ -1,34 +1,41 @@
 import React, { useEffect, useState } from "react";
 import { styled, css } from "styled-components";
-// import AllOptions from "./AllOptions";
 import Button from "@Components/Common/Button/Button";
 import useButtonNavigation from "@hooks/useButtonNavigation";
-import { additionalOptionData, defaultOptionData } from "./optionData";
-import { tags } from "./tagData";
+import { tagData } from "./tagData";
 import OptionTagGroup from "@Components/Custom/OptionTagGroup";
+import OptionCatalogue from "./OptionCatalogue";
 
 const tabData = ["추가 옵션", "기본 포함 옵션"];
 const OptionPage = () => {
-  // 선택한 옵션들 상태관리 (옵션 id 값 저장)
+  // 선택한 옵션들 상태 관리 (옵션 id 값 저장)
   const [selectedOptions, setSelectedOptions] = useState([]);
-  const [selectedTag, setSelectedTag] = useState(2);
   const handleSelectOption = (id) => {
-    if (checkOptionSelected(id)) {
+    if (selectedOptions.includes(id)) {
       setSelectedOptions((prev) => prev.filter((optId) => optId !== id));
     } else {
       setSelectedOptions((prev) => [...prev, id]);
     }
   };
-  const checkOptionSelected = (id) => {
-    return selectedOptions.includes(id);
-  };
 
+  // 선택한 탭 상태 관리
   const [selectedTab, setSelectedTab] = useState("추가 옵션");
   const handleSelectTab = (tab) => {
     setSelectedTab(tab);
-    if (tab === "추가 옵션") setSelectedTag(2);
-    else setSelectedTag(1);
+    if (tab === "추가 옵션") setSelectedTag("전체");
+    else setSelectedTag("대표");
   };
+
+  // 선택한 태그 상태 관리
+  const [selectedTag, setSelectedTag] = useState("전체");
+  const handleSelectTag = (tag) => {
+    setSelectedTag(tag);
+  };
+
+  useEffect(() => {
+    console.log(selectedOptions);
+  }, [selectedOptions]);
+
   const move = useButtonNavigation();
 
   return (
@@ -45,16 +52,16 @@ const OptionPage = () => {
         ))}
       </TabContainer>
       <OptionTagGroup
-        tags={selectedTab === "추가 옵션" ? tags.slice(1) : tags}
+        tags={selectedTab === "추가 옵션" ? tagData.slice(1) : tagData}
         selectedTag={selectedTag}
-        handleSelectTag={setSelectedTag}
+        handleSelectTag={handleSelectTag}
       />
-      {/* <AllOptions
-        tab={selectedTab}
-        optionData={optionData}
+      <OptionCatalogue
+        selectedTab={selectedTab}
+        selectedTag={selectedTag}
+        selectedOptions={selectedOptions}
         handleSelectOption={handleSelectOption}
-        checkOptionSelected={checkOptionSelected}
-      /> */}
+      />
       <ButtonContainer>
         <Button
           text="색상선택"
@@ -70,7 +77,6 @@ const OptionPage = () => {
     </Wrapper>
   );
 };
-const TagContainer = styled.div``;
 const BtnStyle2 = css`
   width: 298px;
   height: 52px;

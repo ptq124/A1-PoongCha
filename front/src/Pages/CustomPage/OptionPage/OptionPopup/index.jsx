@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { styled } from "styled-components";
-// import { options } from "../optionData";
 import Card from "./Card";
 import ArrowLeftIcon from "@assets/icons/arrow-left-32-white.svg";
 import ArrowRightIcon from "@assets/icons/arrow-right-32-white.svg";
@@ -10,46 +9,35 @@ const OptionPopup = ({
   closePopup,
   data,
   handleSelectOption,
-  checkOptionSelected,
+  selected,
 }) => {
-  const [crntOptionIdx, setCrntOptionIdx] = useState(0);
-  const [setData, setSetData] = useState([]);
-
-  useEffect(() => {
-    // data의 세트 옵션들 서버에서 불러오기
-    if (data.set !== null) {
-      setSetData(
-        data.set.map((optId) => options.find((opt) => opt.id === optId))
-      );
-    } else {
-      setSetData([data]);
-    }
-  }, []);
+  const [crntCardIdx, setCrntCardIdx] = useState(0);
+  const { id, options } = data;
 
   return (
     <Wrapper ref={popupRef}>
       <Window>
-        {crntOptionIdx > 0 && (
-          <LeftArrow onClick={() => setCrntOptionIdx((prev) => prev - 1)}>
+        {crntCardIdx > 0 && (
+          <LeftArrow onClick={() => setCrntCardIdx((prev) => prev - 1)}>
             <img src={ArrowLeftIcon} />
           </LeftArrow>
         )}
 
-        <Cards $crntOptionIdx={crntOptionIdx}>
-          {setData.map((data, index) => (
+        <Cards $crntCardIdx={crntCardIdx}>
+          {options.map((option, index) => (
             <Card
               key={index}
-              index={index}
-              setData={setData}
-              selected={checkOptionSelected(data.id)}
+              data={data}
+              crntCardIdx={crntCardIdx}
+              selected={selected}
               closePopup={closePopup}
-              handleNavClick={setCrntOptionIdx}
-              handleSelectOption={() => handleSelectOption(data.id)}
+              handleNavClick={setCrntCardIdx}
+              handleSelectOption={() => handleSelectOption(id)}
             />
           ))}
         </Cards>
-        {crntOptionIdx < setData.length - 1 && (
-          <RightArrow onClick={() => setCrntOptionIdx((prev) => prev + 1)}>
+        {crntCardIdx < data.options.length - 1 && (
+          <RightArrow onClick={() => setCrntCardIdx((prev) => prev + 1)}>
             <img src={ArrowRightIcon} />
           </RightArrow>
         )}
@@ -83,7 +71,7 @@ const Cards = styled.div`
   flex-wrap: nowrap;
   justify-content: flex-start;
   gap: 24px;
-  margin-left: -${({ $crntOptionIdx }) => $crntOptionIdx * 924}px;
+  margin-left: -${({ $crntCardIdx }) => $crntCardIdx * 924}px;
 
   transition: margin-left 0.3s ease;
 `;

@@ -17,12 +17,18 @@ const OptionTagGroup = ({ tags, selectedTag, handleSelectTag }) => {
   );
 };
 
+const Separator = styled.div`
+  width: 100%;
+  height: 1.5px;
+  background-color: ${({ theme }) => theme.color.grey700};
+`;
 const Wrapper = styled.div`
   display: flex;
   gap: 8px;
-  width: 100%;
+  /* width: 100%; */
 
-  padding: 15px 0;
+  padding-bottom: 18px;
+  margin: 15px 128px;
 
   border-bottom: 1.5px solid;
   border-bottom-color: ${({ theme }) => theme.color.grey700};

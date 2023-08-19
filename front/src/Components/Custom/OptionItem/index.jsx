@@ -1,32 +1,64 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { styled, css } from "styled-components";
 import checkBlue from "@assets/checkcircle/check-16-blue.svg";
 import checkGrey from "@assets/checkcircle/check-16-grey.svg";
 import Button from "@Components/Common/Button/Button";
+import SampleImg from "@assets/images/optionItem_sample.svg";
+import OverlaidPopup from "@Components/Common/OverlaidPopup";
+import OptionPopup from "@Pages/CustomPage/OptionPage/OptionPopup";
+import useOnClickPopUp from "@hooks/useOnClickPopUp";
 
-const OptionItem = ({
-  data,
-  selected,
-  handleSelectOption,
-  handleOpenPopup,
-}) => {
-  const { id, option, description, price, img, tag } = data;
+const OptionItem = ({ data, selected, handleSelectOption }) => {
+  const {
+    id,
+    carOptionGroupName,
+    summaryDescription,
+    additionalPrice,
+    options,
+  } = data;
+  const isAdditionalOption = additionalPrice !== 0;
+
+  // 더 알아보기 팝업
+  const optionPopupRef = useRef();
+  const { isPopupOpen, openPopup, closePopup } =
+    useOnClickPopUp(optionPopupRef);
+  const handleOpenPopup = () => {
+    openPopup();
+  };
   return (
     <Wrapper>
-      <img src={img} />
+      {isPopupOpen && (
+        <OverlaidPopup
+          component={
+            <OptionPopup
+              popupRef={optionPopupRef}
+              closePopup={closePopup}
+              data={data}
+              handleSelectOption={handleSelectOption}
+              selected={selected}
+            />
+          }
+        />
+      )}
+      <img src={SampleImg} />
       <Header>
-        <div>{option}</div>
-        <div onClick={() => handleOpenPopup(data.option)}>더 알아보기</div>
+        <div>{carOptionGroupName}</div>
+        <div onClick={() => handleOpenPopup(data.options)}>더 알아보기</div>
       </Header>
-      <Desc>{description}</Desc>
-      <Price>{price}</Price>
-      <Button
-        text="선택"
-        style={BtnStyle}
-        selected={selected}
-        img={<img src={selected ? checkGrey : checkBlue} />}
-        onClick={() => handleSelectOption(id)}
-      />
+
+      {isAdditionalOption && (
+        <>
+          <Desc>{summaryDescription}</Desc>
+          <Price>{additionalPrice.toLocaleString()}원</Price>
+          <Button
+            text="선택"
+            style={BtnStyle}
+            selected={selected}
+            img={<img src={selected ? checkGrey : checkBlue} />}
+            onClick={() => handleSelectOption(id)}
+          />
+        </>
+      )}
     </Wrapper>
   );
 };
@@ -102,9 +134,8 @@ const Header = styled.div`
 
 const Wrapper = styled.div`
   width: 244px;
-  height: 314px;
 
-  > img {
+  & > img {
     width: 100%;
   }
 

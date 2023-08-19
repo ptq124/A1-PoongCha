@@ -16,7 +16,7 @@ import InactivePerformance from "@assets/optionTag/notSelect/performance.svg";
 import InactiveStyle from "@assets/optionTag/notSelect/style.svg";
 
 // tags는 api가 나오면 뺄거
-const tags = [
+const tagData = [
   {
     id:1,
     name:"대표",
@@ -66,4 +66,4 @@ const tags = [
     inactiveIcon:InactiveStyle
   },
 ];
-export { tags };
+export { tagData };

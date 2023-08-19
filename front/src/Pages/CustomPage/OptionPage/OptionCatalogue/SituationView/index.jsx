@@ -1,53 +1,54 @@
 import React, { useState } from "react";
 import { css, styled } from "styled-components";
-import OptionModal from "./OptionModal";
+import OptionTooltip from "./OptionTooltip";
 import OptionItem from "@Components/Custom/OptionItem";
-import TaggedPageSampleImg from "@assets/images/tagged-page-sample.svg";
+import SituationViewSampleImg from "@assets/images/tagged-page-sample.svg";
 import PlusIcon from "@assets/icons/plus.svg";
 
-const TaggedPage = ({
-  tag,
-  handleOpenPopup,
+const SituationView = ({
+  filteredData,
+  selectedTag,
   handleSelectOption,
-  optionData,
-  checkOptionSelected,
+  selectedOptions,
 }) => {
+  // 툴팁 오픈 상태 관리
   const [activeOption, setActiveOption] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isModalFixed, setIsModalFixed] = useState(false);
+  const [isTooltipOpen, setIsTooltipOpen] = useState(false);
+  const [isTooltipFixed, setIsTooltipFixed] = useState(false);
   const handlePlusBtnHover = (id) => {
-    if (isModalFixed && activeOption !== id) {
-      setIsModalFixed(false);
+    if (isTooltipFixed && activeOption !== id) {
+      setIsTooltipFixed(false);
     }
-    setIsModalOpen(true);
+    setIsTooltipOpen(true);
     setActiveOption(id);
   };
   const handlePlusBtnLeave = () => {
-    if (!isModalFixed) {
-      setIsModalOpen(false);
+    if (!isTooltipFixed) {
+      setIsTooltipOpen(false);
       setTimeout(() => {
         setActiveOption(null);
       }, 200);
     }
   };
   const handlePlusBtnClick = () => {
-    setIsModalFixed(!isModalFixed);
+    setIsTooltipFixed(!isTooltipFixed);
   };
 
   return (
     <Wrapper>
       <SituationScreen>
         {activeOption !== null &&
-          optionData.map((data) => data.id).includes(activeOption) && (
-            <OptionModal
-              tag={tag}
-              isOpen={isModalOpen}
-              data={optionData.find((elem) => elem.id === activeOption)}
-              handleOpenPopup={handleOpenPopup}
+          filteredData.map((data) => data.id).includes(activeOption) && (
+            <OptionTooltip
+              tag={selectedTag}
+              isOpen={isTooltipOpen}
+              data={filteredData.find((item) => item.id === activeOption)}
+              handleSelectOption={handleSelectOption}
+              selected={selectedOptions.includes(activeOption)}
             />
           )}
-        <img src={TaggedPageSampleImg} />
-        {optionData.map((data, index) => (
+        <img src={SituationViewSampleImg} />
+        {filteredData.map((data, index) => (
           <PlusButton
             key={index}
             $position={data.position}
@@ -61,12 +62,11 @@ const TaggedPage = ({
         ))}
       </SituationScreen>
       <OptionItemsContainer>
-        {optionData.map((data, index) => (
+        {filteredData.map((data, index) => (
           <OptionItem
             key={index}
             data={data}
-            selected={checkOptionSelected(data.id)}
-            handleOpenPopup={handleOpenPopup}
+            selected={selectedOptions.includes(data.id)}
             handleSelectOption={handleSelectOption}
           />
         ))}
@@ -123,18 +123,14 @@ const SituationScreen = styled.div`
 `;
 const OptionItemsContainer = styled.div`
   display: flex;
+  flex-wrap: nowrap;
   gap: 16px;
   width: 100%;
-  margin-top: 40px;
-  & > div {
-    width: 244px;
-    height: 314px;
-  }
 `;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding-top: 24px;
-  width: 100%;
+  padding: 24px 128px 0px;
+  gap: 40px;
 `;
-export default TaggedPage;
+export default SituationView;
