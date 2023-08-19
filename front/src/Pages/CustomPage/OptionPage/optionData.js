@@ -2,7 +2,7 @@ export const additionalOptionData = [
   {
     id:1,
     carOptionGroupName: "컴포트 II",
-    tagIds: [1, 2, 3],
+    tags: ["전체","사용편의", "주행안전", "추위/더위"],
     additionalPrice:1090000,
     summaryDescription:"편의성을 위해 구성된 세트 옵션",
     position: {x:20, y:30},
@@ -35,7 +35,7 @@ export const additionalOptionData = [
  {
   id:2,
   carOptionGroupName : "현대스마트센스 Ⅰ",
-  tagIds:[2,3],
+  tags:["전체","주행안전"],
   additionalPrice: 1090000,
   summaryDescription:"전방 충돌 감지 / 크루즈 컨트롤 / 차로 유지 등의 ADAS 세트 옵션",
   position:{x:10, y:10},
@@ -56,7 +56,7 @@ export const additionalOptionData = [
  {
   id:3,
   carOptionGroupName : "주차보조 시스템 Ⅱ",
-  tagIds:[1,2],
+  tags:["전체","주행안전"],
   additionalPrice: 1090000,
   summaryDescription:"전방 충돌 감지 / 크루즈 컨트롤 / 차로 유지 등의 ADAS 세트 옵션",
   position:{x:20, y:20},
@@ -77,7 +77,7 @@ export const additionalOptionData = [
  {
   id:4,
   carOptionGroupName : "2열 통풍시트",
-  tagIds:[1,2],
+  tags:["전체","주행안전"],
   additionalPrice: 1090000,
   summaryDescription:"전방 충돌 감지 / 크루즈 컨트롤 / 차로 유지 등의 ADAS 세트 옵션",
   position:{x:20, y:20},
@@ -98,7 +98,7 @@ export const additionalOptionData = [
  {
   id:5,
   carOptionGroupName : "듀얼 와이드 선루프",
-  tagIds:[1,2],
+  tags:["전체","주행안전"],
   additionalPrice: 1090000,
   summaryDescription:"전방 충돌 감지 / 크루즈 컨트롤 / 차로 유지 등의 ADAS 세트 옵션",
   position:{x:20, y:20},
@@ -119,7 +119,7 @@ export const additionalOptionData = [
  {
   id:6,
   carOptionGroupName : "빌트인 캠(보조배터리...",
-  tagIds:[1,2],
+  tags:["전체","주행안전"],
   additionalPrice: 1090000,
   summaryDescription:"전방 충돌 감지 / 크루즈 컨트롤 / 차로 유지 등의 ADAS 세트 옵션",
   position:{x:20, y:20},
@@ -140,7 +140,7 @@ export const additionalOptionData = [
  {
   id:7,
   carOptionGroupName : "듀얼 머플러 패키지",
-  tagIds:[1,2],
+  tags:["전체","주행안전"],
   additionalPrice: 1090000,
   summaryDescription:"전방 충돌 감지 / 크루즈 컨트롤 / 차로 유지 등의 ADAS 세트 옵션",
   position:{x:20, y:20},
@@ -161,7 +161,7 @@ export const additionalOptionData = [
  {
   id:8,
   carOptionGroupName : "빌트인 공기청정기",
-  tagIds:[1,2],
+  tags:["전체","주행안전"],
   additionalPrice: 1090000,
   summaryDescription:"전방 충돌 감지 / 크루즈 컨트롤 / 차로 유지 등의 ADAS 세트 옵션",
   position:{x:20, y:20},
@@ -182,7 +182,7 @@ export const additionalOptionData = [
  {
   id:9,
   carOptionGroupName : "빌트인 공기청정기",
-  tagIds:[1,2],
+  tags:["전체","주행안전"],
   additionalPrice: 1090000,
   summaryDescription:"전방 충돌 감지 / 크루즈 컨트롤 / 차로 유지 등의 ADAS 세트 옵션",
   position:{x:20, y:20},
@@ -206,7 +206,7 @@ export const defaultOptionData = [
   {
     id:1,
     carOptionGroupName: "클러스터(12.3인치 컬러 LCD)",
-    tagIds: [1, 2, 3],
+    tags: ["대표","전체","주행안전"],
     additionalPrice:0,
     summaryDescription:"",
     position: {x:0, y:0},
@@ -222,7 +222,7 @@ export const defaultOptionData = [
   {
     id:2,
     carOptionGroupName: "인조가죽 감싸기 & 도어 암레스트 리얼스티치",
-    tagIds: [1, 2, 3],
+    tags: ["대표","전체","주행안전"],
     additionalPrice:0,
     summaryDescription:"",
     position: {x:0, y:0},
@@ -238,7 +238,7 @@ export const defaultOptionData = [
   {
     id:3,
     carOptionGroupName: "운전석 자세 메모리 시스템 발수 도어(1열)",
-    tagIds: [1, 2, 3],
+    tags: ["대표","전체","주행안전"],
     additionalPrice:0,
     summaryDescription:"",
     position: {x:0, y:0},
@@ -254,7 +254,7 @@ export const defaultOptionData = [
   {
     id:4,
     carOptionGroupName: "스마트폰 무선충전 후측방 모니터",
-    tagIds: [1, 2, 3],
+    tags: ["대표","전체","주행안전"],
     additionalPrice:0,
     summaryDescription:"",
     position: {x:0, y:0},
@@ -270,7 +270,7 @@ export const defaultOptionData = [
   {
     id:5,
     carOptionGroupName: "전동식 틸트 & 텔레스코픽 스티어링 휠",
-    tagIds: [1, 2, 3],
+    tags: ["대표","전체","주행안전"],
     additionalPrice:0,
     summaryDescription:"",
     position: {x:0, y:0},

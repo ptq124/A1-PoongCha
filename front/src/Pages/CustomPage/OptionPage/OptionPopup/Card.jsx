@@ -16,9 +16,6 @@ const Card = ({
   handleSelectOption,
 }) => {
   const crntCardData = data.options[crntCardIdx];
-  const tags = tagData
-    .filter((tag) => data.tagIds.includes(tag.id))
-    .map((tag) => tag.name);
   const isSetOption = data.options.length > 1;
   const isAdditionalOption = data.additionalPrice !== 0;
 
@@ -26,7 +23,7 @@ const Card = ({
     <CardContainer>
       <ImgContainer>
         <TagContainer>
-          {tags.map((tag, index) => (
+          {data.tags.map((tag, index) => (
             <Tag key={index}>{tag}</Tag>
           ))}
         </TagContainer>

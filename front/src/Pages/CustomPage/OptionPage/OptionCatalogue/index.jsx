@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { styled } from "styled-components";
 import { additionalOptionData, defaultOptionData } from "../optionData";
-import { tagData } from "../tagData";
 import SituationView from "./SituationView";
 import DefaultView from "./DefaultView";
 
@@ -18,7 +17,7 @@ const OptionCatalogue = ({
     else setOptionData(defaultOptionData);
   }, [selectedTab]);
   const filteredData = optionData?.filter((data) =>
-    data.tagIds.includes(tagData.find((tag) => tag.name === selectedTag).id)
+    data.tags.includes(selectedTag)
   );
 
   return (

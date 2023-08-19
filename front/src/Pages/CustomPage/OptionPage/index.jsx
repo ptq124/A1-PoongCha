@@ -19,23 +19,20 @@ const OptionPage = () => {
     }
   };
 
-  // 선택한 탭 상태 관리
-  const [selectedTab, setSelectedTab] = useState("추가 옵션");
-  const handleSelectTab = (tab) => {
-    setSelectedTab(tab);
-    if (tab === "추가 옵션") setSelectedTag("전체");
-    else setSelectedTag("대표");
-  };
-
   // 선택한 태그 상태 관리
   const [selectedTag, setSelectedTag] = useState("전체");
   const handleSelectTag = (tag) => {
     setSelectedTag(tag);
   };
 
-  useEffect(() => {
-    console.log(selectedOptions);
-  }, [selectedOptions]);
+  // 선택한 탭 상태 관리
+  const [selectedTab, setSelectedTab] = useState("추가 옵션");
+  const handleSelectTab = (tab) => {
+    setSelectedTab(tab);
+    if (tab === "추가 옵션") {
+      setSelectedTag("전체");
+    } else setSelectedTag("대표");
+  };
 
   const move = useButtonNavigation();
 
