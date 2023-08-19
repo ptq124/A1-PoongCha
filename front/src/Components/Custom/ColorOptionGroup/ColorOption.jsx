@@ -2,12 +2,13 @@ import React from "react";
 import { styled } from "styled-components";
 import Check24Icon from "@assets/checkcircle/check-24-white.svg";
 
-const ColorOption = ({ data, selected, onClick }) => {
+const ColorOption = ({ option, selected, onClick }) => {
   let isLabeled = true;
   return (
     <Wrapper onClick={onClick}>
       <Preview>
-        {isLabeled && <Label>Top 1</Label>}
+        {/* {isLabeled && <Label>Top 1</Label>} */}
+        <ColorImg src={option.image} />
         {selected && (
           <Cover>
             <div></div>
@@ -15,10 +16,15 @@ const ColorOption = ({ data, selected, onClick }) => {
           </Cover>
         )}
       </Preview>
-      <Name>{data}</Name>
+      <Name>{option.name}</Name>
     </Wrapper>
   );
 };
+
+const ColorImg = styled.img`
+  width: 68px;
+  height: 68px;
+`;
 
 const Cover = styled.div`
   position: absolute;

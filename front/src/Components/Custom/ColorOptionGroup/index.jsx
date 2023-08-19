@@ -16,11 +16,16 @@ const innerColorOptions = [
 ];
 const extraColorOptions = ["Exclusive", "Prestige", "Caligraphy"];
 
-const ColorOptionGroup = () => {
+const ColorOptionGroup = ({ option, handleColorOption, data, curData }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const popupRef = useRef();
   const { isPopupOpen, openPopup, closePopup } = useOnClickPopUp(popupRef);
-  const [selectedColor, setSelectedColor] = useState(0);
+  const [selectedColor, setSelectedColor] = useState(curData.name);
+
+  const handleColor = (name, option) => {
+    setSelectedColor(data.filter((d) => d.name === name)[0].name);
+    handleColorOption(name, option);
+  };
 
   const handleDropdownClick = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -29,6 +34,7 @@ const ColorOptionGroup = () => {
   const handleSelectExtraColor = () => {
     openPopup();
   };
+
   return (
     <Wrapper>
       {isPopupOpen && (
@@ -38,7 +44,7 @@ const ColorOptionGroup = () => {
           }
         />
       )}
-      <Header>외장 색상</Header>
+      <Header>{option} 색상</Header>
       <Subtitle>
         <span className="color">그라파이트 그레이 메탈릭</span>
         <span className="stat">
@@ -46,12 +52,12 @@ const ColorOptionGroup = () => {
         </span>
       </Subtitle>
       <OptionsContainer>
-        {innerColorOptions.map((data, index) => (
+        {data.map((data, index) => (
           <ColorOption
             key={index}
-            data={data}
-            selected={selectedColor === index}
-            onClick={() => setSelectedColor(index)}
+            option={data}
+            selected={selectedColor === data.name}
+            onClick={() => handleColor(data.name, option)}
           />
         ))}
       </OptionsContainer>
@@ -66,11 +72,11 @@ const ColorOptionGroup = () => {
         </DropdownTitle>
         {isDropdownOpen && (
           <OptionsContainer>
-            {extraColorOptions.map((data, index) => (
+            {data.map((data, index) => (
               <ExtraColorOption key={index}>
                 <div className="trimName">Exclusive</div>
                 <ColorOption
-                  data={data}
+                  option={data}
                   onClick={() => handleSelectExtraColor()}
                 />
               </ExtraColorOption>

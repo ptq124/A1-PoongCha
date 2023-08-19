@@ -4,14 +4,42 @@ import ColorOptionGroup from "@Components/Custom/ColorOptionGroup";
 import Button from "@Components/Common/Button/Button";
 import useButtonNavigation from "@hooks/useButtonNavigation";
 
-const ColorCustomSideBar = () => {
+const ColorCustomSideBar = ({ handleColorOption, data, curData }) => {
   const move = useButtonNavigation();
+
+  const datas = data.filter((d) => d.id === 1);
+  const [{ colors }] = datas;
+  const exterData = colors.filter((data) => data.type === "EXTERIOR");
+  const interData = colors.filter((data) => data.type === "INTERIOR");
+
+  const datas2 = data.filter((d) => d.id !== 1);
+
+  let exceptExter = [];
+  let exceptInter = [];
+  datas2.forEach((data) => {
+    const { colors } = data;
+    exceptExter.push(colors.filter((data) => data.type === "EXTERIOR"));
+    exceptInter.push(colors.filter((data) => data.type === "INTERIOR"));
+  });
+
+  const { exterior, interior } = curData;
+
   return (
     <Wrapper>
       <CustomBarContent>
-        <ColorOptionGroup />
+        <ColorOptionGroup
+          option="외장"
+          handleColorOption={handleColorOption}
+          data={exterData}
+          curData={exterior}
+        />
         <Separator></Separator>
-        <ColorOptionGroup />
+        <ColorOptionGroup
+          option="내장"
+          handleColorOption={handleColorOption}
+          data={interData}
+          curData={interior}
+        />
         <BtnContainer>
           <Button
             text="트림 선택"

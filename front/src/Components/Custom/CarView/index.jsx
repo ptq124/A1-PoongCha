@@ -13,9 +13,8 @@ import close from "@assets/icons/close.svg";
 import useButtonNavigation from "@hooks/useButtonNavigation";
 import internal001 from "@assets/images/internal001.svg";
 
-const CarView = () => {
+const CarView = ({ data }) => {
   const { pathname } = useLocation();
-
   const CarMode = () => {
     if (pathname === "/custom/trim")
       return (
@@ -23,18 +22,21 @@ const CarView = () => {
           src={`https://www.hyundai.com/contents/vr360/LX06/exterior/A2B/011.png`}
         />
       );
-    else
+    else {
+      const { exterior, interior } = data;
       return (
         <>
           {isExternalImg &&
             (!isCarViewer ? (
-              <CarSideViewer
-                src={`https://www.hyundai.com/contents/vr360/LX06/exterior/A2B/001.png`}
-              />
+              <CarSideViewer src={[exterior].flat()[0].trimExteriorImageUrl} />
             ) : (
-              <CarRotateViewer />
+              <CarRotateViewer
+                rotateImg={[exterior].flat()[0].trimRotationImageBaseUrl}
+              />
             ))}
-          {isInternalImg && <InternalImg src={internal001} />}
+          {isInternalImg && (
+            <InternalImg src={[interior].flat()[0].trimInteriorImageUrl} />
+          )}
 
           <Button
             style={ExternalBtn}
@@ -62,6 +64,7 @@ const CarView = () => {
           )}
         </>
       );
+    }
   };
 
   const [isExternalImg, setIsExternalImg] = useState(true);
