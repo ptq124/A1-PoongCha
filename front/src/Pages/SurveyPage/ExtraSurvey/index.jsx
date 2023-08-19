@@ -5,7 +5,7 @@ import Button from "@Components/Common/Button/Button";
 import BudgetSliderGroup from "./BudgetSliderGroup";
 import useButtonNavigation from "@hooks/useButtonNavigation";
 import { useOutletContext } from "react-router-dom";
-import ExtraQuestion from "@Components/Survey/ExtraQuestion";
+import ExtraQuestionLabel from "@Components/Survey/ExtraQuestionLabel";
 import RadioGroup from "@Components/Common/RadioGroup";
 
 const surveyData = {
@@ -44,7 +44,7 @@ const ExtraSurvey = () => {
         <RadioGroup
           key={questionKey}
           title={data.title}
-          label={ExtraQuestion}
+          label={ExtraQuestionLabel}
           options={data.options}
           newStateHandler={(newState) =>
             handleOptionSelect(questionKey, newState)

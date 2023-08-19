@@ -12,7 +12,7 @@ import PopUp from "@Pages/SurveyPage/LifestyleSurvey/PopUp";
 문구: 텍스트
 프로필 사진: 이미지
 */
-const LifestyleQuestion = (option, selectedItem, handleSelectItem) => {
+const LifestyleQuestionLabel = (option, selectedItem, handleSelectItem) => {
   const popupRef = useRef();
   const { isPopupOpen, openPopup } = useOnClickPopUp(popupRef);
 
@@ -186,4 +186,4 @@ const LifestyleImg = styled.img`
   box-sizing: border-box;
 `;
 
-export default LifestyleQuestion;
+export default LifestyleQuestionLabel;

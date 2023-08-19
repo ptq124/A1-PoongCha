@@ -4,7 +4,7 @@ import { css } from "styled-components";
 import Button from "@Components/Common/Button/Button";
 import useButtonNavigation from "@hooks/useButtonNavigation";
 import { useOutletContext } from "react-router-dom";
-import LifestyleQuestion from "@Components/Survey/LifestyleQuestion";
+import LifestyleQuestionLabel from "@Components/Survey/LifestyleQuestionLabel";
 import PageIndicator from "@Components/Survey/PageIndicator";
 import RadioGroup from "@Components/Common/RadioGroup";
 
@@ -82,7 +82,7 @@ const LifestyleSurvey = () => {
       <S.SurveyContent>
         <RadioGroup
           title={lifestyleRadioGroupTitle()}
-          label={LifestyleQuestion}
+          label={LifestyleQuestionLabel}
           options={lifestyleSurveyInfo.options}
           newStateHandler={(newState) =>
             handleOptionSelect("lifestyle", newState)

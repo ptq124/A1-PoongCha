@@ -2,7 +2,7 @@ import React from "react";
 import { css, styled } from "styled-components";
 import Check24BlueIcon from "@assets/checkcircle/check-24-blue.svg";
 
-const AgeQuestion = (option, selectedItem, handleSelectItem) => {
+const AgeQuestionLabel = (option, selectedItem, handleSelectItem) => {
   return (
     <>
       <Label
@@ -48,4 +48,4 @@ const Label = styled.label`
         `}
 `;
 
-export default AgeQuestion;
+export default AgeQuestionLabel;

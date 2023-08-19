@@ -5,7 +5,7 @@ import Button from "@Components/Common/Button/Button";
 import useButtonNavigation from "@hooks/useButtonNavigation";
 import { useOutletContext } from "react-router-dom";
 import RadioGroup from "@Components/Common/RadioGroup";
-import AgeQuestion from "@Components/Survey/AgeQuestion";
+import AgeQuestionLabel from "@Components/Survey/AgeQuestionLabel";
 import PageIndicator from "@Components/Survey/PageIndicator";
 
 const surveyData = {
@@ -31,7 +31,7 @@ const AgeSurvey = () => {
     <S.SurveyContent>
       <RadioGroup
         title={ageRadioGroupTitle()}
-        label={AgeQuestion}
+        label={AgeQuestionLabel}
         options={surveyData.options}
         newStateHandler={(newState) => handleOptionSelect("age", newState)}
         initialState={state.age}
