@@ -8,7 +8,6 @@ import com.poongcha.car.domain.caroption.CarOption;
 import com.poongcha.car.domain.caroptiongroup.CarOptionGroup;
 import com.poongcha.car.domain.caroptiongroup.CarOptionGroupName;
 import com.poongcha.car.domain.caroptiongroup.SummaryDescription;
-import com.poongcha.car.domain.caroptiontag.CarOptionTag;
 import com.poongcha.car.domain.common.AdditionalPrice;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +30,7 @@ public class CarOptionGroupMapper {
 
     public CarOptionGroupResponse toCarOptionGroupResponse(
             final CarOptionGroup carOptionGroup,
-            final List<CarOptionTag> optionTags,
+            final List<String> optionTags,
             final List<CarOption> carOptions
     ) {
         return new CarOptionGroupResponse(
@@ -39,7 +38,7 @@ public class CarOptionGroupMapper {
                 carOptionGroup.getName().getValue(),
                 carOptionGroup.getAdditionalPrice().getValue(),
                 carOptionGroup.getSummaryDescription().getValue(),
-                carOptionTagMapper.toCarOptionTagResponse(optionTags),
+                optionTags,
                 carOptionGroup.incompatibleCarOptionGroupIds(),
                 carOptionMapper.toCarOptionResponse(carOptions)
         );

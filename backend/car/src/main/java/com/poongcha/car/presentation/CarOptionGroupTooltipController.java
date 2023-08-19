@@ -2,7 +2,7 @@ package com.poongcha.car.presentation;
 
 import com.poongcha.car.application.caroptiongrouptooltip.CarOptionGroupTooltipCommandService;
 import com.poongcha.car.application.caroptiongrouptooltip.CarOptionGroupTooltipQueryService;
-import com.poongcha.car.application.caroptiongrouptooltip.dto.CarOptionGroupTooltipCreateRequest;
+import com.poongcha.car.application.dto.CarOptionGroupTooltipCreateRequest;
 import com.poongcha.car.application.dto.CarOptionGroupTooltipResponse;
 import java.net.URI;
 import lombok.RequiredArgsConstructor;

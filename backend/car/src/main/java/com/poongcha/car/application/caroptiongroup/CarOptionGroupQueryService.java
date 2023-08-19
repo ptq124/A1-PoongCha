@@ -9,6 +9,7 @@ import com.poongcha.car.domain.caroptiontag.CarOptionTag;
 import com.poongcha.car.domain.caroptiontag.CarOptionTagRepository;
 import com.poongcha.car.exception.NotFoundException;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,6 +31,27 @@ public class CarOptionGroupQueryService {
 
         List<CarOptionTag> optionTags = carOptionTagRepository.findAllByIdIn(carOptionGroup.optionTagIds());
 
-        return carOptionGroupMapper.toCarOptionGroupResponse(carOptionGroup, optionTags, options);
+        return carOptionGroupMapper.toCarOptionGroupResponse(
+                carOptionGroup,
+                optionTags.stream()
+                        .map(option -> option.getCarOptionTagName().getValue())
+                        .collect(Collectors.toUnmodifiableList()),
+                options
+        );
+    }
+
+    public List<CarOptionGroupResponse> findAll() {
+        return carOptionGroupRepository.findAll().stream()
+                .map(carOptionGroup -> {
+                    List<CarOption> options = carOptionRepository.findAllByIdIn(carOptionGroup.optionIds());
+                    List<CarOptionTag> optionTags = carOptionTagRepository.findAllByIdIn(carOptionGroup.optionTagIds());
+                    return carOptionGroupMapper.toCarOptionGroupResponse(
+                            carOptionGroup,
+                            optionTags.stream()
+                                    .map(option -> option.getCarOptionTagName().getValue())
+                                    .collect(Collectors.toUnmodifiableList()),
+                            options
+                    );
+                }).collect(Collectors.toUnmodifiableList());
     }
 }

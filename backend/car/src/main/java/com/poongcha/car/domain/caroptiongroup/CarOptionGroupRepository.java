@@ -20,4 +20,6 @@ public interface CarOptionGroupRepository extends Repository<CarOptionGroup, Lon
 
     @Query("select * from car_option_groups where id in (:ids)")
     List<CarOptionGroup> findAllByIdInWithLock(final @Param("ids") List<Long> ids);
+
+    List<CarOptionGroup> findAll();
 }

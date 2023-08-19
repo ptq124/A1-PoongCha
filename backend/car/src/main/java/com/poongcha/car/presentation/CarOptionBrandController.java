@@ -3,7 +3,7 @@ package com.poongcha.car.presentation;
 
 import com.poongcha.car.application.caroptionbrand.CarOptionBrandCommandService;
 import com.poongcha.car.application.caroptionbrand.CarOptionBrandQueryService;
-import com.poongcha.car.application.caroptionbrand.dto.CarOptionBrandCreateRequest;
+import com.poongcha.car.application.dto.CarOptionBrandCreateRequest;
 import com.poongcha.car.application.dto.CarOptionBrandResponse;
 import java.net.URI;
 import java.util.List;

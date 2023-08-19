@@ -1,6 +1,6 @@
 package com.poongcha.car.application.caroptionbrand;
 
-import com.poongcha.car.application.caroptionbrand.dto.CarOptionBrandCreateRequest;
+import com.poongcha.car.application.dto.CarOptionBrandCreateRequest;
 import com.poongcha.car.domain.caroptionbrand.CarOptionBrand;
 import com.poongcha.car.domain.caroptionbrand.CarOptionBrandRepository;
 import lombok.RequiredArgsConstructor;

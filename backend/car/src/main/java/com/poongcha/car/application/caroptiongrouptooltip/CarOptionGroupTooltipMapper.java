@@ -1,6 +1,6 @@
 package com.poongcha.car.application.caroptiongrouptooltip;
 
-import com.poongcha.car.application.caroptiongrouptooltip.dto.CarOptionGroupTooltipCreateRequest;
+import com.poongcha.car.application.dto.CarOptionGroupTooltipCreateRequest;
 import com.poongcha.car.application.dto.CarOptionGroupTooltipResponse;
 import com.poongcha.car.domain.caroptiongrouptooltip.CarOptionGroupTooltip;
 import com.poongcha.car.domain.caroptiongrouptooltip.TooltipDescription;
