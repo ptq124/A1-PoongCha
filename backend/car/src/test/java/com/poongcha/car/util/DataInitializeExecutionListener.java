@@ -10,6 +10,7 @@ import com.poongcha.car.domain.caroptiongroup.CarOptionGroup;
 import com.poongcha.car.domain.caroptiongroup.CarOptionGroupCarOption;
 import com.poongcha.car.domain.caroptiongroup.IncompatibleCarOptionGroup;
 import com.poongcha.car.domain.caroptiongrouptooltip.CarOptionGroupTooltip;
+import com.poongcha.car.domain.caroptiontag.CarOptionTag;
 import com.poongcha.car.domain.cartype.CarType;
 import com.poongcha.car.domain.trim.Trim;
 import com.poongcha.car.domain.trim.TrimCarColor;
@@ -38,6 +39,7 @@ public class DataInitializeExecutionListener extends AbstractTestExecutionListen
         reset(operation, IncompatibleCarOptionGroup.class.getAnnotation(Table.class).name());
         reset(operation, CarOptionGroupTooltip.class.getAnnotation(Table.class).name());
         reset(operation, CarOptionBrand.class.getAnnotation(Table.class).name());
+        reset(operation, CarOptionTag.class.getAnnotation(Table.class).name());
     }
 
     private static void reset(

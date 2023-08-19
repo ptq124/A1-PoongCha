@@ -18,7 +18,7 @@ public class CarOptionBrandAcceptanceTest extends DocumentationTest {
     @DisplayName("차량 옵션 브랜드 생성")
     @Test
     void 차량_옵션_브랜드_생성() {
-        // GIVEN드
+        // GIVEN
         차량_옵션_그룹_생성_요청(
                 "차량 옵션 그룹 이름",
                 10_000_000,
