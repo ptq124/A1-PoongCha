@@ -13,7 +13,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 @DisplayName("차량 옵션 툴팁 관련 기능")
-public class CarOptionTooltipGroupAcceptanceTest extends DocumentationTest {
+public class CarOptionGroupTooltipAcceptanceTest extends DocumentationTest {
     @DisplayName("차량 옵션 툴팁 생성")
     @Test
     void 차량_옵션_툴팁_생성() {
