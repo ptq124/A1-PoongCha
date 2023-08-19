@@ -3,8 +3,9 @@ import { styled, css } from "styled-components";
 import Button from "@Components/Common/Button/Button";
 import useButtonNavigation from "@hooks/useButtonNavigation";
 import { tagData } from "./tagData";
-import OptionTagGroup from "@Components/Custom/OptionTagGroup";
 import OptionCatalogue from "./OptionCatalogue";
+import RadioGroup from "@Components/Common/RadioGroup";
+import OptionTagLabel from "@Components/Custom/OptionTagLabel";
 
 const tabData = ["추가 옵션", "기본 포함 옵션"];
 const OptionPage = () => {
@@ -51,10 +52,12 @@ const OptionPage = () => {
           </TabItem>
         ))}
       </TabContainer>
-      <OptionTagGroup
-        tags={selectedTab === "추가 옵션" ? tagData.slice(1) : tagData}
-        selectedTag={selectedTag}
-        handleSelectTag={handleSelectTag}
+      <RadioGroup
+        label={OptionTagLabel}
+        options={selectedTab === "추가 옵션" ? tagData.slice(1) : tagData}
+        newStateHandler={handleSelectTag}
+        initialState={selectedTag}
+        style={optionTagGroupLabelStyle}
       />
       <OptionCatalogue
         selectedTab={selectedTab}
@@ -76,6 +79,22 @@ const OptionPage = () => {
       </ButtonContainer>
     </Wrapper>
   );
+};
+const optionTagGroupLabelStyle = {
+  wrapper: css`
+    display: flex;
+
+    padding-bottom: 18px;
+    margin: 15px 128px;
+
+    border-bottom: 1.5px solid;
+    border-bottom-color: ${({ theme }) => theme.color.grey700};
+  `,
+  title: css``,
+  options: css`
+    display: flex;
+    gap: 8px;
+  `,
 };
 const BtnStyle2 = css`
   width: 298px;
