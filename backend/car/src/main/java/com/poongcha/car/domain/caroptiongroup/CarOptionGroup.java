@@ -39,6 +39,9 @@ public class CarOptionGroup {
     @MappedCollection(idColumn = "car_option_group_id")
     private Set<IncompatibleCarOptionGroup> incompatibleCarOptionGroups = new HashSet<>();
 
+    @MappedCollection(idColumn = "car_option_group_id")
+    private Set<CarOptionTagCarOptionGroup> tags = new HashSet<>();
+
     public CarOptionGroup(
             final CarOptionGroupName name,
             final AdditionalPrice additionalPrice,
@@ -90,6 +93,16 @@ public class CarOptionGroup {
     public List<Long> incompatibleCarOptionGroupIds() {
         return this.incompatibleCarOptionGroups.stream()
                 .map(IncompatibleCarOptionGroup::incompatibleCarOptionGroupId)
+                .collect(Collectors.toUnmodifiableList());
+    }
+
+    public void addOptionTag(final List<Long> tagIds) {
+        tagIds.forEach(tagId -> this.tags.add(new CarOptionTagCarOptionGroup(tagId)));
+    }
+
+    public List<Long> optionTagIds() {
+        return this.tags.stream()
+                .map(CarOptionTagCarOptionGroup::carOptionTagId)
                 .collect(Collectors.toUnmodifiableList());
     }
 }

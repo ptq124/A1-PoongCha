@@ -5,6 +5,8 @@ import com.poongcha.car.domain.caroption.CarOption;
 import com.poongcha.car.domain.caroption.CarOptionRepository;
 import com.poongcha.car.domain.caroptiongroup.CarOptionGroup;
 import com.poongcha.car.domain.caroptiongroup.CarOptionGroupRepository;
+import com.poongcha.car.domain.caroptiontag.CarOptionTag;
+import com.poongcha.car.domain.caroptiontag.CarOptionTagRepository;
 import com.poongcha.car.exception.NotFoundException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class CarOptionGroupQueryService {
     private final CarOptionGroupRepository carOptionGroupRepository;
     private final CarOptionRepository carOptionRepository;
+    private final CarOptionTagRepository carOptionTagRepository;
     private final CarOptionGroupMapper carOptionGroupMapper;
 
     public CarOptionGroupResponse findById(final long carOptionGroupId) {
@@ -25,6 +28,8 @@ public class CarOptionGroupQueryService {
 
         List<CarOption> options = carOptionRepository.findAllByIdIn(carOptionGroup.optionIds());
 
-        return carOptionGroupMapper.toCarOptionGroupResponse(carOptionGroup, options);
+        List<CarOptionTag> optionTags = carOptionTagRepository.findAllByIdIn(carOptionGroup.optionTagIds());
+
+        return carOptionGroupMapper.toCarOptionGroupResponse(carOptionGroup, optionTags, options);
     }
 }

@@ -10,4 +10,6 @@ public interface CarOptionTagRepository extends Repository<CarOptionTag, Long> {
     Optional<CarOptionTag> findById(final long id);
 
     List<CarOptionTag> findAll();
+
+    List<CarOptionTag> findAllByIdIn(final List<Long> ids);
 }

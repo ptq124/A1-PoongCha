@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 public class CarOptionTagResponse {
     private long id;
 
-    private String tagName;
+    private String name;
 
     private String situationImageUrl;
 

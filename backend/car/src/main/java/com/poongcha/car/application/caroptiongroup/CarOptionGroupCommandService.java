@@ -2,6 +2,7 @@ package com.poongcha.car.application.caroptiongroup;
 
 import com.poongcha.car.application.dto.CarOptionGroupCreateRequest;
 import com.poongcha.car.application.dto.OptionGroupAddIncompatibleOptionGroupRequest;
+import com.poongcha.car.application.dto.OptionGroupAddOptionTagRequest;
 import com.poongcha.car.domain.caroptiongroup.CarOptionGroup;
 import com.poongcha.car.domain.caroptiongroup.CarOptionGroupRepository;
 import com.poongcha.car.exception.NotFoundException;
@@ -40,6 +41,15 @@ public class CarOptionGroupCommandService {
         );
 
         carOptionGroupRepository.saveAll(inCompatibleCarOptionGroups);
+        return carOptionGroupRepository.save(carOptionGroup).getId();
+    }
+
+    public long add(final long carOptionGroupId, final OptionGroupAddOptionTagRequest optionGroupAddOptionTagRequest) {
+        CarOptionGroup carOptionGroup = carOptionGroupRepository.findByIdWithLock(carOptionGroupId)
+                .orElseThrow(() -> new NotFoundException("옵션 그룹을 찾을 수 없습니다."));
+
+        carOptionGroup.addOptionTag(optionGroupAddOptionTagRequest.tagIds);
+
         return carOptionGroupRepository.save(carOptionGroup).getId();
     }
 }

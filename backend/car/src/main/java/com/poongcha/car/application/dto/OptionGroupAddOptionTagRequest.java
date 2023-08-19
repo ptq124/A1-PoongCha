@@ -1,5 +1,6 @@
 package com.poongcha.car.application.dto;
 
+import java.util.List;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,8 +9,6 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor
-public class CarOptionTagCreateRequest {
-    private String name;
-    private String situationImageUrl;
-    private String iconImageUrl;
+public class OptionGroupAddOptionTagRequest {
+    public List<Long> tagIds;
 }
