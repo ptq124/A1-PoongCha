@@ -116,6 +116,16 @@ public class CarOptionGroupSteps {
                                         .description("차량 옵션 그룹 가격"),
                                 fieldWithPath("summaryDescription").type(JsonFieldType.STRING)
                                         .description("차량 옵션 그룹 요약 설명"),
+                                fieldWithPath("tags").type(JsonFieldType.ARRAY)
+                                        .description("차량 옵션 그룹 태그 목록"),
+                                fieldWithPath("tags[].id").type(JsonFieldType.NUMBER)
+                                        .description("차량 옵션 그룹 태그 ID"),
+                                fieldWithPath("tags[].name").type(JsonFieldType.STRING)
+                                        .description("차량 옵션 그룹 태그 이름"),
+                                fieldWithPath("tags[].situationImageUrl").type(JsonFieldType.STRING)
+                                        .description("차량 옵션 그룹 태그 상황 이미지 URL"),
+                                fieldWithPath("tags[].iconImageUrl").type(JsonFieldType.STRING)
+                                        .description("차량 옵션 그룹 태그 아이콘 이미지 URL"),
                                 fieldWithPath("incompatibleCarOptionGroupIds").type(JsonFieldType.ARRAY)
                                         .description("양립 불가능한 차량 옵션 그룹 ID 목록"),
                                 fieldWithPath("options").type(JsonFieldType.ARRAY)
@@ -145,6 +155,10 @@ public class CarOptionGroupSteps {
             final String carOptionGroupName,
             final long additionalPrice,
             final String summaryDescription,
+            final List<Integer> tagIds,
+            final List<String> tagNames,
+            final List<String> situationImageUrls,
+            final List<String> iconImageUrls,
             final List<Integer> incompatibleCarOptionGroupIds,
             final List<Integer> optionIds,
             final List<String> optionNames,
@@ -158,6 +172,14 @@ public class CarOptionGroupSteps {
             assertions.assertThat(response.jsonPath().getString("name")).isEqualTo(carOptionGroupName);
             assertions.assertThat(response.jsonPath().getLong("additionalPrice")).isEqualTo(additionalPrice);
             assertions.assertThat(response.jsonPath().getString("summaryDescription")).isEqualTo(summaryDescription);
+            assertions.assertThat(response.jsonPath().getList("tags.id"))
+                    .usingRecursiveComparison().isEqualTo(tagIds);
+            assertions.assertThat(response.jsonPath().getList("tags.name"))
+                    .usingRecursiveComparison().isEqualTo(tagNames);
+            assertions.assertThat(response.jsonPath().getList("tags.situationImageUrl"))
+                    .usingRecursiveComparison().isEqualTo(situationImageUrls);
+            assertions.assertThat(response.jsonPath().getList("tags.iconImageUrl"))
+                    .usingRecursiveComparison().isEqualTo(iconImageUrls);
             assertions.assertThat(response.jsonPath().getList("incompatibleCarOptionGroupIds"))
                     .usingRecursiveComparison().isEqualTo(incompatibleCarOptionGroupIds);
             assertions.assertThat(response.jsonPath().getList("options.id")).usingRecursiveComparison()
@@ -287,5 +309,27 @@ public class CarOptionGroupSteps {
         try (AutoCloseableSoftAssertions assertions = new AutoCloseableSoftAssertions()) {
             assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.SC_BAD_REQUEST);
         }
+    }
+
+    public static ExtractableResponse<Response> 차량_옵션_그룹_태그_설정_요청(final int carOptionGroupId, final List<Long> tagIds) {
+        return given()
+                .filter(document(
+                        DEFAULT_RESTDOCS_PATH,
+                        pathParameters(
+                                parameterWithName("id").description("차량 옵션 그룹 ID")
+                        ),
+                        requestFields(
+                                fieldWithPath("tagIds").type(JsonFieldType.ARRAY)
+                                        .description("차량 옵션 태그 id 목록")
+                        )
+                )).log().all()
+                .when()
+                .body(Map.of(
+                        "tagIds", tagIds
+                ))
+                .contentType(ContentType.JSON)
+                .post("/api/option-group/{id}/option-tag", carOptionGroupId)
+                .then().log().all()
+                .extract();
     }
 }

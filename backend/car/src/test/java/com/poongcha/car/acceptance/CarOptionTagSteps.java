@@ -29,7 +29,7 @@ public class CarOptionTagSteps {
                 .filter(document(
                         DEFAULT_RESTDOCS_PATH,
                         customRequestFields(
-                                fieldWithPath("tagName").type(JsonFieldType.STRING)
+                                fieldWithPath("name").type(JsonFieldType.STRING)
                                         .description("차량 옵션 태그 설명"),
                                 fieldWithPath("situationImageUrl").type(JsonFieldType.STRING)
                                         .description("차량 옵션 태그 상황 이미지"),
@@ -38,7 +38,7 @@ public class CarOptionTagSteps {
                 )).log().all()
                 .when()
                 .body(Map.of(
-                        "tagName", tagName,
+                        "name", tagName,
                         "situationImageUrl", situationImageUrl,
                         "iconImageUrl", iconImageUrl
                 ))
@@ -65,7 +65,7 @@ public class CarOptionTagSteps {
                         responseFields(
                                 fieldWithPath("id").type(JsonFieldType.NUMBER)
                                         .description("차량 옵션 태그 ID"),
-                                fieldWithPath("tagName").type(JsonFieldType.STRING)
+                                fieldWithPath("name").type(JsonFieldType.STRING)
                                         .description("차량 옵션 태그 설명"),
                                 fieldWithPath("situationImageUrl").type(JsonFieldType.STRING)
                                         .description("차량 옵션 태그 상황 이미지"),
@@ -88,7 +88,7 @@ public class CarOptionTagSteps {
         try (AutoCloseableSoftAssertions assertions = new AutoCloseableSoftAssertions()) {
             assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.SC_OK);
             assertions.assertThat(response.jsonPath().getLong("id")).isEqualTo(id);
-            assertions.assertThat(response.jsonPath().getString("tagName")).isEqualTo(tagName);
+            assertions.assertThat(response.jsonPath().getString("name")).isEqualTo(tagName);
             assertions.assertThat(response.jsonPath().getString("situationImageUrl")).isEqualTo(situationImageUrl);
             assertions.assertThat(response.jsonPath().getString("iconImageUrl")).isEqualTo(iconImageUrl);
         }
@@ -101,7 +101,7 @@ public class CarOptionTagSteps {
                         responseFields(
                                 fieldWithPath("[].id").type(JsonFieldType.NUMBER)
                                         .description("차량 옵션 태그 ID"),
-                                fieldWithPath("[].tagName").type(JsonFieldType.STRING)
+                                fieldWithPath("[].name").type(JsonFieldType.STRING)
                                         .description("차량 옵션 태그 설명"),
                                 fieldWithPath("[].situationImageUrl").type(JsonFieldType.STRING)
                                         .description("차량 옵션 태그 상황 이미지"),
@@ -125,7 +125,7 @@ public class CarOptionTagSteps {
             assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.SC_OK);
             assertions.assertThat(response.jsonPath().getList("id")).usingRecursiveComparison()
                     .isEqualTo(ids);
-            assertions.assertThat(response.jsonPath().getList("tagName")).usingRecursiveComparison()
+            assertions.assertThat(response.jsonPath().getList("name")).usingRecursiveComparison()
                     .isEqualTo(tagNames);
             assertions.assertThat(response.jsonPath().getList("situationImageUrl")).usingRecursiveComparison()
                     .isEqualTo(situationImageUrls);

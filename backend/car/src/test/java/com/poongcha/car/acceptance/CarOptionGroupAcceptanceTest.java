@@ -14,7 +14,9 @@ import static com.poongcha.car.acceptance.CarOptionGroupSteps.차량_옵션_그�
 import static com.poongcha.car.acceptance.CarOptionGroupSteps.차량_옵션_그룹_ID_조회_응답_검증;
 import static com.poongcha.car.acceptance.CarOptionGroupSteps.차량_옵션_그룹_생성_요청;
 import static com.poongcha.car.acceptance.CarOptionGroupSteps.차량_옵션_그룹_생성_응답_검증;
+import static com.poongcha.car.acceptance.CarOptionGroupSteps.차량_옵션_그룹_태그_설정_요청;
 import static com.poongcha.car.acceptance.CarOptionSteps.차량_옵션_생성_요청;
+import static com.poongcha.car.acceptance.CarOptionTagSteps.차량_옵션_태그_생성_요청;
 
 import com.poongcha.car.util.DocumentationTest;
 import java.util.List;
@@ -78,6 +80,10 @@ public class CarOptionGroupAcceptanceTest extends DocumentationTest {
 
         양립_불가능한_차량_옵션_설정_요청(1, List.of(2L, 3L));
 
+        차량_옵션_태그_생성_요청("태그1", "www.naver.com/situation/image1.png", "www.naver.com/icon/image1.png");
+        차량_옵션_태그_생성_요청("태그2", "www.naver.com/situation/image2.png", "www.naver.com/icon/image2.png");
+        차량_옵션_그룹_태그_설정_요청(1, List.of(1L, 2L));
+
         // WHEN
         var response = 차량_옵션_그룹_ID_조회_요청(1L);
 
@@ -88,6 +94,10 @@ public class CarOptionGroupAcceptanceTest extends DocumentationTest {
                 compote2CarOptionGroupName,
                 additionalPrice,
                 summaryDescription,
+                List.of(1, 2),
+                List.of("태그1", "태그2"),
+                List.of("www.naver.com/situation/image1.png", "www.naver.com/situation/image2.png"),
+                List.of("www.naver.com/icon/image1.png", "www.naver.com/icon/image2.png"),
                 List.of(2, 3),
                 List.of(1, 2),
                 List.of(optionName1, optionName2),
