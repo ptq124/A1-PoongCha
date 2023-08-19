@@ -4,9 +4,6 @@ import { additionalOptionData, defaultOptionData } from "../optionData";
 import { tagData } from "../tagData";
 import SituationView from "./SituationView";
 import DefaultView from "./DefaultView";
-import useOnClickPopUp from "@hooks/useOnClickPopUp";
-import OverlaidPopup from "@Components/Common/OverlaidPopup";
-import OptionPopup from "@Pages/CustomPage/OptionPage/OptionPopup";
 
 const OptionCatalogue = ({
   selectedTab,
