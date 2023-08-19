@@ -7,7 +7,7 @@ import OverlaidPopup from "@Components/Common/OverlaidPopup";
 import TrimChangePopup from "@Pages/CustomPage/TrimPage/TrimChangePopup";
 import useOnClickPopUp from "@hooks/useOnClickPopUp";
 
-const TrimOption = (option, selectedItem, handleSelectItem) => {
+const TrimOptionLabel = (option, selectedItem, handleSelectItem) => {
   const TrimChangePopupRef = useRef();
   const {
     isPopupOpen: isTrimChangePopupOpen,
@@ -132,4 +132,4 @@ const Wrapper = styled.div`
     border-bottom: none;
   }
 `;
-export default TrimOption;
+export default TrimOptionLabel;

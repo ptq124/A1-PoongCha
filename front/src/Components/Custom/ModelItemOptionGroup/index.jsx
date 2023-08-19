@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
-import ModelItemOption from "./ModelItemOption";
+import ModelItemOption from "../ModelItemOptionLabel";
 import Tooltip from "../Tooltip";
 import useTooltip from "@hooks/useTooltip";
 

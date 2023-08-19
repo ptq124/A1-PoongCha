@@ -3,7 +3,7 @@ import React from "react";
 import { css, styled } from "styled-components";
 import Tooltip from "../Tooltip";
 
-const ModelItemOption = (option, selectedItem, handleSelectItem) => {
+const ModelItemOptionLabel = (option, selectedItem, handleSelectItem) => {
   const { isTooltipOpen, openTooltip, closeTooltip } = useTooltip();
 
   return (
@@ -53,4 +53,4 @@ const Label = styled.label`
           color: ${({ theme }) => theme.color.grey500};
         `}
 `;
-export default ModelItemOption;
+export default ModelItemOptionLabel;

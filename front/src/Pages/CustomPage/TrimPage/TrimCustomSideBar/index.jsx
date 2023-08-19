@@ -8,9 +8,9 @@ import useOnClickPopUp from "@hooks/useOnClickPopUp";
 import OverlaidPopup from "@Components/Common/OverlaidPopup";
 import ModelItemsDescriptionPopup from "../ModelItemsDescriptionPopup";
 import { TrimOptions, modelItemData } from "./mockData";
-import ModelItemOption from "@Components/Custom/ModelItemOptionGroup/ModelItemOption";
+import ModelItemOptionLabel from "@Components/Custom/ModelItemOptionLabel";
 import RadioGroup from "@Components/Common/RadioGroup";
-import TrimOption from "@Components/Custom/TrimOptionGroup/TrimOption";
+import TrimOptionLabel from "@Components/Custom/TrimOptionLabel";
 import TrimComparisonPopup from "../TrimComparisonPopup";
 
 const TrimCustomSideBar = () => {
@@ -86,7 +86,7 @@ const TrimCustomSideBar = () => {
             <RadioGroup
               key={questionKey}
               title={data.title}
-              label={ModelItemOption}
+              label={ModelItemOptionLabel}
               options={data.options}
               newStateHandler={(newState) =>
                 setOptionSelect(questionKey, newState)
@@ -99,7 +99,7 @@ const TrimCustomSideBar = () => {
         {/* 트림 선택하기 */}
         <RadioGroup
           title={trimRadioGroupTitle()}
-          label={TrimOption}
+          label={TrimOptionLabel}
           options={TrimOptions}
           newStateHandler={(newState) => {
             setOptionSelect("trim", newState);

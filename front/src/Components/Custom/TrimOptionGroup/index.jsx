@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { css, styled } from "styled-components";
 import Button from "@Components/Common/Button/Button";
-import TrimOption from "./TrimOption";
+import TrimOption from "../TrimOptionLabel";
 import Tooltip from "../Tooltip";
 import useTooltip from "@hooks/useTooltip";
 import TrimComparisonPopup from "@Pages/CustomPage/TrimPage/TrimComparisonPopup";
