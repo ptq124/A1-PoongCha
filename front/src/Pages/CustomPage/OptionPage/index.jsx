@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { styled, css } from "styled-components";
-import AllOptions from "./AllOptions";
+// import AllOptions from "./AllOptions";
 import Button from "@Components/Common/Button/Button";
 import useButtonNavigation from "@hooks/useButtonNavigation";
 import { additionalOptionData, defaultOptionData } from "./optionData";
-import { tags, tagSelectIcons, tagsNotSelectIcons } from "./tagIcon";
+import { tags } from "./tagData";
 import OptionTagGroup from "@Components/Custom/OptionTagGroup";
 
 const tabData = ["추가 옵션", "기본 포함 옵션"];
 const OptionPage = () => {
   // 선택한 옵션들 상태관리 (옵션 id 값 저장)
   const [selectedOptions, setSelectedOptions] = useState([]);
-  const [selectedTag, setSelectedTag] = useState(0);
+  const [selectedTag, setSelectedTag] = useState(2);
   const handleSelectOption = (id) => {
     if (checkOptionSelected(id)) {
       setSelectedOptions((prev) => prev.filter((optId) => optId !== id));
@@ -26,15 +26,17 @@ const OptionPage = () => {
   const [selectedTab, setSelectedTab] = useState("추가 옵션");
   const handleSelectTab = (tab) => {
     setSelectedTab(tab);
-    setSelectedTag(0);
+    if (tab === "추가 옵션") setSelectedTag(2);
+    else setSelectedTag(1);
   };
   const move = useButtonNavigation();
 
   return (
     <Wrapper>
       <TabContainer>
-        {tabData.map((tab) => (
+        {tabData.map((tab, index) => (
           <TabItem
+            key={index}
             selected={selectedTab === tab}
             onClick={() => handleSelectTab(tab)}
           >
@@ -42,7 +44,11 @@ const OptionPage = () => {
           </TabItem>
         ))}
       </TabContainer>
-      <OptionTagGroup />
+      <OptionTagGroup
+        tags={selectedTab === "추가 옵션" ? tags.slice(1) : tags}
+        selectedTag={selectedTag}
+        handleSelectTag={setSelectedTag}
+      />
       {/* <AllOptions
         tab={selectedTab}
         optionData={optionData}
