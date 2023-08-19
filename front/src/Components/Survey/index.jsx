@@ -9,14 +9,13 @@ const Survey = ({
   label,
   options,
   openPopup,
-  reducerHandler,
-  reducerKey,
+  newStateHandler,
   initialState,
   style,
 }) => {
   const { selected, handleSelected } = useRadio(initialState);
   useEffect(() => {
-    reducerHandler(reducerKey, selected);
+    newStateHandler(selected);
   }, [selected]);
   return (
     <Wrapper>

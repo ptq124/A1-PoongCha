@@ -29,8 +29,7 @@ const AgeSurvey = () => {
         questionnaire={questionnaire()}
         label={AgeQuestion}
         options={surveyData.options}
-        reducerHandler={handleOptionSelect}
-        reducerKey={"age"}
+        newStateHandler={(newState) => handleOptionSelect("age", newState)}
         initialState={state.age}
         style={ageStyle}
       />

@@ -115,7 +115,10 @@ const CarView = ({ data }) => {
                 <Button
                   text="추천받기"
                   style={RightBtn}
-                  onClick={() => move("/")}
+                  onClick={() => {
+                    closePopup();
+                    move("/");
+                  }}
                 />
               </BtnContainer>
               <img src={close} onClick={closePopup} />
