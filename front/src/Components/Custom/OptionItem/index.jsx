@@ -40,7 +40,9 @@ const OptionItem = ({ data, selected, handleSelectOption }) => {
           }
         />
       )}
-      <img src={SampleImg} />
+      <Thumbnail>
+        <img src={options[0].imageUrl || SampleImg} />
+      </Thumbnail>
       <Header>
         <div>{carOptionGroupName}</div>
         <div onClick={() => handleOpenPopup(data.options)}>더 알아보기</div>
@@ -62,6 +64,7 @@ const OptionItem = ({ data, selected, handleSelectOption }) => {
     </Wrapper>
   );
 };
+
 const BtnStyle = css`
   width: 69px;
   height: 28px;
@@ -90,6 +93,19 @@ const BtnStyle = css`
   }
 `;
 
+const Thumbnail = styled.div`
+  width: 244px;
+  height: 162px;
+  border-radius: 4px;
+  overflow: hidden;
+
+  & > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    overflow: hidden;
+  }
+`;
 const Price = styled.div`
   ${({ theme }) => theme.font.Body3_Medium};
   color: ${({ theme }) => theme.color.gery100};
@@ -99,13 +115,13 @@ const Price = styled.div`
 
 const Desc = styled.div`
   ${({ theme }) => theme.font.Body4_Regular};
-  color: ${({ theme }) => theme.color.gery300};
+  color: ${({ theme }) => theme.color.grey300};
   margin-bottom: 26px;
 
   width: 244px;
+  height: 44px;
   overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: wrap;
 `;
 
 const Header = styled.div`

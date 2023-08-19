@@ -123,7 +123,7 @@ const SituationScreen = styled.div`
 `;
 const OptionItemsContainer = styled.div`
   display: flex;
-  flex-wrap: nowrap;
+  overflow-x: scroll;
   gap: 16px;
   width: 100%;
 `;

@@ -28,7 +28,7 @@ const OptionPopup = ({
             <Card
               key={index}
               data={data}
-              crntCardIdx={crntCardIdx}
+              cardData={option}
               selected={selected}
               closePopup={closePopup}
               handleNavClick={setCrntCardIdx}

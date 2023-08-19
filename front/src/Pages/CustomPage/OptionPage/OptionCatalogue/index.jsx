@@ -16,6 +16,7 @@ const OptionCatalogue = ({
     if (selectedTab === "추가 옵션") setOptionData(additionalOptionData);
     else setOptionData(defaultOptionData);
   }, [selectedTab]);
+
   const filteredData = optionData?.filter((data) =>
     data.tags.includes(selectedTag)
   );
@@ -24,7 +25,7 @@ const OptionCatalogue = ({
     <Wrapper>
       {selectedTag === "대표" || selectedTag === "전체" ? (
         <DefaultView
-          filteredData={filteredData}
+          filteredData={selectedTag === "대표" ? filteredData : optionData}
           handleSelectOption={handleSelectOption}
           selectedOptions={selectedOptions}
         />

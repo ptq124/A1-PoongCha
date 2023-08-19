@@ -5,17 +5,15 @@ import CloseIcon from "@assets/icons/close.svg";
 import Button from "@Components/Common/Button/Button";
 import checkBlue from "@assets/checkcircle/check-16-blue.svg";
 import checkGrey from "@assets/checkcircle/check-16-grey.svg";
-import { tagData } from "../tagData";
 
 const Card = ({
   data,
-  crntCardIdx,
+  cardData,
   selected,
   closePopup,
   handleNavClick,
   handleSelectOption,
 }) => {
-  const crntCardData = data.options[crntCardIdx];
   const isSetOption = data.options.length > 1;
   const isAdditionalOption = data.additionalPrice !== 0;
 
@@ -27,7 +25,7 @@ const Card = ({
             <Tag key={index}>{tag}</Tag>
           ))}
         </TagContainer>
-        <img src={SampleImg} />
+        <img src={cardData.imageUrl || SampleImg} />
       </ImgContainer>
       <DetailContainer>
         <img src={CloseIcon} onClick={closePopup} />
@@ -36,7 +34,7 @@ const Card = ({
             {isSetOption && (
               <span className="setName">{data.carOptionGroupName}</span>
             )}
-            <span className="optionName">{crntCardData.name}</span>
+            <span className="optionName">{cardData.name}</span>
             {isAdditionalOption && (
               <span className="price">
                 {data.additionalPrice.toLocaleString()}원
@@ -53,18 +51,14 @@ const Card = ({
             />
           )}
         </Header>
-        <Description>
-          초음파 센서를 통해 뒷좌석에 남아있는 승객의 움직임을 감지하여
-          운전자에게 경고함으로써 부주의에 의한 유아 또는 반려 동물 등의 방치
-          사고를 예방하는 신기술입니다.
-        </Description>
+        <Description>{cardData.detailDescription}</Description>
         {isSetOption && (
           <>
             <SetOptionNavigation>
               {data.options.map((option, index) => (
                 <Nav
                   key={index}
-                  $selected={index === crntCardIdx}
+                  $selected={option.id === cardData.id}
                   onClick={() => handleNavClick(index)}
                 >
                   {option.name}
@@ -75,7 +69,7 @@ const Card = ({
               {data.options.map((option, index) => (
                 <Bullet
                   key={index}
-                  $selected={index === crntCardIdx}
+                  $selected={option.id === cardData.id}
                   onClick={() => handleNavClick(index)}
                 ></Bullet>
               ))}
@@ -126,6 +120,8 @@ const Bullet = styled.div`
     `}
 `;
 const NavBullets = styled.div`
+  position: absolute;
+  bottom: 32px;
   display: flex;
   gap: 10px;
   margin-top: 14px;
@@ -149,6 +145,8 @@ const Nav = styled.div`
     `}
 `;
 const SetOptionNavigation = styled.div`
+  position: absolute;
+  bottom: 68px;
   display: flex;
   flex-wrap: wrap;
   width: 226px;
