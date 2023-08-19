@@ -24,7 +24,7 @@ const Wrapper = styled.div`
   border-radius: 20px;
 
   z-index: 12;
-  margin-top: 510px;
+  margin: 610px 0px 100px;
 `;
 
 export default PopUp;

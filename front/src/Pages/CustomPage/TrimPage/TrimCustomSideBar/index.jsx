@@ -1,21 +1,21 @@
-import React, { useReducer, useState, useRef } from "react";
+import React, { useReducer, useRef } from "react";
 import { css, styled } from "styled-components";
 import { initialState, reducer } from "./index.reducer";
 import Button from "@Components/Common/Button/Button";
-import TrimOptionGroup from "@Components/Custom/TrimOptionGroup";
-import ModelItemOptionGroup from "@Components/Custom/ModelItemOptionGroup";
 import useButtonNavigation from "@hooks/useButtonNavigation";
 import helpIcon from "@assets/icons/help-circle.svg";
 import useOnClickPopUp from "@hooks/useOnClickPopUp";
 import OverlaidPopup from "@Components/Common/OverlaidPopup";
 import ModelItemsDescriptionPopup from "../ModelItemsDescriptionPopup";
-import TrimChangePopup from "../TrimChangePopup";
 import { TrimOptions, modelItemData } from "./mockData";
+import ModelItemOptionLabel from "@Components/Custom/ModelItemOptionLabel";
+import RadioGroup from "@Components/Common/RadioGroup";
+import TrimOptionLabel from "@Components/Custom/TrimOptionLabel";
+import TrimComparisonPopup from "../TrimComparisonPopup";
 
 const TrimCustomSideBar = () => {
   const move = useButtonNavigation();
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [clickedTrim, setClickedTrim] = useState();
   const setOptionSelect = (questionKey, option) => {
     dispatch({
       type: "SELECT_OPTION",
@@ -31,24 +31,24 @@ const TrimCustomSideBar = () => {
     closePopup: closeModelItemDescriptionPopup,
   } = useOnClickPopUp(modelItemDescriptionPopupRef);
 
-  const TrimChangePopupRef = useRef();
+  const trimComparisonPopupRef = useRef();
   const {
-    isPopupOpen: isTrimChangePopupOpen,
-    openPopup: openTrimChangePopup,
-    closePopup: closeTrimChangePopup,
-  } = useOnClickPopUp(TrimChangePopupRef);
-  const handleTrimOptionChange = (newValue) => {
-    if (newValue === state["trim"]) return;
-    setClickedTrim(newValue);
-    // 새로운 트림 옵션 선택으로 현재 선택한 색상과 옵션이 변동될 경우에 팝업 띄움
-    if (true) {
-      // 일단 항상 팝업 띄우도록 설정
-      openTrimChangePopup();
-    } else {
-      setOptionSelect("trim", newValue);
-    }
+    isPopupOpen: isTrimComparisonPopupOpen,
+    openPopup: openTrimComparisonPopup,
+    closePopup: closeTrimComparisonPopup,
+  } = useOnClickPopUp(trimComparisonPopupRef);
+  const trimRadioGroupTitle = () => {
+    return (
+      <>
+        <span>트림</span>
+        <Button
+          text="비교하기"
+          style={TrimComparisonBtnStyle}
+          onClick={openTrimComparisonPopup}
+        />
+      </>
+    );
   };
-
   return (
     <Wrapper>
       {isModelItemDescriptionPopupOpen && (
@@ -61,13 +61,12 @@ const TrimCustomSideBar = () => {
           }
         />
       )}
-      {isTrimChangePopupOpen && (
+      {isTrimComparisonPopupOpen && (
         <OverlaidPopup
           component={
-            <TrimChangePopup
-              popupRef={TrimChangePopupRef}
-              closePopup={closeTrimChangePopup}
-              changeTrim={() => setOptionSelect("trim", clickedTrim)}
+            <TrimComparisonPopup
+              popupRef={trimComparisonPopupRef}
+              closePopup={closeTrimComparisonPopup}
             />
           }
         />
@@ -81,24 +80,32 @@ const TrimCustomSideBar = () => {
             onClick={openModelItemDescriptionPopup}
           />
         </LinkBtnContainer>
+        {/* 엔진/바디/구동방식 선택하기 */}
         <ModelItems>
           {Object.entries(modelItemData).map(([questionKey, data]) => (
-            <ModelItemOptionGroup
+            <RadioGroup
               key={questionKey}
-              data={data}
-              handleOptionSelect={(newValue) => {
-                setOptionSelect(questionKey, newValue);
-              }}
-              selectedOption={state[questionKey]}
+              title={data.title}
+              label={ModelItemOptionLabel}
+              options={data.options}
+              newStateHandler={(newState) =>
+                setOptionSelect(questionKey, newState)
+              }
+              initialState={state[questionKey]}
+              style={modelItemRadioGroupStyle}
             />
           ))}
         </ModelItems>
-        <TrimOptionGroup
+        {/* 트림 선택하기 */}
+        <RadioGroup
+          title={trimRadioGroupTitle()}
+          label={TrimOptionLabel}
           options={TrimOptions}
-          selectedOption={state["trim"]}
-          handleOptionSelect={(newValue) => {
-            handleTrimOptionChange(newValue);
+          newStateHandler={(newState) => {
+            setOptionSelect("trim", newState);
           }}
+          initialState={state["trim"]}
+          style={trimOptionGroupStyle}
         />
         <Button
           text="색상 선택"
@@ -110,6 +117,46 @@ const TrimCustomSideBar = () => {
   );
 };
 
+const trimOptionGroupStyle = {
+  wrapper: css``,
+  title: css`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    ${({ theme }) => theme.font.Head2};
+    margin-top: 32px;
+  `,
+  options: css``,
+};
+const TrimComparisonBtnStyle = css`
+  background-color: ${({ theme }) => theme.color.grey1000};
+  ${({ theme }) => theme.font.Extra17};
+
+  border: 1px solid ${({ theme }) => theme.color.grey700};
+  border-radius: 20px;
+
+  padding: 4px 12px;
+`;
+const modelItemRadioGroupStyle = {
+  wrapper: css`
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin: 0px 12px;
+  `,
+  title: css`
+    ${({ theme }) => theme.font.Body4_Medium};
+  `,
+  options: css`
+    position: relative;
+    display: flex;
+    width: 100%;
+    margin-top: 4px;
+    & > div {
+      width: 50%;
+    }
+  `,
+};
 const LinkBtnContainer = styled.div`
   display: flex;
   gap: 2px;
