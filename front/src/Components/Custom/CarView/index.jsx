@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { styled, css } from "styled-components";
 import { useLocation } from "react-router";
 import CarRotateViewer from "./CarRotateViewer";
@@ -7,10 +7,8 @@ import rotate from "@assets/icons/rotate.svg";
 import external from "@assets/icons/외장.svg";
 import internal from "@assets/icons/내장.svg";
 import degree360 from "@assets/icons/360.svg";
-import useOnClickPopUp from "@hooks/useOnClickPopUp";
-import OverlaidPopup from "@Components/Common/OverlaidPopup";
-import close from "@assets/icons/close.svg";
-import useButtonNavigation from "@hooks/useButtonNavigation";
+import PopupProvider from "@Components/Common/PopupProvider";
+import BackToSurveyPopup from "@Pages/CustomPage/TrimPage/BackToSurveyPopup";
 
 const CarView = ({ data }) => {
   const { pathname } = useLocation();
@@ -83,114 +81,25 @@ const CarView = ({ data }) => {
   const [isExternal, setExternalHover] = useState(false);
   const [isInternal, setInternalHover] = useState(false);
 
-  const popupRef = useRef();
-  const { isPopupOpen, openPopup, closePopup } = useOnClickPopUp(popupRef);
-
-  const move = useButtonNavigation();
   return (
-    <>
-      <Wrapper>
-        <BackgrondTop />
-        <BackgrondBottom />
+    <Wrapper>
+      <BackgrondTop />
+      <BackgrondBottom />
+      <PopupProvider label={<BackToSurveyPopup />}>
         <Button
           style={RecommendBtn}
           text="다시 추천받기"
           img={<img src={rotate} />}
-          onClick={openPopup}
         />
+      </PopupProvider>
 
-        {CarMode()}
-      </Wrapper>
-      {isPopupOpen && (
-        <OverlaidPopup
-          component={
-            <PopUp ref={popupRef}>
-              <Container>
-                <Title>추천페이지로 돌아가시겠어요?</Title>
-                <SubTitle>선택한 옵션들은 모두 초기화돼요.</SubTitle>
-              </Container>
-              <BtnContainer>
-                <Button text="아니요" style={LeftBtn} onClick={closePopup} />
-                <Button
-                  text="추천받기"
-                  style={RightBtn}
-                  onClick={() => {
-                    closePopup();
-                    move("/");
-                  }}
-                />
-              </BtnContainer>
-              <img src={close} onClick={closePopup} />
-            </PopUp>
-          }
-        />
-      )}
-    </>
+      {CarMode()}
+    </Wrapper>
   );
 };
 const InternalImg = styled.img`
   position: absolute;
   width: 100%;
-`;
-const LeftBtn = css`
-  width: 178px;
-  height: 46px;
-  background-color: ${({ theme }) => theme.color.grey1000};
-  border: 1px solid;
-  border-color: ${({ theme }) => theme.color.grey600};
-  border-radius: 4px;
-  color: ${({ theme }) => theme.color.grey50};
-  ${({ theme }) => theme.font.Body3_Medium};
-`;
-
-const RightBtn = css`
-  width: 178px;
-  height: 46px;
-  background-color: ${({ theme }) => theme.color.primary_default};
-  border: 1px solid;
-  border-color: ${({ theme }) => theme.color.primary_default};
-  border-radius: 4px;
-  color: ${({ theme }) => theme.color.grey1000};
-  ${({ theme }) => theme.font.Body3_Medium};
-`;
-
-const BtnContainer = styled.div`
-  display: flex;
-  margin-top: 32px;
-  margin-left: 32px;
-  gap: 10px;
-`;
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: 24px;
-  margin-left: 32px;
-`;
-const Title = styled.div`
-  ${({ theme }) => theme.font.Head1};
-`;
-const SubTitle = styled.div`
-  color: ${({ theme }) => theme.color.grey400};
-  ${({ theme }) => theme.font.Body4_Regular};
-  margin-top: 8px;
-`;
-const PopUp = styled.div`
-  position: relative;
-
-  width: 427px;
-  height: 192px;
-
-  border-radius: 12px;
-
-  z-index: 999;
-  background-color: ${({ theme }) => theme.color.grey1000};
-
-  img {
-    position: absolute;
-    top: 24px;
-    right: 24px;
-  }
 `;
 
 const RotateBtn = css`
@@ -319,7 +228,7 @@ const BackgrondBottom = styled.div`
 const Wrapper = styled.div`
   flex: 0 0 auto;
   width: calc(100% - 473px);
-  position: fixed;
+  position: absolute;
   display: flex;
   flex-direction: column;
 
