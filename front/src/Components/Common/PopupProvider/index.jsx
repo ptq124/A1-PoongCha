@@ -10,7 +10,11 @@ const PopupProvider = ({ label, children }) => {
     <Wrapper>
       {isPopupOpen && (
         <OverlaidPopup
-          component={React.cloneElement(label, { closePopup, popupRef })}
+          component={React.cloneElement(label, {
+            ...label.props,
+            closePopup,
+            popupRef,
+          })}
         />
       )}
       {React.cloneElement(children, {

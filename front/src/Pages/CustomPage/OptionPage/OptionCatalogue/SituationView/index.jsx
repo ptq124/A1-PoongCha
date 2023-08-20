@@ -55,7 +55,7 @@ const SituationView = ({
             />
           )} */}
         <img src={SituationViewSampleImg} />
-        {mockPositions.map((position, index) => (
+        {/* {mockPositions.map((position, index) => (
           <PlusBtnPositioner $position={position}>
             <TooltipProvider
               label={<OptionTooltip tag={selectedTag} />}
@@ -73,7 +73,7 @@ const SituationView = ({
               <PlusButton key={index} $position={position} />
             </TooltipProvider>
           </PlusBtnPositioner>
-        ))}
+        ))} */}
         {/* {filteredData.map((data, index) => (
           <PlusButton
             key={index}

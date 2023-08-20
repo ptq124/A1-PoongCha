@@ -176,7 +176,6 @@ const ExternalBtn = css`
 
 const BackToSurveyBtnStyle = css`
   position: fixed;
-  /* top: 300px; */
 
   width: 124px;
   height: 36px;
