@@ -1,7 +1,7 @@
 import useOnClickPopUp from "@hooks/useOnClickPopUp";
 import React, { useRef } from "react";
 import { styled } from "styled-components";
-import OverlaidPopup from "../OverlaidPopup";
+import OverlaidPopup from "./OverlaidPopup";
 
 const PopupProvider = ({ label, children }) => {
   const popupRef = useRef();

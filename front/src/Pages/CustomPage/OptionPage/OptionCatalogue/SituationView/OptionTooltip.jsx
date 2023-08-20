@@ -1,34 +1,13 @@
-import React, { useRef } from "react";
+import React from "react";
 import { css, keyframes, styled } from "styled-components";
 import TooltipTail from "@assets/icons/option-tooltip-tail.svg";
 import ArrowRightIcon from "@assets/icons/arrow-right.svg";
-import useOnClickPopUp from "@hooks/useOnClickPopUp";
-import OverlaidPopup from "@Components/Common/OverlaidPopup";
 import OptionPopup from "../../OptionPopup";
+import PopupProvider from "@Components/Common/PopupProvider";
 
 const OptionTooltip = ({ tag, isOpen, data, handleSelectOption, selected }) => {
-  // 더 알아보기 팝업
-  const optionPopupRef = useRef();
-  const { isPopupOpen, openPopup, closePopup } =
-    useOnClickPopUp(optionPopupRef);
-  const handleOpenPopup = () => {
-    openPopup();
-  };
   return (
     <Wrapper $position={data.position} $isOpen={isOpen}>
-      {isPopupOpen && (
-        <OverlaidPopup
-          component={
-            <OptionPopup
-              popupRef={optionPopupRef}
-              closePopup={closePopup}
-              data={data}
-              handleSelectOption={handleSelectOption}
-              selected={selected}
-            />
-          }
-        />
-      )}
       <Content>
         <Img></Img>
         <Detail>
@@ -41,7 +20,17 @@ const OptionTooltip = ({ tag, isOpen, data, handleSelectOption, selected }) => {
           )}
         </Detail>
       </Content>
-      <Arrow src={ArrowRightIcon} className="arrow" onClick={handleOpenPopup} />
+      <PopupProvider
+        label={
+          <OptionPopup
+            data={data}
+            handleSelectOption={handleSelectOption}
+            selected={selected}
+          />
+        }
+      >
+        <Arrow src={ArrowRightIcon} className="arrow" />
+      </PopupProvider>
       <ArrowTail src={TooltipTail} className="tail" $position={data.position} />
     </Wrapper>
   );

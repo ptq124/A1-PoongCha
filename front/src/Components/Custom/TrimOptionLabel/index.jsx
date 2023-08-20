@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 import Check28BlueIcon from "@assets/checkcircle/check-28-blue.svg";
 import Check28GreyIcon from "@assets/checkcircle/check-28-grey.svg";
 import DefaultOption from "./DefaultOption";
-import OverlaidPopup from "@Components/Common/OverlaidPopup";
+import OverlaidPopup from "@Components/Common/PopupProvider/OverlaidPopup";
 import TrimChangePopup from "@Pages/CustomPage/TrimPage/TrimChangePopup";
 import useOnClickPopUp from "@hooks/useOnClickPopUp";
 
