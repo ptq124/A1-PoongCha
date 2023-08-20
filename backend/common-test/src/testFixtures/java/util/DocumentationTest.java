@@ -1,4 +1,4 @@
-package com.poongcha.car.util;
+package util;
 
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
 import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;

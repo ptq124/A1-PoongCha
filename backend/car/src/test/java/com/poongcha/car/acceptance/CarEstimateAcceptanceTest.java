@@ -15,7 +15,7 @@ import static com.poongcha.car.acceptance.TrimSteps.트림_생성_요청;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 
-import com.poongcha.car.util.DocumentationTest;
+import com.poongcha.car.util.CarAcceptanceTest;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.ExtractableResponse;
@@ -30,7 +30,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.restdocs.payload.JsonFieldType;
 
 @DisplayName("차량 견적 인수 테스트")
-public class CarEstimateAcceptanceTest extends DocumentationTest {
+public class CarEstimateAcceptanceTest extends CarAcceptanceTest {
     private final String compote2CarOptionGroupName = "컴포트 2";
     private final String handleInstallationLocation = "HANDLE";
     private final int additionalPrice = 1_000_000;

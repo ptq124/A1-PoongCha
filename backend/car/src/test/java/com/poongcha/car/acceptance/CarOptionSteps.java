@@ -1,10 +1,10 @@
 package com.poongcha.car.acceptance;
 
 import static com.epages.restdocs.apispec.RestAssuredRestDocumentationWrapper.document;
-import static com.poongcha.car.util.DocumentationTest.DEFAULT_RESTDOCS_PATH;
-import static com.poongcha.car.util.DocumentationTest.customRequestFields;
-import static com.poongcha.car.util.DocumentationTest.given;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static util.DocumentationTest.DEFAULT_RESTDOCS_PATH;
+import static util.DocumentationTest.customRequestFields;
+import static util.DocumentationTest.given;
 
 import io.restassured.http.ContentType;
 import io.restassured.response.ExtractableResponse;

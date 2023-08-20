@@ -26,13 +26,13 @@ import static com.poongcha.car.acceptance.TrimSteps.트림에_존재하지_않�
 import static com.poongcha.car.acceptance.TrimSteps.트림에_차량_색상_설정_요청;
 import static com.poongcha.car.acceptance.TrimSteps.트림에_차량_색상_설정_응답_검증;
 
-import com.poongcha.car.util.DocumentationTest;
+import com.poongcha.car.util.CarAcceptanceTest;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 @DisplayName("트림 인수 테스트")
-public class TrimAcceptanceTest extends DocumentationTest {
+public class TrimAcceptanceTest extends CarAcceptanceTest {
     private final String trimNameLeBlanc = "Le Blanc";
     private final String imageUrlLeBlanc = "https://www.hyundai.com/contents/vr360/LX06/trim/DS.png";
     private final long minPriceLeBlanc = 48_000_000;

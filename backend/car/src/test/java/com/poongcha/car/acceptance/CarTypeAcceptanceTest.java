@@ -14,13 +14,13 @@ import static com.poongcha.car.acceptance.CarTypeSteps.차종_생성_응답_검�
 import static com.poongcha.car.acceptance.CarTypeSteps.차종_전체_조회_요청;
 import static com.poongcha.car.acceptance.CarTypeSteps.차종_전체_조회_응답_검증;
 
-import com.poongcha.car.util.DocumentationTest;
+import com.poongcha.car.util.CarAcceptanceTest;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 @DisplayName("차종 인수 테스트")
-public class CarTypeAcceptanceTest extends DocumentationTest {
+public class CarTypeAcceptanceTest extends CarAcceptanceTest {
     private final String palisadeCarTypeName = "palisade";
     private final String palisadeImageUrl = "https://www.hyundai.com/static/images/model/palisade/24my/mo/palisade_highlights_design_m.jpg";
     private final String sonataCarTypeName = "sonata";

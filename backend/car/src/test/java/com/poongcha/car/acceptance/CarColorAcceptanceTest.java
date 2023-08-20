@@ -11,12 +11,12 @@ import static com.poongcha.car.acceptance.CarColorSteps.존재하지_않는_차�
 import static com.poongcha.car.acceptance.CarColorSteps.차량_색상_생성_요청;
 import static com.poongcha.car.acceptance.CarColorSteps.차량_색상_생성_응답_검증;
 
-import com.poongcha.car.util.DocumentationTest;
+import com.poongcha.car.util.CarAcceptanceTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 @DisplayName("차량 색상 관련 기능")
-public class CarColorAcceptanceTest extends DocumentationTest {
+public class CarColorAcceptanceTest extends CarAcceptanceTest {
     @DisplayName("차량 색상 생성")
     @Test
     void 차량_색상_생성() {
