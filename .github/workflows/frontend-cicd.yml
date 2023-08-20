@@ -15,14 +15,26 @@ jobs:
 
       - name: ☕️ Install npm
         run: sudo apt install nodejs
+        working-directory: front
+        shell: bash
+
+      - name: ☕️ Update npm
+        run: npm install -g npm@latest
+        working-directory: front
         shell: bash
 
       - name: ☕️ Install vite
-        run: sudo npm install vite --save-dev
+        run: npm install vite --save-dev
+        working-directory: front
+        shell: bash
+
+      - name: ☕️ Install plugin-react
+        run: npm install @vitejs/plugin-react --save-dev
+        working-directory: front
         shell: bash
 
       - name: 🛠 Build with npm
-        run: sudo npm run build
+        run: npm run build
         working-directory: front
         shell: bash
 
@@ -41,4 +53,4 @@ jobs:
         env:
           REGION: ap-northeast-2
           S3_NAME: my-car-store-front
-        run: aws s3 cp --recursive --region ap-northeast-2 front/dist s3://$S3_NAME/dist
+        run: aws s3 cp --recursive --region ap-northeast-2 /front/dist s3://$S3_NAME/dist
