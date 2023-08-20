@@ -1,0 +1,40 @@
+buildscript {
+    ext {
+        restdocsApiSpecVersion = '0.16.2'
+    }
+}
+
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.7.14'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+    id 'com.epages.restdocs-api-spec' version "${restdocsApiSpecVersion}"
+    id 'org.hidetake.swagger.generator' version '2.18.2'
+    id "java-library"
+    id "java-test-fixtures"
+    id "maven-publish"
+}
+
+group = 'com.poongcha'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = '11'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+    testFixturesImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // 인수 테스트
+    testFixturesImplementation 'io.rest-assured:rest-assured'
+
+    // 문서화
+    testFixturesImplementation "com.epages:restdocs-api-spec-restassured:${restdocsApiSpecVersion}"
+}
+
+tasks.register('prepareKotlinBuildScriptModel')

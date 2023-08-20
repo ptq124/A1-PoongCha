@@ -18,13 +18,13 @@ import static com.poongcha.car.acceptance.CarOptionGroupSteps.차량_옵션_그�
 import static com.poongcha.car.acceptance.CarOptionSteps.차량_옵션_생성_요청;
 import static com.poongcha.car.acceptance.CarOptionTagSteps.차량_옵션_태그_생성_요청;
 
-import com.poongcha.car.util.DocumentationTest;
+import com.poongcha.car.util.CarAcceptanceTest;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 @DisplayName("차량 옵션 그룹 관련 기능")
-public class CarOptionGroupAcceptanceTest extends DocumentationTest {
+public class CarOptionGroupAcceptanceTest extends CarAcceptanceTest {
     private final String compote2CarOptionGroupName = "컴포트 2";
     private final String handleInstallationLocation = "HANDLE";
     private final long additionalPrice = 10_000_000;

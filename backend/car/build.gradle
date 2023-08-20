@@ -58,6 +58,8 @@ dependencies {
     // 문서화
     testImplementation "com.epages:restdocs-api-spec-restassured:${restdocsApiSpecVersion}"
     swaggerUI 'org.webjars:swagger-ui:4.11.1'
+
+    testImplementation(testFixtures(project(':common-test')))
 }
 
 tasks.named('test') {

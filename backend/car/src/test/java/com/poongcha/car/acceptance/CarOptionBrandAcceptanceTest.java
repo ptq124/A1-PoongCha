@@ -8,13 +8,13 @@ import static com.poongcha.car.acceptance.CarOptionBrandSteps.차량_옵션_브�
 import static com.poongcha.car.acceptance.CarOptionBrandSteps.차량_옵션_브랜드_생성_응답_검증;
 import static com.poongcha.car.acceptance.CarOptionGroupSteps.차량_옵션_그룹_생성_요청;
 
-import com.poongcha.car.util.DocumentationTest;
+import com.poongcha.car.util.CarAcceptanceTest;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 @DisplayName("차량 브랜드")
-public class CarOptionBrandAcceptanceTest extends DocumentationTest {
+public class CarOptionBrandAcceptanceTest extends CarAcceptanceTest {
     @DisplayName("차량 옵션 브랜드 생성")
     @Test
     void 차량_옵션_브랜드_생성() {

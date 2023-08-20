@@ -8,12 +8,12 @@ import static com.poongcha.car.acceptance.CarOptionGroupTooltipSteps.차량_옵�
 import static com.poongcha.car.acceptance.CarOptionGroupTooltipSteps.차량_옵션_툴팁_생성_요청;
 import static com.poongcha.car.acceptance.CarOptionGroupTooltipSteps.차량_옵션_툴팁_생성_응답_검증;
 
-import com.poongcha.car.util.DocumentationTest;
+import com.poongcha.car.util.CarAcceptanceTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 @DisplayName("차량 옵션 툴팁 관련 기능")
-public class CarOptionGroupTooltipAcceptanceTest extends DocumentationTest {
+public class CarOptionGroupTooltipAcceptanceTest extends CarAcceptanceTest {
     @DisplayName("차량 옵션 툴팁 생성")
     @Test
     void 차량_옵션_툴팁_생성() {

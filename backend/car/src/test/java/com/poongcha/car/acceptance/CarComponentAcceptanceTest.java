@@ -7,13 +7,13 @@ import static com.poongcha.car.acceptance.CarComponentSteps.차량_컴포넌트_
 import static com.poongcha.car.acceptance.CarComponentSteps.차량_컴포넌트_생성_요청;
 import static com.poongcha.car.acceptance.CarComponentSteps.차량_컴포넌트_생성_응답_검증;
 
-import com.poongcha.car.util.DocumentationTest;
+import com.poongcha.car.util.CarAcceptanceTest;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 @DisplayName("차량 컴포넌트 관련 기능")
-public class CarComponentAcceptanceTest extends DocumentationTest {
+public class CarComponentAcceptanceTest extends CarAcceptanceTest {
     private final String carComponentName4WD = "4WD";
     private final String carComponentDescriptionImageUrl4WD = "www.naver.com/image/4wd.png";
     private final int carComponentAdditionalPrice4WD = 2_000_000;
