@@ -11,10 +11,7 @@ import PopupProvider from "@Components/Common/PopupProvider";
 문구: 텍스트
 프로필 사진: 이미지
 */
-const LifestyleQuestionLabel = (option, selectedItem, handleSelectItem) => {
-  // const popupRef = useRef();
-  // const { isPopupOpen, openPopup } = useOnClickPopUp(popupRef);
-
+const LifestyleQuestionLabel = ({ option, selectedItem, handleSelectItem }) => {
   const isSelected = option.index === selectedItem;
 
   return (
@@ -35,7 +32,7 @@ const LifestyleQuestionLabel = (option, selectedItem, handleSelectItem) => {
           <CheckImg src={isSelected ? check32blue : check32grey} />
         </LifestylePhrase>
         <PopupProvider label={<PopUp />}>
-          <LifestyleDetail onClick={openPopup} selected={isSelected}>
+          <LifestyleDetail selected={isSelected}>
             라이프스타일 엿보기
           </LifestyleDetail>
         </PopupProvider>

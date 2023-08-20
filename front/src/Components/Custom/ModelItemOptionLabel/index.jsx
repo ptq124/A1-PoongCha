@@ -1,7 +1,7 @@
 import React from "react";
 import { css, styled } from "styled-components";
 
-const ModelItemOptionLabel = (option, selectedItem, handleSelectItem) => {
+const ModelItemOptionLabel = ({ option, selectedItem, handleSelectItem }) => {
   return (
     <>
       <Label

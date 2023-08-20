@@ -57,7 +57,7 @@ const TrimCustomSideBar = () => {
             >
               <RadioGroup
                 title={data.title}
-                label={ModelItemOptionLabel}
+                label={<ModelItemOptionLabel />}
                 options={data.options}
                 newStateHandler={(newState) =>
                   setOptionSelect(questionKey, newState)
@@ -80,7 +80,7 @@ const TrimCustomSideBar = () => {
         >
           <RadioGroup
             title={trimRadioGroupTitle()}
-            label={TrimOptionLabel}
+            label={<TrimOptionLabel />}
             options={TrimOptions}
             newStateHandler={(newState) => {
               setOptionSelect("trim", newState);
