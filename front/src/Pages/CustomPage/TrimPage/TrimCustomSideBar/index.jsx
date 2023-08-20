@@ -12,6 +12,8 @@ import ModelItemOptionLabel from "@Components/Custom/ModelItemOptionLabel";
 import RadioGroup from "@Components/Common/RadioGroup";
 import TrimOptionLabel from "@Components/Custom/TrimOptionLabel";
 import TrimComparisonPopup from "../TrimComparisonPopup";
+import Tooltip from "@Components/Custom/Tooltip";
+import TooltipProvider from "@Components/Common/TooltipProvider";
 
 const TrimCustomSideBar = () => {
   const move = useButtonNavigation();
@@ -83,17 +85,19 @@ const TrimCustomSideBar = () => {
         {/* 엔진/바디/구동방식 선택하기 */}
         <ModelItems>
           {Object.entries(modelItemData).map(([questionKey, data]) => (
-            <RadioGroup
-              key={questionKey}
-              title={data.title}
-              label={ModelItemOptionLabel}
-              options={data.options}
-              newStateHandler={(newState) =>
-                setOptionSelect(questionKey, newState)
-              }
-              initialState={state[questionKey]}
-              style={modelItemRadioGroupStyle}
-            />
+            <TooltipProvider>
+              <RadioGroup
+                key={questionKey}
+                title={data.title}
+                label={ModelItemOptionLabel}
+                options={data.options}
+                newStateHandler={(newState) =>
+                  setOptionSelect(questionKey, newState)
+                }
+                initialState={state[questionKey]}
+                style={modelItemRadioGroupStyle}
+              />
+            </TooltipProvider>
           ))}
         </ModelItems>
         {/* 트림 선택하기 */}
