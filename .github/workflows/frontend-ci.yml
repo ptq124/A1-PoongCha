@@ -1,0 +1,39 @@
+name: Frontend CI
+
+on:
+  pull_request:
+    branches: [ front ]
+
+jobs:
+  frontend-ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 👋 Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+
+      - name: ☕️ Install npm
+        run: sudo apt install nodejs
+        working-directory: front
+        shell: bash
+
+      - name: ☕️ Update npm
+        run: npm install -g npm@latest
+        working-directory: front
+        shell: bash
+
+      - name: ☕️ Install vite
+        run: npm install vite --save-dev
+        working-directory: front
+        shell: bash
+
+      - name: ☕️ Install plugin-react
+        run: npm install @vitejs/plugin-react --save-dev
+        working-directory: front
+        shell: bash
+
+      - name: 🛠 Build with npm
+        run: npm run build
+        working-directory: front
+        shell: bash
