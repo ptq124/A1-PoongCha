@@ -49,4 +49,4 @@ jobs:
         env:
           REGION: ap-northeast-2
           S3_NAME: my-car-store-front
-        run: aws s3 cp --recursive --region ap-northeast-2 front/dist/ s3://$S3_NAME/dist
+        run: aws s3 cp --recursive --region ap-northeast-2 front/dist/ s3://$S3_NAME/
