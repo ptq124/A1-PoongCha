@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CarEstimateCarComponentResponse {
     private long id;
-    private String groupName;
     private String name;
     private long additionalPrice;
 }

@@ -109,7 +109,6 @@ public class CarEstimateAcceptanceTest extends DocumentationTest {
                 imageUrlLeBlanc,
                 minPriceLeBlanc,
                 List.of(1),
-                List.of(carComponentGroupNameEngine),
                 List.of(carComponentName4WD),
                 List.of(carComponentAdditionalPrice4WD),
                 1,
@@ -143,8 +142,6 @@ public class CarEstimateAcceptanceTest extends DocumentationTest {
                                 fieldWithPath("trim.imageUrl").type(JsonFieldType.STRING).description("트림 이미지 URL"),
                                 fieldWithPath("trim.minPrice").type(JsonFieldType.NUMBER).description("트림 가격"),
                                 fieldWithPath("components[].id").type(JsonFieldType.NUMBER).description("컴포넌트 ID"),
-                                fieldWithPath("components[].groupName").type(JsonFieldType.STRING)
-                                        .description("컴포넌트 그룹 이름"),
                                 fieldWithPath("components[].name").type(JsonFieldType.STRING).description("컴포넌트 이름"),
                                 fieldWithPath("components[].additionalPrice").type(JsonFieldType.NUMBER)
                                         .description("컴포넌트 추가 가격"),
@@ -189,7 +186,6 @@ public class CarEstimateAcceptanceTest extends DocumentationTest {
             final String trimImageUrl,
             final long trimMinPrice,
             final List<Integer> componentIds,
-            final List<String> componentGroupName,
             final List<String> componentName,
             final List<Integer> componentAdditionalPrice,
             final int exteriorColorId,
@@ -219,7 +215,6 @@ public class CarEstimateAcceptanceTest extends DocumentationTest {
             assertions.assertThat(jsonPath.getString("trim.imageUrl")).isEqualTo(trimImageUrl);
             assertions.assertThat(jsonPath.getLong("trim.minPrice")).isEqualTo(trimMinPrice);
             assertions.assertThat(jsonPath.getList("components.id")).isEqualTo(componentIds);
-            assertions.assertThat(jsonPath.getList("components.groupName")).isEqualTo(List.of("4WD"));
             assertions.assertThat(jsonPath.getList("components.name")).isEqualTo(componentName);
             assertions.assertThat(jsonPath.getList("components.additionalPrice")).isEqualTo(componentAdditionalPrice);
             assertions.assertThat(jsonPath.getLong("exteriorColor.id")).isEqualTo(exteriorColorId);
