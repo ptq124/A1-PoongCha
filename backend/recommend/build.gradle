@@ -1,7 +1,15 @@
+buildscript {
+	ext {
+		restdocsApiSpecVersion = '0.16.2'
+	}
+}
+
 plugins {
 	id 'java'
 	id 'org.springframework.boot' version '2.7.14'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id 'com.epages.restdocs-api-spec' version "${restdocsApiSpecVersion}"
+	id 'org.hidetake.swagger.generator' version '2.18.2'
 }
 
 group = 'com.poongcha'
@@ -21,6 +29,20 @@ repositories {
 	mavenCentral()
 }
 
+openapi3 {
+	setServer("http://localhost:8080")
+	title = "차량 API 명세서"
+	description = "내 차 만들기 추천 API 명세서"
+	version = "0.0.1"
+	format = "yaml"
+}
+
+swaggerSources {
+	sample {
+		setInputFile(file("${project.buildDir}/api-spec/openapi3.yaml"))
+	}
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
@@ -29,6 +51,15 @@ dependencies {
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// 인수 테스트
+	testImplementation 'io.rest-assured:rest-assured'
+
+	// 문서화
+	testImplementation "com.epages:restdocs-api-spec-restassured:${restdocsApiSpecVersion}"
+	swaggerUI 'org.webjars:swagger-ui:4.11.1'
+
+	testImplementation(testFixtures(project(':common-test')))
 }
 
 tasks.named('test') {
@@ -36,3 +67,26 @@ tasks.named('test') {
 }
 
 tasks.register('prepareKotlinBuildScriptModel')
+
+// GenerateSwaggerUI 태스크가, openapi3 task 를 의존하도록 설정
+tasks.withType(GenerateSwaggerUI) {
+	dependsOn 'openapi3'
+}
+
+// 생성된 SwaggerUI 를 jar 에 포함시키기 위해 build/resources 경로로 로 복사
+tasks.register('copySwaggerUI', Copy) {
+	dependsOn 'generateSwaggerUISample'
+
+	def generateSwaggerUISampleTask = tasks.named('generateSwaggerUISample', GenerateSwaggerUI).get()
+
+	from("${generateSwaggerUISampleTask.outputDir}")
+	into("${project.buildDir}/resources/main/static/docs")
+}
+
+bootJar {
+	bootJarMainClassName.dependsOn copySwaggerUI
+}
+
+jar {
+	dependsOn copySwaggerUI
+}
