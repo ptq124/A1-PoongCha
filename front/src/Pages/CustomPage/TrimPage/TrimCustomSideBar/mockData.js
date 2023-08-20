@@ -2,14 +2,17 @@ const modelItemData = {
     engine: {
       title: "엔진",
       options: ["디젤 2.2", "가솔린 3.8"],
+      tooltip:"디젤은 연비가 좋고 가솔린은 승차감이 더 부드럽고 조용해요."
     },
     body: {
       title: "바디",
       options: ["7인승", "8인승"],
+      tooltip:"바디 설명 툴팁 내용입니다."
     },
     drivetrain: {
       title: "구동방식",
       options: ["2WD", "4WD"],
+      tooltip:"구동방식 설명 툴팁 내용입니다."
     },
   };
   

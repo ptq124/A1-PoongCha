@@ -3,24 +3,12 @@ import { styled } from "styled-components";
 import LightBulbIcon from "@assets/icons/tooltip-lightbulb.svg";
 import TooltipTail from "@assets/icons/tooltip-tail.svg";
 
-const Tooltip = ({ offset }) => {
-  const [isTooltipVisible, setIsTooltipVisible] = useState(false);
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setIsTooltipVisible(true);
-    }, 200);
-
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, []);
-
+const Tooltip = ({ content }) => {
   return (
-    <Wrapper $isVisible={isTooltipVisible} $offset={offset}>
+    <Wrapper>
       <TooltipBody>
         <Img src={LightBulbIcon} />
-        <span>디젤은 연비가 좋고 가솔린은 승차감이 더 부드럽고 조용해요.</span>
+        <span>{content}</span>
       </TooltipBody>
       <TooltipTailImg src={TooltipTail} />
     </Wrapper>
@@ -57,11 +45,6 @@ const TooltipBody = styled.div`
   }
 `;
 const Wrapper = styled.div`
-  position: absolute;
-  left: -12px;
-  bottom: ${({ $offset }) => $offset}px;
-
-  opacity: ${({ $isVisible }) => ($isVisible ? 1 : 0)};
   transition: opacity 0.3s ease;
 
   z-index: 1;

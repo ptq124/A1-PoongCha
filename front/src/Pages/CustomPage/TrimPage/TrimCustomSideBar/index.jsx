@@ -85,9 +85,14 @@ const TrimCustomSideBar = () => {
         {/* 엔진/바디/구동방식 선택하기 */}
         <ModelItems>
           {Object.entries(modelItemData).map(([questionKey, data]) => (
-            <TooltipProvider>
+            <TooltipProvider
+              key={questionKey}
+              label={<Tooltip content={data.tooltip} />}
+              offset={css`
+                bottom: 78px;
+              `}
+            >
               <RadioGroup
-                key={questionKey}
                 title={data.title}
                 label={ModelItemOptionLabel}
                 options={data.options}
@@ -101,16 +106,25 @@ const TrimCustomSideBar = () => {
           ))}
         </ModelItems>
         {/* 트림 선택하기 */}
-        <RadioGroup
-          title={trimRadioGroupTitle()}
-          label={TrimOptionLabel}
-          options={TrimOptions}
-          newStateHandler={(newState) => {
-            setOptionSelect("trim", newState);
-          }}
-          initialState={state["trim"]}
-          style={trimOptionGroupStyle}
-        />
+        <TooltipProvider
+          label={
+            <Tooltip content="트림은 등급이에요. 등급이 올라갈수록 기본 포함 옵션들이 점점 추가되고 내부 시트의 퀄리티가 높아져요." />
+          }
+          offset={css`
+            top: -110px;
+          `}
+        >
+          <RadioGroup
+            title={trimRadioGroupTitle()}
+            label={TrimOptionLabel}
+            options={TrimOptions}
+            newStateHandler={(newState) => {
+              setOptionSelect("trim", newState);
+            }}
+            initialState={state["trim"]}
+            style={trimOptionGroupStyle}
+          />
+        </TooltipProvider>
         <Button
           text="색상 선택"
           style={nextBtnStyle}

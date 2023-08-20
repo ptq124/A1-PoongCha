@@ -1,18 +1,32 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
 
-const TooltipProvider = ({ label, children }) => {
+const TooltipProvider = ({ label, offset, children }) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsOpen(true);
+  };
+  const handleMouseLeave = () => {
+    setIsOpen(false);
+  };
   return (
-    <Wrapper
-      onMouseEnter={() => setIsOpen(true)}
-      onMouseLeave={() => setIsOpen(false)}
-    >
-      {isOpen && <>hi i'm a tooltip</>}
+    <Wrapper onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+      {isOpen && (
+        <TooltipContainer $offset={offset}>
+          {React.cloneElement(label)}
+        </TooltipContainer>
+      )}
       {children}
     </Wrapper>
   );
 };
 
-const Wrapper = styled.div``;
+const TooltipContainer = styled.div`
+  position: absolute;
+  ${({ $offset }) => $offset}
+`;
+const Wrapper = styled.div`
+  position: relative;
+`;
 export default TooltipProvider;
