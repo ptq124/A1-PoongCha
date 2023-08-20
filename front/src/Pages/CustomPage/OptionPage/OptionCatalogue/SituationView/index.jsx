@@ -48,7 +48,7 @@ const SituationView = ({
             />
           )}
         <img src={SituationViewSampleImg} />
-        {filteredData.map((data, index) => (
+        {/* {filteredData.map((data, index) => (
           <PlusButton
             key={index}
             $position={data.position}
@@ -59,7 +59,7 @@ const SituationView = ({
           >
             <img src={PlusIcon} />
           </PlusButton>
-        ))}
+        ))} */}
       </SituationScreen>
       <OptionItemsContainer>
         {filteredData.map((data, index) => (
@@ -82,7 +82,7 @@ const SituationView = ({
 const AdditionalComment = styled.div`
   ${({ theme }) => theme.font.Caption1_Regular};
   color: ${({ theme }) => theme.color.grey500};
-  margin: 36px 0px;
+  margin-top: -30px;
 `;
 const PlusButton = styled.div`
   position: absolute;

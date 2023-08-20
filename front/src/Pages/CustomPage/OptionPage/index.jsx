@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { styled, css } from "styled-components";
 import Button from "@Components/Common/Button/Button";
 import useButtonNavigation from "@hooks/useButtonNavigation";
@@ -9,7 +9,6 @@ import OptionTagLabel from "@Components/Custom/OptionTagLabel";
 
 const tabData = ["추가 옵션", "기본 포함 옵션"];
 const OptionPage = () => {
-  // 선택한 옵션들 상태 관리 (옵션 id 값 저장)
   const [selectedOptions, setSelectedOptions] = useState([]);
   const handleSelectOption = (id) => {
     if (selectedOptions.includes(id)) {
@@ -121,7 +120,8 @@ const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
 
-  margin-top: 50px;
+  margin-top: 48px;
+  padding-bottom: 79px;
   gap: 12px;
   width: 100%;
 `;

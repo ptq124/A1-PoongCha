@@ -9,13 +9,7 @@ import OptionPopup from "@Pages/CustomPage/OptionPage/OptionPopup";
 import useOnClickPopUp from "@hooks/useOnClickPopUp";
 
 const OptionItem = ({ data, selected, handleSelectOption }) => {
-  const {
-    id,
-    carOptionGroupName,
-    summaryDescription,
-    additionalPrice,
-    options,
-  } = data;
+  const { id, name, summaryDescription, additionalPrice, options } = data;
   const isAdditionalOption = additionalPrice !== 0;
 
   // 더 알아보기 팝업
@@ -44,8 +38,8 @@ const OptionItem = ({ data, selected, handleSelectOption }) => {
         <img src={options[0].imageUrl || SampleImg} />
       </Thumbnail>
       <Header>
-        <div>{carOptionGroupName}</div>
-        <div onClick={() => handleOpenPopup(data.options)}>더 알아보기</div>
+        <div>{name}</div>
+        <div onClick={handleOpenPopup}>더 알아보기</div>
       </Header>
 
       {isAdditionalOption && (

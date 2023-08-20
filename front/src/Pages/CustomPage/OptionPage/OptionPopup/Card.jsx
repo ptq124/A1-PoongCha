@@ -21,7 +21,7 @@ const Card = ({
     <CardContainer>
       <ImgContainer>
         <TagContainer>
-          {data.tags.map((tag, index) => (
+          {data.tagNames.map((tag, index) => (
             <Tag key={index}>{tag}</Tag>
           ))}
         </TagContainer>
@@ -31,9 +31,7 @@ const Card = ({
         <img src={CloseIcon} onClick={closePopup} />
         <Header>
           <OptionInfo>
-            {isSetOption && (
-              <span className="setName">{data.carOptionGroupName}</span>
-            )}
+            {isSetOption && <span className="setName">{data.name}</span>}
             <span className="optionName">{cardData.name}</span>
             {isAdditionalOption && (
               <span className="price">
@@ -130,10 +128,14 @@ const NavBullets = styled.div`
   }
 `;
 const Nav = styled.div`
-  width: 50%;
+  width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   ${({ theme }) => theme.font.Body4_Regular};
   color: ${({ theme }) => theme.color.grey400};
   margin-bottom: 14px;
+  margin-right: 10px;
   &:hover {
     cursor: pointer;
   }
@@ -149,7 +151,7 @@ const SetOptionNavigation = styled.div`
   bottom: 68px;
   display: flex;
   flex-wrap: wrap;
-  width: 226px;
+  width: 250px;
   margin-top: 44px;
 `;
 const Description = styled.div`

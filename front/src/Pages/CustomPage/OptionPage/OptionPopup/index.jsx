@@ -13,7 +13,6 @@ const OptionPopup = ({
 }) => {
   const [crntCardIdx, setCrntCardIdx] = useState(0);
   const { id, options } = data;
-
   return (
     <Wrapper ref={popupRef}>
       <Window>

@@ -19,6 +19,9 @@ const DefaultView = ({ filteredData, handleSelectOption, selectedOptions }) => {
   };
   return (
     <Wrapper>
+      <TotalOptionsInfo>
+        전체 <strong>{filteredData?.length}</strong>
+      </TotalOptionsInfo>
       <OptionContainer>
         {getPagedData(filteredData, crntPage, OPTION_ITEMS_PER_PAGE)?.map(
           (data, index) => (
@@ -51,6 +54,15 @@ const DefaultView = ({ filteredData, handleSelectOption, selectedOptions }) => {
   );
 };
 
+const TotalOptionsInfo = styled.div`
+  ${({ theme }) => theme.font.Body2_Regular};
+  margin-bottom: 16px;
+  color: ${({ theme }) => theme.color.grey300};
+
+  strong {
+    color: ${({ theme }) => theme.color.secondary};
+  }
+`;
 const PageBtn = styled.div`
   display: flex;
   align-items: center;

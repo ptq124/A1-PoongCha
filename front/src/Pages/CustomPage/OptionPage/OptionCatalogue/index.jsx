@@ -1,10 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import { additionalOptionData, defaultOptionData } from "../optionData";
 import SituationView from "./SituationView";
 import DefaultView from "./DefaultView";
+import { GET } from "@utils/fetch";
 
 const OptionCatalogue = ({
+  // data,
   selectedTab,
   selectedTag,
   handleSelectOption,
@@ -12,13 +14,24 @@ const OptionCatalogue = ({
 }) => {
   const [optionData, setOptionData] = useState();
   useEffect(() => {
-    // 추가 옵션 또는 기본 포함 옵션 데이터 불러오기
-    if (selectedTab === "추가 옵션") setOptionData(additionalOptionData);
-    else setOptionData(defaultOptionData);
+    GET("http://3.34.166.253/api/option-group").then((data) => {
+      if (selectedTab === "추가 옵션") {
+        setOptionData(data?.filter((option) => option.additionalPrice > 0));
+      } else {
+        // 기본 포함 옵션
+        setOptionData(data?.filter((option) => option.additionalPrice === 0));
+      }
+    });
   }, [selectedTab]);
 
+  // useEffect(() => {
+  //   // 추가 옵션 또는 기본 포함 옵션 데이터 불러오기
+  //   if (selectedTab === "추가 옵션") setOptionData(additionalOptionData);
+  //   else setOptionData(defaultOptionData);
+  // }, [selectedTab]);
+
   const filteredData = optionData?.filter((data) =>
-    data.tags.includes(selectedTag)
+    data.tagNames.includes(selectedTag)
   );
 
   return (

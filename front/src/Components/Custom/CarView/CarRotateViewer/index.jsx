@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { styled, css } from "styled-components";
 import { convertToTwoDigits } from "@utils/index";
 
-const CarRotateViewer = () => {
+const CarRotateViewer = ({ rotateImg }) => {
   const imageArray = Array.from({ length: 60 }, (_, index) => ++index);
 
   const [isClicked, setIsClicked] = useState(false);
@@ -60,9 +60,7 @@ const CarRotateViewer = () => {
         <CarImage
           key={index}
           $isDisplay={index === currentImage}
-          src={`https://www.hyundai.com/contents/vr360/LX06/exterior/A2B/0${convertToTwoDigits(
-            index
-          )}.png`}
+          src={`${rotateImg}` + `${convertToTwoDigits(index)}.png`}
           alt="360 VR"
         />
       ))}
