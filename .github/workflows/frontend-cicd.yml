@@ -5,7 +5,7 @@ on:
     branches: [ fe/setting/156-Frontend-CICD-구축 ]
 
 jobs:
-  frontend-ci:
+  frontend-cicd:
     runs-on: ubuntu-latest
     steps:
       - name: 👋 Checkout
@@ -38,10 +38,6 @@ jobs:
         working-directory: front
         shell: bash
 
-  frontend-cd:
-    needs: [frontend-ci]
-    runs-on: ubuntu-latest
-    steps:
       - name: 🔑 Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -53,4 +49,4 @@ jobs:
         env:
           REGION: ap-northeast-2
           S3_NAME: my-car-store-front
-        run: aws s3 cp --recursive --region ap-northeast-2 /front/dist s3://$S3_NAME/dist
+        run: aws s3 cp --recursive --region ap-northeast-2 front/dist/ s3://$S3_NAME/dist
