@@ -23,10 +23,11 @@ const BackToSurveyPopup = ({ popupRef, closePopup }) => {
           }}
         />
       </BtnContainer>
-      <img src={closeIcon} onClick={closePopup} />
+      <CloseBtn src={closeIcon} onClick={closePopup} />
     </Wrapper>
   );
 };
+
 const LeftBtnStyle = css`
   width: 178px;
   height: 46px;
@@ -49,6 +50,11 @@ const RightBtnStyle = css`
   ${({ theme }) => theme.font.Body3_Medium};
 `;
 
+const CloseBtn = styled.img`
+  &:hover {
+    cursor: pointer;
+  }
+`;
 const BtnContainer = styled.div`
   display: flex;
   margin-top: 32px;

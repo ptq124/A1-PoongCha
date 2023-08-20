@@ -82,19 +82,20 @@ const CarView = ({ data }) => {
   const [isInternal, setInternalHover] = useState(false);
 
   return (
-    <Wrapper>
-      <BackgrondTop />
-      <BackgrondBottom />
+    <>
+      <Wrapper>
+        <BackgrondTop />
+        <BackgrondBottom />
+        {CarMode()}
+      </Wrapper>
       <PopupProvider label={<BackToSurveyPopup />}>
         <Button
-          style={RecommendBtn}
+          style={BackToSurveyBtnStyle}
           text="다시 추천받기"
           img={<img src={rotate} />}
         />
       </PopupProvider>
-
-      {CarMode()}
-    </Wrapper>
+    </>
   );
 };
 const InternalImg = styled.img`
@@ -173,8 +174,9 @@ const ExternalBtn = css`
   }
 `;
 
-const RecommendBtn = css`
-  position: absolute;
+const BackToSurveyBtnStyle = css`
+  position: fixed;
+  /* top: 300px; */
 
   width: 124px;
   height: 36px;
@@ -187,7 +189,7 @@ const RecommendBtn = css`
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(2px);
 
-  top: 24px;
+  top: 145px;
   left: 128px;
 
   color: ${({ theme }) => theme.color.secondary};
@@ -228,7 +230,7 @@ const BackgrondBottom = styled.div`
 const Wrapper = styled.div`
   flex: 0 0 auto;
   width: calc(100% - 473px);
-  position: absolute;
+  position: fixed;
   display: flex;
   flex-direction: column;
 
