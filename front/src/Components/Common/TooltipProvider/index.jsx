@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
 
+// common action:
+// children mouseenter > open tooltip
+// children mouseleave > close tooltip
+// mouseevent not applied among tooltip area
+
 const TooltipProvider = ({ label, offset, children }) => {
   const [isOpen, setIsOpen] = useState(false);
 

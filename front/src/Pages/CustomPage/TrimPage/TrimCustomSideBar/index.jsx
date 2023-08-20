@@ -14,6 +14,7 @@ import TrimOptionLabel from "@Components/Custom/TrimOptionLabel";
 import TrimComparisonPopup from "../TrimComparisonPopup";
 import Tooltip from "@Components/Custom/Tooltip";
 import TooltipProvider from "@Components/Common/TooltipProvider";
+import PopupProvider from "@Components/Common/PopupProvider";
 
 const TrimCustomSideBar = () => {
   const move = useButtonNavigation();
@@ -26,62 +27,30 @@ const TrimCustomSideBar = () => {
     });
   };
 
-  const modelItemDescriptionPopupRef = useRef();
-  const {
-    isPopupOpen: isModelItemDescriptionPopupOpen,
-    openPopup: openModelItemDescriptionPopup,
-    closePopup: closeModelItemDescriptionPopup,
-  } = useOnClickPopUp(modelItemDescriptionPopupRef);
-
-  const trimComparisonPopupRef = useRef();
-  const {
-    isPopupOpen: isTrimComparisonPopupOpen,
-    openPopup: openTrimComparisonPopup,
-    closePopup: closeTrimComparisonPopup,
-  } = useOnClickPopUp(trimComparisonPopupRef);
   const trimRadioGroupTitle = () => {
     return (
       <>
         <span>트림</span>
-        <Button
-          text="비교하기"
-          style={TrimComparisonBtnStyle}
-          onClick={openTrimComparisonPopup}
-        />
+        <PopupProvider label={<TrimComparisonPopup />}>
+          <Button
+            text="비교하기"
+            style={TrimComparisonBtnStyle}
+            // onClick={openTrimComparisonPopup}
+          />
+        </PopupProvider>
       </>
     );
   };
   return (
     <Wrapper>
-      {isModelItemDescriptionPopupOpen && (
-        <OverlaidPopup
-          component={
-            <ModelItemsDescriptionPopup
-              popupRef={modelItemDescriptionPopupRef}
-              closePopup={closeModelItemDescriptionPopup}
-            />
-          }
-        />
-      )}
-      {isTrimComparisonPopupOpen && (
-        <OverlaidPopup
-          component={
-            <TrimComparisonPopup
-              popupRef={trimComparisonPopupRef}
-              closePopup={closeTrimComparisonPopup}
-            />
-          }
-        />
-      )}
       <CustomBarContent>
         <LinkBtnContainer>
           <img src={helpIcon} />
-          <Button
-            text="고르기 어렵다면?"
-            style={LinkBtnStyle}
-            onClick={openModelItemDescriptionPopup}
-          />
+          <PopupProvider label={<ModelItemsDescriptionPopup />}>
+            <Button text="고르기 어렵다면?" style={LinkBtnStyle} />
+          </PopupProvider>
         </LinkBtnContainer>
+
         {/* 엔진/바디/구동방식 선택하기 */}
         <ModelItems>
           {Object.entries(modelItemData).map(([questionKey, data]) => (
@@ -105,6 +74,7 @@ const TrimCustomSideBar = () => {
             </TooltipProvider>
           ))}
         </ModelItems>
+
         {/* 트림 선택하기 */}
         <TooltipProvider
           label={

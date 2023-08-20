@@ -4,6 +4,7 @@ import OptionTooltip from "./OptionTooltip";
 import OptionItem from "@Components/Custom/OptionItem";
 import SituationViewSampleImg from "@assets/images/tagged-page-sample.svg";
 import PlusIcon from "@assets/icons/plus.svg";
+import TooltipProvider from "@Components/Common/TooltipProvider";
 
 const SituationView = ({
   filteredData,
@@ -34,10 +35,16 @@ const SituationView = ({
     setIsTooltipFixed(!isTooltipFixed);
   };
 
+  const mockPositions = [
+    { x: 10, y: 10 },
+    { x: 10, y: 90 },
+    { x: 90, y: 10 },
+    { x: 90, y: 90 },
+  ];
   return (
     <Wrapper>
       <SituationScreen>
-        {activeOption !== null &&
+        {/* {activeOption !== null &&
           filteredData.map((data) => data.id).includes(activeOption) && (
             <OptionTooltip
               tag={selectedTag}
@@ -46,8 +53,27 @@ const SituationView = ({
               handleSelectOption={handleSelectOption}
               selected={selectedOptions.includes(activeOption)}
             />
-          )}
+          )} */}
         <img src={SituationViewSampleImg} />
+        {mockPositions.map((position, index) => (
+          <PlusBtnPositioner $position={position}>
+            <TooltipProvider
+              label={<OptionTooltip tag={selectedTag} />}
+              offset={css`
+                top: ${position.y < 23
+                  ? `calc(${position.y}% + 50px)`
+                  : `calc(${position.y}% - 110px)`};
+                left: ${position.x < 13
+                  ? `calc(${position.x}% - 5px)`
+                  : position.x > 85
+                  ? `calc(${position.x}% - 240px)`
+                  : `calc(${position.x}% - 124px)`};
+              `}
+            >
+              <PlusButton key={index} $position={position} />
+            </TooltipProvider>
+          </PlusBtnPositioner>
+        ))}
         {/* {filteredData.map((data, index) => (
           <PlusButton
             key={index}
@@ -79,15 +105,20 @@ const SituationView = ({
   );
 };
 
+const PlusBtnPositioner = styled.div`
+  position: absolute;
+  top: ${({ $position }) => $position.y}%;
+  left: ${({ $position }) => $position.x}%;
+`;
 const AdditionalComment = styled.div`
   ${({ theme }) => theme.font.Caption1_Regular};
   color: ${({ theme }) => theme.color.grey500};
   margin-top: -30px;
 `;
 const PlusButton = styled.div`
-  position: absolute;
+  /* position: absolute;
   top: ${({ $position }) => $position.y}%;
-  left: ${({ $position }) => $position.x}%;
+  left: ${({ $position }) => $position.x}%; */
 
   display: flex;
   align-items: center;
