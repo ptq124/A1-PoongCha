@@ -15,9 +15,9 @@ const RadioGroup = ({
     newStateHandler(selectedItem);
   }, [selectedItem]);
   return (
-    <Wrapper $style={style.wrapper}>
-      <Title $style={style.title}>{title}</Title>
-      <Options $style={style.options}>
+    <Wrapper $style={style?.wrapper}>
+      <Title $style={style?.title}>{title}</Title>
+      <Options $style={style?.options}>
         {options.map((option, index) => (
           <div key={index}>{label(option, selectedItem, handleSelectItem)}</div>
         ))}

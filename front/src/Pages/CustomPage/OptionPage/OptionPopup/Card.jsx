@@ -7,63 +7,69 @@ import checkBlue from "@assets/checkcircle/check-16-blue.svg";
 import checkGrey from "@assets/checkcircle/check-16-grey.svg";
 
 const Card = ({
-  index,
-  setData,
+  data,
+  cardData,
   selected,
   closePopup,
   handleNavClick,
   handleSelectOption,
 }) => {
-  const crntCardData = setData[index];
+  const isSetOption = data.options.length > 1;
+  const isAdditionalOption = data.additionalPrice !== 0;
+
   return (
     <CardContainer>
       <ImgContainer>
         <TagContainer>
-          {crntCardData.tag.map((tag, index) => (
+          {data.tagNames.map((tag, index) => (
             <Tag key={index}>{tag}</Tag>
           ))}
         </TagContainer>
-        <img src={SampleImg} />
+        <img src={cardData.imageUrl || SampleImg} />
       </ImgContainer>
       <DetailContainer>
         <img src={CloseIcon} onClick={closePopup} />
         <Header>
           <OptionInfo>
-            {crntCardData.set && (
-              <span className="setName">{crntCardData.set}</span>
+            {isSetOption && <span className="setName">{data.name}</span>}
+            <span className="optionName">{cardData.name}</span>
+            {isAdditionalOption && (
+              <span className="price">
+                {data.additionalPrice.toLocaleString()}원
+              </span>
             )}
-            <span className="optionName">{crntCardData.option}</span>
-            <span className="price">{crntCardData.price}</span>
           </OptionInfo>
-          <Button
-            text="선택"
-            style={BtnStyle}
-            selected={selected}
-            onClick={handleSelectOption}
-            img={<img src={selected ? checkGrey : checkBlue} />}
-          />
+          {isAdditionalOption && (
+            <Button
+              text="선택"
+              style={BtnStyle}
+              selected={selected}
+              onClick={handleSelectOption}
+              img={<img src={selected ? checkGrey : checkBlue} />}
+            />
+          )}
         </Header>
-        <Description>
-          초음파 센서를 통해 뒷좌석에 남아있는 승객의 움직임을 감지하여
-          운전자에게 경고함으로써 부주의에 의한 유아 또는 반려 동물 등의 방치
-          사고를 예방하는 신기술입니다.
-        </Description>
-        {setData.length !== 1 && (
+        <Description>{cardData.detailDescription}</Description>
+        {isSetOption && (
           <>
             <SetOptionNavigation>
-              {setData.map((data, idx) => (
+              {data.options.map((option, index) => (
                 <Nav
-                  key={idx}
-                  $selected={idx === index}
-                  onClick={() => handleNavClick(idx)}
+                  key={index}
+                  $selected={option.id === cardData.id}
+                  onClick={() => handleNavClick(index)}
                 >
-                  {data.option}
+                  {option.name}
                 </Nav>
               ))}
             </SetOptionNavigation>
             <NavBullets>
-              {setData.map((data, idx) => (
-                <Bullet key={idx} $selected={idx === index}></Bullet>
+              {data.options.map((option, index) => (
+                <Bullet
+                  key={index}
+                  $selected={option.id === cardData.id}
+                  onClick={() => handleNavClick(index)}
+                ></Bullet>
               ))}
             </NavBullets>
           </>
@@ -112,15 +118,24 @@ const Bullet = styled.div`
     `}
 `;
 const NavBullets = styled.div`
+  position: absolute;
+  bottom: 32px;
   display: flex;
   gap: 10px;
   margin-top: 14px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 const Nav = styled.div`
-  width: 50%;
+  width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   ${({ theme }) => theme.font.Body4_Regular};
   color: ${({ theme }) => theme.color.grey400};
   margin-bottom: 14px;
+  margin-right: 10px;
   &:hover {
     cursor: pointer;
   }
@@ -132,20 +147,17 @@ const Nav = styled.div`
     `}
 `;
 const SetOptionNavigation = styled.div`
+  position: absolute;
+  bottom: 68px;
   display: flex;
   flex-wrap: wrap;
-  width: 226px;
+  width: 250px;
   margin-top: 44px;
 `;
 const Description = styled.div`
   ${({ theme }) => theme.font.Body4_Regular};
   color: ${({ theme }) => theme.color.grey200};
   margin-top: 20px;
-`;
-const SelectButton = styled.div`
-  width: 69px;
-  height: 28px;
-  background-color: beige;
 `;
 const OptionInfo = styled.div`
   display: flex;

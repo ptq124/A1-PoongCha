@@ -5,3 +5,6 @@ export const MIN_SLIDER_OFFSET = 12;
 export const MAX_SLIDER_OFFSET = 608;
 export const SLIDER_HANDLE_SIZE = 24;
 export const SLIDER_UNIT_WIDTH = MAX_SLIDER_OFFSET / SLIDER_IDX_COUNT;
+
+// OptionPage
+export const OPTION_ITEMS_PER_PAGE = 8;

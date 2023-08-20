@@ -1,24 +1,47 @@
-import React from "react";
+import React, { useRef } from "react";
 import { css, keyframes, styled } from "styled-components";
 import TooltipTail from "@assets/icons/option-tooltip-tail.svg";
 import ArrowRightIcon from "@assets/icons/arrow-right.svg";
+import useOnClickPopUp from "@hooks/useOnClickPopUp";
+import OverlaidPopup from "@Components/Common/OverlaidPopup";
+import OptionPopup from "../../OptionPopup";
 
-const OptionModal = ({ tag, isOpen, data, handleOpenPopup }) => {
+const OptionTooltip = ({ tag, isOpen, data, handleSelectOption, selected }) => {
+  // 더 알아보기 팝업
+  const optionPopupRef = useRef();
+  const { isPopupOpen, openPopup, closePopup } =
+    useOnClickPopUp(optionPopupRef);
+  const handleOpenPopup = () => {
+    openPopup();
+  };
   return (
     <Wrapper $position={data.position} $isOpen={isOpen}>
+      {isPopupOpen && (
+        <OverlaidPopup
+          component={
+            <OptionPopup
+              popupRef={optionPopupRef}
+              closePopup={closePopup}
+              data={data}
+              handleSelectOption={handleSelectOption}
+              selected={selected}
+            />
+          }
+        />
+      )}
       <Content>
         <Img></Img>
         <Detail>
           <div className="tag">{tag}</div>
-          <div className="option">{data.option}</div>
-          <div className="price">{data.price}</div>
+          <div className="option">{data.carOptionGroupName}</div>
+          {data.additionalPrice !== 0 && (
+            <div className="price">
+              {data.additionalPrice.toLocaleString()}원
+            </div>
+          )}
         </Detail>
       </Content>
-      <Arrow
-        src={ArrowRightIcon}
-        className="arrow"
-        onClick={() => handleOpenPopup(data.option)}
-      />
+      <Arrow src={ArrowRightIcon} className="arrow" onClick={handleOpenPopup} />
       <ArrowTail src={TooltipTail} className="tail" $position={data.position} />
     </Wrapper>
   );
@@ -119,4 +142,4 @@ const Wrapper = styled.div`
   animation: ${({ $isOpen }) => ($isOpen ? fadeIn : fadeOut)} 0.2s linear;
 `;
 
-export default OptionModal;
+export default OptionTooltip;

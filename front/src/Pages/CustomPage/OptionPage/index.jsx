@@ -1,60 +1,65 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { styled, css } from "styled-components";
-import AllOptions from "./AllOptions";
 import Button from "@Components/Common/Button/Button";
 import useButtonNavigation from "@hooks/useButtonNavigation";
-import { options } from "./optionData";
+import { tagData } from "./tagData";
+import OptionCatalogue from "./OptionCatalogue";
+import RadioGroup from "@Components/Common/RadioGroup";
+import OptionTagLabel from "@Components/Custom/OptionTagLabel";
 
+const tabData = ["추가 옵션", "기본 포함 옵션"];
 const OptionPage = () => {
-  // 선택한 옵션들 상태관리
   const [selectedOptions, setSelectedOptions] = useState([]);
-  const handleSelectOption = (optionId) => {
-    const option = options.find((opt) => opt.id === optionId);
-
-    if (checkOptionSelected(optionId)) {
-      const poppedOptionSet = [optionId, ...(option.set ? option.set : [])];
-
-      setSelectedOptions((prev) =>
-        prev.filter((optId) => !poppedOptionSet.includes(optId))
-      );
+  const handleSelectOption = (id) => {
+    if (selectedOptions.includes(id)) {
+      setSelectedOptions((prev) => prev.filter((optId) => optId !== id));
     } else {
-      const pushedOptionSet = [
-        optionId,
-        ...(option.set
-          ? option.set.filter((opt) => !selectedOptions.includes(opt))
-          : []),
-      ];
-      setSelectedOptions((prev) => [...prev, ...pushedOptionSet]);
+      setSelectedOptions((prev) => [...prev, id]);
     }
   };
-  const checkOptionSelected = (optionId) => {
-    return selectedOptions.includes(optionId);
+
+  // 선택한 태그 상태 관리
+  const [selectedTag, setSelectedTag] = useState("전체");
+  const handleSelectTag = (tag) => {
+    setSelectedTag(tag);
   };
 
+  // 선택한 탭 상태 관리
   const [selectedTab, setSelectedTab] = useState("추가 옵션");
+  const handleSelectTab = (tab) => {
+    setSelectedTab(tab);
+    if (tab === "추가 옵션") {
+      setSelectedTag("전체");
+    } else setSelectedTag("대표");
+  };
+
   const move = useButtonNavigation();
 
   return (
     <Wrapper>
-      <TabWrapper>
-        <TabItem
-          selected={selectedTab === "추가 옵션"}
-          onClick={() => setSelectedTab("추가 옵션")}
-        >
-          추가 옵션
-        </TabItem>
-        <TabItem
-          selected={selectedTab === "기본 포함 옵션"}
-          onClick={() => setSelectedTab("기본 포함 옵션")}
-        >
-          기본 포함 옵션
-        </TabItem>
-      </TabWrapper>
-      <AllOptions
-        tab={selectedTab}
-        options={options}
+      <TabContainer>
+        {tabData.map((tab, index) => (
+          <TabItem
+            key={index}
+            selected={selectedTab === tab}
+            onClick={() => handleSelectTab(tab)}
+          >
+            {tab}
+          </TabItem>
+        ))}
+      </TabContainer>
+      <RadioGroup
+        label={OptionTagLabel}
+        options={selectedTab === "추가 옵션" ? tagData.slice(1) : tagData}
+        newStateHandler={handleSelectTag}
+        initialState={selectedTag}
+        style={optionTagGroupLabelStyle}
+      />
+      <OptionCatalogue
+        selectedTab={selectedTab}
+        selectedTag={selectedTag}
+        selectedOptions={selectedOptions}
         handleSelectOption={handleSelectOption}
-        checkOptionSelected={checkOptionSelected}
       />
       <ButtonContainer>
         <Button
@@ -71,7 +76,22 @@ const OptionPage = () => {
     </Wrapper>
   );
 };
+const optionTagGroupLabelStyle = {
+  wrapper: css`
+    display: flex;
 
+    padding-bottom: 18px;
+    margin: 15px 128px;
+
+    border-bottom: 1.5px solid;
+    border-bottom-color: ${({ theme }) => theme.color.grey700};
+  `,
+  title: css``,
+  options: css`
+    display: flex;
+    gap: 8px;
+  `,
+};
 const BtnStyle2 = css`
   width: 298px;
   height: 52px;
@@ -100,7 +120,8 @@ const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
 
-  margin-top: 50px;
+  margin-top: 48px;
+  padding-bottom: 79px;
   gap: 12px;
   width: 100%;
 `;
@@ -122,7 +143,7 @@ const TabItem = styled.div`
   padding-bottom: 8px;
 `;
 
-const TabWrapper = styled.div`
+const TabContainer = styled.div`
   display: flex;
 
   gap: 40px;
