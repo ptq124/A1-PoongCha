@@ -1,16 +1,14 @@
-import React, { useReducer, useRef } from "react";
+import React, { useReducer } from "react";
 import { css, styled } from "styled-components";
 import { initialState, reducer } from "./index.reducer";
 import Button from "@Components/Common/Button/Button";
 import useButtonNavigation from "@hooks/useButtonNavigation";
 import helpIcon from "@assets/icons/help-circle.svg";
-import useOnClickPopUp from "@hooks/useOnClickPopUp";
-import OverlaidPopup from "@Components/Common/OverlaidPopup";
-import ModelItemsDescriptionPopup from "../ModelItemsDescriptionPopup";
 import { TrimOptions, modelItemData } from "./mockData";
 import ModelItemOptionLabel from "@Components/Custom/ModelItemOptionLabel";
 import RadioGroup from "@Components/Common/RadioGroup";
 import TrimOptionLabel from "@Components/Custom/TrimOptionLabel";
+import ModelItemsDescriptionPopup from "../ModelItemsDescriptionPopup";
 import TrimComparisonPopup from "../TrimComparisonPopup";
 import Tooltip from "@Components/Custom/Tooltip";
 import TooltipProvider from "@Components/Common/TooltipProvider";
@@ -32,11 +30,7 @@ const TrimCustomSideBar = () => {
       <>
         <span>트림</span>
         <PopupProvider label={<TrimComparisonPopup />}>
-          <Button
-            text="비교하기"
-            style={TrimComparisonBtnStyle}
-            // onClick={openTrimComparisonPopup}
-          />
+          <Button text="비교하기" style={TrimComparisonBtnStyle} />
         </PopupProvider>
       </>
     );

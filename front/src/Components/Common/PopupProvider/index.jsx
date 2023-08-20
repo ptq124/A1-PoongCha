@@ -1,5 +1,5 @@
 import useOnClickPopUp from "@hooks/useOnClickPopUp";
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { styled } from "styled-components";
 import OverlaidPopup from "../OverlaidPopup";
 
@@ -7,13 +7,16 @@ const PopupProvider = ({ label, children }) => {
   const popupRef = useRef();
   const { isPopupOpen, openPopup, closePopup } = useOnClickPopUp(popupRef);
   return (
-    <Wrapper onClick={openPopup}>
+    <Wrapper>
       {isPopupOpen && (
         <OverlaidPopup
           component={React.cloneElement(label, { closePopup, popupRef })}
         />
       )}
-      {children}
+      {React.cloneElement(children, {
+        ...children.props,
+        onClick: openPopup,
+      })}
     </Wrapper>
   );
 };

@@ -15,36 +15,35 @@ const OptionTooltip = ({ tag, isOpen, data, handleSelectOption, selected }) => {
     openPopup();
   };
   return (
-    <>tooltip</>
-    // <Wrapper $position={data.position} $isOpen={isOpen}>
-    //   {isPopupOpen && (
-    //     <OverlaidPopup
-    //       component={
-    //         <OptionPopup
-    //           popupRef={optionPopupRef}
-    //           closePopup={closePopup}
-    //           data={data}
-    //           handleSelectOption={handleSelectOption}
-    //           selected={selected}
-    //         />
-    //       }
-    //     />
-    //   )}
-    //   <Content>
-    //     <Img></Img>
-    //     <Detail>
-    //       <div className="tag">{tag}</div>
-    //       <div className="option">{data.carOptionGroupName}</div>
-    //       {data.additionalPrice !== 0 && (
-    //         <div className="price">
-    //           {data.additionalPrice.toLocaleString()}원
-    //         </div>
-    //       )}
-    //     </Detail>
-    //   </Content>
-    //   <Arrow src={ArrowRightIcon} className="arrow" onClick={handleOpenPopup} />
-    //   <ArrowTail src={TooltipTail} className="tail" $position={data.position} />
-    // </Wrapper>
+    <Wrapper $position={data.position} $isOpen={isOpen}>
+      {isPopupOpen && (
+        <OverlaidPopup
+          component={
+            <OptionPopup
+              popupRef={optionPopupRef}
+              closePopup={closePopup}
+              data={data}
+              handleSelectOption={handleSelectOption}
+              selected={selected}
+            />
+          }
+        />
+      )}
+      <Content>
+        <Img></Img>
+        <Detail>
+          <div className="tag">{tag}</div>
+          <div className="option">{data.carOptionGroupName}</div>
+          {data.additionalPrice !== 0 && (
+            <div className="price">
+              {data.additionalPrice.toLocaleString()}원
+            </div>
+          )}
+        </Detail>
+      </Content>
+      <Arrow src={ArrowRightIcon} className="arrow" onClick={handleOpenPopup} />
+      <ArrowTail src={TooltipTail} className="tail" $position={data.position} />
+    </Wrapper>
   );
 };
 const ArrowTail = styled.img`
