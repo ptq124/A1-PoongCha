@@ -8,9 +8,9 @@ import { GET } from "@utils/fetch";
 const ColorPage = () => {
   const [colorData, setColorData] = useState([]);
 
-  GET("http://3.34.166.253:8080/api/car-type/1/color").then((data) => {
-    console.log("api: ", data);
-  });
+  // GET("http://3.34.166.253:8080/api/car-type/1/color").then((data) => {
+  //   console.log("api: ", data);
+  // });
   const data = mockColordData.filter((data) => data.id === 1);
   const [{ id, colors }] = data;
   const exterData = colors.filter((data) => data.type === "EXTERIOR");
