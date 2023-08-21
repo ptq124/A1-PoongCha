@@ -21,49 +21,57 @@ const tagData = [
     id:1,
     name:"대표",
     activeIcon:ActiveMain,
-    inactiveIcon:InactiveMain
+    inactiveIcon:InactiveMain,
+    situationImageUrl:""
   },
   {
     id:2,
     name:"전체",
     activeIcon:ActiveAll,
-    inactiveIcon:InactiveAll
+    inactiveIcon:InactiveAll,
+    situationImageUrl:""
   },
   {
     id:3,
     name:"주행안전",
     activeIcon:ActiveSafety,
-    inactiveIcon:InactiveSafety
+    inactiveIcon:InactiveSafety,
+    situationImageUrl:"https://my-car-store-resource.s3.ap-northeast-2.amazonaws.com/car_option_tags/safety_situation.jpg"
   },
   {
     id:4,
     name:"사용편의",
     activeIcon:ActiveConvenience,
-    inactiveIcon:InactiveConvenience
+    inactiveIcon:InactiveConvenience,
+    situationImageUrl:"https://my-car-store-resource.s3.ap-northeast-2.amazonaws.com/car_option_tags/convenience_situation.jpg"
   },
   {
     id:5,
     name:"추위/더위",
     activeIcon:ActiveTemperature,
-    inactiveIcon:InactiveTemperature
+    inactiveIcon:InactiveTemperature,
+    situationImageUrl:"https://my-car-store-resource.s3.ap-northeast-2.amazonaws.com/car_option_tags/temperature_situation.jpg"
   },
   {
     id:6,
     name:"주차/출차",
     activeIcon:ActiveParking,
-    inactiveIcon:InactiveParking
+    inactiveIcon:InactiveParking,
+    situationImageUrl:"https://my-car-store-resource.s3.ap-northeast-2.amazonaws.com/car_option_tags/parking_situation.jpg"
   },
   {
     id:7,
     name:"퍼포먼스",
     activeIcon:ActivePerformance,
-    inactiveIcon:InactivePerformance
+    inactiveIcon:InactivePerformance,
+    situationImageUrl:"https://my-car-store-resource.s3.ap-northeast-2.amazonaws.com/car_option_tags/performance_situation.jpg"
   },
   {
     id:8,
     name:"스타일",
     activeIcon:ActiveStyle,
-    inactiveIcon:InactiveStyle
+    inactiveIcon:InactiveStyle,
+    situationImageUrl:"https://my-car-store-resource.s3.ap-northeast-2.amazonaws.com/car_option_tags/style_situation.jpg"
   },
 ];
 export { tagData };

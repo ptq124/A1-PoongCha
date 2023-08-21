@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { css, styled } from "styled-components";
 import OptionTooltip from "./OptionTooltip";
 import OptionItem from "@Components/Custom/OptionItem";
-import SituationViewSampleImg from "@assets/images/tagged-page-sample.svg";
 import PlusIcon from "@assets/icons/plus.svg";
-import TooltipProvider from "@Components/Common/TooltipProvider";
 
 const SituationView = ({
   filteredData,
@@ -12,7 +10,7 @@ const SituationView = ({
   handleSelectOption,
   selectedOptions,
 }) => {
-  // 툴팁 오픈 상태 관리
+  const [mockPositions, setMockPositions] = useState([]);
   const [activeOption, setActiveOption] = useState(null);
   const [isTooltipOpen, setIsTooltipOpen] = useState(false);
   const [isTooltipFixed, setIsTooltipFixed] = useState(false);
@@ -34,50 +32,39 @@ const SituationView = ({
   const handlePlusBtnClick = () => {
     setIsTooltipFixed(!isTooltipFixed);
   };
+  // + 버튼 랜덤 위치 설정
+  useEffect(() => {
+    setMockPositions(
+      filteredData.map((data) => ({
+        x: Math.random() * 80 + 10,
+        y: Math.random() * 80 + 10,
+      }))
+    );
+  }, [selectedTag]);
 
-  const mockPositions = [
-    { x: 10, y: 10 },
-    { x: 10, y: 90 },
-    { x: 90, y: 10 },
-    { x: 90, y: 90 },
-  ];
   return (
     <Wrapper>
       <SituationScreen>
-        {/* {activeOption !== null &&
+        {activeOption !== null &&
           filteredData.map((data) => data.id).includes(activeOption) && (
             <OptionTooltip
               tag={selectedTag}
               isOpen={isTooltipOpen}
+              position={
+                mockPositions[
+                  filteredData.findIndex((data) => data.id === activeOption)
+                ]
+              }
               data={filteredData.find((item) => item.id === activeOption)}
               handleSelectOption={handleSelectOption}
               selected={selectedOptions.includes(activeOption)}
             />
-          )} */}
-        <img src={SituationViewSampleImg} />
-        {/* {mockPositions.map((position, index) => (
-          <PlusBtnPositioner $position={position}>
-            <TooltipProvider
-              label={<OptionTooltip tag={selectedTag} />}
-              offset={css`
-                top: ${position.y < 23
-                  ? `calc(${position.y}% + 50px)`
-                  : `calc(${position.y}% - 110px)`};
-                left: ${position.x < 13
-                  ? `calc(${position.x}% - 5px)`
-                  : position.x > 85
-                  ? `calc(${position.x}% - 240px)`
-                  : `calc(${position.x}% - 124px)`};
-              `}
-            >
-              <PlusButton key={index} $position={position} />
-            </TooltipProvider>
-          </PlusBtnPositioner>
-        ))} */}
-        {/* {filteredData.map((data, index) => (
+          )}
+        <img src={selectedTag.situationImageUrl} />
+        {filteredData.map((data, index) => (
           <PlusButton
             key={index}
-            $position={data.position}
+            $position={mockPositions[index]}
             $clicked={activeOption === data.id}
             onMouseEnter={() => handlePlusBtnHover(data.id)}
             onMouseLeave={handlePlusBtnLeave}
@@ -85,10 +72,10 @@ const SituationView = ({
           >
             <img src={PlusIcon} />
           </PlusButton>
-        ))} */}
+        ))}
       </SituationScreen>
       <OptionItemsContainer>
-        {filteredData.map((data, index) => (
+        {filteredData?.map((data, index) => (
           <OptionItem
             key={index}
             data={data}
@@ -105,20 +92,15 @@ const SituationView = ({
   );
 };
 
-const PlusBtnPositioner = styled.div`
-  position: absolute;
-  top: ${({ $position }) => $position.y}%;
-  left: ${({ $position }) => $position.x}%;
-`;
 const AdditionalComment = styled.div`
   ${({ theme }) => theme.font.Caption1_Regular};
   color: ${({ theme }) => theme.color.grey500};
   margin-top: -30px;
 `;
 const PlusButton = styled.div`
-  /* position: absolute;
-  top: ${({ $position }) => $position.y}%;
-  left: ${({ $position }) => $position.x}%; */
+  position: absolute;
+  top: ${({ $position }) => $position?.y}%;
+  left: ${({ $position }) => $position?.x}%;
 
   display: flex;
   align-items: center;
@@ -127,7 +109,7 @@ const PlusButton = styled.div`
   width: 28px;
   height: 28px;
 
-  background-color: #acb8c8;
+  background-color: ${({ theme }) => theme.color.secondary};
 
   border-radius: 55px;
   opacity: 0.8;

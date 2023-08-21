@@ -28,9 +28,11 @@ const TrimCustomSideBar = () => {
   };
 
   useEffect(() => {
-    GET("http://my-car.store/api/car-type/1/component-group").then((data) => {
-      setComponentGroupData(data);
-    });
+    GET(import.meta.env.VITE_BASE_URL + "/car-type/1/component-group").then(
+      (data) => {
+        setComponentGroupData(data);
+      }
+    );
   }, []);
 
   const trimRadioGroupTitle = () => {
