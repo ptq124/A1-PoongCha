@@ -1,45 +1,34 @@
-import React, { useRef } from "react";
+import React from "react";
 import { styled, css } from "styled-components";
 import checkBlue from "@assets/checkcircle/check-16-blue.svg";
 import checkGrey from "@assets/checkcircle/check-16-grey.svg";
 import Button from "@Components/Common/Button/Button";
 import SampleImg from "@assets/images/optionItem_sample.svg";
-import OverlaidPopup from "@Components/Common/OverlaidPopup";
 import OptionPopup from "@Pages/CustomPage/OptionPage/OptionPopup";
-import useOnClickPopUp from "@hooks/useOnClickPopUp";
+import PopupProvider from "@Components/Common/PopupProvider";
 
 const OptionItem = ({ data, selected, handleSelectOption }) => {
   const { id, name, summaryDescription, additionalPrice, options } = data;
   const isAdditionalOption = additionalPrice !== 0;
 
-  // 더 알아보기 팝업
-  const optionPopupRef = useRef();
-  const { isPopupOpen, openPopup, closePopup } =
-    useOnClickPopUp(optionPopupRef);
-  const handleOpenPopup = () => {
-    openPopup();
-  };
   return (
     <Wrapper>
-      {isPopupOpen && (
-        <OverlaidPopup
-          component={
+      <Thumbnail>
+        <img src={options[0].imageUrl || SampleImg} />
+      </Thumbnail>
+      <Header>
+        <div className="optionName">{name}</div>
+        <PopupProvider
+          label={
             <OptionPopup
-              popupRef={optionPopupRef}
-              closePopup={closePopup}
               data={data}
               handleSelectOption={handleSelectOption}
               selected={selected}
             />
           }
-        />
-      )}
-      <Thumbnail>
-        <img src={options[0].imageUrl || SampleImg} />
-      </Thumbnail>
-      <Header>
-        <div>{name}</div>
-        <div onClick={handleOpenPopup}>더 알아보기</div>
+        >
+          <div className="popupBtn">더 알아보기</div>
+        </PopupProvider>
       </Header>
 
       {isAdditionalOption && (
@@ -122,8 +111,8 @@ const Header = styled.div`
   display: flex;
   justify-content: space-between;
 
-  div:nth-child(1) {
-    color: ${({ theme }) => theme.color.gery0};
+  .optionName {
+    color: ${({ theme }) => theme.color.grey0};
     ${({ theme }) => theme.font.Head4};
 
     width: 166px;
@@ -131,7 +120,7 @@ const Header = styled.div`
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-  div:nth-child(2) {
+  .popupBtn {
     color: ${({ theme }) => theme.color.secondary};
     ${({ theme }) => theme.font.Body4_Regular};
     &:hover {

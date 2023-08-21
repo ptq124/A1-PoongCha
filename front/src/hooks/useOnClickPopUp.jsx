@@ -14,7 +14,6 @@ const useOnClickPopUp = (ref) => {
       return;
     }
     closePopup();
-    document.body.style.overflow = "auto";
   };
 
   useEffect(() => {

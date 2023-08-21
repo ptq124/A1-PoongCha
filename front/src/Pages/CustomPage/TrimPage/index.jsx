@@ -13,6 +13,7 @@ const TrimPage = () => {
 };
 
 const Wrapper = styled.div`
+  position: relative;
   display: flex;
   width: 100%;
   height: 100%;

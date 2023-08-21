@@ -44,7 +44,7 @@ const ExtraSurvey = () => {
         <RadioGroup
           key={questionKey}
           title={data.title}
-          label={ExtraQuestionLabel}
+          label={<ExtraQuestionLabel />}
           options={data.options}
           newStateHandler={(newState) =>
             handleOptionSelect(questionKey, newState)

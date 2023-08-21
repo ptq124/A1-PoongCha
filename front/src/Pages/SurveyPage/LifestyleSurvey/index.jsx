@@ -82,7 +82,7 @@ const LifestyleSurvey = () => {
       <S.SurveyContent>
         <RadioGroup
           title={lifestyleRadioGroupTitle()}
-          label={LifestyleQuestionLabel}
+          label={<LifestyleQuestionLabel />}
           options={lifestyleSurveyInfo.options}
           newStateHandler={(newState) =>
             handleOptionSelect("lifestyle", newState)
