@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor
-public class AdditionalQuestionOptionNameResponse {
-    private Long id;
-    private String name;
+public class AdditionalQuestionAnswerResponse {
+    private long questionId;
+    private long optionId;
 }
