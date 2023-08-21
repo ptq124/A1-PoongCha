@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import SituationView from "./SituationView";
 import DefaultView from "./DefaultView";
-import { GET } from "@utils/fetch";
+import { getOption } from "apis/custom";
 
 const OptionCatalogue = ({
   selectedTab,
@@ -12,12 +12,11 @@ const OptionCatalogue = ({
 }) => {
   const [optionData, setOptionData] = useState();
   useEffect(() => {
-    GET("http://api.my-car.store/option-group").then((data) => {
+    getOption().then((data) => {
       if (selectedTab === "추가 옵션") {
         setOptionData(data?.filter((option) => option.additionalPrice > 0));
       } else {
         // 기본 포함 옵션
-
         setOptionData(data?.filter((option) => option.additionalPrice === 0));
       }
     });

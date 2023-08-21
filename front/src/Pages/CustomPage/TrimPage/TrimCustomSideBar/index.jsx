@@ -13,7 +13,7 @@ import TrimComparisonPopup from "../TrimComparisonPopup";
 import Tooltip from "@Components/Custom/Tooltip";
 import TooltipProvider from "@Components/Common/TooltipProvider";
 import PopupProvider from "@Components/Common/PopupProvider";
-import { GET } from "@utils/fetch";
+import { getComponent } from "apis/custom";
 
 const TrimCustomSideBar = () => {
   const move = useButtonNavigation();
@@ -28,11 +28,9 @@ const TrimCustomSideBar = () => {
   };
 
   useEffect(() => {
-    GET(import.meta.env.VITE_BASE_URL + "/car-type/1/component-group").then(
-      (data) => {
-        setComponentGroupData(data);
-      }
-    );
+    getComponent().then((data) => {
+      setComponentGroupData(data);
+    });
   }, []);
 
   const trimRadioGroupTitle = () => {
