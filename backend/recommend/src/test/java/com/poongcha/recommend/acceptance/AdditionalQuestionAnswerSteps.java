@@ -2,6 +2,7 @@ package com.poongcha.recommend.acceptance;
 
 import static com.epages.restdocs.apispec.RestAssuredRestDocumentationWrapper.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static util.DocumentationTest.DEFAULT_RESTDOCS_PATH;
 import static util.DocumentationTest.customRequestFields;
 import static util.DocumentationTest.given;
@@ -58,6 +59,43 @@ public class AdditionalQuestionAnswerSteps {
         try (AutoCloseableSoftAssertions assertions = new AutoCloseableSoftAssertions()) {
             assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.SC_CREATED);
             assertions.assertThat(response.header(HttpHeaders.LOCATION)).isEqualTo(location);
+        }
+    }
+
+    public static ExtractableResponse<Response> 추가_질문_답변_ID_조회_요청(final long id) {
+        return given()
+                .filter(document(
+                        DEFAULT_RESTDOCS_PATH,
+                        responseFields(
+                                fieldWithPath("id").type(JsonFieldType.NUMBER).description("질문 답변 그룹 ID"),
+                                fieldWithPath("answers[]").type(JsonFieldType.ARRAY).description("질문 답변 목록"),
+                                fieldWithPath("answers[].questionId").type(JsonFieldType.NUMBER)
+                                        .description("추가 질문 ID"),
+                                fieldWithPath("answers[].optionId").type(JsonFieldType.NUMBER)
+                                        .description("추가 질문 옵션 ID")
+                        )
+                )).log().all()
+                .when()
+                .get("/answer/{id}", 1)
+                .then().log().all()
+                .extract();
+    }
+
+    public static void 추가_질문_답변_ID_조회_응답_검증(
+            final ExtractableResponse<Response> response,
+            final long id,
+            final List<Integer> additionalQuestionIds,
+            final List<Integer> additionalQuestionOptionIds
+    ) {
+        try (AutoCloseableSoftAssertions assertions = new AutoCloseableSoftAssertions()) {
+            assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.SC_OK);
+            assertions.assertThat(response.jsonPath().getLong("id")).isEqualTo(id);
+            assertions.assertThat(response.jsonPath().getList("answers.questionId"))
+                    .usingRecursiveComparison()
+                    .isEqualTo(additionalQuestionIds);
+            assertions.assertThat(response.jsonPath().getList("answers.optionId"))
+                    .usingRecursiveComparison()
+                    .isEqualTo(additionalQuestionOptionIds);
         }
     }
 }

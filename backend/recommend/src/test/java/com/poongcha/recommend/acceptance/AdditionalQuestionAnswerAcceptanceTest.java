@@ -1,5 +1,7 @@
 package com.poongcha.recommend.acceptance;
 
+import static com.poongcha.recommend.acceptance.AdditionalQuestionAnswerSteps.추가_질문_답변_ID_조회_요청;
+import static com.poongcha.recommend.acceptance.AdditionalQuestionAnswerSteps.추가_질문_답변_ID_조회_응답_검증;
 import static com.poongcha.recommend.acceptance.AdditionalQuestionAnswerSteps.추가_질문_답변_생성_요청;
 import static com.poongcha.recommend.acceptance.AdditionalQuestionAnswerSteps.추가_질문_답변_생성_응답_검증;
 import static com.poongcha.recommend.acceptance.AdditionalQuestionSteps.추가_질문_생성_요청;
@@ -38,5 +40,26 @@ public class AdditionalQuestionAnswerAcceptanceTest extends RecommendAcceptanceT
 
         // THEN
         추가_질문_답변_생성_응답_검증(response, "/answer/1");
+    }
+
+    @DisplayName("추가 질문 답변 ID 조회")
+    @Test
+    void 추가_질문_답변_ID_조회() {
+        // GIVEN
+        추가_질문_답변_생성_요청(
+                List.of(ageAdditionalQuestionId, drivingCareerAdditionalQuestionId, valueAdditionalQuestionId),
+                List.of(1, 5, 19)
+        );
+
+        // WHEN
+        var response = 추가_질문_답변_ID_조회_요청(1L);
+
+        // THEN
+        추가_질문_답변_ID_조회_응답_검증(
+                response,
+                1,
+                List.of(ageAdditionalQuestionId, drivingCareerAdditionalQuestionId, valueAdditionalQuestionId),
+                List.of(1, 5, 19)
+        );
     }
 }
