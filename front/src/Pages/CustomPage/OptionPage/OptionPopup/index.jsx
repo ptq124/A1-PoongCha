@@ -31,7 +31,7 @@ const OptionPopup = ({
               selected={selected}
               closePopup={closePopup}
               handleNavClick={setCrntCardIdx}
-              handleSelectOption={() => handleSelectOption(id)}
+              handleSelectOption={() => handleSelectOption(data)}
             />
           ))}
         </Cards>
