@@ -10,10 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CarOptionTagResponse {
     private long id;
-
     private String name;
-
     private String situationImageUrl;
-
     private String iconImageUrl;
 }

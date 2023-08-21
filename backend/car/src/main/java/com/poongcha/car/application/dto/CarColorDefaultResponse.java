@@ -12,7 +12,7 @@ import lombok.RequiredArgsConstructor;
 public class CarColorDefaultResponse {
     private final long id;
     private final String name;
-    private final String image;
+    private final String imageUrl;
     private final String type;
     private final String trimExteriorImageUrl;
     private final String trimInteriorImageUrl;
