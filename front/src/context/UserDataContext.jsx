@@ -4,6 +4,16 @@ const UserDataContext = createContext();
 
 export const UserDataProvider = ({ children }) => {
   const [totalData, setTotalData] = useState({
+    트림: {
+      name: "Le Blanc",
+      defaultOptions: [
+        "20인치 알로이 휠",
+        "12인치 클러스터",
+        "서라운드 뷰 모니터",
+      ],
+      information: "필수적인 옵션만 모은",
+      additionalPrice: 43460000,
+    },
     엔진: {
       id: 2,
       name: "가솔린 3.8",
@@ -51,17 +61,10 @@ export const UserDataProvider = ({ children }) => {
   });
 
   const 유저데이터저장 = (key, data) => {
-    if (key !== "옵션") {
-      setTotalData((prev) => ({
-        ...prev,
-        [key]: data[0],
-      }));
-    } else {
-      setTotalData((prev) => ({
-        ...prev,
-        [key]: data,
-      }));
-    }
+    setTotalData((prev) => ({
+      ...prev,
+      [key]: data,
+    }));
   };
 
   return (
