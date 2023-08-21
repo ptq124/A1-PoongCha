@@ -40,7 +40,7 @@ const OptionItem = ({ data, selected, handleSelectOption }) => {
             style={BtnStyle}
             selected={selected}
             img={<img src={selected ? checkGrey : checkBlue} />}
-            onClick={() => handleSelectOption(id)}
+            onClick={() => handleSelectOption(data)}
           />
         </>
       )}

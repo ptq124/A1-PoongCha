@@ -6,15 +6,19 @@ import { tagData } from "./tagData";
 import OptionCatalogue from "./OptionCatalogue";
 import RadioGroup from "@Components/Common/RadioGroup";
 import OptionTagLabel from "@Components/Custom/OptionTagLabel";
+import { useUserData } from "context/UserDataContext";
 
 const tabData = ["추가 옵션", "기본 포함 옵션"];
 const OptionPage = () => {
-  const [selectedOptions, setSelectedOptions] = useState([]);
-  const handleSelectOption = (id) => {
-    if (selectedOptions.includes(id)) {
-      setSelectedOptions((prev) => prev.filter((optId) => optId !== id));
+  const { totalData, 유저데이터저장 } = useUserData();
+  const handleSelectOption = (option) => {
+    if (totalData["옵션"].includes(option)) {
+      유저데이터저장(
+        "옵션",
+        totalData["옵션"].filter((data) => data.id !== option.id)
+      );
     } else {
-      setSelectedOptions((prev) => [...prev, id]);
+      유저데이터저장("옵션", [...totalData["옵션"], option]);
     }
   };
 
@@ -60,7 +64,7 @@ const OptionPage = () => {
       <OptionCatalogue
         selectedTab={selectedTab}
         selectedTag={selectedTag}
-        selectedOptions={selectedOptions}
+        selectedOptions={totalData["옵션"]}
         handleSelectOption={handleSelectOption}
       />
       <ButtonContainer>

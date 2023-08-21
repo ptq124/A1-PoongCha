@@ -12,12 +12,11 @@ const OptionCatalogue = ({
 }) => {
   const [optionData, setOptionData] = useState();
   useEffect(() => {
-    GET("http://api.my-car.store/option-group").then((data) => {
+    GET(import.meta.env.VITE_BASE_URL + "/option-group").then((data) => {
       if (selectedTab === "추가 옵션") {
         setOptionData(data?.filter((option) => option.additionalPrice > 0));
       } else {
         // 기본 포함 옵션
-
         setOptionData(data?.filter((option) => option.additionalPrice === 0));
       }
     });

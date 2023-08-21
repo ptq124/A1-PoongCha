@@ -55,9 +55,11 @@ const SituationView = ({
                   filteredData.findIndex((data) => data.id === activeOption)
                 ]
               }
-              data={filteredData.find((item) => item.id === activeOption)}
+              data={filteredData.find((data) => data.id === activeOption)}
               handleSelectOption={handleSelectOption}
-              selected={selectedOptions.includes(activeOption)}
+              selected={selectedOptions.includes(
+                filteredData.find((data) => data.id === activeOption)
+              )}
             />
           )}
         <img src={selectedTag.situationImageUrl} />
@@ -79,7 +81,7 @@ const SituationView = ({
           <OptionItem
             key={index}
             data={data}
-            selected={selectedOptions.includes(data.id)}
+            selected={selectedOptions.includes(data)}
             handleSelectOption={handleSelectOption}
           />
         ))}
