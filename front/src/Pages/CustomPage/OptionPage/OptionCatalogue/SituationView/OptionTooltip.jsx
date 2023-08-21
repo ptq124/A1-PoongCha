@@ -5,14 +5,21 @@ import ArrowRightIcon from "@assets/icons/arrow-right.svg";
 import OptionPopup from "../../OptionPopup";
 import PopupProvider from "@Components/Common/PopupProvider";
 
-const OptionTooltip = ({ tag, isOpen, data, handleSelectOption, selected }) => {
+const OptionTooltip = ({
+  tag,
+  isOpen,
+  data,
+  handleSelectOption,
+  selected,
+  position,
+}) => {
   return (
-    <Wrapper $position={data.position} $isOpen={isOpen}>
+    <Wrapper $position={position} $isOpen={isOpen}>
       <Content>
-        <Img></Img>
+        <Img src={data.options[0].imageUrl}></Img>
         <Detail>
-          <div className="tag">{tag}</div>
-          <div className="option">{data.carOptionGroupName}</div>
+          <div className="tag">{tag.name}</div>
+          <div className="option">{data.name}</div>
           {data.additionalPrice !== 0 && (
             <div className="price">
               {data.additionalPrice.toLocaleString()}원
@@ -31,13 +38,13 @@ const OptionTooltip = ({ tag, isOpen, data, handleSelectOption, selected }) => {
       >
         <Arrow src={ArrowRightIcon} className="arrow" />
       </PopupProvider>
-      <ArrowTail src={TooltipTail} className="tail" $position={data.position} />
+      <ArrowTail src={TooltipTail} className="tail" $position={position} />
     </Wrapper>
   );
 };
 const ArrowTail = styled.img`
   position: absolute;
-  top: ${({ $position }) => $position.y < 23 && "-8px"};
+  top: ${({ $position }) => $position?.y < 23 && "-8px"};
   ${({ $position }) =>
     $position.y < 23
       ? css`
@@ -51,7 +58,7 @@ const ArrowTail = styled.img`
   height: 10px;
 
   left: ${({ $position }) =>
-    $position.x < 13 ? "10px" : $position.x > 85 ? "250px" : "130px"};
+    $position?.x < 13 ? "10px" : $position?.x > 85 ? "250px" : "130px"};
 `;
 const Arrow = styled.img`
   width: 24px;
@@ -68,6 +75,10 @@ const Detail = styled.div`
   .option {
     color: ${({ theme }) => theme.color.grey50};
     ${({ theme }) => theme.font.Body3_Medium};
+    width: 138px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .price {
     color: ${({ theme }) => theme.color.grey100};
@@ -75,10 +86,10 @@ const Detail = styled.div`
     margin-top: 8px;
   }
 `;
-const Img = styled.div`
+const Img = styled.img`
   width: 72px;
   height: 72px;
-  background-color: beige;
+  object-fit: cover;
 `;
 const Content = styled.div`
   display: flex;
@@ -102,16 +113,18 @@ const fadeOut = keyframes`
 `;
 const Wrapper = styled.div`
   position: absolute;
+  top: -100px;
+
   top: ${({ $position }) =>
-    $position.y < 23
-      ? `calc(${$position.y}% + 50px)`
-      : `calc(${$position.y}% - 110px)`};
+    $position?.y < 23
+      ? `calc(${$position?.y}% + 50px)`
+      : `calc(${$position?.y}% - 110px)`};
   left: ${({ $position }) =>
-    $position.x < 13
-      ? `calc(${$position.x}% - 5px)`
-      : $position.x > 85
-      ? `calc(${$position.x}% - 240px)`
-      : `calc(${$position.x}% - 124px)`};
+    $position?.x < 13
+      ? `calc(${$position?.x}% - 5px)`
+      : $position?.x > 85
+      ? `calc(${$position?.x}% - 240px)`
+      : `calc(${$position?.x}% - 124px)`};
 
   display: flex;
   justify-content: space-between;
