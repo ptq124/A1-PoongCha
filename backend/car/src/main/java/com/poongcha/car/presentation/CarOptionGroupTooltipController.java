@@ -19,7 +19,7 @@ public class CarOptionGroupTooltipController {
     private final CarOptionGroupTooltipCommandService carOptionGroupTooltipCommandService;
     private final CarOptionGroupTooltipQueryService carOptionGroupTooltipQueryService;
 
-    @PostMapping("/api/option-group/{id}/tooltip")
+    @PostMapping("/option-group/{id}/tooltip")
     public ResponseEntity<Void> create(
             @PathVariable("id") final long optionGroupId,
             @RequestBody CarOptionGroupTooltipCreateRequest carOptionGroupTooltipCreateRequest
@@ -28,11 +28,11 @@ public class CarOptionGroupTooltipController {
                 .create(optionGroupId, carOptionGroupTooltipCreateRequest);
 
         return ResponseEntity.created(
-                URI.create("/api/option-group/" + optionGroupId + "/tooltip/" + createCarOptionGroupTooltipId)
+                URI.create("/option-group/" + optionGroupId + "/tooltip/" + createCarOptionGroupTooltipId)
         ).build();
     }
 
-    @GetMapping("/api/option-group/{id}/tooltip")
+    @GetMapping("/option-group/{id}/tooltip")
     public ResponseEntity<CarOptionGroupTooltipResponse> findById(@PathVariable("id") final long optionGroupId) {
         return ResponseEntity.ok().body(carOptionGroupTooltipQueryService.findById(optionGroupId));
     }

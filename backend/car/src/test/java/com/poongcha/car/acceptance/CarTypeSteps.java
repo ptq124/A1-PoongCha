@@ -39,7 +39,7 @@ public class CarTypeSteps {
                         )
                 )
                 .contentType(ContentType.JSON)
-                .post("/api/car-type")
+                .post("/car-type")
                 .then().log().all()
                 .extract();
     }
@@ -64,7 +64,7 @@ public class CarTypeSteps {
                 .log().all()
                 .when()
                 .contentType(ContentType.JSON)
-                .get("/api/car-type/{id}", id)
+                .get("/car-type/{id}", id)
                 .then().log().all()
                 .extract();
     }
@@ -95,7 +95,7 @@ public class CarTypeSteps {
                 ))
                 .log().all()
                 .when()
-                .get("/api/car-type")
+                .get("/car-type")
                 .then().log().all()
                 .extract();
     }
@@ -137,7 +137,7 @@ public class CarTypeSteps {
                         "carComponentGroupIds", carComponentGroupIds
                 ))
                 .contentType(ContentType.JSON)
-                .post("/api/car-type/{id}/component-group", carTypeId)
+                .post("/car-type/{id}/component-group", carTypeId)
                 .then().log().all()
                 .extract();
     }
@@ -176,7 +176,7 @@ public class CarTypeSteps {
                 )).log().all()
                 .when()
                 .contentType(ContentType.JSON)
-                .get("/api/car-type/{id}/component-group", carTypeId)
+                .get("/car-type/{id}/component-group", carTypeId)
                 .then().log().all()
                 .extract();
     }

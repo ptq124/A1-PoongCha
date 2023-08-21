@@ -22,26 +22,26 @@ public class CarOptionGroupController {
     private final CarOptionGroupCommandService carOptionGroupCommandService;
     private final CarOptionGroupQueryService carOptionGroupQueryService;
 
-    @PostMapping("/api/option-group")
+    @PostMapping("/option-group")
     public ResponseEntity<Void> createCarOptionGroup(
             @RequestBody final CarOptionGroupCreateRequest carOptionGroupCreateRequest
     ) {
         long createCarOptionGroupId = carOptionGroupCommandService.create(carOptionGroupCreateRequest);
 
-        return ResponseEntity.created(URI.create("/api/option-group/" + createCarOptionGroupId)).build();
+        return ResponseEntity.created(URI.create("/option-group/" + createCarOptionGroupId)).build();
     }
 
-    @GetMapping("/api/option-group")
+    @GetMapping("/option-group")
     public ResponseEntity<List<CarOptionGroupResponse>> findAll() {
         return ResponseEntity.ok().body(carOptionGroupQueryService.findAll());
     }
 
-    @GetMapping("/api/option-group/{id}")
+    @GetMapping("/option-group/{id}")
     public ResponseEntity<CarOptionGroupResponse> findById(@PathVariable("id") final long carOptionGroupId) {
         return ResponseEntity.ok().body(carOptionGroupQueryService.findById(carOptionGroupId));
     }
 
-    @PostMapping("/api/option-group/{id}/incompatible")
+    @PostMapping("/option-group/{id}/incompatible")
     public ResponseEntity<Void> createCarOptionGroup(
             @PathVariable("id") final long carOptionGroupId,
             @RequestBody final OptionGroupAddIncompatibleOptionGroupRequest optionGroupAddIncompatibleOptionGroupRequest
@@ -51,10 +51,10 @@ public class CarOptionGroupController {
                 optionGroupAddIncompatibleOptionGroupRequest
         );
 
-        return ResponseEntity.created(URI.create("/api/option-group/" + createCarOptionGroupId)).build();
+        return ResponseEntity.created(URI.create("/option-group/" + createCarOptionGroupId)).build();
     }
 
-    @PostMapping("/api/option-group/{id}/option-tag")
+    @PostMapping("/option-group/{id}/option-tag")
     public ResponseEntity<Void> createCarOptionGroup(
             @PathVariable("id") final long carOptionGroupId,
             @RequestBody final OptionGroupAddOptionTagRequest optionGroupAddOptionTagRequest
@@ -64,6 +64,6 @@ public class CarOptionGroupController {
                 optionGroupAddOptionTagRequest
         );
 
-        return ResponseEntity.created(URI.create("/api/option-group/" + createCarOptionGroupId)).build();
+        return ResponseEntity.created(URI.create("/option-group/" + createCarOptionGroupId)).build();
     }
 }

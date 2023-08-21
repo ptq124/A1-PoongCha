@@ -29,7 +29,7 @@ public class CarColorAcceptanceTest extends CarAcceptanceTest {
         var response = 차량_색상_생성_요청(carColorName, imageUrl, carColorType);
 
         // THEN
-        차량_색상_생성_응답_검증(response, "/api/color/1");
+        차량_색상_생성_응답_검증(response, "/color/1");
     }
 
     @DisplayName("양립 불가능한 차량 색상 설정")
@@ -45,7 +45,7 @@ public class CarColorAcceptanceTest extends CarAcceptanceTest {
         var response = 양립_불가능한_차량_색상_설정_요청(1L, 2L, 4L);
 
         // THEN
-        양립_불가능한_차량_색상_설정_응답_검증(response, "/api/color/1");
+        양립_불가능한_차량_색상_설정_응답_검증(response, "/color/1");
     }
 
     @DisplayName("존재하지 않는 차량 색상에 양립 불가능한 차량 색상 설정")

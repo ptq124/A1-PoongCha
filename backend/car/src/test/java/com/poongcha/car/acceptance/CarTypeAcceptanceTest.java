@@ -38,7 +38,7 @@ public class CarTypeAcceptanceTest extends CarAcceptanceTest {
         var response = 차종_생성_요청(palisadeCarTypeName, palisadeImageUrl);
 
         // THEN
-        차종_생성_응답_검증(response, "/api/car-type/1");
+        차종_생성_응답_검증(response, "/car-type/1");
     }
 
     @DisplayName("차종 ID 조회")
@@ -86,7 +86,7 @@ public class CarTypeAcceptanceTest extends CarAcceptanceTest {
         var response = 차량_타입에_차량_컴포넌트_그룹_추가_요청(1L, List.of(1L));
 
         // THEN
-        차량_타입에_차량_컴포넌트_그룹_추가_응답_검증(response, "/api/car-type/1/component-group");
+        차량_타입에_차량_컴포넌트_그룹_추가_응답_검증(response, "/car-type/1/component-group");
     }
 
     @DisplayName("차량 타입에 차량 컴포넌트 조회")

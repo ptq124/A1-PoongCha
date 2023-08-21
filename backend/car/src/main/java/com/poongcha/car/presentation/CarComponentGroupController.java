@@ -16,15 +16,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class CarComponentGroupController {
     private final CarComponentGroupCommandService carComponentGroupCommandService;
 
-    @PostMapping("/api/component-group")
+    @PostMapping("/component-group")
     private ResponseEntity<Void> createCarComponentGroup(
             @RequestBody final CarComponentGroupCreateRequest carComponentGroupCreateRequest
     ) {
         long createCarComponentGroupId = carComponentGroupCommandService.create(carComponentGroupCreateRequest);
-        return ResponseEntity.created(URI.create("/api/component-group/" + createCarComponentGroupId)).build();
+        return ResponseEntity.created(URI.create("/component-group/" + createCarComponentGroupId)).build();
     }
 
-    @PostMapping("/api/component-group/{id}")
+    @PostMapping("/component-group/{id}")
     private ResponseEntity<Void> addCarComponent(
             @PathVariable("id") final long carComponentId,
             @RequestBody final CarComponentGroupAddCarComponentRequest carComponentGroupAddCarComponentRequest
@@ -33,6 +33,6 @@ public class CarComponentGroupController {
                 carComponentId,
                 carComponentGroupAddCarComponentRequest
         );
-        return ResponseEntity.created(URI.create("/api/component-group/" + addCarComponentGroupId)).build();
+        return ResponseEntity.created(URI.create("/component-group/" + addCarComponentGroupId)).build();
     }
 }

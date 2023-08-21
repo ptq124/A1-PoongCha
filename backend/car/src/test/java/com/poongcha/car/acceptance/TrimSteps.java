@@ -48,7 +48,7 @@ public class TrimSteps {
                         )
                 )
                 .contentType(ContentType.JSON)
-                .post("/api/trim")
+                .post("/trim")
                 .then().log().all()
                 .extract();
     }
@@ -87,7 +87,7 @@ public class TrimSteps {
                         )
                 )
                 .contentType(ContentType.JSON)
-                .post("/api/trim")
+                .post("/trim")
                 .then().log().all()
                 .extract();
     }
@@ -112,7 +112,7 @@ public class TrimSteps {
                 ))
                 .log().all()
                 .when()
-                .get("/api/trim/{id}", id)
+                .get("/trim/{id}", id)
                 .then().log().all()
                 .extract();
     }
@@ -140,7 +140,7 @@ public class TrimSteps {
                 .filter(document(DEFAULT_RESTDOCS_PATH))
                 .log().all()
                 .when()
-                .get("/api/trim/{id}", id)
+                .get("/trim/{id}", id)
                 .then().log().all()
                 .extract();
     }
@@ -168,7 +168,7 @@ public class TrimSteps {
                 ))
                 .log().all()
                 .when()
-                .get("/api/car-type/{car-type-id}/trim", carTypeId)
+                .get("/car-type/{car-type-id}/trim", carTypeId)
                 .then().log().all()
                 .extract();
     }
@@ -201,7 +201,7 @@ public class TrimSteps {
                 ))
                 .log().all()
                 .when()
-                .get("/api/car-type/{car-type-id}/trim", carTypeId)
+                .get("/car-type/{car-type-id}/trim", carTypeId)
                 .then().log().all()
                 .extract();
     }
@@ -240,7 +240,7 @@ public class TrimSteps {
                         "trimInteriorImageUrl", trimInteriorImageUrl,
                         "trimRotationImageBaseUrl", trimRotationImageBaseUrl
                 ))
-                .post("/api/trim/{id}/color", trimId)
+                .post("/trim/{id}/color", trimId)
                 .then().log().all()
                 .extract();
     }
@@ -265,7 +265,7 @@ public class TrimSteps {
                 .body(Map.of(
                         "colorId", carColorId
                 ))
-                .post("/api/trim/{id}/color", trimId)
+                .post("/trim/{id}/color", trimId)
                 .then().log().all()
                 .extract();
     }
@@ -289,7 +289,7 @@ public class TrimSteps {
                 .body(Map.of(
                         "colorId", carColorId
                 ))
-                .post("/api/trim/{id}/color", trimId)
+                .post("/trim/{id}/color", trimId)
                 .then().log().all()
                 .extract();
     }
@@ -327,7 +327,7 @@ public class TrimSteps {
                         )
                 )).log().all()
                 .when()
-                .get("/api/car-type/{id}/color", carTypeId)
+                .get("/car-type/{id}/color", carTypeId)
                 .then().log().all()
                 .extract();
     }
@@ -366,7 +366,7 @@ public class TrimSteps {
                         pathParameters(parameterWithName("id").description("차종 ID"))
                 )).log().all()
                 .when()
-                .get("/api/car-type/{id}/color", carTypeId)
+                .get("/car-type/{id}/color", carTypeId)
                 .then().log().all()
                 .extract();
     }

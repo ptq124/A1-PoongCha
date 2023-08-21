@@ -39,7 +39,7 @@ public class CarComponentSteps {
                         "selectionHelpTooltip", selectionHelpTooltip
                 ))
                 .contentType(ContentType.JSON)
-                .post("/api/component-group")
+                .post("/component-group")
                 .then().log().all()
                 .extract();
     }
@@ -75,7 +75,7 @@ public class CarComponentSteps {
                         "additionalPrice", additionalPrice
                 ))
                 .contentType(ContentType.JSON)
-                .post("/api/component")
+                .post("/component")
                 .then().log().all()
                 .extract();
     }
@@ -106,7 +106,7 @@ public class CarComponentSteps {
                         "carComponentIds", carComponentIds
                 ))
                 .contentType(ContentType.JSON)
-                .post("/api/component-group/{id}", carComponentGroupId)
+                .post("/component-group/{id}", carComponentGroupId)
                 .then().log().all()
                 .extract();
     }

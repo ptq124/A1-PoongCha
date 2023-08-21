@@ -21,17 +21,17 @@ public class CarOptionBrandController {
     private final CarOptionBrandCommandService carOptionBrandCommandService;
     private final CarOptionBrandQueryService carOptionBrandQueryService;
 
-    @PostMapping("/api/option-group/{id}/brand")
+    @PostMapping("/option-group/{id}/brand")
     public ResponseEntity<Void> create(
             @PathVariable(name = "id") final long id,
             @RequestBody final CarOptionBrandCreateRequest carOptionBrandCreateRequest
     ) {
         carOptionBrandCommandService.create(id, carOptionBrandCreateRequest);
 
-        return ResponseEntity.created(URI.create("/api/option-group/" + id + "/brand")).build();
+        return ResponseEntity.created(URI.create("/option-group/" + id + "/brand")).build();
     }
 
-    @GetMapping("/api/option-group/{id}/brand")
+    @GetMapping("/option-group/{id}/brand")
     public ResponseEntity<List<CarOptionBrandResponse>> findAllByOptionGroupId(
             @PathVariable(name = "id") final long id
     ) {

@@ -44,7 +44,7 @@ public class CarOptionBrandSteps {
                         "carOptionGroupId", carOptionGroupId
                 ))
                 .contentType(ContentType.JSON)
-                .post("/api/option-group/{id}/brand", 1L)
+                .post("/option-group/{id}/brand", 1L)
                 .then().log().all()
                 .extract();
     }
@@ -84,7 +84,7 @@ public class CarOptionBrandSteps {
                         "carOptionGroupId", carOptionGroupId
                 ))
                 .contentType(ContentType.JSON)
-                .post("/api/option-group/{id}/brand", 1231239183891283L)
+                .post("/option-group/{id}/brand", 1231239183891283L)
                 .then().log().all()
                 .extract();
     }
@@ -114,7 +114,7 @@ public class CarOptionBrandSteps {
                         )
                 )).log().all()
                 .when()
-                .get("/api/option-group/{id}/brand", id)
+                .get("/option-group/{id}/brand", id)
                 .then().log().all()
                 .extract();
     }

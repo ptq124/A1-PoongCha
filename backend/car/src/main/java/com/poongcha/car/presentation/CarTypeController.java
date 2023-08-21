@@ -22,34 +22,34 @@ public class CarTypeController {
     private final CarTypeCommandService carTypeCommandService;
     private final CarTypeQueryService carTypeQueryService;
 
-    @PostMapping("/api/car-type")
+    @PostMapping("/car-type")
     public ResponseEntity<Void> createCarType(@RequestBody final CarTypeCreateRequest carTypeCreateRequest) {
         long createCarTypeId = carTypeCommandService.create(carTypeCreateRequest);
-        return ResponseEntity.created(URI.create("/api/car-type/" + createCarTypeId)).build();
+        return ResponseEntity.created(URI.create("/car-type/" + createCarTypeId)).build();
     }
 
-    @GetMapping("/api/car-type/{id}")
+    @GetMapping("/car-type/{id}")
     public ResponseEntity<CarTypeDefaultResponse> findById(@PathVariable(value = "id") final long carTypeId) {
         return ResponseEntity.ok().body(carTypeQueryService.findById(carTypeId));
     }
 
-    @GetMapping("/api/car-type")
+    @GetMapping("/car-type")
     public ResponseEntity<List<CarTypeDefaultResponse>> findAll() {
         return ResponseEntity.ok().body(carTypeQueryService.findAll());
     }
 
-    @PostMapping("/api/car-type/{id}/component-group")
+    @PostMapping("/car-type/{id}/component-group")
     public ResponseEntity<Void> addCarComponentGroup(
             @PathVariable(name = "id") final long carTypeId,
             @RequestBody final CarTypeAddCarComponentGroupRequest carTypeAddCarComponentGroupRequest
     ) {
         long addCarComponentGroupCarTypeId = carTypeCommandService.add(carTypeId, carTypeAddCarComponentGroupRequest);
         return ResponseEntity
-                .created(URI.create("/api/car-type/" + addCarComponentGroupCarTypeId + "/component-group"))
+                .created(URI.create("/car-type/" + addCarComponentGroupCarTypeId + "/component-group"))
                 .build();
     }
 
-    @GetMapping("/api/car-type/{id}/component-group")
+    @GetMapping("/car-type/{id}/component-group")
     public ResponseEntity<List<CarComponentGroupResponse>> addCarComponentGroup(
             @PathVariable(name = "id") final long carTypeId
     ) {

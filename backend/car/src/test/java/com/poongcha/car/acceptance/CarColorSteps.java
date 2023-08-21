@@ -39,7 +39,7 @@ public class CarColorSteps {
                         "carColorType", carColorType
                 ))
                 .contentType(ContentType.JSON)
-                .post("/api/color")
+                .post("/color")
                 .then().log().all()
                 .extract();
     }
@@ -70,7 +70,7 @@ public class CarColorSteps {
                         "ids", incompatibleCarColor
                 ))
                 .contentType(ContentType.JSON)
-                .post("/api/color/{id}/incompatible", carColorId)
+                .post("/color/{id}/incompatible", carColorId)
                 .then().log().all()
                 .extract();
     }
@@ -101,7 +101,7 @@ public class CarColorSteps {
                         "ids", incompatibleIds
                 ))
                 .contentType(ContentType.JSON)
-                .post("/api/color/{id}/incompatible", carColorId)
+                .post("/color/{id}/incompatible", carColorId)
                 .then().log().all()
                 .extract();
     }
@@ -131,7 +131,7 @@ public class CarColorSteps {
                         "ids", sameColorId
                 ))
                 .contentType(ContentType.JSON)
-                .post("/api/color/{id}/incompatible", carColorId)
+                .post("/color/{id}/incompatible", carColorId)
                 .then().log().all()
                 .extract();
     }
@@ -161,7 +161,7 @@ public class CarColorSteps {
                         "ids", sameColorId
                 ))
                 .contentType(ContentType.JSON)
-                .post("/api/color/{id}/incompatible", carColorId)
+                .post("/color/{id}/incompatible", carColorId)
                 .then().log().all()
                 .extract();
     }

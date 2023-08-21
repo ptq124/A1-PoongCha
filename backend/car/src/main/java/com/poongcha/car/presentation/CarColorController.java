@@ -16,18 +16,18 @@ import org.springframework.web.bind.annotation.RestController;
 public class CarColorController {
     private final CarColorCommandService carColorCommandService;
 
-    @PostMapping("/api/color")
+    @PostMapping("/color")
     private ResponseEntity<Void> createCarColor(@RequestBody final CarColorCreateRequest carColorCreateRequest) {
         long createCarColorId = carColorCommandService.create(carColorCreateRequest);
-        return ResponseEntity.created(URI.create("/api/color/" + createCarColorId)).build();
+        return ResponseEntity.created(URI.create("/color/" + createCarColorId)).build();
     }
 
-    @PostMapping("/api/color/{id}/incompatible")
+    @PostMapping("/color/{id}/incompatible")
     private ResponseEntity<Void> addIncompatibleColor(
             @PathVariable(value = "id") final long carColorId,
             @RequestBody final CarColorAddIncompatibleColorRequest carColorAddIncompatibleColorRequest
     ) {
         long setIncompatibleCarColorId = carColorCommandService.add(carColorId, carColorAddIncompatibleColorRequest);
-        return ResponseEntity.created(URI.create("/api/color/" + setIncompatibleCarColorId)).build();
+        return ResponseEntity.created(URI.create("/color/" + setIncompatibleCarColorId)).build();
     }
 }

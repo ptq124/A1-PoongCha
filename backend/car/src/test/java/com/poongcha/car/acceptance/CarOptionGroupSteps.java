@@ -49,7 +49,7 @@ public class CarOptionGroupSteps {
                         "carOptionIds", ids
                 ))
                 .contentType(ContentType.JSON)
-                .post("/api/option-group")
+                .post("/option-group")
                 .then().log().all()
                 .extract();
     }
@@ -89,7 +89,7 @@ public class CarOptionGroupSteps {
                         "carOptionIds", ids
                 ))
                 .contentType(ContentType.JSON)
-                .post("/api/option-group")
+                .post("/option-group")
                 .then().log().all()
                 .extract();
     }
@@ -136,7 +136,7 @@ public class CarOptionGroupSteps {
                 ))
                 .log().all()
                 .when()
-                .get("/api/option-group/{id}", id)
+                .get("/option-group/{id}", id)
                 .then().log().all()
                 .extract();
     }
@@ -188,7 +188,7 @@ public class CarOptionGroupSteps {
                 ))
                 .log().all()
                 .when()
-                .get("/api/option-group/{id}", id)
+                .get("/option-group/{id}", id)
                 .then().log().all()
                 .extract();
     }
@@ -219,7 +219,7 @@ public class CarOptionGroupSteps {
                         "incompatibleOptionGroupIds", incompatibleOptionGroupIds
                 ))
                 .contentType(ContentType.JSON)
-                .post("/api/option-group/{id}/incompatible", id)
+                .post("/option-group/{id}/incompatible", id)
                 .then().log().all()
                 .extract();
     }
@@ -252,7 +252,7 @@ public class CarOptionGroupSteps {
                         "incompatibleOptionGroupIds", incompatibleOptionGroupIds
                 ))
                 .contentType(ContentType.JSON)
-                .post("/api/option-group/{id}/incompatible", id)
+                .post("/option-group/{id}/incompatible", id)
                 .then().log().all()
                 .extract();
     }
@@ -283,7 +283,7 @@ public class CarOptionGroupSteps {
                         "incompatibleOptionGroupIds", incompatibleOptionGroupIds
                 ))
                 .contentType(ContentType.JSON)
-                .post("/api/option-group/{id}/incompatible", id)
+                .post("/option-group/{id}/incompatible", id)
                 .then().log().all()
                 .extract();
     }
@@ -311,7 +311,7 @@ public class CarOptionGroupSteps {
                         "tagIds", tagIds
                 ))
                 .contentType(ContentType.JSON)
-                .post("/api/option-group/{id}/option-tag", carOptionGroupId)
+                .post("/option-group/{id}/option-tag", carOptionGroupId)
                 .then().log().all()
                 .extract();
     }

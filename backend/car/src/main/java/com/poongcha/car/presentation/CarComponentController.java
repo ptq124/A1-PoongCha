@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class CarComponentController {
     private final CarComponentCommandService carComponentCommandService;
 
-    @PostMapping("/api/component")
+    @PostMapping("/component")
     private ResponseEntity<Void> createCarComponent(
             @RequestBody final CarComponentCreateRequest carComponentCreateRequest
     ) {
         long createCarComponentGroupId = carComponentCommandService.create(carComponentCreateRequest);
-        return ResponseEntity.created(URI.create("/api/component/" + createCarComponentGroupId)).build();
+        return ResponseEntity.created(URI.create("/component/" + createCarComponentGroupId)).build();
     }
 }

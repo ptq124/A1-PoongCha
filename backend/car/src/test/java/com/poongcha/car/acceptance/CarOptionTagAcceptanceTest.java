@@ -25,7 +25,7 @@ public class CarOptionTagAcceptanceTest extends CarAcceptanceTest {
         );
 
         // THEN
-        차량_옵션_태그_생성_응답_검증(response, "/api/option-tag/1");
+        차량_옵션_태그_생성_응답_검증(response, "/option-tag/1");
     }
 
     @DisplayName("차량 옵션 태그 ID 조회")

@@ -21,6 +21,6 @@ public class CarOptionAcceptanceTest extends CarAcceptanceTest {
         );
 
         // THEN
-        차량_옵션_생성_응답_검증(response, "/api/option/1");
+        차량_옵션_생성_응답_검증(response, "/option/1");
     }
 }

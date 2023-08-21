@@ -19,14 +19,14 @@ public class CarEstimateController {
     private final CarEstimateCommandService carEstimateCommandService;
     private final CarEstimateQueryService carEstimateQueryService;
 
-    @PostMapping("/api/estimate")
+    @PostMapping("/estimate")
     public ResponseEntity<Void> create(@RequestBody final CarEstimateCreateRequest carEstimateCreateRequest) {
         long createCarEstimateId = carEstimateCommandService.create(carEstimateCreateRequest);
 
-        return ResponseEntity.created(URI.create("/api/estimate/" + createCarEstimateId)).build();
+        return ResponseEntity.created(URI.create("/estimate/" + createCarEstimateId)).build();
     }
 
-    @GetMapping("/api/estimate/{id}")
+    @GetMapping("/estimate/{id}")
     public ResponseEntity<CarEstimateResponse> create(@PathVariable("id") final long carEstimateId) {
         return ResponseEntity.ok().body(carEstimateQueryService.findById(carEstimateId));
     }

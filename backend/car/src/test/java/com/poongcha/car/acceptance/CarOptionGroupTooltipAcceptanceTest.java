@@ -33,7 +33,7 @@ public class CarOptionGroupTooltipAcceptanceTest extends CarAcceptanceTest {
         );
 
         // THEN
-        차량_옵션_툴팁_생성_응답_검증(response, "/api/option-group/1/tooltip/1");
+        차량_옵션_툴팁_생성_응답_검증(response, "/option-group/1/tooltip/1");
     }
 
     @DisplayName("존재하지 않는 차량 옵션 그룹의 ID로 차량 옵션 툴팁 생성")

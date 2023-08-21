@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class CarOptionController {
     private final CarOptionCommandService carOptionCommandService;
 
-    @PostMapping("/api/option")
+    @PostMapping("/option")
     public ResponseEntity<Void> createCarOption(@RequestBody final CarOptionCreateRequest carOptionCreateRequest) {
         long createCarOptionId = carOptionCommandService.create(carOptionCreateRequest);
 
-        return ResponseEntity.created(URI.create("/api/option/" + createCarOptionId)).build();
+        return ResponseEntity.created(URI.create("/option/" + createCarOptionId)).build();
     }
 }

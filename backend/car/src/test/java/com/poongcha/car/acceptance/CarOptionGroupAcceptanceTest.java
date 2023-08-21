@@ -55,7 +55,7 @@ public class CarOptionGroupAcceptanceTest extends CarAcceptanceTest {
         );
 
         // THEN
-        차량_옵션_그룹_생성_응답_검증(response, "/api/option-group/1");
+        차량_옵션_그룹_생성_응답_검증(response, "/option-group/1");
     }
 
     @DisplayName("차량 옵션 그룹 ID 조회")
@@ -168,7 +168,7 @@ public class CarOptionGroupAcceptanceTest extends CarAcceptanceTest {
         var response = 양립_불가능한_차량_옵션_설정_요청(1L, List.of(2L));
 
         // THEN
-        양립_불가능한_차량_옵션_설정_응답_검증(response, "/api/option-group/" + 1L);
+        양립_불가능한_차량_옵션_설정_응답_검증(response, "/option-group/" + 1L);
     }
 
     @DisplayName("같은 ID로 양립 불가능한 차량 옵션 설정")

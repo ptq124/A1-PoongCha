@@ -44,7 +44,7 @@ public class CarOptionSteps {
                         "detailDescription", detailDescription
                 ))
                 .contentType(ContentType.JSON)
-                .post("/api/option")
+                .post("/option")
                 .then().log().all()
                 .extract();
     }

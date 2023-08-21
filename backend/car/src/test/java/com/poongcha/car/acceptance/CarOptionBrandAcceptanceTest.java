@@ -34,7 +34,7 @@ public class CarOptionBrandAcceptanceTest extends CarAcceptanceTest {
         );
 
         // THEN
-        차량_옵션_브랜드_생성_응답_검증(response, "/api/option-group/1/brand");
+        차량_옵션_브랜드_생성_응답_검증(response, "/option-group/1/brand");
     }
 
     @DisplayName("존재하지 않는 차량 옵션 그룹의 ID로 차량 옵션 브랜드 생성")

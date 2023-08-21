@@ -62,7 +62,7 @@ public class TrimAcceptanceTest extends CarAcceptanceTest {
         var response = 트림_생성_요청(trimNameLeBlanc, imageUrlLeBlanc, minPriceLeBlanc, 1L);
 
         // THEN
-        트림_생성_응답_검증(response, "/api/trim/1");
+        트림_생성_응답_검증(response, "/trim/1");
     }
 
     @DisplayName("존재하지 않는 차종으로 트림 생성")
@@ -180,7 +180,7 @@ public class TrimAcceptanceTest extends CarAcceptanceTest {
         );
 
         // THEN
-        트림에_차량_색상_설정_응답_검증(response, "/api/trim/1/color");
+        트림에_차량_색상_설정_응답_검증(response, "/trim/1/color");
     }
 
     @DisplayName("존재하지 않는 트림에 차량 색상을 설정")

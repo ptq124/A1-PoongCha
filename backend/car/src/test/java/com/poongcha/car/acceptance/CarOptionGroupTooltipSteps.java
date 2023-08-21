@@ -43,7 +43,7 @@ public class CarOptionGroupTooltipSteps {
                         "carOptionGroupId", carOptionGroupId
                 ))
                 .contentType(ContentType.JSON)
-                .post("/api/option-group/{id}/tooltip", 1L)
+                .post("/option-group/{id}/tooltip", 1L)
                 .then().log().all()
                 .extract();
     }
@@ -83,7 +83,7 @@ public class CarOptionGroupTooltipSteps {
                         "carOptionGroupId", carOptionGroupId
                 ))
                 .contentType(ContentType.JSON)
-                .post("/api/option-group/{id}/tooltip", 1231239183891283L)
+                .post("/option-group/{id}/tooltip", 1231239183891283L)
                 .then().log().all()
                 .extract();
     }
@@ -111,7 +111,7 @@ public class CarOptionGroupTooltipSteps {
                         )
                 )).log().all()
                 .when()
-                .get("/api/option-group/{id}/tooltip", id)
+                .get("/option-group/{id}/tooltip", id)
                 .then().log().all()
                 .extract();
     }

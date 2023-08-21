@@ -43,7 +43,7 @@ public class CarOptionTagSteps {
                         "iconImageUrl", iconImageUrl
                 ))
                 .contentType(ContentType.JSON)
-                .post("/api/option-tag")
+                .post("/option-tag")
                 .then().log().all()
                 .extract();
     }
@@ -73,7 +73,7 @@ public class CarOptionTagSteps {
                         )
                 )).log().all()
                 .when()
-                .get("/api/option-tag/{id}", id)
+                .get("/option-tag/{id}", id)
                 .then().log().all()
                 .extract();
     }
@@ -109,7 +109,7 @@ public class CarOptionTagSteps {
                         )
                 )).log().all()
                 .when()
-                .get("/api/option-tag")
+                .get("/option-tag")
                 .then().log().all()
                 .extract();
     }

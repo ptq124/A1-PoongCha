@@ -20,19 +20,19 @@ public class CarOptionTagController {
     private final CarOptionTagCommandService carOptionTagCommandService;
     private final CarOptionTagQueryService carOptionTagQueryService;
 
-    @PostMapping("/api/option-tag")
+    @PostMapping("/option-tag")
     public ResponseEntity<Void> create(@RequestBody final CarOptionTagCreateRequest carOptionTagCreateRequest) {
         long createCarOptionTagId = carOptionTagCommandService.create(carOptionTagCreateRequest);
 
-        return ResponseEntity.created(URI.create("/api/option-tag/" + createCarOptionTagId)).build();
+        return ResponseEntity.created(URI.create("/option-tag/" + createCarOptionTagId)).build();
     }
 
-    @GetMapping("/api/option-tag/{id}")
+    @GetMapping("/option-tag/{id}")
     public ResponseEntity<CarOptionTagResponse> findById(@PathVariable("id") long optionTagId) {
         return ResponseEntity.ok().body(carOptionTagQueryService.findById(optionTagId));
     }
 
-    @GetMapping("/api/option-tag")
+    @GetMapping("/option-tag")
     public ResponseEntity<List<CarOptionTagResponse>> findAll() {
         return ResponseEntity.ok().body(carOptionTagQueryService.findAll());
     }

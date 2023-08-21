@@ -170,7 +170,7 @@ public class CarEstimateAcceptanceTest extends CarAcceptanceTest {
                 ))
                 .log().all()
                 .when()
-                .get("/api/estimate/{id}", id)
+                .get("/estimate/{id}", id)
                 .then().log().all()
                 .extract();
     }
@@ -272,7 +272,7 @@ public class CarEstimateAcceptanceTest extends CarAcceptanceTest {
                         )
                 )
                 .contentType(ContentType.JSON)
-                .post("/api/estimate")
+                .post("/estimate")
                 .then().log().all()
                 .extract();
     }

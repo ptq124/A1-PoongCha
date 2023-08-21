@@ -27,7 +27,7 @@ public class CarComponentAcceptanceTest extends CarAcceptanceTest {
         var response = 차량_컴포넌트_그룹_생성_요청(carComponentGroupNameEngine, selectionHelpTooltipEngine);
 
         // THEN
-        차량_컴포넌트_그룹_생성_응답_검증(response, "/api/component-group/1");
+        차량_컴포넌트_그룹_생성_응답_검증(response, "/component-group/1");
     }
 
     @DisplayName("차량 컴포넌트 생성")
@@ -41,7 +41,7 @@ public class CarComponentAcceptanceTest extends CarAcceptanceTest {
         );
 
         // THEN
-        차량_컴포넌트_생성_응답_검증(response, "/api/component/1");
+        차량_컴포넌트_생성_응답_검증(response, "/component/1");
     }
 
     @DisplayName("차량 컴포넌트 그룹에 차량 컴포넌트 추가")
@@ -55,6 +55,6 @@ public class CarComponentAcceptanceTest extends CarAcceptanceTest {
         var response = 차량_컴포넌트_그룹에_차량_컴포넌트_추가_요청(1L, List.of(1L));
 
         // THEN
-        차량_컴포넌트_그룹에_차량_컴포넌트_추가_응답_검증(response, "/api/component-group/1");
+        차량_컴포넌트_그룹에_차량_컴포넌트_추가_응답_검증(response, "/component-group/1");
     }
 }
