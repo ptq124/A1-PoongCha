@@ -4,6 +4,7 @@ import com.poongcha.recommend.domain.additionalquestion.AdditionalQuestion;
 import com.poongcha.recommend.domain.additionalquestion.AdditionalQuestionOption;
 import com.poongcha.recommend.domain.additionalquestionanswer.AdditionalQuestionAnswer;
 import com.poongcha.recommend.domain.additionalquestionanswer.AdditionalQuestionAnswerGroup;
+import com.poongcha.recommend.domain.lifestylepersonasituationtag.LifestylePersonaSituationTag;
 import java.sql.PreparedStatement;
 import org.springframework.context.ApplicationContext;
 import org.springframework.data.relational.core.mapping.Table;
@@ -20,6 +21,7 @@ public class DataInitializeExecutionListener extends AbstractTestExecutionListen
         reset(operation, AdditionalQuestionOption.class.getAnnotation(Table.class).name());
         reset(operation, AdditionalQuestionAnswerGroup.class.getAnnotation(Table.class).name());
         reset(operation, AdditionalQuestionAnswer.class.getAnnotation(Table.class).name());
+        reset(operation, LifestylePersonaSituationTag.class.getAnnotation(Table.class).name());
     }
 
     private static void reset(

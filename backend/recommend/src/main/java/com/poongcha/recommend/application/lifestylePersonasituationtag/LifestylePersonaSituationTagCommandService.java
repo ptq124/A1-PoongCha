@@ -1,4 +1,4 @@
-package com.poongcha.recommend.application.lifestylePersonasituationTag;
+package com.poongcha.recommend.application.lifestylePersonasituationtag;
 
 import com.poongcha.recommend.application.dto.LifestylePersonaSituationTagCreateRequest;
 import com.poongcha.recommend.domain.lifestylepersonasituationtag.LifestylePersonaSituationTag;
