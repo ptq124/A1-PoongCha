@@ -1,8 +1,7 @@
-import React, { useRef } from "react";
+import React, { useState } from "react";
 import { css, styled } from "styled-components";
 import { useLocation } from "react-router";
 import Button from "@Components/Common/Button/Button";
-import useOnClickPopUp from "@hooks/useOnClickPopUp";
 import useButtonNavigation from "@hooks/useButtonNavigation";
 import Dropdown from "./DropDown";
 import { useUserData } from "context/UserDataContext";
@@ -26,12 +25,14 @@ const Navigation = () => {
 
   const move = useButtonNavigation();
 
-  const popupRef = useRef();
-  const { isPopupOpen, openPopup, closePopup } = useOnClickPopUp(popupRef);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const { totalData, 유저데이터저장 } = useUserData();
 
   navItems[1].detail = `${totalData["외장"].name} / ${totalData["내장"].name}`;
+  navItems[2].detail = `${totalData["옵션"]
+    .map((option) => option.name)
+    .join(", ")}`;
 
   return (
     <>
@@ -53,7 +54,7 @@ const Navigation = () => {
           <Button
             text="요금 상세"
             style={amountDetailBtnStyle}
-            onClick={openPopup}
+            onClick={() => setIsPopupOpen(!isPopupOpen)}
           />
           <Button
             text="견적내기"
@@ -62,7 +63,7 @@ const Navigation = () => {
           />
         </BtnsContainer>
       </Wrapper>
-      {isPopupOpen && <Dropdown popupRef={popupRef} closePopup={closePopup} />}
+      {isPopupOpen && <Dropdown closePopup={() => setIsPopupOpen(false)} />}
     </>
   );
 };
