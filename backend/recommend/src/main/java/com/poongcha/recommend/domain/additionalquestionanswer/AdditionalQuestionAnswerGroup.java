@@ -1,6 +1,8 @@
 package com.poongcha.recommend.domain.additionalquestionanswer;
 
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,5 +24,11 @@ public class AdditionalQuestionAnswerGroup {
 
     public AdditionalQuestionAnswerGroup(final Set<AdditionalQuestionAnswer> additionalQuestionAnswers) {
         this.additionalQuestionAnswers = additionalQuestionAnswers;
+    }
+
+    public List<Long> additionalQuestionOptionIds() {
+        return this.additionalQuestionAnswers.stream()
+                .map(AdditionalQuestionAnswer::additionalQuestionOptionId)
+                .collect(Collectors.toUnmodifiableList());
     }
 }

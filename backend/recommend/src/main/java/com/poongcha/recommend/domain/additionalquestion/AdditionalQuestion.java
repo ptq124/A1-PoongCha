@@ -2,6 +2,7 @@ package com.poongcha.recommend.domain.additionalquestion;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -37,5 +38,11 @@ public class AdditionalQuestion {
         this.topic = topic;
         this.description = description;
         this.additionalQuestionOptions.addAll(additionalQuestionOptions);
+    }
+
+    public Optional<AdditionalQuestionOption> findAdditionalQuestionOptionById(final long id) {
+        return this.additionalQuestionOptions.stream()
+                .filter(additionalQuestionOption -> additionalQuestionOption.getId().equals(id))
+                .findFirst();
     }
 }

@@ -19,4 +19,8 @@ public class AdditionalQuestionAnswer {
     public AdditionalQuestionAnswer(final Long additionalQuestionOptionId) {
         this.additionalQuestionOption = new IdOnlyAggregateReference<>(additionalQuestionOptionId);
     }
+
+    public long additionalQuestionOptionId() {
+        return additionalQuestionOption.getId();
+    }
 }

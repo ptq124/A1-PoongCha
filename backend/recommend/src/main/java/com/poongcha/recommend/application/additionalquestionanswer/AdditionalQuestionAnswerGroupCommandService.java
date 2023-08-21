@@ -1,4 +1,4 @@
-package com.poongcha.recommend.application.additionalanswer;
+package com.poongcha.recommend.application.additionalquestionanswer;
 
 import com.poongcha.recommend.application.dto.AdditionalQuestionAnswerGroupCreateRequest;
 import com.poongcha.recommend.domain.additionalquestionanswer.AdditionalQuestionAnswerGroup;
