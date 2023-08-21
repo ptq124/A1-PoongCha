@@ -1,10 +1,10 @@
-import React, { useReducer } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import { css, styled } from "styled-components";
 import { initialState, reducer } from "./index.reducer";
 import Button from "@Components/Common/Button/Button";
 import useButtonNavigation from "@hooks/useButtonNavigation";
 import helpIcon from "@assets/icons/help-circle.svg";
-import { TrimOptions, modelItemData } from "./mockData";
+import { TrimOptions } from "./mockData";
 import ModelItemOptionLabel from "@Components/Custom/ModelItemOptionLabel";
 import RadioGroup from "@Components/Common/RadioGroup";
 import TrimOptionLabel from "@Components/Custom/TrimOptionLabel";
@@ -13,9 +13,11 @@ import TrimComparisonPopup from "../TrimComparisonPopup";
 import Tooltip from "@Components/Custom/Tooltip";
 import TooltipProvider from "@Components/Common/TooltipProvider";
 import PopupProvider from "@Components/Common/PopupProvider";
+import { GET } from "@utils/fetch";
 
 const TrimCustomSideBar = () => {
   const move = useButtonNavigation();
+  const [componentGroupData, setComponentGroupData] = useState([]);
   const [state, dispatch] = useReducer(reducer, initialState);
   const setOptionSelect = (questionKey, option) => {
     dispatch({
@@ -24,6 +26,12 @@ const TrimCustomSideBar = () => {
       option,
     });
   };
+
+  useEffect(() => {
+    GET("http://my-car.store/api/car-type/1/component-group").then((data) => {
+      setComponentGroupData(data);
+    });
+  }, []);
 
   const trimRadioGroupTitle = () => {
     return (
@@ -47,22 +55,22 @@ const TrimCustomSideBar = () => {
 
         {/* 엔진/바디/구동방식 선택하기 */}
         <ModelItems>
-          {Object.entries(modelItemData).map(([questionKey, data]) => (
+          {componentGroupData?.map((data) => (
             <TooltipProvider
-              key={questionKey}
-              label={<Tooltip content={data.tooltip} />}
+              key={data.id}
+              label={<Tooltip content={data.selectionHelpTooltip} />}
               offset={css`
                 bottom: 78px;
               `}
             >
               <RadioGroup
-                title={data.title}
+                title={data.name}
                 label={<ModelItemOptionLabel />}
-                options={data.options}
+                options={data.component}
                 newStateHandler={(newState) =>
-                  setOptionSelect(questionKey, newState)
+                  setOptionSelect(data.name, newState)
                 }
-                initialState={state[questionKey]}
+                initialState={state[data.name]}
                 style={modelItemRadioGroupStyle}
               />
             </TooltipProvider>
