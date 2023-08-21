@@ -14,7 +14,7 @@ const OptionCatalogue = ({
 }) => {
   const [optionData, setOptionData] = useState();
   useEffect(() => {
-    GET("http://3.34.166.253/api/option-group").then((data) => {
+    GET("http://my-car.store/api/option-group").then((data) => {
       if (selectedTab === "추가 옵션") {
         setOptionData(data?.filter((option) => option.additionalPrice > 0));
       } else {

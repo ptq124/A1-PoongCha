@@ -5,10 +5,10 @@ const ModelItemOptionLabel = ({ option, selectedItem, handleSelectItem }) => {
   return (
     <>
       <Label
-        selected={option === selectedItem}
+        selected={option.id === selectedItem.id}
         onClick={() => handleSelectItem(option)}
       >
-        {option}
+        {option.name}
       </Label>
     </>
   );
