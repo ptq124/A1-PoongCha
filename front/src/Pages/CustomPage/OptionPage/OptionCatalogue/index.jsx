@@ -17,6 +17,7 @@ const OptionCatalogue = ({
         setOptionData(data?.filter((option) => option.additionalPrice > 0));
       } else {
         // 기본 포함 옵션
+
         setOptionData(data?.filter((option) => option.additionalPrice === 0));
       }
     });
