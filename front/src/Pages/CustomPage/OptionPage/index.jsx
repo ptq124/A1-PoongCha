@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { styled, css } from "styled-components";
 import Button from "@Components/Common/Button/Button";
 import useButtonNavigation from "@hooks/useButtonNavigation";
@@ -19,7 +19,9 @@ const OptionPage = () => {
   };
 
   // 선택한 태그 상태 관리
-  const [selectedTag, setSelectedTag] = useState("전체");
+  const [selectedTag, setSelectedTag] = useState(
+    tagData.find((tag) => tag.name === "전체")
+  );
   const handleSelectTag = (tag) => {
     setSelectedTag(tag);
   };
@@ -29,8 +31,8 @@ const OptionPage = () => {
   const handleSelectTab = (tab) => {
     setSelectedTab(tab);
     if (tab === "추가 옵션") {
-      setSelectedTag("전체");
-    } else setSelectedTag("대표");
+      setSelectedTag(tagData.find((tag) => tag.name === "전체"));
+    } else setSelectedTag(tagData.find((tag) => tag.name === "대표"));
   };
 
   const move = useButtonNavigation();

@@ -54,7 +54,7 @@ const SituationView = ({
               selected={selectedOptions.includes(activeOption)}
             />
           )} */}
-        <img src={SituationViewSampleImg} />
+        <img src={selectedTag.situationImageUrl} />
         {/* {mockPositions.map((position, index) => (
           <PlusBtnPositioner $position={position}>
             <TooltipProvider
@@ -88,7 +88,7 @@ const SituationView = ({
         ))} */}
       </SituationScreen>
       <OptionItemsContainer>
-        {filteredData.map((data, index) => (
+        {filteredData?.map((data, index) => (
           <OptionItem
             key={index}
             data={data}
