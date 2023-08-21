@@ -4,6 +4,10 @@ import com.poongcha.recommend.domain.additionalquestion.AdditionalQuestion;
 import com.poongcha.recommend.domain.additionalquestion.AdditionalQuestionOption;
 import com.poongcha.recommend.domain.additionalquestionanswer.AdditionalQuestionAnswer;
 import com.poongcha.recommend.domain.additionalquestionanswer.AdditionalQuestionAnswerGroup;
+import com.poongcha.recommend.domain.lifestylepersona.LifestyleInterview;
+import com.poongcha.recommend.domain.lifestylepersona.LifestylePersona;
+import com.poongcha.recommend.domain.lifestylepersona.LifestylePersonaAdditionalQuestionOption;
+import com.poongcha.recommend.domain.lifestylepersona.LifestylePersonaLifestylePersonaSituationTag;
 import com.poongcha.recommend.domain.lifestylepersonasituationtag.LifestylePersonaSituationTag;
 import java.sql.PreparedStatement;
 import org.springframework.context.ApplicationContext;
@@ -22,6 +26,10 @@ public class DataInitializeExecutionListener extends AbstractTestExecutionListen
         reset(operation, AdditionalQuestionAnswerGroup.class.getAnnotation(Table.class).name());
         reset(operation, AdditionalQuestionAnswer.class.getAnnotation(Table.class).name());
         reset(operation, LifestylePersonaSituationTag.class.getAnnotation(Table.class).name());
+        reset(operation, LifestylePersona.class.getAnnotation(Table.class).name());
+        reset(operation, LifestyleInterview.class.getAnnotation(Table.class).name());
+        reset(operation, LifestylePersonaAdditionalQuestionOption.class.getAnnotation(Table.class).name());
+        reset(operation, LifestylePersonaLifestylePersonaSituationTag.class.getAnnotation(Table.class).name());
     }
 
     private static void reset(
