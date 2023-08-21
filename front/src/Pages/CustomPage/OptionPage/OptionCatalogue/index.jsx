@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import SituationView from "./SituationView";
 import DefaultView from "./DefaultView";
-import { GET } from "@utils/fetch";
 import { getOption } from "apis/custom";
 
 const OptionCatalogue = ({
