@@ -60,7 +60,7 @@ const CarRotateViewer = ({ rotateImg }) => {
         <CarImage
           key={index}
           $isDisplay={index === currentImage}
-          src={`${rotateImg}` + `${convertToTwoDigits(index)}.png`}
+          src={`${rotateImg}` + `image_0${convertToTwoDigits(index)}.png`}
           alt="360 VR"
         />
       ))}

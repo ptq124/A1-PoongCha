@@ -3,6 +3,7 @@
 import { handleHttpError } from "@utils/error";
 
 const fetchWrap = async ({ method, url, body }) => {
+  const URL = `${import.meta.env.VITE_BASE_URL}/${url}`;
   try {
     const config = {
       method,
@@ -12,10 +13,10 @@ const fetchWrap = async ({ method, url, body }) => {
       body: JSON.stringify(body),
     };
     const res =
-      (method === "get" && (await fetch(url))) ||
-      (method === "post" && (await fetch(url, config))) ||
-      (method === "put" && (await fetch(url, config))) ||
-      (method === "delete" && (await fetch(url, { method }))) ||
+      (method === "get" && (await fetch(URL))) ||
+      (method === "post" && (await fetch(URL, config))) ||
+      (method === "put" && (await fetch(URL, config))) ||
+      (method === "delete" && (await fetch(URL, { method }))) ||
       {};
 
     if (!res.ok) handleHttpError(res.status);
