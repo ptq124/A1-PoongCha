@@ -4,6 +4,7 @@ import { GlobalStyle } from "./styles/global-style";
 import { Outlet } from "react-router-dom";
 import Header from "./Components/Header";
 import ScrollToTop from "./utils/ScrollToTop";
+import { UserDataProvider } from "context/UserDataContext";
 
 function App() {
   return (
@@ -11,8 +12,10 @@ function App() {
       <GlobalStyle />
       <ScrollToTop />
       <Wrapper>
-        <Header />
-        <Outlet />
+        <UserDataProvider>
+          <Header />
+          <Outlet />
+        </UserDataProvider>
       </Wrapper>
     </ThemeProvider>
   );

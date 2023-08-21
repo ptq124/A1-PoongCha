@@ -4,6 +4,7 @@ import CarView from "@Components/Custom/CarView";
 import ColorCustomSideBar from "./ColorCustomSIdeBar";
 import { mockColordData } from "./mockColorData";
 import { GET } from "@utils/fetch";
+import { useUserData } from "context/UserDataContext";
 
 const ColorPage = () => {
   const [colorData, setColorData] = useState([]);
@@ -16,15 +17,19 @@ const ColorPage = () => {
   const exterData = colors.filter((data) => data.type === "EXTERIOR");
   const interData = colors.filter((data) => data.type === "INTERIOR");
 
-  const [exterior, setExterior] = useState(exterData[0]);
-  const [interior, setInterior] = useState(interData[0]);
+  const { totalData, 유저데이터저장 } = useUserData();
+
+  const [exterior, setExterior] = useState(totalData["외장"]);
+  const [interior, setInterior] = useState(totalData["내장"]);
 
   const handleColorOption = (name, option) => {
     if (option === "외장") {
       const newExterior = exterData.filter((data) => data.name === name);
+      유저데이터저장(option, newExterior);
       setExterior(newExterior);
     } else {
       const newInterior = interData.filter((data) => data.name === name);
+      유저데이터저장(option, newInterior);
       setInterior(newInterior);
     }
   };
