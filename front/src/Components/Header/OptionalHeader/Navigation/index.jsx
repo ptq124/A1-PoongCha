@@ -5,8 +5,9 @@ import Button from "@Components/Common/Button/Button";
 import useOnClickPopUp from "@hooks/useOnClickPopUp";
 import useButtonNavigation from "@hooks/useButtonNavigation";
 import Dropdown from "./DropDown";
+import { useUserData } from "context/UserDataContext";
 
-const navItems = [
+let navItems = [
   { title: "1 트림", detail: "Le Blanc(르블랑)", path: "/custom/trim" },
   {
     title: "2 색상",
@@ -27,6 +28,10 @@ const Navigation = () => {
 
   const popupRef = useRef();
   const { isPopupOpen, openPopup, closePopup } = useOnClickPopUp(popupRef);
+
+  const { totalData, 유저데이터저장 } = useUserData();
+
+  navItems[1].detail = `${totalData["외장"].name} / ${totalData["내장"].name}`;
 
   return (
     <>
@@ -104,6 +109,19 @@ const NavTitle = styled.div`
 const Nav = styled.div`
   display: flex;
   gap: 12px;
+
+  &:nth-child(2) div:nth-child(2) {
+    width: 165px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  &:nth-child(3) div:nth-child(2) {
+    width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 `;
 
 const NavContainer = styled.div`

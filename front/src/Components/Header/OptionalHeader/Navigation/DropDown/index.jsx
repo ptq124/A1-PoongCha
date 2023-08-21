@@ -1,31 +1,38 @@
 import React from "react";
 import { styled } from "styled-components";
 import arrowUp from "@assets/icons/arrow_up.svg";
+import { useUserData } from "context/UserDataContext";
 
 const DropDonw = ({ popupRef, closePopup }) => {
+  const { totalData, 유저데이터저장 } = useUserData();
+
+  const { name: engin } = totalData.엔진;
+  const { name: body } = totalData.바디;
+  const { name: drive } = totalData.구동방식;
+  const { name: exterior } = totalData.외장;
+  const { name: interior } = totalData.내장;
+
   return (
     <Wrapper ref={popupRef}>
       <MainContainer>
         <ItemWrapper>
           <TrimInfo>
-            <span>가솔린</span>
+            <span>{engin}</span>
             <span>43,460,00원</span>
           </TrimInfo>
           <TrimInfo>
-            <span>7 인승</span>
+            <span>{body}</span>
           </TrimInfo>
           <TrimInfo>
-            <span>2WD</span>
+            <span>{drive}</span>
           </TrimInfo>
         </ItemWrapper>
         <ItemWrapper>
           <ColorInfo>
-            <span>크리미 화이트 tksksks</span>
-            <span>43,460,00원</span>
+            <span>{exterior}</span>
           </ColorInfo>
           <ColorInfo>
-            <span>인조가죽(블랙)</span>
-            <span>00원</span>
+            <span>{interior}</span>
           </ColorInfo>
         </ItemWrapper>
         <ItemWrapper>
