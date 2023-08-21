@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 import ColorOption from "./ColorOption";
 import ArrowDownIcon from "@assets/icons/24-chevron-down.svg";
 import ArrowUpIcon from "@assets/icons/24-chevron-up.svg";
-import OverlaidPopup from "@Components/Common/OverlaidPopup";
+import OverlaidPopup from "@Components/Common/PopupProvider/OverlaidPopup";
 import ColorChangePopup from "@Pages/CustomPage/ColorPage/ColorChangePopup";
 import useOnClickPopUp from "@hooks/useOnClickPopUp";
 

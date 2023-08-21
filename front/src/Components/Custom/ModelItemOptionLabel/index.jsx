@@ -1,21 +1,14 @@
-import useTooltip from "@hooks/useTooltip";
 import React from "react";
 import { css, styled } from "styled-components";
-import Tooltip from "../Tooltip";
 
-const ModelItemOptionLabel = (option, selectedItem, handleSelectItem) => {
-  const { isTooltipOpen, openTooltip, closeTooltip } = useTooltip();
-
+const ModelItemOptionLabel = ({ option, selectedItem, handleSelectItem }) => {
   return (
     <>
-      {isTooltipOpen && <Tooltip offset={78} />}
       <Label
-        selected={option === selectedItem}
+        selected={option.id === selectedItem.id}
         onClick={() => handleSelectItem(option)}
-        onMouseEnter={openTooltip}
-        onMouseLeave={closeTooltip}
       >
-        {option}
+        {option.name}
       </Label>
     </>
   );

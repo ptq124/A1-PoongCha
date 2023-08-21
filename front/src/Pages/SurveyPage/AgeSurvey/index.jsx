@@ -31,7 +31,7 @@ const AgeSurvey = () => {
     <S.SurveyContent>
       <RadioGroup
         title={ageRadioGroupTitle()}
-        label={AgeQuestionLabel}
+        label={<AgeQuestionLabel />}
         options={surveyData.options}
         newStateHandler={(newState) => handleOptionSelect("age", newState)}
         initialState={state.age}

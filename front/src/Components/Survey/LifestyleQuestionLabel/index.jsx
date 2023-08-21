@@ -1,28 +1,21 @@
-import React, { useRef } from "react";
+import React from "react";
 import { styled, css } from "styled-components";
 import check32blue from "@assets/checkcircle/check-32-blue.svg";
 import check32grey from "@assets/checkcircle/check-32-grey.svg";
 import LifeImg from "@assets/lifestyle/lifestyle1.svg";
-import useOnClickPopUp from "@hooks/useOnClickPopUp";
-import OverlaidPopup from "@Components/Common/OverlaidPopup";
 import PopUp from "@Pages/SurveyPage/LifestyleSurvey/PopUp";
+import PopupProvider from "@Components/Common/PopupProvider";
 /**
 데이터 전달 값: 라이프 스타일
 태그: []
 문구: 텍스트
 프로필 사진: 이미지
 */
-const LifestyleQuestionLabel = (option, selectedItem, handleSelectItem) => {
-  const popupRef = useRef();
-  const { isPopupOpen, openPopup } = useOnClickPopUp(popupRef);
-
+const LifestyleQuestionLabel = ({ option, selectedItem, handleSelectItem }) => {
   const isSelected = option.index === selectedItem;
 
   return (
     <>
-      {isPopupOpen && (
-        <OverlaidPopup component={<PopUp popupRef={popupRef} />} />
-      )}
       <Wrapper
         selected={isSelected}
         onClick={() => handleSelectItem(option.index)}
@@ -38,9 +31,11 @@ const LifestyleQuestionLabel = (option, selectedItem, handleSelectItem) => {
           <span>{option.phrase}</span>
           <CheckImg src={isSelected ? check32blue : check32grey} />
         </LifestylePhrase>
-        <LifestyleDetail onClick={openPopup} selected={isSelected}>
-          라이프스타일 엿보기
-        </LifestyleDetail>
+        <PopupProvider label={<PopUp />}>
+          <LifestyleDetail selected={isSelected}>
+            라이프스타일 엿보기
+          </LifestyleDetail>
+        </PopupProvider>
         <LifestyleImg selected={isSelected} src={LifeImg} alt="Lifestyle" />
       </Wrapper>
     </>

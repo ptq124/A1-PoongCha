@@ -1,7 +1,7 @@
 import React from "react";
 import { css, styled } from "styled-components";
 
-const OptionTagLabel = (option, selectedItem, handleSelectItem) => {
+const OptionTagLabel = ({ option, selectedItem, handleSelectItem }) => {
   const isSelected = selectedItem === option.name;
   return (
     <Wrapper

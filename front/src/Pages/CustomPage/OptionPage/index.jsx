@@ -49,7 +49,7 @@ const OptionPage = () => {
         ))}
       </TabContainer>
       <RadioGroup
-        label={OptionTagLabel}
+        label={<OptionTagLabel />}
         options={selectedTab === "추가 옵션" ? tagData.slice(1) : tagData}
         newStateHandler={handleSelectTag}
         initialState={selectedTag}
