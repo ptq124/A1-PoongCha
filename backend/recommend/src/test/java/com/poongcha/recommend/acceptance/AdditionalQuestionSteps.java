@@ -5,6 +5,7 @@ import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWit
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
+import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
 import static util.DocumentationTest.DEFAULT_RESTDOCS_PATH;
 import static util.DocumentationTest.customRequestFields;
 import static util.DocumentationTest.given;
@@ -90,6 +91,49 @@ public class AdditionalQuestionSteps {
             assertions.assertThat(response.jsonPath().getString("description")).isEqualTo(description);
             assertions.assertThat(response.jsonPath().getList("options.id")).contains(optionIds);
             assertions.assertThat(response.jsonPath().getList("options.name")).contains(optionNames);
+        }
+    }
+
+    public static ExtractableResponse<Response> 추가_질문_ID_목록_조회_요청(final List<Long> ids) {
+        return given()
+                .filter(document(
+                        DEFAULT_RESTDOCS_PATH,
+                        requestParameters(
+                                parameterWithName("id").description("추가 질문 ID 목록")
+                        ),
+                        responseFields(
+                                fieldWithPath("[].id").type(JsonFieldType.NUMBER).description("추가 질문 ID"),
+                                fieldWithPath("[].topic").type(JsonFieldType.STRING).description("질문 제목"),
+                                fieldWithPath("[].description").type(JsonFieldType.STRING).description("질문 설명"),
+                                fieldWithPath("[].options").type(JsonFieldType.ARRAY).description("질문 선택지 목록"),
+                                fieldWithPath("[].options[].id").type(JsonFieldType.NUMBER).description("질문 선택지 ID"),
+                                fieldWithPath("[].options[].name").type(JsonFieldType.STRING).description("질문 선택지 이름")
+                        )
+                )).log().all()
+                .when()
+                .queryParam("id", ids)
+                .get("/question")
+                .then().log().all()
+                .extract();
+    }
+
+    public static void 추가_질문_ID_목록_조회_응답_검증(
+            final ExtractableResponse<Response> response,
+            final List<Integer> ids,
+            final List<String> topics,
+            final List<String> descriptions,
+            final List<Integer[]> optionIds,
+            final List<String[]> optionNames
+    ) {
+        try (AutoCloseableSoftAssertions assertions = new AutoCloseableSoftAssertions()) {
+            assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.SC_OK);
+            assertions.assertThat(response.jsonPath().getList("id")).isEqualTo(ids);
+            assertions.assertThat(response.jsonPath().getList("topic")).isEqualTo(topics);
+            assertions.assertThat(response.jsonPath().getList("description")).isEqualTo(descriptions);
+            assertions.assertThat(response.jsonPath().getList("options.id[0]")).contains(optionIds.get(0));
+            assertions.assertThat(response.jsonPath().getList("options.id[1]")).contains(optionIds.get(1));
+            assertions.assertThat(response.jsonPath().getList("options.name[0]")).contains(optionNames.get(0));
+            assertions.assertThat(response.jsonPath().getList("options.name[1]")).contains(optionNames.get(1));
         }
     }
 }
