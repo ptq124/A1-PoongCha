@@ -28,7 +28,7 @@ const DefaultView = ({ filteredData, handleSelectOption, selectedOptions }) => {
             <OptionItem
               key={index}
               data={data}
-              selected={selectedOptions.includes(data.id)}
+              selected={selectedOptions.includes(data)}
               handleSelectOption={handleSelectOption}
             />
           )

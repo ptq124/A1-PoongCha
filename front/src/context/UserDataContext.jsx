@@ -47,11 +47,11 @@ export const UserDataProvider = ({ children }) => {
         "https://www.hyundai.com/contents/vr360/LX06/interior/I49/img-interior.png",
       incompatibleColorIds: [2, 3],
     },
-    options: [],
+    옵션: [],
   });
 
   const 유저데이터저장 = (key, data) => {
-    if (key !== "options") {
+    if (key !== "옵션") {
       setTotalData((prev) => ({
         ...prev,
         [key]: data[0],
@@ -59,7 +59,7 @@ export const UserDataProvider = ({ children }) => {
     } else {
       setTotalData((prev) => ({
         ...prev,
-        [key]: [...prev[key], data],
+        [key]: data,
       }));
     }
   };
