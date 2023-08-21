@@ -6,13 +6,11 @@ import com.poongcha.recommend.application.dto.AdditionalQuestionResponse;
 import com.poongcha.recommend.domain.additionalquestion.AdditionalQuestion;
 import com.poongcha.recommend.domain.additionalquestion.AdditionalQuestionOption;
 import com.poongcha.recommend.domain.additionalquestion.AdditionalQuestionOptionName;
-import com.poongcha.recommend.domain.additionalquestion.AdditionalQuestionSequence;
 import com.poongcha.recommend.domain.additionalquestion.Description;
 import com.poongcha.recommend.domain.additionalquestion.Topic;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -28,10 +26,9 @@ public class AdditionalQuestionMapper {
     private List<AdditionalQuestionOption> createAdditionalQuestionOption(
             final List<String> additionalQuestionOptionNames
     ) {
-        return IntStream.range(0, additionalQuestionOptionNames.size())
-                .mapToObj(i -> new AdditionalQuestionOption(
-                        new AdditionalQuestionSequence(i + 1),
-                        new AdditionalQuestionOptionName(additionalQuestionOptionNames.get(i))
+        return additionalQuestionOptionNames.stream()
+                .map(additionalQuestionOptionName -> new AdditionalQuestionOption(
+                        new AdditionalQuestionOptionName(additionalQuestionOptionName)
                 )).collect(Collectors.toUnmodifiableList());
     }
 
@@ -57,7 +54,6 @@ public class AdditionalQuestionMapper {
     ) {
         return new AdditionalQuestionOptionNameResponse(
                 additionalQuestionOption.getId(),
-                additionalQuestionOption.getAdditionalQuestionSequence().getValue(),
                 additionalQuestionOption.getAdditionalQuestionOptionName().getValue()
         );
     }
