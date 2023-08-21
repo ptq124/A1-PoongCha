@@ -58,4 +58,10 @@ public class LifestylePersona {
                 .map(LifestylePersonaAdditionalQuestionOption::new)
                 .collect(Collectors.toUnmodifiableList()));
     }
+
+    public List<Long> lifestylePersonaSituationTagIds() {
+        return this.lifestylePersonaLifestylePersonaSituationTags.stream()
+                .map(LifestylePersonaLifestylePersonaSituationTag::lifestylePersonaSituationTagId)
+                .collect(Collectors.toUnmodifiableList());
+    }
 }

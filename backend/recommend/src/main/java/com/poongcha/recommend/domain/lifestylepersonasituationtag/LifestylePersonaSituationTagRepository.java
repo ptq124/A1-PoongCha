@@ -7,4 +7,6 @@ public interface LifestylePersonaSituationTagRepository extends Repository<Lifes
     LifestylePersonaSituationTag save(final LifestylePersonaSituationTag lifestylePersonaSituationTag);
 
     List<LifestylePersonaSituationTag> findAll();
+
+    List<LifestylePersonaSituationTag> findAllByIdIn(final List<Long> ids);
 }

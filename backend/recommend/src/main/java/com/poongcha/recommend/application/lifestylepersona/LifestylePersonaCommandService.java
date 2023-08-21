@@ -1,4 +1,4 @@
-package com.poongcha.recommend.application.lifestylePersona;
+package com.poongcha.recommend.application.lifestylepersona;
 
 import com.poongcha.recommend.application.dto.LifestylePersonaCreateRequest;
 import com.poongcha.recommend.domain.lifestylepersona.LifestylePersona;

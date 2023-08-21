@@ -24,4 +24,8 @@ public class LifestylePersonaLifestylePersonaSituationTag {
     public LifestylePersonaLifestylePersonaSituationTag(final long id) {
         this.lifestylePersonaSituationTag = new IdOnlyAggregateReference<>(id);
     }
+
+    public Long lifestylePersonaSituationTagId() {
+        return this.lifestylePersonaSituationTag.getId();
+    }
 }
