@@ -14,9 +14,9 @@ public class CarOptionGroupTooltipQueryService {
     private final CarOptionGroupTooltipRepository carOptionGroupTooltipRepository;
     private final CarOptionGroupTooltipMapper carOptionGroupTooltipMapper;
 
-    public CarOptionGroupTooltipResponse findById(final long optionGroupId, final long carOptionGroupTooltipId) {
-        CarOptionGroupTooltip carOptionGroupTooltip = carOptionGroupTooltipRepository.
-                findByIdAndCarOptionGroup(carOptionGroupTooltipId, optionGroupId);
+    public CarOptionGroupTooltipResponse findById(final long optionGroupId) {
+        CarOptionGroupTooltip carOptionGroupTooltip = carOptionGroupTooltipRepository
+                .findByCarOptionGroup(optionGroupId);
 
         return carOptionGroupTooltipMapper.toCarOptionGroupTooltipResponse(carOptionGroupTooltip);
     }

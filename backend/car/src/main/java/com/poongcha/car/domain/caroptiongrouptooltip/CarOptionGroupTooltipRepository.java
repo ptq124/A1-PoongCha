@@ -5,5 +5,5 @@ import org.springframework.data.repository.Repository;
 public interface CarOptionGroupTooltipRepository extends Repository<CarOptionGroupTooltip, Long> {
     CarOptionGroupTooltip save(final CarOptionGroupTooltip carOptionGroupTooltip);
 
-    CarOptionGroupTooltip findByIdAndCarOptionGroup(long id, final long carOptionGroupTooltipId);
+    CarOptionGroupTooltip findByCarOptionGroup(final long carOptionGroupTooltipId);
 }

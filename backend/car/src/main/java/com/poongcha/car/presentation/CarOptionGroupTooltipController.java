@@ -32,11 +32,8 @@ public class CarOptionGroupTooltipController {
         ).build();
     }
 
-    @GetMapping("/api/option-group/{id}/tooltip/{tooltip-id}")
-    public ResponseEntity<CarOptionGroupTooltipResponse> findById(
-            @PathVariable("id") final long optionGroupId,
-            @PathVariable("tooltip-id") final long carOptionGroupTooltipId
-    ) {
-        return ResponseEntity.ok().body(carOptionGroupTooltipQueryService.findById(optionGroupId, carOptionGroupTooltipId));
+    @GetMapping("/api/option-group/{id}/tooltip")
+    public ResponseEntity<CarOptionGroupTooltipResponse> findById(@PathVariable("id") final long optionGroupId) {
+        return ResponseEntity.ok().body(carOptionGroupTooltipQueryService.findById(optionGroupId));
     }
 }

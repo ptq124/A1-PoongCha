@@ -94,16 +94,12 @@ public class CarOptionGroupTooltipSteps {
         }
     }
 
-    public static ExtractableResponse<Response> 차량_옵션_툴팁_ID_조회_요청(
-            final long id,
-            final long carOptionGroupTooltipId
-    ) {
+    public static ExtractableResponse<Response> 차량_옵션_툴팁_ID_조회_요청(final long id) {
         return given()
                 .filter(document(
                         DEFAULT_RESTDOCS_PATH,
                         pathParameters(
-                                parameterWithName("id").description("차량 옵션 그룹 ID"),
-                                parameterWithName("tooltip-id").description("차량 옵션 툴팁 ID")
+                                parameterWithName("id").description("차량 옵션 그룹 ID")
                         ),
                         responseFields(
                                 fieldWithPath("id").type(JsonFieldType.NUMBER)
@@ -115,9 +111,7 @@ public class CarOptionGroupTooltipSteps {
                         )
                 )).log().all()
                 .when()
-                .pathParam("id", id)
-                .pathParam("tooltip-id", carOptionGroupTooltipId)
-                .get("/api/option-group/{id}/tooltip/{tooltip-id}", id, carOptionGroupTooltipId)
+                .get("/api/option-group/{id}/tooltip", id)
                 .then().log().all()
                 .extract();
     }

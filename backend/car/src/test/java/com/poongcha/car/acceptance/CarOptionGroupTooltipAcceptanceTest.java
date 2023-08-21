@@ -74,7 +74,7 @@ public class CarOptionGroupTooltipAcceptanceTest extends CarAcceptanceTest {
                 1L
         );
 
-        var response = 차량_옵션_툴팁_ID_조회_요청(1L, 1L);
+        var response = 차량_옵션_툴팁_ID_조회_요청(1L);
 
         // THEN
         차량_옵션_툴팁_ID_조회_응답_검증(
