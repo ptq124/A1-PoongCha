@@ -19,7 +19,7 @@ const TooltipProvider = ({ label, offset, children }) => {
     <Wrapper onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       {isOpen && (
         <TooltipContainer $offset={offset}>
-          {React.cloneElement(label)}
+          {React.cloneElement(label, { ...label.props })}
         </TooltipContainer>
       )}
       {children}

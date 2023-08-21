@@ -158,10 +158,16 @@ const Description = styled.div`
   ${({ theme }) => theme.font.Body4_Regular};
   color: ${({ theme }) => theme.color.grey200};
   margin-top: 20px;
+  width: 286px;
+  height: 90px;
+  white-space: wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 const OptionInfo = styled.div`
   display: flex;
   flex-direction: column;
+  width: 200px;
   gap: 4px;
   .setName {
     ${({ theme }) => theme.font.Caption1_Medium};
@@ -179,7 +185,7 @@ const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  gap: 56px;
+  /* gap: 70px; */
 
   margin-top: 50px;
 `;

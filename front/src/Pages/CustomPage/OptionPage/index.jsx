@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { styled, css } from "styled-components";
 import Button from "@Components/Common/Button/Button";
 import useButtonNavigation from "@hooks/useButtonNavigation";

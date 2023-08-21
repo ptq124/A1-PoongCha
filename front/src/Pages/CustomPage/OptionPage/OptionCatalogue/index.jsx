@@ -12,7 +12,7 @@ const OptionCatalogue = ({
 }) => {
   const [optionData, setOptionData] = useState();
   useEffect(() => {
-    GET("http://my-car.store/api/option-group").then((data) => {
+    GET(import.meta.env.VITE_BASE_URL + "/option-group").then((data) => {
       if (selectedTab === "추가 옵션") {
         setOptionData(data?.filter((option) => option.additionalPrice > 0));
       } else {
@@ -30,7 +30,7 @@ const OptionCatalogue = ({
     <Wrapper>
       {selectedTag.name === "대표" || selectedTag.name === "전체" ? (
         <DefaultView
-          filteredData={selectedTag === "대표" ? filteredData : optionData}
+          filteredData={selectedTag.name === "대표" ? filteredData : optionData}
           handleSelectOption={handleSelectOption}
           selectedOptions={selectedOptions}
         />
