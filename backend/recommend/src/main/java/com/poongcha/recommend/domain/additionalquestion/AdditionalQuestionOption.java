@@ -17,9 +17,16 @@ public class AdditionalQuestionOption {
     private Long id;
 
     @Embedded.Nullable
+    private AdditionalQuestionSequence additionalQuestionSequence;
+
+    @Embedded.Nullable
     private AdditionalQuestionOptionName additionalQuestionOptionName;
 
-    public AdditionalQuestionOption(final AdditionalQuestionOptionName additionalQuestionOptionName) {
+    public AdditionalQuestionOption(
+            final AdditionalQuestionSequence additionalQuestionSequence,
+            final AdditionalQuestionOptionName additionalQuestionOptionName
+    ) {
+        this.additionalQuestionSequence = additionalQuestionSequence;
         this.additionalQuestionOptionName = additionalQuestionOptionName;
     }
 }

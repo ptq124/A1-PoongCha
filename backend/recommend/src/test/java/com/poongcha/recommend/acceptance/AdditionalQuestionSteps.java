@@ -67,6 +67,7 @@ public class AdditionalQuestionSteps {
                                 fieldWithPath("description").type(JsonFieldType.STRING).description("질문 설명"),
                                 fieldWithPath("options").type(JsonFieldType.ARRAY).description("질문 선택지 목록"),
                                 fieldWithPath("options[].id").type(JsonFieldType.NUMBER).description("질문 선택지 ID"),
+                                fieldWithPath("options[].sequence").type(JsonFieldType.NUMBER).description("질문 선택지 순서"),
                                 fieldWithPath("options[].name").type(JsonFieldType.STRING).description("질문 선택지 이름")
                         )
                 )).log().all()
@@ -107,6 +108,7 @@ public class AdditionalQuestionSteps {
                                 fieldWithPath("[].description").type(JsonFieldType.STRING).description("질문 설명"),
                                 fieldWithPath("[].options").type(JsonFieldType.ARRAY).description("질문 선택지 목록"),
                                 fieldWithPath("[].options[].id").type(JsonFieldType.NUMBER).description("질문 선택지 ID"),
+                                fieldWithPath("[].options[].sequence").type(JsonFieldType.NUMBER).description("질문 선택지 순서"),
                                 fieldWithPath("[].options[].name").type(JsonFieldType.STRING).description("질문 선택지 이름")
                         )
                 )).log().all()

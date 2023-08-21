@@ -10,5 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class AdditionalQuestionOptionNameResponse {
     private Long id;
+    private int sequence;
     private String name;
 }
