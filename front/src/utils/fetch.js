@@ -2,8 +2,10 @@
 // import properties from "@/config/properties";
 import { handleHttpError } from "@utils/error";
 
+const BASE_URL = "http://api.my-car.store";
+
 const fetchWrap = async ({ method, url, body }) => {
-  const URL = `${import.meta.env.VITE_BASE_URL}/${url}`;
+  const URL = `${BASE_URL}/${url}`;
   try {
     const config = {
       method,
