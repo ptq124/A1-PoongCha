@@ -310,7 +310,7 @@ public class TrimSteps {
                                 fieldWithPath("[].colors").type(JsonFieldType.ARRAY).description("차량 색상 정보"),
                                 fieldWithPath("[].colors[].id").type(JsonFieldType.NUMBER).description("차량 색상 ID"),
                                 fieldWithPath("[].colors[].name").type(JsonFieldType.STRING).description("차량 색상 이름"),
-                                fieldWithPath("[].colors[].image").type(JsonFieldType.STRING)
+                                fieldWithPath("[].colors[].imageUrl").type(JsonFieldType.STRING)
                                         .description("차량 색상 이미지 URL"),
                                 fieldWithPath("[].colors[].type").type(JsonFieldType.STRING).description("차량 색상 타입"),
                                 fieldWithPath("[].colors[].trimExteriorImageUrl").optional()
@@ -350,7 +350,7 @@ public class TrimSteps {
                     .isEqualTo(carColorIds);
             assertions.assertThat(response.jsonPath().getList("colors.name")).usingRecursiveComparison()
                     .isEqualTo(carColorNames);
-            assertions.assertThat(response.jsonPath().getList("colors.image")).usingRecursiveComparison()
+            assertions.assertThat(response.jsonPath().getList("colors.imageUrl")).usingRecursiveComparison()
                     .isEqualTo(carColorImages);
             assertions.assertThat(response.jsonPath().getList("colors.type")).usingRecursiveComparison()
                     .isEqualTo(carColorTypes);
