@@ -13,12 +13,12 @@ public interface CarOptionGroupRepository extends Repository<CarOptionGroup, Lon
 
     Optional<CarOptionGroup> findById(final long id);
 
-    @Query("select * from car_option_groups where id = :id")
+    @Query("select * from car_option_groups where id = :id for update ")
     Optional<CarOptionGroup> findByIdWithLock(final long id);
 
     List<CarOptionGroup> findAllByIdIn(final List<Long> ids);
 
-    @Query("select * from car_option_groups where id in (:ids)")
+    @Query("select * from car_option_groups where id in (:ids) for update ")
     List<CarOptionGroup> findAllByIdInWithLock(final @Param("ids") List<Long> ids);
 
     List<CarOptionGroup> findAll();

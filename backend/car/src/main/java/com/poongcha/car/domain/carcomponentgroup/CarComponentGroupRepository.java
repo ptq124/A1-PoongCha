@@ -8,7 +8,7 @@ import org.springframework.data.repository.Repository;
 public interface CarComponentGroupRepository extends Repository<CarComponentGroup, Long> {
     CarComponentGroup save(final CarComponentGroup carComponentGroup);
 
-    @Query("select * from car_component_groups where id = :id")
+    @Query("select * from car_component_groups where id = :id for update ")
     Optional<CarComponentGroup> findByIdWithLock(final long id);
 
     List<CarComponentGroup> findAllByIdIn(List<Long> ids);
