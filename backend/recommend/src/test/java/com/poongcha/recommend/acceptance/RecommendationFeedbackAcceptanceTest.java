@@ -2,8 +2,10 @@ package com.poongcha.recommend.acceptance;
 
 import static com.poongcha.recommend.acceptance.AdditionalQuestionAnswerSteps.추가_질문_답변_생성_요청;
 import static com.poongcha.recommend.acceptance.AdditionalQuestionSteps.추가_질문_생성_요청;
+import static com.poongcha.recommend.acceptance.RecommendationFeedbackSteps.추천_피드백_ID_조회_요청;
 import static com.poongcha.recommend.acceptance.RecommendationFeedbackSteps.추천_피드백_생성_요청;
 import static com.poongcha.recommend.acceptance.RecommendationFeedbackSteps.추천_피드백_생성_응답_검증;
+import static com.poongcha.recommend.acceptance.RecommendationFeedbackSteps.추천_피드백_조회_검증;
 
 import com.poongcha.recommend.domain.recommendationfeedback.FeedbackScore;
 import com.poongcha.recommend.util.RecommendAcceptanceTest;
@@ -44,5 +46,22 @@ public class RecommendationFeedbackAcceptanceTest extends RecommendAcceptanceTes
 
         // THEN
         추천_피드백_생성_응답_검증(response, "/feedback/1");
+    }
+
+    @DisplayName("추천 피드백 조회")
+    @Test
+    void 추천_피드백_조회() {
+        // GIVEN
+        추가_질문_답변_생성_요청(
+                List.of(ageAdditionalQuestionId, drivingCareerAdditionalQuestionId, valueAdditionalQuestionId),
+                List.of(1, 5, 19)
+        );
+        추천_피드백_생성_요청(좋음, 견적ID, 추가_질문_답변ID);
+
+        // WHEN
+        var response = 추천_피드백_ID_조회_요청(1L);
+
+        // THEN
+        추천_피드백_조회_검증(response, 좋음, 견적ID, 추가_질문_답변ID);
     }
 }
