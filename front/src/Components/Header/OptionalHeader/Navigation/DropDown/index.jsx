@@ -4,7 +4,7 @@ import arrowUp from "@assets/icons/arrow_up.svg";
 import { useUserData } from "context/UserDataContext";
 
 const DropDown = ({ popupRef, closePopup }) => {
-  const { totalData, 유저데이터저장 } = useUserData();
+  const { totalData, estimated } = useUserData();
 
   const { name: engine } = totalData.엔진;
   const { name: body } = totalData.바디;
@@ -12,17 +12,6 @@ const DropDown = ({ popupRef, closePopup }) => {
   const { name: exterior } = totalData.외장;
   const { name: interior } = totalData.내장;
 
-  const renderEstimatedPrice = () => {
-    let estimatedPrice =
-      totalData.엔진.additionalPrice +
-      totalData.바디.additionalPrice +
-      totalData.구동방식.additionalPrice;
-    totalData.옵션.map((option) => {
-      estimatedPrice += option.additionalPrice;
-    });
-    // 트림 가격도 추가하기
-    return estimatedPrice;
-  };
   return (
     <Wrapper ref={popupRef}>
       <MainContainer>
@@ -57,7 +46,7 @@ const DropDown = ({ popupRef, closePopup }) => {
       </MainContainer>
       <FooterContainer>
         <img src={arrowUp} onClick={closePopup} />
-        <span>{renderEstimatedPrice().toLocaleString()}원</span>
+        <span>{estimated.toLocaleString()}원</span>
       </FooterContainer>
     </Wrapper>
   );

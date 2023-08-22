@@ -2,14 +2,19 @@ import React from "react";
 import { styled } from "styled-components";
 import { useLocation } from "react-router-dom";
 
-const SelectedItem = () => {
+const SelectedItem = ({ data, option }) => {
   const { pathname } = useLocation();
+
+  if (!data) return null;
+
   return (
     <Wrapper>
       <ItemDetail>
-        <Img></Img>
+        <Img src={data.imageUrl}></Img>
         <TextBox>
-          <Body4Regular>외장 - 크리미 화이트 펄</Body4Regular>
+          <Body4Regular>
+            {option && `${option} -`} {data.name}
+          </Body4Regular>
           <Head4>0원</Head4>
         </TextBox>
       </ItemDetail>
@@ -50,6 +55,8 @@ const Img = styled.img`
 
   background-color: ${({ theme }) => theme.color.grey600};
   border-radius: 4px;
+
+  object-fit: cover;
 `;
 
 const Wrapper = styled.div`
@@ -74,6 +81,11 @@ const TextBox = styled.div`
 const Body4Regular = styled.div`
   ${({ theme }) => theme.font.Body4_Regular};
   color: ${({ theme }) => theme.color.grey200};
+
+  width: 125px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 const Head4 = styled.div`

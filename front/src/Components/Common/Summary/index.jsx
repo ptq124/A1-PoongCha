@@ -2,7 +2,11 @@ import React from "react";
 import { styled } from "styled-components";
 import SelectedItem from "./SelectedItem/SelectedItem";
 
-const Summary = () => {
+const Summary = ({ data, estimated }) => {
+  const { name: engine } = data.엔진;
+  const { name: body } = data.바디;
+  const { name: drive } = data.구동방식;
+
   return (
     <Wrapper>
       <TrimContainer>
@@ -13,28 +17,30 @@ const Summary = () => {
           </TrimName>
           <TrimPrice>43,460,000원</TrimPrice>
         </TrimTitle>
-        <TrimSubtitle>가솔린 • 2WD • 8인승</TrimSubtitle>
+        <TrimSubtitle>
+          {engine} • {body} • {drive}
+        </TrimSubtitle>
       </TrimContainer>
       <Separator></Separator>
       <ColorOptionContainer>
         <Title>색상</Title>
         <ItemContainer>
-          <SelectedItem />
-          <SelectedItem />
+          <SelectedItem data={data.외장} option="외장" />
+          <SelectedItem data={data.내장} option="내장" />
         </ItemContainer>
       </ColorOptionContainer>
       <Separator></Separator>
       <ColorOptionContainer>
         <Title>옵션</Title>
         <ItemContainer>
-          <SelectedItem />
-          <SelectedItem />
+          <SelectedItem data={data?.옵션[0]?.options[0]} option="" />
+          <SelectedItem data={data?.옵션[1]?.options[0]} option="" />
         </ItemContainer>
       </ColorOptionContainer>
       <Separator></Separator>
       <EstimateContainer>
         <span className="estimate">총 금액</span>
-        <span className="value">48,120,000원</span>
+        <span className="value">{estimated?.toLocaleString()}원</span>
       </EstimateContainer>
     </Wrapper>
   );
