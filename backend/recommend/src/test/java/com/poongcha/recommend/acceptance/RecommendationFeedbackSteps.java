@@ -6,6 +6,7 @@ import static util.DocumentationTest.DEFAULT_RESTDOCS_PATH;
 import static util.DocumentationTest.customRequestFields;
 import static util.DocumentationTest.given;
 
+import com.poongcha.recommend.domain.recommendationfeedback.FeedbackScore;
 import io.restassured.http.ContentType;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
@@ -19,20 +20,24 @@ public class RecommendationFeedbackSteps {
 
     public static ExtractableResponse<Response> 추천_피드백_생성_요청(
             final FeedbackScore feedbackScore,
-            final Long estimateId
+            final long estimateId,
+            final long additionalQuestionAnswerGroupId
     ) {
         return given()
                 .filter(document(
                         DEFAULT_RESTDOCS_PATH,
                         customRequestFields(
                                 fieldWithPath("feedbackScore").type(JsonFieldType.STRING).description("피드백 점수"),
-                                fieldWithPath("estimateId").type(JsonFieldType.NUMBER).description("견적 ID")
+                                fieldWithPath("estimateId").type(JsonFieldType.NUMBER).description("견적 ID"),
+                                fieldWithPath("additionalQuestionAnswerGroupId").type(JsonFieldType.NUMBER)
+                                        .description("질문 응답 그룹 ID")
                         )
                 )).log().all()
                 .when()
                 .body(Map.of(
                         "feedbackScore", feedbackScore,
-                        "estimateId", estimateId
+                        "estimateId", estimateId,
+                        "additionalQuestionAnswerGroupId", additionalQuestionAnswerGroupId
                 ))
                 .contentType(ContentType.JSON)
                 .post("/feedback")
