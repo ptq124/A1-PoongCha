@@ -18,7 +18,7 @@ const RadioGroup = ({
     <Wrapper $style={style?.wrapper}>
       <Title $style={style?.title}>{title}</Title>
       <Options $style={style?.options}>
-        {options.map((option, index) => (
+        {options?.map((option, index) => (
           <div key={index}>
             {React.cloneElement(label, {
               ...label.props,

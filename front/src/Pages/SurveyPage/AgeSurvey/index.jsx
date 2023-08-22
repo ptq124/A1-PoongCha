@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import * as S from "../styles";
 import { css } from "styled-components";
 import Button from "@Components/Common/Button/Button";
@@ -7,16 +7,14 @@ import { useOutletContext } from "react-router-dom";
 import RadioGroup from "@Components/Common/RadioGroup";
 import AgeQuestionLabel from "@Components/Survey/AgeQuestionLabel";
 import PageIndicator from "@Components/Survey/PageIndicator";
+import { getSurvey } from "apis/survey";
 
-const surveyData = {
-  options: ["20대", "30대", "40대", "50대 이상"],
-};
-
-const ageRadioGroupTitle = () => {
+const ageRadioGroupTitle = (data) => {
   return (
     <>
       <span>
-        <strong>나이</strong>를 알려주세요.
+        {/* <strong>나이</strong>를 알려주세요. */}
+        {data?.description}
       </span>
       <PageIndicator />
     </>
@@ -26,15 +24,22 @@ const ageRadioGroupTitle = () => {
 const AgeSurvey = () => {
   const move = useButtonNavigation();
   const [handleOptionSelect, state] = useOutletContext();
+  const [surveyData, setSurveyData] = useState({});
+
+  useEffect(() => {
+    getSurvey(1).then((data) => {
+      setSurveyData(data);
+    });
+  }, []);
 
   return (
     <S.SurveyContent>
       <RadioGroup
-        title={ageRadioGroupTitle()}
+        title={ageRadioGroupTitle(surveyData)}
         label={<AgeQuestionLabel />}
         options={surveyData.options}
         newStateHandler={(newState) => handleOptionSelect("age", newState)}
-        initialState={state.age}
+        initialState={surveyData.options && surveyData.options[0]}
         style={ageRadioGroupStyle}
       />
       <Button

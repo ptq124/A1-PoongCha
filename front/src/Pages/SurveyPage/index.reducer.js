@@ -1,5 +1,5 @@
 const initialState = {
-  age: "20대",
+  age: "",
   lifestyle: "",
   drivingRecord: "1년 이하",
   familySize: "1인",
