@@ -9,6 +9,7 @@ import com.poongcha.recommend.domain.lifestylepersona.LifestylePersona;
 import com.poongcha.recommend.domain.lifestylepersona.LifestylePersonaAdditionalQuestionOption;
 import com.poongcha.recommend.domain.lifestylepersona.LifestylePersonaLifestylePersonaSituationTag;
 import com.poongcha.recommend.domain.lifestylepersonasituationtag.LifestylePersonaSituationTag;
+import com.poongcha.recommend.domain.recommendationfeedback.RecommendationFeedback;
 import java.sql.PreparedStatement;
 import org.springframework.context.ApplicationContext;
 import org.springframework.data.relational.core.mapping.Table;
@@ -30,6 +31,7 @@ public class DataInitializeExecutionListener extends AbstractTestExecutionListen
         reset(operation, LifestyleInterview.class.getAnnotation(Table.class).name());
         reset(operation, LifestylePersonaAdditionalQuestionOption.class.getAnnotation(Table.class).name());
         reset(operation, LifestylePersonaLifestylePersonaSituationTag.class.getAnnotation(Table.class).name());
+        reset(operation, RecommendationFeedback.class.getAnnotation(Table.class).name());
     }
 
     private static void reset(
