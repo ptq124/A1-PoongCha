@@ -76,14 +76,14 @@ public class RecommendationFeedbackSteps {
             final ExtractableResponse<Response> response,
             final FeedbackScore feedbackScore,
             final Long estimateId,
-            final Long recommendationFeedbackId
+            final Long additionalQuestionAnswerGroupId
     ) {
         try (AutoCloseableSoftAssertions assertions = new AutoCloseableSoftAssertions()) {
             assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.SC_OK);
-            assertions.assertThat(response.jsonPath().getString("feedbackScore")).isEqualTo(feedbackScore);
+            assertions.assertThat(response.jsonPath().getString("feedbackScore")).isEqualTo(feedbackScore.name());
             assertions.assertThat(response.jsonPath().getLong("estimateId")).isEqualTo(estimateId);
-            assertions.assertThat(response.jsonPath().getLong("recommendationFeedbackId"))
-                    .isEqualTo(recommendationFeedbackId);
+            assertions.assertThat(response.jsonPath().getLong("additionalQuestionAnswerGroupId"))
+                    .isEqualTo(additionalQuestionAnswerGroupId);
         }
     }
 }
