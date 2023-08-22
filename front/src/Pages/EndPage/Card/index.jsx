@@ -121,6 +121,15 @@ const Wrapper = styled.div`
   background: linear-gradient(180deg, #a2b1d3 0%, #edf2fe 100%);
 `;
 
+const fillContentBackground = keyframes`
+  from {
+    background: linear-gradient(180deg, #a2b1d3 0%, #edf2fe 100%);
+
+  }
+  to {
+    background: linear-gradient(180deg, #cbd3e8 0%, #eef2fc 100%);
+  }
+`;
 const Content = styled.div`
   position: relative;
   display: flex;
@@ -131,7 +140,9 @@ const Content = styled.div`
   width: 100%;
   height: 100%;
   border-radius: 8px;
-  background: linear-gradient(180deg, #cbd3e8 0%, #eef2fc 100%);
+  background: linear-gradient(180deg, #a2b1d3 0%, #edf2fe 100%);
+  animation: ${fillContentBackground} 0.3s forwards;
+  animation-delay: 1.6s;
 
   z-index: 2;
   overflow: hidden;
