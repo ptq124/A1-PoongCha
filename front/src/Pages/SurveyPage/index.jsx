@@ -13,10 +13,6 @@ const SurveyPage = () => {
     });
   };
 
-  useEffect(() => {
-    console.log(state);
-  }, [state]);
-
   return (
     <Wrapper>
       <Outlet context={[handleOptionSelect, state]} />

@@ -39,7 +39,9 @@ const AgeSurvey = () => {
         title={ageRadioGroupTitle(surveyData)}
         label={<AgeQuestionLabel />}
         options={surveyData.options}
-        newStateHandler={(newState) => handleOptionSelect("age", newState)}
+        newStateHandler={(newState) =>
+          handleOptionSelect(surveyData.id, newState)
+        }
         initialState={surveyData.options && surveyData.options[0]}
         style={ageRadioGroupStyle}
       />

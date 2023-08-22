@@ -1,10 +1,10 @@
 const initialState = {
-  age: "",
+  1: "",
   lifestyle: "",
-  drivingRecord: "1년 이하",
-  familySize: "1인",
-  purpose: "",
-  viewpoint: "",
+  2: "",
+  3: "",
+  4: "",
+  5: "",
   maxBudget: 5100,
 };
 

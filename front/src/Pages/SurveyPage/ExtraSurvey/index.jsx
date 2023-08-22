@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import * as S from "../styles";
 import { css, styled } from "styled-components";
 import Button from "@Components/Common/Button/Button";
@@ -7,48 +7,60 @@ import useButtonNavigation from "@hooks/useButtonNavigation";
 import { useOutletContext } from "react-router-dom";
 import ExtraQuestionLabel from "@Components/Survey/ExtraQuestionLabel";
 import RadioGroup from "@Components/Common/RadioGroup";
-
-const surveyData = {
-  drivingRecord: {
-    title: "운전 경력이 어떻게 되시나요?",
-    options: ["1년 이하", "3년 이하", "5년 이상"],
-  },
-  familySize: {
-    title: "가족 구성원이 몇 명인가요?",
-    options: ["1인", "2인", "3-4인", "5인 이상"],
-  },
-  purpose: {
-    title: "어떤 목적으로 주로 차를 타시나요?",
-    options: ["출퇴근용", "레저용", "가정용", "업무용"],
-  },
-  viewpoint: {
-    title: "자동차를 살 때 어떤 가치가 가장 중요한가요?",
-    options: ["디자인", "성능", "안전", "편의성"],
-  },
-};
+import { getSurvey } from "apis/survey";
+import {
+  DRIVING_RECORD_SURVEY_ID,
+  FAMILY_SIZE_SURVEY_ID,
+  MAX_BUDGET_SURVEY_ID,
+  PURPOSE_SURVEY_ID,
+  VIEWPOINT_SURVEY_ID,
+} from "@utils/constants";
 
 const ExtraSurvey = () => {
   const move = useButtonNavigation();
-
   const [handleOptionSelect, state] = useOutletContext();
+  const isBtnActive = () =>
+    state[PURPOSE_SURVEY_ID] && state[VIEWPOINT_SURVEY_ID];
 
-  const isActive = () => state.purpose && state.viewpoint;
+  const [surveyData, setSurveyData] = useState([]);
+  useEffect(() => {
+    const fetchAll = async () => {
+      const requestIds = [
+        DRIVING_RECORD_SURVEY_ID,
+        FAMILY_SIZE_SURVEY_ID,
+        PURPOSE_SURVEY_ID,
+        VIEWPOINT_SURVEY_ID,
+        // MAX_BUDGET_SURVEY_ID,
+      ];
+      const surveyDataArr = await Promise.all(
+        requestIds.map((id) => getSurvey(id).then((data) => data))
+      );
+      setSurveyData(surveyDataArr);
+    };
+
+    fetchAll();
+  }, []);
+
   return (
     <S.SurveyContent>
       <Title>
         당신의 <strong>라이프스타일</strong>을 알려주세요.
       </Title>
       <Subtitle>당신의 라이프스타일을 반영한 차를 추천해 드릴게요.</Subtitle>
-      {Object.entries(surveyData).map(([questionKey, data]) => (
+      {surveyData?.map((survey, index) => (
         <RadioGroup
-          key={questionKey}
-          title={data.title}
+          key={survey.id}
+          title={survey.description}
           label={<ExtraQuestionLabel />}
-          options={data.options}
+          options={survey.options}
           newStateHandler={(newState) =>
-            handleOptionSelect(questionKey, newState)
+            handleOptionSelect(survey.id, newState)
           }
-          initialState={state[questionKey]}
+          initialState={
+            (survey.id === DRIVING_RECORD_SURVEY_ID ||
+              survey.id === FAMILY_SIZE_SURVEY_ID) &&
+            survey.options[0]
+          }
           style={extraRadioGroupStyle}
         />
       ))}
@@ -58,7 +70,7 @@ const ExtraSurvey = () => {
       />
       <Button
         text="완료"
-        $isActive={isActive()}
+        $isActive={isBtnActive()}
         style={SurveyBtnStyle}
         onClick={() => move("/survey/etc_end", state)}
       />

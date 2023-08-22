@@ -2,19 +2,26 @@ import React from "react";
 import { useLocation } from "react-router";
 import { keyframes, styled } from "styled-components";
 import PalisadeImg from "@assets/images/etc-end-palisade.svg";
+import {
+  DRIVING_RECORD_SURVEY_ID,
+  FAMILY_SIZE_SURVEY_ID,
+  PURPOSE_SURVEY_ID,
+  VIEWPOINT_SURVEY_ID,
+} from "@utils/constants";
 
 const QNASummary = () => {
   const { state } = useLocation();
-  const AnswerTags = Object.entries(state).map(([key, value]) => (
-    <AnswerTag key={key}>
-      {value}
-      {key == "maxBudget" && "만원"}
-    </AnswerTag>
-  ));
+
   return (
     <Wrapper>
       <SummaryContent>
-        <AnswerTagContainer>{AnswerTags}</AnswerTagContainer>
+        <AnswerTagContainer>
+          <AnswerTag>{state[DRIVING_RECORD_SURVEY_ID].name}</AnswerTag>
+          <AnswerTag>{state[FAMILY_SIZE_SURVEY_ID].name}</AnswerTag>
+          <AnswerTag>{state[PURPOSE_SURVEY_ID].name}</AnswerTag>
+          <AnswerTag>{state[VIEWPOINT_SURVEY_ID].name}</AnswerTag>
+          <AnswerTag>{state["maxBudget"]}만원</AnswerTag>
+        </AnswerTagContainer>
         <Title>질문에 기반한 추천 차량이에요.</Title>
         <Subtitle>전국의 카마스터분들이 엄선하여 추천했어요.</Subtitle>
         <Img src={PalisadeImg} />
