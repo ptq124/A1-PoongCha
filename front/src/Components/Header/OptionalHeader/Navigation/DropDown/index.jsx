@@ -3,40 +3,39 @@ import { styled } from "styled-components";
 import arrowUp from "@assets/icons/arrow_up.svg";
 import { useUserData } from "context/UserDataContext";
 
-const DropDown = ({ popupRef, closePopup }) => {
-  const { totalData, estimated } = useUserData();
-
-  const { name: engine } = totalData.엔진;
-  const { name: body } = totalData.바디;
-  const { name: drive } = totalData.구동방식;
-  const { name: exterior } = totalData.외장;
-  const { name: interior } = totalData.내장;
+const DropDown = ({ closePopup }) => {
+  const {
+    totalData: { 트림, 엔진, 바디, 구동방식, 외장, 내장, 옵션 },
+    estimated,
+  } = useUserData();
 
   return (
-    <Wrapper ref={popupRef}>
+    <Wrapper>
       <MainContainer>
         <ItemWrapper>
           <TrimInfo>
-            <span>{engine}</span>
-            <span>43,460,00원</span>
+            <span>{엔진.name}</span>
+            <span>{엔진.additionalPrice.toLocaleString()}원</span>
           </TrimInfo>
           <TrimInfo>
-            <span>{body}</span>
+            <span>{바디.name}</span>
+            <span>{바디.additionalPrice.toLocaleString()}원</span>
           </TrimInfo>
           <TrimInfo>
-            <span>{drive}</span>
+            <span>{구동방식.name}</span>
+            <span>{구동방식.additionalPrice.toLocaleString()}원</span>
           </TrimInfo>
         </ItemWrapper>
         <ItemWrapper>
           <ColorInfo>
-            <span>{exterior}</span>
+            <span>{외장.name}</span>
           </ColorInfo>
           <ColorInfo>
-            <span>{interior}</span>
+            <span>{내장.name}</span>
           </ColorInfo>
         </ItemWrapper>
         <ItemWrapper>
-          {totalData.옵션.map((option) => (
+          {옵션.map((option) => (
             <OptionInfo key={option.id}>
               <span>{option.name}</span>
               <span>{option.additionalPrice.toLocaleString()}원</span>

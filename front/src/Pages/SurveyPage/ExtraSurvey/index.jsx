@@ -33,7 +33,6 @@ const ExtraSurvey = () => {
   const [handleOptionSelect, state] = useOutletContext();
 
   const isActive = () => state.purpose && state.viewpoint;
-
   return (
     <S.SurveyContent>
       <Title>

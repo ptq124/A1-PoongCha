@@ -14,18 +14,12 @@ import Tooltip from "@Components/Custom/Tooltip";
 import TooltipProvider from "@Components/Common/TooltipProvider";
 import PopupProvider from "@Components/Common/PopupProvider";
 import { getComponent } from "apis/custom";
+import { useUserData } from "context/UserDataContext";
 
 const TrimCustomSideBar = () => {
   const move = useButtonNavigation();
+  const { totalData, 유저데이터저장 } = useUserData();
   const [componentGroupData, setComponentGroupData] = useState([]);
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const setOptionSelect = (questionKey, option) => {
-    dispatch({
-      type: "SELECT_OPTION",
-      questionKey,
-      option,
-    });
-  };
 
   useEffect(() => {
     getComponent().then((data) => {
@@ -68,9 +62,9 @@ const TrimCustomSideBar = () => {
                 label={<ModelItemOptionLabel />}
                 options={data.component}
                 newStateHandler={(newState) =>
-                  setOptionSelect(data.name, newState)
+                  유저데이터저장(data.name, newState)
                 }
-                initialState={state[data.name]}
+                initialState={totalData[data.name]}
                 style={modelItemRadioGroupStyle}
               />
             </TooltipProvider>
@@ -90,10 +84,8 @@ const TrimCustomSideBar = () => {
             title={trimRadioGroupTitle()}
             label={<TrimOptionLabel />}
             options={TrimOptions}
-            newStateHandler={(newState) => {
-              setOptionSelect("trim", newState);
-            }}
-            initialState={state["trim"]}
+            newStateHandler={(newState) => 유저데이터저장("트림", newState)}
+            initialState={totalData["트림"]}
             style={trimOptionGroupStyle}
           />
         </TooltipProvider>
