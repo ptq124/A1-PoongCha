@@ -4,11 +4,12 @@ import Check24Icon from "@assets/checkcircle/check-24-white.svg";
 
 const ColorOption = ({ option, selected, onClick }) => {
   let isLabeled = true;
+
   return (
     <Wrapper onClick={onClick}>
       <Preview>
         {/* {isLabeled && <Label>Top 1</Label>} */}
-        <ColorImg src={option.image} />
+        <ColorImg src={option.imageUrl} />
         {selected && (
           <Cover>
             <div></div>
