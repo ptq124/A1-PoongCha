@@ -27,29 +27,15 @@ const Navigation = () => {
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-  const { totalData, 유저데이터저장 } = useUserData();
-
-  navItems[0].detail = `${totalData["트림"].name}`;
-  navItems[1].detail = `${totalData["외장"].name} / ${totalData["내장"].name}`;
-  navItems[2].detail = `${totalData["옵션"]
-    .map((option) => option.name)
-    .join(", ")}`;
-
   const {
-    totalData: { 트림, 엔진, 바디, 구동방식, 옵션 },
+    totalData: { 트림, 엔진, 바디, 구동방식, 옵션, 외장, 내장 },
+    estimated,
   } = useUserData();
 
-  const renderEstimatedPrice = () => {
-    let estimatedPrice =
-      트림.additionalPrice +
-      엔진.additionalPrice +
-      바디.additionalPrice +
-      구동방식.additionalPrice;
-    옵션.map((option) => {
-      estimatedPrice += option.additionalPrice;
-    });
-    return estimatedPrice;
-  };
+  navItems[0].detail = `${트림.name}`;
+  navItems[1].detail = `${외장.name} / ${내장.name}`;
+  navItems[2].detail = `${옵션.map((option) => option.name).join(", ")}`;
+
   return (
     <>
       <Wrapper>
@@ -73,7 +59,7 @@ const Navigation = () => {
             onClick={() => setIsPopupOpen(!isPopupOpen)}
           />
           <Button
-            text={renderEstimatedPrice().toLocaleString() + "원 견적내기"}
+            text={estimated.toLocaleString() + "원 견적내기"}
             style={estimateBtnStyle}
             onClick={() => move("/result")}
           />
@@ -82,7 +68,7 @@ const Navigation = () => {
       {isPopupOpen && (
         <Dropdown
           closePopup={() => setIsPopupOpen(false)}
-          estimatedPrice={renderEstimatedPrice()}
+          estimatedPrice={estimated}
         />
       )}
     </>
