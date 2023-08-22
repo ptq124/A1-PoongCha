@@ -12,7 +12,7 @@ const tabData = ["추가 옵션", "기본 포함 옵션"];
 const OptionPage = () => {
   const { totalData, 유저데이터저장 } = useUserData();
   const handleSelectOption = (option) => {
-    if (totalData["옵션"].includes(option)) {
+    if (totalData["옵션"].map((option) => option.id).includes(option.id)) {
       유저데이터저장(
         "옵션",
         totalData["옵션"].filter((data) => data.id !== option.id)

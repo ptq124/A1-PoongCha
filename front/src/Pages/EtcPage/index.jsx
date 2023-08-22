@@ -4,13 +4,15 @@ import QNASummary from "./QNASummary";
 import Summary from "@Components/Common/Summary";
 import Button from "@Components/Common/Button/Button";
 import useButtonNavigation from "@hooks/useButtonNavigation";
+import { useUserData } from "context/UserDataContext";
 
 const EtcPage = () => {
   const move = useButtonNavigation();
+  const { totalData, estimated } = useUserData();
   return (
     <Wrapper>
       <QNASummary />
-      <Summary />
+      <Summary data={totalData} estimated={estimated} />
       <ButtonContainer>
         <Button
           text="커스텀하기"

@@ -3,9 +3,10 @@ import { styled } from "styled-components";
 import arrowUp from "@assets/icons/arrow_up.svg";
 import { useUserData } from "context/UserDataContext";
 
-const DropDown = ({ closePopup, estimatedPrice }) => {
+const DropDown = ({ closePopup }) => {
   const {
     totalData: { 트림, 엔진, 바디, 구동방식, 외장, 내장, 옵션 },
+    estimated,
   } = useUserData();
 
   return (
@@ -44,7 +45,7 @@ const DropDown = ({ closePopup, estimatedPrice }) => {
       </MainContainer>
       <FooterContainer>
         <img src={arrowUp} onClick={closePopup} />
-        <span>{estimatedPrice.toLocaleString()}원</span>
+        <span>{estimated.toLocaleString()}원</span>
       </FooterContainer>
     </Wrapper>
   );

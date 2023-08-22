@@ -4,6 +4,7 @@ import Card from "./Card";
 import Summary from "@Components/Common/Summary";
 import Button from "@Components/Common/Button/Button";
 import Accordion from "@Components/Result/Accordian";
+import { useUserData } from "context/UserDataContext";
 
 const initialAccordions = [
   { title: "탁송", content: "이곳에 내용이 들어갑니다.", isOpen: false },
@@ -33,11 +34,13 @@ const ResultPage = () => {
     setAccordions(updatedAccordions);
   };
 
+  const { totalData, estimated } = useUserData();
+
   return (
     <Wrapper>
       <Card />
       <MainContainer>
-        <Summary />
+        <Summary data={totalData} estimated={estimated} />
         <BtnContainer>
           <Button style={BtnStyle} text="내 계정에 저장" />
           <Button style={BtnStyle} text="PDF로 저장" />
@@ -60,7 +63,7 @@ const ResultPage = () => {
         </PurchaseContainer>
         <AmountBox>
           <div>차량 견적 총 금액</div>
-          <div>48,,120,000원</div>
+          <div>{estimated?.toLocaleString()}원</div>
         </AmountBox>
         <Footer>
           <Button style={Btn1} text="내 계정에 저장" />
