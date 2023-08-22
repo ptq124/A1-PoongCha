@@ -8,6 +8,7 @@ import RadioGroup from "@Components/Common/RadioGroup";
 import AgeQuestionLabel from "@Components/Survey/AgeQuestionLabel";
 import PageIndicator from "@Components/Survey/PageIndicator";
 import { getSurvey } from "apis/survey";
+import { AGE_SURVEY_ID } from "@utils/constants";
 
 const ageRadioGroupTitle = (data) => {
   return (
@@ -27,7 +28,7 @@ const AgeSurvey = () => {
   const [surveyData, setSurveyData] = useState({});
 
   useEffect(() => {
-    getSurvey(1).then((data) => {
+    getSurvey(AGE_SURVEY_ID).then((data) => {
       setSurveyData(data);
     });
   }, []);

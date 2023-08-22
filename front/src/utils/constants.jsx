@@ -1,3 +1,11 @@
+// Survey ID
+export const AGE_SURVEY_ID = 1;
+// export const LIFESTYLE_SURVEY_ID = 999;
+export const DRIVING_RECORD_SURVEY_ID = 2;
+export const FAMILY_SIZE_SURVEY_ID = 3;
+export const PURPOSE_SURVEY_ID = 4;
+export const VIEWPOINT_SURVEY_ID = 5;
+
 // ExtraSurvey : Max Budget Slider
 export const INIT_SLIDER_IDX = 3;
 export const SLIDER_IDX_COUNT = 9;
