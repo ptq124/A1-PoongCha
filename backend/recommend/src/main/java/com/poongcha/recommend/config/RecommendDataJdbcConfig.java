@@ -1,6 +1,5 @@
 package com.poongcha.recommend.config;
 
-import com.poongcha.recommend.RecommendApplication;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -28,7 +27,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
         jdbcOperationsRef = "recommendNamedParameterJdbcOperations",
         transactionManagerRef = "recommendTransactionManager",
         dataAccessStrategyRef = "recommendDataAccessStrategy",
-        basePackageClasses = RecommendApplication.class
+        basePackages = "com.poongcha.recommend"
 )
 @Configuration
 class RecommendDataJdbcConfig {

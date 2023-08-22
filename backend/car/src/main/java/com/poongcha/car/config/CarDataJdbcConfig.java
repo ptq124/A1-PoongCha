@@ -1,6 +1,5 @@
 package com.poongcha.car.config;
 
-import com.poongcha.car.CarApplication;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -29,7 +28,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
         jdbcOperationsRef = "carNamedParameterJdbcOperations",
         transactionManagerRef = "carTransactionManager",
         dataAccessStrategyRef = "carDataAccessStrategy",
-        basePackageClasses = CarApplication.class
+        basePackages = "com.poongcha.car"
 )
 @Configuration
 class CarDataJdbcConfig {
