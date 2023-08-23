@@ -16,6 +16,7 @@ import com.poongcha.car.domain.caroptiontag.CarOptionTag;
 import com.poongcha.car.domain.cartype.CarType;
 import com.poongcha.car.domain.trim.Trim;
 import com.poongcha.car.domain.trim.TrimCarColor;
+import com.poongcha.car.domain.trim.TrimCarOptionGroup;
 import java.sql.PreparedStatement;
 import org.springframework.context.ApplicationContext;
 import org.springframework.data.relational.core.mapping.Table;
@@ -44,6 +45,7 @@ public class DataInitializeExecutionListener extends AbstractTestExecutionListen
         reset(operation, CarOptionTag.class.getAnnotation(Table.class).name());
         reset(operation, CarOptionTagCarOptionGroup.class.getAnnotation(Table.class).name());
         reset(operation, CarEstimate.class.getAnnotation(Table.class).name());
+        reset(operation, TrimCarOptionGroup.class.getAnnotation(Table.class).name());
     }
 
     private static void reset(

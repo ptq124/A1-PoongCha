@@ -107,7 +107,10 @@ public class TrimSteps {
                                 fieldWithPath("trimName").type(JsonFieldType.STRING).description("트림명"),
                                 fieldWithPath("imageUrl").type(JsonFieldType.STRING).description("트림 이미지 URL"),
                                 fieldWithPath("minPrice").type(JsonFieldType.NUMBER).description("트림 최소 가격"),
-                                fieldWithPath("carTypeId").type(JsonFieldType.NUMBER).description("차종 ID")
+                                fieldWithPath("carTypeId").type(JsonFieldType.NUMBER).description("차종 ID"),
+                                fieldWithPath("optionGroups").type(JsonFieldType.ARRAY).description("트림 대표 옵션 그룹"),
+                                fieldWithPath("optionGroups[].id").type(JsonFieldType.NUMBER).description("트림 대표 옵션 ID"),
+                                fieldWithPath("optionGroups[].name").type(JsonFieldType.STRING).description("트림 대표 옵션 이름")
                         )
                 ))
                 .log().all()
@@ -123,7 +126,9 @@ public class TrimSteps {
             final String trimName,
             final String imageUrl,
             final long minPrice,
-            final long carTypeId
+            final long carTypeId,
+            final List<Integer> optionGroupIds,
+            final List<String> optionGroupName
     ) {
         try (AutoCloseableSoftAssertions assertions = new AutoCloseableSoftAssertions()) {
             assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.SC_OK);
@@ -132,6 +137,10 @@ public class TrimSteps {
             assertions.assertThat(response.jsonPath().getString("imageUrl")).isEqualTo(imageUrl);
             assertions.assertThat(response.jsonPath().getLong("minPrice")).isEqualTo(minPrice);
             assertions.assertThat(response.jsonPath().getLong("carTypeId")).isEqualTo(carTypeId);
+            assertions.assertThat(response.jsonPath().getList("optionGroups.id")).usingRecursiveComparison()
+                    .isEqualTo(optionGroupIds);
+            assertions.assertThat(response.jsonPath().getList("optionGroups.name")).usingRecursiveComparison()
+                    .isEqualTo(optionGroupName);
         }
     }
 
@@ -163,7 +172,12 @@ public class TrimSteps {
                                 fieldWithPath("[].trimName").type(JsonFieldType.STRING).description("트림명"),
                                 fieldWithPath("[].imageUrl").type(JsonFieldType.STRING).description("트림 이미지 URL"),
                                 fieldWithPath("[].minPrice").type(JsonFieldType.NUMBER).description("트림 최소 가격"),
-                                fieldWithPath("[].carTypeId").type(JsonFieldType.NUMBER).description("차종 ID")
+                                fieldWithPath("[].carTypeId").type(JsonFieldType.NUMBER).description("차종 ID"),
+                                fieldWithPath("[].optionGroups").type(JsonFieldType.ARRAY).description("차종 트림 대표 옵션"),
+                                fieldWithPath("[].optionGroups[].id").type(JsonFieldType.NUMBER).optional()
+                                        .description("차종 대표 옵션 ID"),
+                                fieldWithPath("[].optionGroups[].name").type(JsonFieldType.NUMBER).optional()
+                                        .description("차종 대표 옵션 이름")
                         )
                 ))
                 .log().all()
@@ -374,6 +388,32 @@ public class TrimSteps {
     public static void 존재하지_않는_차종에_차량_색상_조회_응답_검증(final ExtractableResponse<Response> response) {
         try (AutoCloseableSoftAssertions assertions = new AutoCloseableSoftAssertions()) {
             assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.SC_NOT_FOUND);
+        }
+    }
+
+
+    public static ExtractableResponse<Response> 트림_대표_옵션_그룹_추가_요청(final long trimId, final long... optionGroupIds) {
+        return given()
+                .filter(document(
+                        DEFAULT_RESTDOCS_PATH,
+                        requestFields(
+                                fieldWithPath("optionGroupIds").type(JsonFieldType.ARRAY).description("옵션 그룹 ID 목록")
+                        )
+                )).log().all()
+                .when()
+                .contentType(ContentType.JSON)
+                .body(Map.of(
+                        "optionGroupIds", optionGroupIds
+                ))
+                .post("/trim/{id}/representative", trimId)
+                .then().log().all()
+                .extract();
+    }
+
+    public static void 트림_대표_옵션_그룹_추가_응답_검증(final ExtractableResponse<Response> response, final String location) {
+        try (AutoCloseableSoftAssertions assertions = new AutoCloseableSoftAssertions()) {
+            assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.SC_CREATED);
+            assertions.assertThat(response.header(HttpHeaders.LOCATION)).isEqualTo(location);
         }
     }
 }

@@ -2,6 +2,8 @@ package com.poongcha.car.acceptance;
 
 import static com.poongcha.car.acceptance.CarColorSteps.양립_불가능한_차량_색상_설정_요청;
 import static com.poongcha.car.acceptance.CarColorSteps.차량_색상_생성_요청;
+import static com.poongcha.car.acceptance.CarOptionGroupSteps.차량_옵션_그룹_생성_요청;
+import static com.poongcha.car.acceptance.CarOptionSteps.차량_옵션_생성_요청;
 import static com.poongcha.car.acceptance.CarTypeSteps.차종_생성_요청;
 import static com.poongcha.car.acceptance.TrimSteps.존재하지_않는_차종_ID로_트림_목록_조회_요청;
 import static com.poongcha.car.acceptance.TrimSteps.존재하지_않는_차종_ID로_트림_목록_조회_응답_검증;
@@ -19,6 +21,8 @@ import static com.poongcha.car.acceptance.TrimSteps.차종에_차량_색상_조�
 import static com.poongcha.car.acceptance.TrimSteps.차종에_차량_색상_조회_응답_검증;
 import static com.poongcha.car.acceptance.TrimSteps.트림_ID_조회_요청;
 import static com.poongcha.car.acceptance.TrimSteps.트림_ID_조회_응답_검증;
+import static com.poongcha.car.acceptance.TrimSteps.트림_대표_옵션_그룹_추가_요청;
+import static com.poongcha.car.acceptance.TrimSteps.트림_대표_옵션_그룹_추가_응답_검증;
 import static com.poongcha.car.acceptance.TrimSteps.트림_생성_요청;
 import static com.poongcha.car.acceptance.TrimSteps.트림_생성_응답_검증;
 import static com.poongcha.car.acceptance.TrimSteps.트림에_존재하지_않는_차량_색상_설정_요청;
@@ -40,7 +44,7 @@ public class TrimAcceptanceTest extends CarAcceptanceTest {
     private final String imageUrlCalligraphy = "https://www.hyundai.com/static/images/model/sonata-hybrid/23fl/mo/sonata_the_edge_hybrid_highlights_hybrid_m.jpg";
     private final long minPriceCalligraphy = 45_000_000;
     private final String trimNamePremium = "Premium";
-    private final String imageUrlPremium = "https://www.hyundai.com/static/images/model/sonata-hybrid/23fl/mo/sonata_the_edge_hybrid_highlights_hybrid_m.jpg";
+    private final String imageUrlPremium = "https://www.hyundai.co트m/static/images/model/sonata-hybrid/23fl/mo/sonata_the_edge_hybrid_highlights_hybrid_m.jpg";
     private final long minPricePremium = 52_000_000;
     private final String carColorNameRed = "red";
     private final String imageUrlRed = "https://www.naver.com/color/red.jpg";
@@ -90,12 +94,52 @@ public class TrimAcceptanceTest extends CarAcceptanceTest {
                 "https://www.hyundai.com/static/images/model/palisade/24my/mo/palisade_highlights_design_m.jpg"
         );
         트림_생성_요청(trimNameLeBlanc, imageUrlLeBlanc, minPriceLeBlanc, 1L);
+        차량_옵션_생성_요청(
+                "후석 승객 알림",
+                "www.naver.com/option/image.png",
+                "HANDLE",
+                "초음파 센서를 통해 뒷좌석에 남아있는 승객의 움직임을 감지하여 운전자에게 경고함으로써 부주의에 의한 유아 또는 반려 동물 등의 방치 사고를 예방하는 신기술입니다."
+        );
+        차량_옵션_생성_요청(
+                "전방 추돌 방지 알림",
+                "www.naver.com/option/image.png",
+                "DEFAULT",
+                "카메라를를 통해 전방 차량을 감지해 추돌을 방지해주는 옵션"
+        );
+        차량_옵션_생성_요청(
+                "컴포트 2",
+                "www.naver.com/option/image.png",
+                "DEFAULT",
+                "다양한 옵션을 제공해주는 세트 옵션"
+        );
+        차량_옵션_그룹_생성_요청(
+                "전방 추돌 방지 알림",
+                10_000_000,
+                "전방 추돌 방지 옵션 그룹",
+                new long[]{2L}
+        );
+        차량_옵션_그룹_생성_요청(
+                "컴포트 2",
+                400_000_000,
+                "다양한 옵션을 제공해주는 세트 옵션",
+                new long[]{1L}
+        );
+        트림_대표_옵션_그룹_추가_요청(1L, 1, 2);
 
         // WHEN
         var response = 트림_ID_조회_요청(1L);
 
         // THEN
-        트림_ID_조회_응답_검증(response, 1L, trimNameLeBlanc, imageUrlLeBlanc, minPriceLeBlanc, 1L);
+        트림_ID_조회_응답_검증(
+                response,
+                1L,
+                trimNameLeBlanc,
+                imageUrlLeBlanc,
+                minPriceLeBlanc,
+                1L,
+                List.of(1, 2),
+                List.of("전방 추돌 방지 알림", "컴포트 2")
+        );
     }
 
     @DisplayName("존재하지 않는 트림 ID로 조회")
@@ -282,5 +326,52 @@ public class TrimAcceptanceTest extends CarAcceptanceTest {
 
         // THEN
         존재하지_않는_차종에_차량_색상_조회_응답_검증(response);
+    }
+
+    @DisplayName("트림에 대표 옵션 그룹 추가")
+    @Test
+    void 트림_대표_옵션_그룹_추가() {
+        // GIVEN
+        차종_생성_요청(
+                "palisade",
+                "https://www.hyundai.com/static/images/model/palisade/24my/mo/palisade_highlights_design_m.jpg"
+        );
+        트림_생성_요청(trimNameLeBlanc, imageUrlLeBlanc, minPriceLeBlanc, 1L);
+        차량_옵션_생성_요청(
+                "후석 승객 알림",
+                "www.naver.com/option/image.png",
+                "HANDLE",
+                "초음파 센서를 통해 뒷좌석에 남아있는 승객의 움직임을 감지하여 운전자에게 경고함으로써 부주의에 의한 유아 또는 반려 동물 등의 방치 사고를 예방하는 신기술입니다."
+        );
+        차량_옵션_생성_요청(
+                "전방 추돌 방지 알림",
+                "www.naver.com/option/image.png",
+                "DEFAULT",
+                "카메라를를 통해 전방 차량을 감지해 추돌을 방지해주는 옵션"
+        );
+        차량_옵션_생성_요청(
+                "컴포트 2",
+                "www.naver.com/option/image.png",
+                "DEFAULT",
+                "다양한 옵션을 제공해주는 세트 옵션"
+        );
+        차량_옵션_그룹_생성_요청(
+                "전방 추돌 방지 알림",
+                10_000_000,
+                "전방 추돌 방지 옵션 그룹",
+                new long[]{2L}
+        );
+        차량_옵션_그룹_생성_요청(
+                "컴포트 2",
+                400_000_000,
+                "다양한 옵션을 제공해주는 세트 옵션",
+                new long[]{1L}
+        );
+
+        // WHEN
+        var response = 트림_대표_옵션_그룹_추가_요청(1L, 1L, 2L);
+
+        // THEN
+        트림_대표_옵션_그룹_추가_응답_검증(response, "/trim/1");
     }
 }
