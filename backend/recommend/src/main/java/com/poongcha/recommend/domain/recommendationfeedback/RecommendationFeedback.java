@@ -27,6 +27,7 @@ public class RecommendationFeedback {
 
     @Column("additional_question_answer_group_id")
     private AggregateReference<AdditionalQuestionAnswerGroup, Long> additionalQuestionAnswerGroup;
+
     public RecommendationFeedback(
             final FeedbackScore feedbackScore,
             final Long estimateId,
