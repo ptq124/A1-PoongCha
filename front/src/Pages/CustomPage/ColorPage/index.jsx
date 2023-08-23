@@ -26,11 +26,11 @@ const ColorPage = () => {
 
   const handleColorOption = (name, option) => {
     if (option === "외장") {
-      const newExterior = exterData.filter((data) => data.name === name);
+      const newExterior = exterData.find((data) => data.name === name);
       유저데이터저장(option, newExterior);
       setExterior(newExterior);
     } else {
-      const newInterior = interData.filter((data) => data.name === name);
+      const newInterior = interData.find((data) => data.name === name);
       유저데이터저장(option, newInterior);
       setInterior(newInterior);
     }

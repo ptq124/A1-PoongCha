@@ -5,11 +5,11 @@ import up from "@assets/icons/arrow_up.svg";
 const Accordion = ({ title, content, isOpen, toggleAccordion }) => {
   return (
     <AccordionContainer>
-      <AccordionTitle onClick={toggleAccordion} isOpen={isOpen}>
+      <AccordionTitle onClick={toggleAccordion} $isOpen={isOpen}>
         {title}
         <img src={up} />
       </AccordionTitle>
-      <AccordionContent isOpen={isOpen}>{content}</AccordionContent>
+      <AccordionContent $isOpen={isOpen}>{content}</AccordionContent>
     </AccordionContainer>
   );
 };
@@ -36,13 +36,14 @@ const AccordionTitle = styled.div`
 
   img {
     transition: transform 0.3s;
-    transform: ${({ isOpen }) => (isOpen ? "rotate(0deg)" : "rotate(-180deg)")};
+    transform: ${({ $isOpen }) =>
+      $isOpen ? "rotate(0deg)" : "rotate(-180deg)"};
   }
 `;
 
 const AccordionContent = styled.div`
   margin-top: 20px;
-  display: ${({ isOpen }) => (isOpen ? "block" : "none")};
+  display: ${({ $isOpen }) => ($isOpen ? "block" : "none")};
 `;
 
 export default Accordion;

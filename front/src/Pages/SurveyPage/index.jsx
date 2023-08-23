@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 import { styled } from "styled-components";
 import { Outlet } from "react-router-dom";
 import { initialState, reducer } from "./index.reducer";

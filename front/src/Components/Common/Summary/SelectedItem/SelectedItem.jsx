@@ -4,18 +4,25 @@ import { useLocation } from "react-router-dom";
 
 const SelectedItem = ({ data, option }) => {
   const { pathname } = useLocation();
-
+  let imageUrl;
+  if (option === "내장" || option === "외장") {
+    imageUrl = data?.imageUrl;
+  } else {
+    imageUrl = data?.options && data?.options[0].imageUrl;
+  }
   if (!data) return null;
 
   return (
     <Wrapper>
       <ItemDetail>
-        <Img src={data.imageUrl}></Img>
+        <Img src={imageUrl}></Img>
         <TextBox>
           <Body4Regular>
-            {option && `${option} -`} {data.name}
+            {option !== "옵션" && `${option} -`} {data?.name}
           </Body4Regular>
-          <Head4>0원</Head4>
+          <Head4>
+            {data.additionalPrice ? data.additionalPrice.toLocaleString() : 0}원
+          </Head4>
         </TextBox>
       </ItemDetail>
       {/* 데이터에 Recommend Reason Phrase 있는 경우에만 보여줌*/}

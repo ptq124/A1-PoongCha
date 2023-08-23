@@ -27,12 +27,14 @@ const Navigation = () => {
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-  const { totalData, 유저데이터저장 } = useUserData();
+  const {
+    totalData: { 트림, 엔진, 바디, 구동방식, 옵션, 외장, 내장 },
+    estimated,
+  } = useUserData();
 
-  navItems[1].detail = `${totalData["외장"].name} / ${totalData["내장"].name}`;
-  navItems[2].detail = `${totalData["옵션"]
-    .map((option) => option.name)
-    .join(", ")}`;
+  navItems[0].detail = `${트림.name}`;
+  navItems[1].detail = `${외장.name} / ${내장.name}`;
+  navItems[2].detail = `${옵션.map((option) => option.name).join(", ")}`;
 
   return (
     <>
@@ -57,13 +59,18 @@ const Navigation = () => {
             onClick={() => setIsPopupOpen(!isPopupOpen)}
           />
           <Button
-            text="견적내기"
+            text={estimated.toLocaleString() + "원 견적내기"}
             style={estimateBtnStyle}
             onClick={() => move("/result")}
           />
         </BtnsContainer>
       </Wrapper>
-      {isPopupOpen && <Dropdown closePopup={() => setIsPopupOpen(false)} />}
+      {isPopupOpen && (
+        <Dropdown
+          closePopup={() => setIsPopupOpen(false)}
+          estimatedPrice={estimated}
+        />
+      )}
     </>
   );
 };

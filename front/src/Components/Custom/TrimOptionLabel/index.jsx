@@ -6,8 +6,12 @@ import DefaultOption from "./DefaultOption";
 import OverlaidPopup from "@Components/Common/PopupProvider/OverlaidPopup";
 import TrimChangePopup from "@Pages/CustomPage/TrimPage/TrimChangePopup";
 import useOnClickPopUp from "@hooks/useOnClickPopUp";
+import { useUserData } from "context/UserDataContext";
 
 const TrimOptionLabel = ({ option, selectedItem, handleSelectItem }) => {
+  const {
+    totalData: { 엔진, 바디, 구동방식 },
+  } = useUserData();
   const TrimChangePopupRef = useRef();
   const {
     isPopupOpen: isTrimChangePopupOpen,
@@ -31,7 +35,7 @@ const TrimOptionLabel = ({ option, selectedItem, handleSelectItem }) => {
             <TrimChangePopup
               popupRef={TrimChangePopupRef}
               closePopup={closeTrimChangePopup}
-              changeTrim={() => handleSelectItem(option.name)}
+              changeTrim={() => handleSelectItem(option)}
             />
           }
         />
@@ -40,13 +44,17 @@ const TrimOptionLabel = ({ option, selectedItem, handleSelectItem }) => {
         <TrimInfo>
           <NameAndModelItem>
             <span className="trimName">{option.name}</span>
-            <span className="modelItemSummary">디젤 2.2 • 7인승 • 2WD</span>
+            <span className="modelItemSummary">
+              {엔진.name} • {바디.name} • {구동방식.name}
+            </span>
           </NameAndModelItem>
           <span className="comment">{option.information}</span>
-          <span className="price">{option.minPrice.toLocaleString()}원</span>
+          <span className="price">
+            {option.additionalPrice.toLocaleString()}원
+          </span>
         </TrimInfo>
         <CheckBtn onClick={() => handleTrimChangeAttempt(option.name)}>
-          {option.name === selectedItem ? (
+          {option.name === selectedItem.name ? (
             <img src={Check28BlueIcon} alt="checked" />
           ) : (
             <img src={Check28GreyIcon} alt="checked" />

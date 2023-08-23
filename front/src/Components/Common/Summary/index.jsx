@@ -33,8 +33,8 @@ const Summary = ({ data, estimated }) => {
       <ColorOptionContainer>
         <Title>옵션</Title>
         <ItemContainer>
-          <SelectedItem data={data?.옵션[0]?.options[0]} option="" />
-          <SelectedItem data={data?.옵션[1]?.options[0]} option="" />
+          <SelectedItem data={data?.옵션[0]} option="옵션" />
+          <SelectedItem data={data?.옵션[1]} option="옵션" />
         </ItemContainer>
       </ColorOptionContainer>
       <Separator></Separator>
