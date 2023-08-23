@@ -4,10 +4,10 @@ import static com.poongcha.car.acceptance.CarColorSteps.차량_색상_생성_요
 import static com.poongcha.car.acceptance.CarComponentSteps.차량_컴포넌트_그룹_생성_요청;
 import static com.poongcha.car.acceptance.CarComponentSteps.차량_컴포넌트_그룹에_차량_컴포넌트_추가_요청;
 import static com.poongcha.car.acceptance.CarComponentSteps.차량_컴포넌트_생성_요청;
-import static com.poongcha.car.acceptance.CarEstimateSteps.차량_견적_ID_조회_검증;
-import static com.poongcha.car.acceptance.CarEstimateSteps.차량_견적_생성_응답_검증;
-import static com.poongcha.car.acceptance.CarEstimateSteps.차량_견적_ID_조회_요청;
 import static com.poongcha.car.acceptance.CarEstimateSteps.차량_견적_생성_요청;
+import static com.poongcha.car.acceptance.CarEstimateSteps.차량_견적_생성_응답_검증;
+import static com.poongcha.car.acceptance.CarEstimateSteps.차량_견적_코드_조회_검증;
+import static com.poongcha.car.acceptance.CarEstimateSteps.차량_견적_코드_조회_요청;
 import static com.poongcha.car.acceptance.CarOptionGroupSteps.양립_불가능한_차량_옵션_설정_요청;
 import static com.poongcha.car.acceptance.CarOptionGroupSteps.차량_옵션_그룹_생성_요청;
 import static com.poongcha.car.acceptance.CarOptionGroupSteps.차량_옵션_그룹_태그_설정_요청;
@@ -18,6 +18,7 @@ import static com.poongcha.car.acceptance.TrimSteps.트림_생성_요청;
 
 import com.poongcha.car.util.CarAcceptanceTest;
 import java.util.List;
+import org.apache.http.HttpHeaders;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -88,7 +89,7 @@ public class CarEstimateAcceptanceTest extends CarAcceptanceTest {
 
     @DisplayName("차량 견적 조회 테스트")
     @Test
-    void 차량_견적_ID_조회() {
+    void 차량_견적_코드_조회() {
         // GIVEN
         String carTypeName = "palisade";
         String carTypeImageUrl = "https://www.hyundai.com/static/images/model/palisade/24my/mo/palisade_highlights_design_m.jpg";
@@ -122,21 +123,24 @@ public class CarEstimateAcceptanceTest extends CarAcceptanceTest {
         String interiorColorImageUrl = "www.naver.com/color/red.png";
         String interiorColorType = "INTERIOR";
         차량_색상_생성_요청(interiorColorName, interiorColorImageUrl, interiorColorType);
-        차량_견적_생성_요청(
+        String location = 차량_견적_생성_요청(
                 1L,
                 List.of(1L),
                 1L,
                 2L,
                 List.of(1L)
-        );
+        ).header(HttpHeaders.LOCATION);
+
+        String estimateCode = location.substring(location.lastIndexOf("/") + 1);
 
         // WHEN
-        var response = 차량_견적_ID_조회_요청(1L);
+        var response = 차량_견적_코드_조회_요청(estimateCode);
 
         // THEN
-        차량_견적_ID_조회_검증(
+        차량_견적_코드_조회_검증(
                 response,
                 1L,
+                estimateCode,
                 1L,
                 carTypeName,
                 carTypeImageUrl,
