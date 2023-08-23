@@ -76,6 +76,7 @@ const OptionPage = () => {
         newStateHandler={handleSelectTag}
         initialState={selectedTag}
         style={optionTagGroupLabelStyle}
+        trigger={true}
       />
       <OptionCatalogue
         selectedTab={selectedTab}
