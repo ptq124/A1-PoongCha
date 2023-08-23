@@ -32,7 +32,7 @@ const Navigation = () => {
     estimated,
   } = useUserData();
 
-  navItems[0].detail = `${트림.name}`;
+  navItems[0].detail = `${트림.trimName}`;
   navItems[1].detail = `${외장.name} / ${내장.name}`;
   navItems[2].detail = `${옵션.map((option) => option.name).join(", ")}`;
 

@@ -9,7 +9,6 @@ const DefaultOptionPopup = ({ popupRef, closePopup, option }) => {
   useEffect(() => {
     getDefaultOption(option.id).then((data) => {
       setOptionData(data);
-      console.log(data);
     });
   }, []);
   return (

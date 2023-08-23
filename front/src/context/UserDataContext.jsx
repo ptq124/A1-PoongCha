@@ -6,8 +6,8 @@ export const UserDataProvider = ({ children }) => {
   const [totalData, setTotalData] = useState({
     트림: {
       id: 2,
-      name: "Le Blanc",
-      defaultOptions: [
+      trimName: "Le Blanc",
+      optionGroups: [
         "20인치 알로이 휠",
         "12인치 클러스터",
         "서라운드 뷰 모니터",
