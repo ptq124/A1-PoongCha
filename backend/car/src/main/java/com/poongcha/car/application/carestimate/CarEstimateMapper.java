@@ -45,6 +45,7 @@ public class CarEstimateMapper {
     ) {
         return new CarEstimateResponse(
                 carEstimate.getId(),
+                carEstimate.getEstimateCode(),
                 createCarEstimateCarTypeResponse(carType),
                 createCarEstimateTrimResponse(trim),
                 createCarEstimateCarComponentResponses(carComponents),

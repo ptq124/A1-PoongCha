@@ -3,6 +3,7 @@ package com.poongcha.car.domain.carestimate;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -29,6 +30,9 @@ public class CarEstimate {
     @Column("trim_id")
     private Long trimId;
 
+    @Column("estimate_code")
+    private String estimateCode;
+
     @MappedCollection(idColumn = "car_estimate_id")
     private Set<CarEstimateCarComponent> carEstimateCarComponents = new HashSet<>();
 
@@ -45,6 +49,7 @@ public class CarEstimate {
         this.carExteriorColorId = carExteriorColorId;
         this.carInteriorColorId = carInteriorColorId;
         this.trimId = trimId;
+        this.estimateCode = UUID.randomUUID().toString();
         this.carEstimateCarComponents.addAll(
                 carEstimateCarComponents.stream()
                         .map(CarEstimateCarComponent::new)

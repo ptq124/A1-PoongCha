@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CarEstimateResponse {
     private long id;
+    private String code;
     private CarEstimateCarTypeResponse carType;
     private CarEstimateTrimResponse trim;
     private List<CarEstimateCarComponentResponse> components;

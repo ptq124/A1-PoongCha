@@ -21,13 +21,13 @@ public class CarEstimateController {
 
     @PostMapping("/estimate")
     public ResponseEntity<Void> create(@RequestBody final CarEstimateCreateRequest carEstimateCreateRequest) {
-        long createCarEstimateId = carEstimateCommandService.create(carEstimateCreateRequest);
+        String estimateCode = carEstimateCommandService.create(carEstimateCreateRequest);
 
-        return ResponseEntity.created(URI.create("/estimate/" + createCarEstimateId)).build();
+        return ResponseEntity.created(URI.create("/estimate/" + estimateCode)).build();
     }
 
-    @GetMapping("/estimate/{id}")
-    public ResponseEntity<CarEstimateResponse> create(@PathVariable("id") final long carEstimateId) {
-        return ResponseEntity.ok().body(carEstimateQueryService.findById(carEstimateId));
+    @GetMapping("/estimate/{estimate-code}")
+    public ResponseEntity<CarEstimateResponse> findBy(@PathVariable("estimate-code") String estimateCode) {
+        return ResponseEntity.ok().body(carEstimateQueryService.findByEstimateCode(estimateCode));
     }
 }

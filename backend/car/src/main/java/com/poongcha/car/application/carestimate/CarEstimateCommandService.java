@@ -14,9 +14,9 @@ public class CarEstimateCommandService {
     private final CarEstimateRepository carEstimateRepository;
     private final CarEstimateMapper carEstimateMapper;
 
-    public long create(final CarEstimateCreateRequest carEstimateCreateRequest) {
+    public String create(final CarEstimateCreateRequest carEstimateCreateRequest) {
         CarEstimate carEstimate = carEstimateMapper.toEntity(carEstimateCreateRequest);
 
-        return carEstimateRepository.save(carEstimate).getId();
+        return carEstimateRepository.save(carEstimate).getEstimateCode();
     }
 }

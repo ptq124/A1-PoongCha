@@ -67,4 +67,30 @@ public class CarEstimateQueryService {
                 .map(carOptionGroup -> optionRepository.findAllByIdIn(carOptionGroup.optionIds()))
                 .collect(Collectors.toUnmodifiableList());
     }
+
+    public CarEstimateResponse findByEstimateCode(final String estimateCode) {
+        CarEstimate carEstimate = carEstimateRepository.findByEstimateCode(estimateCode)
+                .orElseThrow(() -> new NotFoundException("견적이 존재하지 않습니다."));
+        Trim trim = trimRepository.findById(carEstimate.getTrimId())
+                .orElseThrow(() -> new BadRequestException("트림이 존재하지 않습니다."));
+        CarType carType = carTypeRepository.findById(trim.getCarType().getId())
+                .orElseThrow(() -> new BadRequestException("차종이 존재하지 않습니다."));
+        List<CarComponent> carComponents = carComponentRepository.findAllByIdIn(carEstimate.carComponentIds());
+        CarColor exteriorCarColor = carColorRepository.findById(carEstimate.getCarExteriorColorId())
+                .orElseThrow(() -> new BadRequestException("외장 색상이 존재하지 않습니다."));
+        CarColor interiorCarColor = carColorRepository.findById(carEstimate.getCarInteriorColorId())
+                .orElseThrow(() -> new BadRequestException("내장 색상이 존재하지 않습니다."));
+        List<CarOptionGroup> optionGroups = optionGroupRepository.findAllByIdIn(carEstimate.carOptionGroupIds());
+
+        return carEstimateMapper.toCarEstimateResponse(
+                carEstimate,
+                carType,
+                trim,
+                carComponents,
+                exteriorCarColor,
+                interiorCarColor,
+                optionGroups,
+                findCarOptions(optionGroups)
+        );
+    }
 }
