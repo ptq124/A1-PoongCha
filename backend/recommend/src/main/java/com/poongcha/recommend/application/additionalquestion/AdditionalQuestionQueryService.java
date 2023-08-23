@@ -25,7 +25,9 @@ public class AdditionalQuestionQueryService {
     }
 
     public List<AdditionalQuestionResponse> findAllBy(final List<Long> ids) {
-        List<AdditionalQuestion> additionalQuestions = additionalQuestionRepository.findAllByIdIn(ids);
+        List<AdditionalQuestion> additionalQuestions = additionalQuestionRepository.findAll().stream()
+                .filter(additionalQuestion -> ids.contains(additionalQuestion.getId()))
+                .collect(Collectors.toUnmodifiableList());
 
         return additionalQuestions.stream()
                 .map(additionalQuestionMapper::toAdditionalQuestionResponse)

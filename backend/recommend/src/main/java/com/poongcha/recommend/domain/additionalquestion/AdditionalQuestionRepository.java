@@ -10,7 +10,7 @@ public interface AdditionalQuestionRepository extends Repository<AdditionalQuest
 
     Optional<AdditionalQuestion> findById(final long id);
 
-    List<AdditionalQuestion> findAllByIdIn(final List<Long> ids);
+    List<AdditionalQuestion> findAll();
 
     @Query("select * from additional_question_options where id in (:ids)")
     List<AdditionalQuestionOption> findAllByAdditionalQuestionsOptionIdIn(final List<Long> ids);
