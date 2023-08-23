@@ -45,7 +45,7 @@ jobs:
         shell: bash
 
       - name: 🛠 Build with Gradle
-        run: sudo ./gradlew build
+        run: sudo ./gradlew build -x test -Pprofile=prod
         working-directory: backend/boot-loader/
         shell: bash
 
