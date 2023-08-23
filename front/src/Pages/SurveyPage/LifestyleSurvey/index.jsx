@@ -11,7 +11,7 @@ import RadioGroup from "@Components/Common/RadioGroup";
 const lifestyleSurveyInfo = {
   options: [
     {
-      index: 0,
+      id: 0,
       phrase: (
         <>
           가족과 함께 타서 <br /> 안전을 중시해요.
@@ -20,7 +20,7 @@ const lifestyleSurveyInfo = {
       tags: ["#주행안전", "#사용편의"],
     },
     {
-      index: 1,
+      id: 1,
       phrase: (
         <>
           매일 출퇴근하여 경제적이고
@@ -31,7 +31,7 @@ const lifestyleSurveyInfo = {
       tags: ["#사용편의", "#추위/더위"],
     },
     {
-      index: 2,
+      id: 2,
       phrase: (
         <>
           운전 경력이 짧아 <br />
@@ -41,7 +41,7 @@ const lifestyleSurveyInfo = {
       tags: ["#주행안전", "#주차/출차"],
     },
     {
-      index: 3,
+      id: 3,
       phrase: (
         <>
           트렌드에 민감해 <br />
