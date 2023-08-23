@@ -13,7 +13,7 @@ import TrimComparisonPopup from "../TrimComparisonPopup";
 import Tooltip from "@Components/Custom/Tooltip";
 import TooltipProvider from "@Components/Common/TooltipProvider";
 import PopupProvider from "@Components/Common/PopupProvider";
-import { getComponent, getTrim } from "apis/custom";
+import { getComponent, getAllTrim } from "apis/custom";
 import { useUserData } from "context/UserDataContext";
 
 const TrimCustomSideBar = () => {
@@ -27,7 +27,7 @@ const TrimCustomSideBar = () => {
       setComponentGroupData(data);
     });
 
-    getTrim().then((data) => {
+    getAllTrim().then((data) => {
       setTrimGroupData(data);
     });
   }, []);

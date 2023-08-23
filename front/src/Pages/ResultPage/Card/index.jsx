@@ -4,7 +4,8 @@ import carImage from "@assets/image342.svg";
 import HyundaiWhiteLogo from "@assets/icons/hyundai-logo.svg";
 import download from "@assets/icons/download.svg";
 
-const Card = () => {
+const Card = ({ data }) => {
+  console.log(data);
   return (
     <Wrapper>
       <Title>나만의 차가 완성되었어요!</Title>
@@ -21,7 +22,7 @@ const Card = () => {
           펠리세이드
           <img src={HyundaiWhiteLogo} />
         </Top>
-        <Trim>Le Blanc(르블랑)</Trim>
+        <Trim>{data?.name}</Trim>
       </Footer>
     </Wrapper>
   );

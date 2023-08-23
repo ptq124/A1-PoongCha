@@ -1,7 +1,7 @@
 import { GET, POST } from "@utils/fetch";
 
 // GET car-type/1/trim 트림 정보 가져오기
-export const getTrim = () => GET("car-type/1/trim");
+export const getAllTrim = () => GET("car-type/1/trim");
 
 export const getDefaultOption = (id) => GET(`option-group/${id}/tooltip`);
 
