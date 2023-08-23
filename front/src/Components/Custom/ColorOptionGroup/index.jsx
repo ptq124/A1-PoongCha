@@ -7,7 +7,14 @@ import OverlaidPopup from "@Components/Common/PopupProvider/OverlaidPopup";
 import ColorChangePopup from "@Pages/CustomPage/ColorPage/ColorChangePopup";
 import useOnClickPopUp from "@hooks/useOnClickPopUp";
 
-const ColorOptionGroup = ({ option, handleColorOption, data, curData }) => {
+const ColorOptionGroup = ({
+  option,
+  handleColorOption,
+  data,
+  curData,
+  exceptColor,
+  totalData,
+}) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const popupRef = useRef();
   const { isPopupOpen, openPopup, closePopup } = useOnClickPopUp(popupRef);
@@ -22,8 +29,23 @@ const ColorOptionGroup = ({ option, handleColorOption, data, curData }) => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  const handleSelectExtraColor = () => {
+  const handleSelectExtraColor = (id) => {
+    setTrimName(id);
     openPopup();
+  };
+
+  const [trimName, setTrimName] = useState();
+
+  const hasTrim = (totalData, data) => {
+    let answer = "";
+    totalData.forEach((d) => {
+      const { id, colors } = d;
+      const list = colors.filter((d1) => d1.name === data.name);
+      if (list.length) {
+        answer = isTrim(id);
+      }
+    });
+    return answer;
   };
 
   return (
@@ -31,7 +53,11 @@ const ColorOptionGroup = ({ option, handleColorOption, data, curData }) => {
       {isPopupOpen && (
         <OverlaidPopup
           component={
-            <ColorChangePopup popupRef={popupRef} closePopup={closePopup} />
+            <ColorChangePopup
+              popupRef={popupRef}
+              closePopup={closePopup}
+              name={trimName}
+            />
           }
         />
       )}
@@ -49,6 +75,8 @@ const ColorOptionGroup = ({ option, handleColorOption, data, curData }) => {
             option={data}
             selected={selectedColor === data.name}
             onClick={() => handleColor(data.name, option)}
+            index={index}
+            opt={option}
           />
         ))}
       </OptionsContainer>
@@ -63,12 +91,14 @@ const ColorOptionGroup = ({ option, handleColorOption, data, curData }) => {
         </DropdownTitle>
         {isDropdownOpen && (
           <OptionsContainer>
-            {data.map((data, index) => (
+            {exceptColor.map((data, index) => (
               <ExtraColorOption key={index}>
-                <div className="trimName">Exclusive</div>
+                <div className="trimName"> {hasTrim(totalData, data)}</div>
                 <ColorOption
                   option={data}
-                  onClick={() => handleSelectExtraColor()}
+                  onClick={() =>
+                    handleSelectExtraColor(hasTrim(totalData, data))
+                  }
                 />
               </ExtraColorOption>
             ))}
@@ -78,6 +108,26 @@ const ColorOptionGroup = ({ option, handleColorOption, data, curData }) => {
     </Wrapper>
   );
 };
+
+const isTrim = (id) => {
+  let answer = "";
+  switch (id) {
+    case 1:
+      answer = "Exclusive";
+      break;
+    case 2:
+      answer = "Le Blanc";
+      break;
+    case 3:
+      answer = "Prestige";
+      break;
+    case 4:
+      answer = "Caligraphy";
+      break;
+  }
+  return answer;
+};
+
 const ExtraColorOption = styled.div`
   display: flex;
   flex-direction: column;
