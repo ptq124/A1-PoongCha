@@ -6,11 +6,13 @@ const ExtraQuestionLabel = ({ option, selectedItem, handleSelectItem }) => {
   return (
     <>
       <Label
-        selected={option === selectedItem}
+        selected={option.id === selectedItem.id}
         onClick={() => handleSelectItem(option)}
       >
-        {option}
-        {option === selectedItem && <img src={Check24BlueIcon} alt="check" />}
+        {option.name}
+        {option.id === selectedItem.id && (
+          <img src={Check24BlueIcon} alt="check" />
+        )}
       </Label>
     </>
   );
