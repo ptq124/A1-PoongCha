@@ -2,6 +2,6 @@ spring:
   datasource:
     car:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: ${{car-default-database-url}}
-      username: ${{car-default-database-username}}
-      password: ${{car-default-database-password}}
+      url: ${{ secrets.CAR_DEFAULT_DATABASE_URL }}
+      username: ${{ secrets.CAR_DEFAULT_DATABASE_USERNAME }}
+      password: ${{ secrets.CAR_DEFAULT_DATABASE_PASSWORD }}
