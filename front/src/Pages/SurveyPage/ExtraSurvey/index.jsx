@@ -72,7 +72,7 @@ const ExtraSurvey = () => {
         text="완료"
         $isActive={isBtnActive()}
         style={SurveyBtnStyle}
-        onClick={() => move("/survey/etc_end", state)}
+        onClick={() => move("/survey/etc_end")}
       />
     </S.SurveyContent>
   );

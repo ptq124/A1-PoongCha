@@ -5,7 +5,6 @@ import HyundaiWhiteLogo from "@assets/icons/hyundai-logo.svg";
 import download from "@assets/icons/download.svg";
 
 const Card = ({ data }) => {
-  console.log(data);
   return (
     <Wrapper>
       <Title>나만의 차가 완성되었어요!</Title>
