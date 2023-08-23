@@ -2,6 +2,8 @@ package com.poongcha.car.application.trim;
 
 import com.poongcha.car.application.dto.TrimCreateRequest;
 import com.poongcha.car.application.dto.TrimDefaultResponse;
+import com.poongcha.car.application.dto.TrimRepresentativeOptionGroupResponse;
+import com.poongcha.car.domain.caroptiongroup.CarOptionGroup;
 import com.poongcha.car.domain.common.ImageUrl;
 import com.poongcha.car.domain.trim.MinPrice;
 import com.poongcha.car.domain.trim.Trim;
@@ -21,19 +23,18 @@ public class TrimMapper {
         );
     }
 
-    public TrimDefaultResponse toDefaultResponse(final Trim trim) {
+    public TrimDefaultResponse toDefaultResponse(final Trim trim, final List<CarOptionGroup> optionGroups) {
         return new TrimDefaultResponse(
                 trim.getId(),
                 trim.getTrimName().getValue(),
                 trim.getImageUrl().getValue(),
                 trim.getMinPrice().getValue(),
-                trim.getCarType().getId()
+                trim.getCarType().getId(),
+                optionGroups.stream()
+                        .map(optionGroup -> new TrimRepresentativeOptionGroupResponse(
+                                optionGroup.getId(),
+                                optionGroup.getName().getValue()
+                        )).collect(Collectors.toUnmodifiableList())
         );
-    }
-
-    public List<TrimDefaultResponse> toDefaultResponse(final List<Trim> trims) {
-        return trims.stream()
-                .map(this::toDefaultResponse)
-                .collect(Collectors.toUnmodifiableList());
     }
 }

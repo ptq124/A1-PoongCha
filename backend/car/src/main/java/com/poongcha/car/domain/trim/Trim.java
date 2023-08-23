@@ -1,7 +1,7 @@
 package com.poongcha.car.domain.trim;
 
-import com.poongcha.car.domain.common.ImageUrl;
 import com.poongcha.car.domain.cartype.CarType;
+import com.poongcha.car.domain.common.ImageUrl;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -40,6 +40,9 @@ public class Trim {
 
     @MappedCollection(idColumn = "trim_id")
     private Set<TrimCarColor> trimCarColors = new HashSet<>();
+
+    @MappedCollection(idColumn = "trim_id")
+    private Set<TrimCarOptionGroup> trimCarOptionGroups = new HashSet<>();
 
     public Trim(
             final TrimName trimName,
@@ -92,6 +95,18 @@ public class Trim {
         return trimCarColors.stream()
                 .map(TrimCarColor::getCarColor)
                 .map(AggregateReference::getId)
+                .collect(Collectors.toUnmodifiableList());
+    }
+
+    public void setRepresentativeOptionGroup(final List<Long> optionGroupIds) {
+        trimCarOptionGroups.addAll(optionGroupIds.stream()
+                .map(TrimCarOptionGroup::new)
+                .collect(Collectors.toUnmodifiableList()));
+    }
+
+    public List<Long> optionGroupIds() {
+        return trimCarOptionGroups.stream()
+                .map(TrimCarOptionGroup::optionGroupId)
                 .collect(Collectors.toUnmodifiableList());
     }
 }

@@ -1,5 +1,6 @@
 package com.poongcha.car.application.dto;
 
+import java.util.List;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -11,4 +12,5 @@ public class TrimDefaultResponse {
     private final String imageUrl;
     private final long minPrice;
     private final long carTypeId;
+    private final List<TrimRepresentativeOptionGroupResponse> optionGroups;
 }

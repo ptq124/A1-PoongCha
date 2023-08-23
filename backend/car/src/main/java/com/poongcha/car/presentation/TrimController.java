@@ -4,6 +4,7 @@ import com.poongcha.car.application.dto.TrimAddCarColorRequest;
 import com.poongcha.car.application.dto.TrimCarColorResponse;
 import com.poongcha.car.application.dto.TrimCreateRequest;
 import com.poongcha.car.application.dto.TrimDefaultResponse;
+import com.poongcha.car.application.dto.TrimRepresentativeRequest;
 import com.poongcha.car.application.trim.TrimCommandService;
 import com.poongcha.car.application.trim.TrimQueryService;
 import java.net.URI;
@@ -54,5 +55,15 @@ public class TrimController {
             @PathVariable(value = "id") final long carTypeId
     ) {
         return ResponseEntity.ok().body(trimQueryService.findCarTypeColors(carTypeId));
+    }
+
+    @PostMapping("/trim/{id}/representative")
+    public ResponseEntity<Void> representative(
+            @PathVariable(value = "id") final long trimId,
+            @RequestBody final TrimRepresentativeRequest trimRepresentativeRequest
+    ) {
+        return ResponseEntity.created(
+                URI.create("/trim/" + trimCommandService.setRepresentative(trimId, trimRepresentativeRequest))
+        ).build();
     }
 }

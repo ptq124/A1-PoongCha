@@ -2,6 +2,7 @@ package com.poongcha.car.application.trim;
 
 import com.poongcha.car.application.dto.TrimAddCarColorRequest;
 import com.poongcha.car.application.dto.TrimCreateRequest;
+import com.poongcha.car.application.dto.TrimRepresentativeRequest;
 import com.poongcha.car.domain.trim.Trim;
 import com.poongcha.car.domain.trim.TrimImageUrl;
 import com.poongcha.car.domain.trim.TrimRepository;
@@ -35,6 +36,15 @@ public class TrimCommandService {
                         trimAddTrimColorRequest.getTrimRotationImageBaseUrl()
                 )
         );
+
+        return trimRepository.save(trim).getId();
+    }
+
+    public Long setRepresentative(final long trimId, final TrimRepresentativeRequest trimRepresentativeRequest) {
+        Trim trim = trimRepository.findByIdWithLock(trimId)
+                .orElseThrow(() -> new BadRequestException("트림이 존재하지 않습니다."));
+
+        trim.setRepresentativeOptionGroup(trimRepresentativeRequest.getOptionGroupIds());
 
         return trimRepository.save(trim).getId();
     }
