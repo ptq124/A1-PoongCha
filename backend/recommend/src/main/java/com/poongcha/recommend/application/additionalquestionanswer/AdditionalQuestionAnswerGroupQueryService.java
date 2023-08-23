@@ -25,7 +25,7 @@ public class AdditionalQuestionAnswerGroupQueryService {
                 .findById(id)
                 .orElseThrow(() -> new NotFoundException("추가 질문 답변 그룹을 찾을 수 없습니다."));
         List<AdditionalQuestionOption> additionalQuestionOptions = additionalQuestionRepository
-                .findAllByAdditionalQuestionsOptionIdIn(additionalQuestionAnswerGroup.additionalQuestionOptionIds());
+                .findAdditionalQuestionOptionsByAdditionalQuestionsOptionIdIn(additionalQuestionAnswerGroup.additionalQuestionOptionIds());
         List<AdditionalQuestion> additionalQuestions = additionalQuestionRepository
                 .findAllByAdditionalQuestionOptionIdIn(additionalQuestionAnswerGroup.additionalQuestionOptionIds());
 

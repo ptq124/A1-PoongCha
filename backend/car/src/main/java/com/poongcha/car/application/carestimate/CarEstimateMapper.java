@@ -104,6 +104,7 @@ public class CarEstimateMapper {
                             carOptionGroup.getId(),
                             carOptionGroup.getName().getValue(),
                             carOptionGroup.getAdditionalPrice().getValue(),
+                            carOptionGroup.getSummaryDescription().getValue(),
                             options.stream()
                                     .map(carOption -> new CarEstimateOptionResponse(
                                             carOption.getId(),

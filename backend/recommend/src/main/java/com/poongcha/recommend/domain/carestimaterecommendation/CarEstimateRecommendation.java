@@ -38,4 +38,10 @@ public class CarEstimateRecommendation {
                         .collect(Collectors.toUnmodifiableList())
         );
     }
+
+    public List<Long> carEstimateRecommendationQuestionOptionIds() {
+        return carEstimateRecommendationQuestionOptions.stream()
+                .map(CarEstimateRecommendationQuestionOption::additionalQuestionOptionId)
+                .collect(Collectors.toUnmodifiableList());
+    }
 }

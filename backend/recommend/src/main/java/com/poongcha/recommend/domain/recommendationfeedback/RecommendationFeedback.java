@@ -14,7 +14,6 @@ import org.springframework.data.relational.core.mapping.Table;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Table(name = "recommendation_feedbacks")
 public class RecommendationFeedback {
-
     @Column("id")
     @Id
     private Long id;

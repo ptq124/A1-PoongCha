@@ -7,4 +7,6 @@ public interface LifestylePersonaRepository extends Repository<LifestylePersona,
     LifestylePersona save(final LifestylePersona lifestylePersona);
 
     List<LifestylePersona> findAll();
+
+    LifestylePersona findById(long personaId);
 }

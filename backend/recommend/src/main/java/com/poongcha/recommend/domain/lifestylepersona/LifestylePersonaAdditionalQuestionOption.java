@@ -24,4 +24,8 @@ public class LifestylePersonaAdditionalQuestionOption {
     public LifestylePersonaAdditionalQuestionOption(final Long id) {
         this.additionalQuestionOption = new IdOnlyAggregateReference<>(id);
     }
+
+    public long additionalQuestionOptionId() {
+        return additionalQuestionOption.getId();
+    }
 }
