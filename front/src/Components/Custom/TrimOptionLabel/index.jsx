@@ -44,15 +44,15 @@ const TrimOptionLabel = ({ value, handleSelectItem, checked }) => {
       <TrimOptionUpper>
         <TrimInfo>
           <NameAndModelItem>
-            <span className="trimName">{value.name}</span>
+            <span className="trimName">{value?.trimName}</span>
             <span className="modelItemSummary">
               {엔진.name} • {바디.name} • {구동방식.name}
             </span>
           </NameAndModelItem>
-          <span className="comment">{value.information}</span>
-          <span className="price">{value.minPrice.toLocaleString()}원</span>
+          <span className="comment">합리적인 당신을 위한</span>
+          <span className="price">{value?.minPrice.toLocaleString()}원</span>
         </TrimInfo>
-        <CheckBtn onClick={() => handleTrimChangeAttempt(value.name)}>
+        <CheckBtn onClick={() => handleTrimChangeAttempt(value)}>
           {checked ? (
             <img src={Check28BlueIcon} alt="checked" />
           ) : (
@@ -64,8 +64,8 @@ const TrimOptionLabel = ({ value, handleSelectItem, checked }) => {
       <TrimDefaultOptions>
         <span className="defaultOptionTitle">기본 옵션</span>
         <DefaultOptions>
-          {value.defaultOptions.map((value, index) => (
-            <DefaultOption key={index} option={value} />
+          {value.optionGroups.slice(0, 3).map((option, index) => (
+            <DefaultOption key={index} option={option} />
           ))}
         </DefaultOptions>
       </TrimDefaultOptions>
@@ -81,6 +81,7 @@ const CheckBtn = styled.label`
 const DefaultOptions = styled.div`
   display: flex;
   flex-wrap: wrap;
+  width: 100%;
 `;
 const NameAndModelItem = styled.div`
   display: flex;
