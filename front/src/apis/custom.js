@@ -20,3 +20,6 @@ export const postUserData = (data) => POST("estimate", data);
 // GET estimate/resultId 최종 견적 페이지 데이터 가져오기
 export const getEstimate = (id) => GET(`estimate/${id}`);
 
+// GET Trim/id 트림정보 가져오기
+export const getTrim = (id) => GET(`trim/${id}`);
+

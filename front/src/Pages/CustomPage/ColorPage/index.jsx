@@ -18,7 +18,8 @@ const ColorPage = () => {
   }, []);
   if (!colorData.length) return null;
 
-  const data = colorData.filter((data) => data.id === 1);
+  const data = colorData.filter((data) => data.id === 2);
+
   const [{ id, colors }] = data;
 
   const exterData = colors.filter((data) => data.type === "EXTERIOR");

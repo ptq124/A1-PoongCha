@@ -1,16 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { css, styled } from "styled-components";
 import closeIcon from "@assets/icons/close.svg";
 import Button from "@Components/Common/Button/Button";
 import useButtonNavigation from "@hooks/useButtonNavigation";
+import { getTrim } from "apis/custom";
 
-const ColorChangePopup = ({ popupRef, closePopup }) => {
+const trim = ["", "Exclusive", " Le Blanc", "Prestige", "Caligraphy"];
+
+const ColorChangePopup = ({ popupRef, closePopup, name }) => {
   const move = useButtonNavigation();
+  const id = trim.indexOf(name);
+
+  const [price, setPrice] = useState();
+
+  getTrim(id).then((data) => {
+    setPrice(data.minPrice);
+  });
+
   return (
     <Wrapper ref={popupRef}>
       <Title>
         <span>
-          Caligraphy 트림으로
+          {name} 트림으로
           <br />
           변경하시겠어요?
         </span>
@@ -26,17 +37,17 @@ const ColorChangePopup = ({ popupRef, closePopup }) => {
         </TrimDetail>
       </TrimInfo>
       <TrimInfo>
-        <span className="title">현재 트림</span>
+        <span className="title">변경 트림</span>
         <div className="separator"></div>
         <TrimDetail>
-          <span className="trimName">Le Blanc(르블랑)</span>
-          <span className="trimPrice">40,440,000원</span>
+          <span className="trimName">{name}</span>
+          <span className="trimPrice">{price?.toLocaleString()}원</span>
         </TrimDetail>
       </TrimInfo>
       <Separator></Separator>
       <PriceInfo>
         <span className="title">변경 금액</span>
-        <span className="price">+ 12,100,000원</span>
+        <span className="price">+ 10,620,000원</span>
       </PriceInfo>
       <BtnContainer>
         <Button text="아니요" style={CancelBtnStyle} onClick={closePopup} />
