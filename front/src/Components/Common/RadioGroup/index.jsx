@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
-import { styled } from "styled-components";
+import { styled, css } from "styled-components";
 import useRadio from "../../../hooks/useRadio";
+import Label from "./Label";
 
 const RadioGroup = ({
   title,
+  trigger,
   label,
   options,
   newStateHandler,
@@ -11,35 +13,43 @@ const RadioGroup = ({
   style,
 }) => {
   const { selectedItem, handleSelectItem } = useRadio(initialState);
+
   useEffect(() => {
     newStateHandler(selectedItem);
   }, [selectedItem]);
+
   return (
-    <Wrapper $style={style?.wrapper}>
-      <Title $style={style?.title}>{title}</Title>
-      <Options $style={style?.options}>
-        {options?.map((option, index) => (
-          <div key={index}>
-            {React.cloneElement(label, {
-              ...label.props,
-              option,
-              selectedItem,
-              handleSelectItem,
-            })}
-          </div>
+    <Form $style={style.wrapper}>
+      <Title $style={style.title} trigger={trigger}>
+        {title}
+      </Title>
+      <Radio $style={style.options}>
+        {options?.map((option) => (
+          <Label
+            key={option.id}
+            component={label}
+            value={option}
+            checked={option.id === selectedItem.id}
+            handleSelectItem={handleSelectItem}
+          />
         ))}
-      </Options>
-    </Wrapper>
+      </Radio>
+    </Form>
   );
 };
 
 const Title = styled.div`
   ${({ $style }) => $style}
+  ${({ trigger }) =>
+    trigger &&
+    css`
+      display: none;
+    `}
 `;
-const Options = styled.div`
+const Radio = styled.div`
   ${({ $style }) => $style}
 `;
-const Wrapper = styled.div`
+const Form = styled.div`
   ${({ $style }) => $style}
 `;
 

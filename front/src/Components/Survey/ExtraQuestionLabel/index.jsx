@@ -2,17 +2,12 @@ import React from "react";
 import { css, styled } from "styled-components";
 import Check24BlueIcon from "../../../assets/checkcircle/check-24-blue.svg";
 
-const ExtraQuestionLabel = ({ option, selectedItem, handleSelectItem }) => {
+const ExtraQuestionLabel = ({ value, handleSelectItem, checked }) => {
   return (
     <>
-      <Label
-        selected={option.id === selectedItem.id}
-        onClick={() => handleSelectItem(option)}
-      >
-        {option.name}
-        {option.id === selectedItem.id && (
-          <img src={Check24BlueIcon} alt="check" />
-        )}
+      <Label selected={checked} onClick={() => handleSelectItem(value)}>
+        {value.name}
+        {checked && <img src={Check24BlueIcon} alt="check" />}
       </Label>
     </>
   );

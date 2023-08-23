@@ -11,32 +11,27 @@ import PopupProvider from "@Components/Common/PopupProvider";
 문구: 텍스트
 프로필 사진: 이미지
 */
-const LifestyleQuestionLabel = ({ option, selectedItem, handleSelectItem }) => {
-  const isSelected = option.index === selectedItem;
-
+const LifestyleQuestionLabel = ({ value, handleSelectItem, checked }) => {
   return (
     <>
-      <Wrapper
-        selected={isSelected}
-        onClick={() => handleSelectItem(option.index)}
-      >
+      <Wrapper selected={checked} onClick={() => handleSelectItem(value)}>
         <TagWrapper>
-          {option.tags.map((tag, index) => (
-            <LifestyleTag selected={isSelected} key={index}>
+          {value.tags.map((tag, index) => (
+            <LifestyleTag selected={checked} key={index}>
               {tag}
             </LifestyleTag>
           ))}
         </TagWrapper>
-        <LifestylePhrase selected={isSelected}>
-          <span>{option.phrase}</span>
-          <CheckImg src={isSelected ? check32blue : check32grey} />
+        <LifestylePhrase selected={checked}>
+          <span>{value.phrase}</span>
+          <CheckImg src={checked ? check32blue : check32grey} />
         </LifestylePhrase>
         <PopupProvider label={<PopUp />}>
-          <LifestyleDetail selected={isSelected}>
+          <LifestyleDetail selected={checked}>
             라이프스타일 엿보기
           </LifestyleDetail>
         </PopupProvider>
-        <LifestyleImg selected={isSelected} src={LifeImg} alt="Lifestyle" />
+        <LifestyleImg selected={checked} src={LifeImg} alt="Lifestyle" />
       </Wrapper>
     </>
   );

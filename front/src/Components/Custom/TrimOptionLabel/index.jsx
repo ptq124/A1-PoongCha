@@ -8,7 +8,7 @@ import TrimChangePopup from "@Pages/CustomPage/TrimPage/TrimChangePopup";
 import useOnClickPopUp from "@hooks/useOnClickPopUp";
 import { useUserData } from "context/UserDataContext";
 
-const TrimOptionLabel = ({ option, selectedItem, handleSelectItem }) => {
+const TrimOptionLabel = ({ value, handleSelectItem, checked }) => {
   const {
     totalData: { 엔진, 바디, 구동방식 },
   } = useUserData();
@@ -18,8 +18,9 @@ const TrimOptionLabel = ({ option, selectedItem, handleSelectItem }) => {
     openPopup: openTrimChangePopup,
     closePopup: closeTrimChangePopup,
   } = useOnClickPopUp(TrimChangePopupRef);
+
   const handleTrimChangeAttempt = (newState) => {
-    if (newState === selectedItem) return;
+    if (checked) return;
     if (true) {
       // 일단 항상 팝업 띄우도록 설정
       openTrimChangePopup();
@@ -35,7 +36,7 @@ const TrimOptionLabel = ({ option, selectedItem, handleSelectItem }) => {
             <TrimChangePopup
               popupRef={TrimChangePopupRef}
               closePopup={closeTrimChangePopup}
-              changeTrim={() => handleSelectItem(option)}
+              changeTrim={() => handleSelectItem(value)}
             />
           }
         />
@@ -43,16 +44,16 @@ const TrimOptionLabel = ({ option, selectedItem, handleSelectItem }) => {
       <TrimOptionUpper>
         <TrimInfo>
           <NameAndModelItem>
-            <span className="trimName">{option.name}</span>
+            <span className="trimName">{value.name}</span>
             <span className="modelItemSummary">
               {엔진.name} • {바디.name} • {구동방식.name}
             </span>
           </NameAndModelItem>
-          <span className="comment">{option.information}</span>
-          <span className="price">{option.minPrice.toLocaleString()}원</span>
+          <span className="comment">{value.information}</span>
+          <span className="price">{value.minPrice.toLocaleString()}원</span>
         </TrimInfo>
-        <CheckBtn onClick={() => handleTrimChangeAttempt(option.name)}>
-          {option.name === selectedItem.name ? (
+        <CheckBtn onClick={() => handleTrimChangeAttempt(value.name)}>
+          {checked ? (
             <img src={Check28BlueIcon} alt="checked" />
           ) : (
             <img src={Check28GreyIcon} alt="checked" />
@@ -63,8 +64,8 @@ const TrimOptionLabel = ({ option, selectedItem, handleSelectItem }) => {
       <TrimDefaultOptions>
         <span className="defaultOptionTitle">기본 옵션</span>
         <DefaultOptions>
-          {option.defaultOptions.map((option, index) => (
-            <DefaultOption key={index} option={option} />
+          {value.defaultOptions.map((value, index) => (
+            <DefaultOption key={index} option={value} />
           ))}
         </DefaultOptions>
       </TrimDefaultOptions>
