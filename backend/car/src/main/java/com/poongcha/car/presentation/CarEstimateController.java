@@ -4,6 +4,7 @@ import com.poongcha.car.application.carestimate.CarEstimateCommandService;
 import com.poongcha.car.application.carestimate.CarEstimateQueryService;
 import com.poongcha.car.application.dto.CarEstimateCreateRequest;
 import com.poongcha.car.application.dto.CarEstimateResponse;
+import com.poongcha.car.application.dto.CarEstimateCreateResponse;
 import java.net.URI;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,10 +21,15 @@ public class CarEstimateController {
     private final CarEstimateQueryService carEstimateQueryService;
 
     @PostMapping("/estimate")
-    public ResponseEntity<Void> create(@RequestBody final CarEstimateCreateRequest carEstimateCreateRequest) {
-        String estimateCode = carEstimateCommandService.create(carEstimateCreateRequest);
+    public ResponseEntity<CarEstimateCreateResponse> create(
+            @RequestBody final CarEstimateCreateRequest carEstimateCreateRequest
+    ) {
+        CarEstimateCreateResponse carEstimateCreateResponse = carEstimateCommandService.create(
+                carEstimateCreateRequest
+        );
 
-        return ResponseEntity.created(URI.create("/estimate/" + estimateCode)).build();
+        return ResponseEntity.created(URI.create("/estimate/" + carEstimateCreateResponse.getCode()))
+                .body(carEstimateCreateResponse);
     }
 
     @GetMapping("/estimate/{estimate-code}")
