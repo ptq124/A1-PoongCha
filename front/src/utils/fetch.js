@@ -17,12 +17,13 @@ const fetchWrap = async ({ method, url, body }) => {
     const res =
       (method === "get" && (await fetch(URL))) ||
       (method === "post" && (await fetch(URL, config))) ||
-      (method === "put" && (await fetch(URL, config))) ||
+      (method === "patch" && (await fetch(URL, config))) ||
       (method === "delete" && (await fetch(URL, { method }))) ||
       {};
 
     if (!res.ok) handleHttpError(res.status);
     const data = await res.json();
+    
     return data;
   } catch (error) {
     console.error;

@@ -2,11 +2,7 @@ import React from "react";
 import { styled } from "styled-components";
 import SelectedItem from "./SelectedItem/SelectedItem";
 
-const Summary = ({ data, estimated }) => {
-  const { name: engine } = data.엔진;
-  const { name: body } = data.바디;
-  const { name: drive } = data.구동방식;
-
+const Summary = ({ data, estimated = 0 }) => {
   return (
     <Wrapper>
       <TrimContainer>
@@ -18,23 +14,23 @@ const Summary = ({ data, estimated }) => {
           <TrimPrice>43,460,000원</TrimPrice>
         </TrimTitle>
         <TrimSubtitle>
-          {engine} • {body} • {drive}
+          {data.엔진?.name} • {data.바디?.name} • {data.구동방식?.name}
         </TrimSubtitle>
       </TrimContainer>
       <Separator></Separator>
       <ColorOptionContainer>
         <Title>색상</Title>
         <ItemContainer>
-          <SelectedItem data={data.외장} option="외장" />
-          <SelectedItem data={data.내장} option="내장" />
+          <SelectedItem data={data?.외장} option="외장" />
+          <SelectedItem data={data?.내장} option="내장" />
         </ItemContainer>
       </ColorOptionContainer>
       <Separator></Separator>
       <ColorOptionContainer>
         <Title>옵션</Title>
         <ItemContainer>
-          <SelectedItem data={data?.옵션[0]} option="옵션" />
-          <SelectedItem data={data?.옵션[1]} option="옵션" />
+          <SelectedItem data={data.옵션 && data.옵션[0]} option="옵션" />
+          <SelectedItem data={data.옵션 && data.옵션[1]} option="옵션" />
         </ItemContainer>
       </ColorOptionContainer>
       <Separator></Separator>

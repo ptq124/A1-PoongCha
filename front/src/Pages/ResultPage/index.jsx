@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { styled, css } from "styled-components";
 import Card from "./Card";
 import Summary from "@Components/Common/Summary";
 import Button from "@Components/Common/Button/Button";
 import Accordion from "@Components/Result/Accordian";
-import { useUserData } from "context/UserDataContext";
+import { renderEstimatedPrice } from "context/UserDataContext";
+import { useParams } from "react-router-dom";
+import { getEstimate } from "apis/custom";
 
 const initialAccordions = [
   { title: "탁송", content: "이곳에 내용이 들어갑니다.", isOpen: false },
@@ -26,6 +28,23 @@ const initialAccordions = [
 ];
 
 const ResultPage = () => {
+  const { resultId } = useParams();
+  const [resultData, setResultData] = useState({});
+
+  useEffect(() => {
+    getEstimate(resultId).then((data) => {
+      setResultData({
+        트림: data.trim,
+        엔진: data.components[0],
+        바디: data.components[1],
+        구동방식: data.components[2],
+        외장: data.exteriorColor,
+        내장: data.interiorColor,
+        옵션: data.optionGroups,
+      });
+    });
+  }, []);
+
   const [accordions, setAccordions] = useState(initialAccordions);
 
   const toggleAccordion = (index) => {
@@ -34,13 +53,11 @@ const ResultPage = () => {
     setAccordions(updatedAccordions);
   };
 
-  const { totalData, estimated } = useUserData();
-
   return (
     <Wrapper>
       <Card />
       <MainContainer>
-        <Summary data={totalData} estimated={estimated} />
+        <Summary data={resultData} />
         <BtnContainer>
           <Button style={BtnStyle} text="내 계정에 저장" />
           <Button style={BtnStyle} text="PDF로 저장" />
@@ -63,7 +80,7 @@ const ResultPage = () => {
         </PurchaseContainer>
         <AmountBox>
           <div>차량 견적 총 금액</div>
-          <div>{estimated?.toLocaleString()}원</div>
+          <div>{renderEstimatedPrice(resultData).toLocaleString()}원</div>
         </AmountBox>
         <Footer>
           <Button style={Btn1} text="내 계정에 저장" />

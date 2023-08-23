@@ -7,6 +7,7 @@ import OptionCatalogue from "./OptionCatalogue";
 import RadioGroup from "@Components/Common/RadioGroup";
 import OptionTagLabel from "@Components/Custom/OptionTagLabel";
 import { useUserData } from "context/UserDataContext";
+import { postUserData } from "apis/custom";
 
 const tabData = ["추가 옵션", "기본 포함 옵션"];
 const OptionPage = () => {
@@ -40,6 +41,21 @@ const OptionPage = () => {
   };
 
   const move = useButtonNavigation();
+  // 커스텀 정보 서버 전송
+  const formatAndPost = () => {
+    const { 트림, 엔진, 바디, 구동방식, 외장, 내장, 옵션 } = totalData;
+    const formattedData = {
+      trimId: 트림.id,
+      componentIds: [엔진.id, 바디.id, 구동방식.id],
+      interiorId: 내장.id,
+      exteriorId: 외장.id,
+      optionGroupIds: 옵션.map((option) => option.id),
+    };
+
+    postUserData(formattedData).then((data) => {
+      move(`/result/${data.code}`);
+    });
+  };
 
   return (
     <Wrapper>
@@ -76,7 +92,7 @@ const OptionPage = () => {
         <Button
           text="견적내기"
           style={BtnStyle2}
-          onClick={() => move("/result")}
+          onClick={() => formatAndPost()}
         />
       </ButtonContainer>
     </Wrapper>

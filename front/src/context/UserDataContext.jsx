@@ -5,6 +5,7 @@ const UserDataContext = createContext();
 export const UserDataProvider = ({ children }) => {
   const [totalData, setTotalData] = useState({
     트림: {
+      id: 2,
       name: "Le Blanc",
       defaultOptions: [
         "20인치 알로이 휠",
@@ -12,7 +13,7 @@ export const UserDataProvider = ({ children }) => {
         "서라운드 뷰 모니터",
       ],
       information: "필수적인 옵션만 모은",
-      additionalPrice: 43460000,
+      minPrice: 43460000,
     },
     엔진: {
       id: 2,
@@ -184,14 +185,14 @@ export const UserDataProvider = ({ children }) => {
 
 export const useUserData = () => useContext(UserDataContext);
 
-const renderEstimatedPrice = (totalData) => {
+export const renderEstimatedPrice = (data) => {
   let estimatedPrice =
-    totalData.엔진.additionalPrice +
-    totalData.바디.additionalPrice +
-    totalData.구동방식.additionalPrice;
-  totalData.옵션.map((option) => {
+    data.트림?.minPrice +
+    data.엔진?.additionalPrice +
+    data.바디?.additionalPrice +
+    data.구동방식?.additionalPrice;
+  data.옵션?.map((option) => {
     estimatedPrice += option.additionalPrice;
   });
-  // 트림 가격도 추가하기
-  return estimatedPrice + 43360000;
+  return estimatedPrice;
 };

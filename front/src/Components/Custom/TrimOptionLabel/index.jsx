@@ -49,9 +49,7 @@ const TrimOptionLabel = ({ option, selectedItem, handleSelectItem }) => {
             </span>
           </NameAndModelItem>
           <span className="comment">{option.information}</span>
-          <span className="price">
-            {option.additionalPrice.toLocaleString()}원
-          </span>
+          <span className="price">{option.minPrice.toLocaleString()}원</span>
         </TrimInfo>
         <CheckBtn onClick={() => handleTrimChangeAttempt(option.name)}>
           {option.name === selectedItem.name ? (
