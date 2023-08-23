@@ -30,6 +30,7 @@ const Navigation = () => {
   const {
     totalData: { 트림, 엔진, 바디, 구동방식, 옵션, 외장, 내장 },
     estimated,
+    formatAndPost,
   } = useUserData();
 
   navItems[0].detail = `${트림.trimName}`;
@@ -61,7 +62,7 @@ const Navigation = () => {
           <Button
             text={estimated.toLocaleString() + "원 견적내기"}
             style={estimateBtnStyle}
-            onClick={() => move("/result")}
+            onClick={() => formatAndPost()}
           />
         </BtnsContainer>
       </Wrapper>

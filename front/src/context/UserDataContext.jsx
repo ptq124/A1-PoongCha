@@ -1,3 +1,5 @@
+import useButtonNavigation from "@hooks/useButtonNavigation";
+import { postUserData } from "apis/custom";
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 const UserDataContext = createContext();
@@ -176,8 +178,26 @@ export const UserDataProvider = ({ children }) => {
     setEstimated(renderEstimatedPrice(totalData));
   }, [totalData]);
 
+  const move = useButtonNavigation();
+  const formatAndPost = () => {
+    const { 트림, 엔진, 바디, 구동방식, 외장, 내장, 옵션 } = totalData;
+    const formattedData = {
+      trimId: 트림.id,
+      componentIds: [엔진.id, 바디.id, 구동방식.id],
+      interiorId: 내장.id,
+      exteriorId: 외장.id,
+      optionGroupIds: 옵션.map((option) => option.id),
+    };
+
+    postUserData(formattedData).then((data) => {
+      move(`/result/${data.code}`);
+    });
+  };
+
   return (
-    <UserDataContext.Provider value={{ totalData, 유저데이터저장, estimated }}>
+    <UserDataContext.Provider
+      value={{ totalData, 유저데이터저장, estimated, formatAndPost }}
+    >
       {children}
     </UserDataContext.Provider>
   );
