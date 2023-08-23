@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation } from "react-router";
+import { useOutletContext } from "react-router-dom";
 import { keyframes, styled } from "styled-components";
 import PalisadeImg from "@assets/images/etc-end-palisade.svg";
 import {
@@ -10,7 +10,7 @@ import {
 } from "@utils/constants";
 
 const QNASummary = () => {
-  const { state } = useLocation();
+  const [handleOptionSelect, state] = useOutletContext();
 
   return (
     <Wrapper>

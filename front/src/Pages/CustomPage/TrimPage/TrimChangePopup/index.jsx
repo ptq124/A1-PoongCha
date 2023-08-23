@@ -2,8 +2,11 @@ import React from "react";
 import { css, styled } from "styled-components";
 import closeIcon from "@assets/icons/close.svg";
 import Button from "@Components/Common/Button/Button";
+import { useUserData } from "context/UserDataContext";
 
 const TrimChangePopup = ({ popupRef, closePopup, changeTrim }) => {
+  const { totalData } = useUserData();
+
   return (
     <Wrapper ref={popupRef}>
       <Header>
@@ -16,8 +19,16 @@ const TrimChangePopup = ({ popupRef, closePopup, changeTrim }) => {
           <div className="separator"></div>
           <Items>
             <Item>
-              <div className="img"></div>
-              <span className="name">내장 - 인조가죽(블랙)</span>
+              <div className="img">
+                <img src={totalData.내장.imageUrl} />
+              </div>
+              <span className="name">내장 - {totalData.내장.name}</span>
+            </Item>
+            <Item>
+              <div className="img">
+                <img src={totalData.외장.imageUrl} />
+              </div>
+              <span className="name">외장 - {totalData.외장.name}</span>
             </Item>
           </Items>
         </CanceledItemDetail>
@@ -26,12 +37,16 @@ const TrimChangePopup = ({ popupRef, closePopup, changeTrim }) => {
           <div className="separator"></div>
           <Items>
             <Item>
-              <div className="img"></div>
-              <span className="name">주차보조 시스템</span>
+              <div className="img">
+                <img src={totalData.옵션[0].options[0].imageUrl} />
+              </div>
+              <span className="name">{totalData.옵션[0].name}</span>
             </Item>
             <Item>
-              <div className="img"></div>
-              <span className="name">컴포트 2</span>
+              <div className="img">
+                <img src={totalData.옵션[1].options[0].imageUrl} />
+              </div>
+              <span className="name">{totalData.옵션[1].name}</span>
             </Item>
           </Items>
         </CanceledItemDetail>
@@ -79,6 +94,9 @@ const Item = styled.div`
     height: 60px;
     background-color: grey;
     border-radius: 3.25px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
   }
   .name {
     ${({ theme }) => theme.font.Body3_Regular}

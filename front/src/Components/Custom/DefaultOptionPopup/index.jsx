@@ -1,23 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import CloseXIcon from "@assets/icons/close.svg";
 import SampleImg from "@assets/images/default-option-popup-sample.svg";
+import { getDefaultOption } from "apis/custom";
 
-const DefaultOptionPopup = ({ popupRef, closePopup }) => {
+const DefaultOptionPopup = ({ popupRef, closePopup, option }) => {
+  const [optionData, setOptionData] = useState();
+  useEffect(() => {
+    getDefaultOption(option.id).then((data) => {
+      setOptionData(data);
+    });
+  }, []);
   return (
     <Wrapper ref={popupRef}>
       <Header>
-        <span>네비게이션 기반 스마트 크루즈 컨트롤(진출입로)</span>
+        <span>{option.name}</span>
         <img src={CloseXIcon} onClick={closePopup} />
       </Header>
       <Img>
-        <img src={SampleImg} />
+        <img src={optionData?.imageUrl} />
       </Img>
-      <Description>
-        스마트 크루즈 중 고속도로/도시고속도로/ 자동차전용 도로 내 고속도로
-        진출입로 주행 시 차로를 판단하여 사전감속 또 최적 속도에 맞추어 감속을
-        진행합니다.
-      </Description>
+      <Description>{optionData?.tooltipDescription}</Description>
       <Caption>
         *사진과 설명은 참고용이며 실제 차량과는 상이할 수 있습니다.
       </Caption>
@@ -40,6 +43,11 @@ const Img = styled.div`
   border-radius: 4px;
   overflow: hidden;
   margin-top: 16px;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
 `;
 const Header = styled.div`
   display: flex;
@@ -59,7 +67,6 @@ const Wrapper = styled.div`
   right: 12px;
   bottom: 30px;
   width: 300px;
-  height: 420px;
 
   background-color: ${({ theme }) => theme.color.grey1000};
 

@@ -1,5 +1,10 @@
 import { GET, POST } from "@utils/fetch";
 
+// GET car-type/1/trim 트림 정보 가져오기
+export const getAllTrim = () => GET("car-type/1/trim");
+
+export const getDefaultOption = (id) => GET(`option-group/${id}/tooltip`);
+
 // GET car-type/1/color 색상 정보 가져오기
 export const getColor = () => GET("car-type/1/color");
 
@@ -17,3 +22,4 @@ export const getEstimate = (id) => GET(`estimate/${id}`);
 
 // GET Trim/id 트림정보 가져오기
 export const getTrim = (id) => GET(`trim/${id}`);
+

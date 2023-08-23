@@ -3,8 +3,10 @@ import { styled } from "styled-components";
 import carImage from "@assets/image342.svg";
 import HyundaiWhiteLogo from "@assets/icons/hyundai-logo.svg";
 import download from "@assets/icons/download.svg";
+import PopupProvider from "@Components/Common/PopupProvider";
+import ShareUrlPopup from "../ShareUrlPopup";
 
-const Card = () => {
+const Card = ({ data }) => {
   return (
     <Wrapper>
       <Title>나만의 차가 완성되었어요!</Title>
@@ -12,16 +14,18 @@ const Card = () => {
       <Container>
         <CarImg src={carImage} />
         <TriangleDecoration />
-        <DownLoadImg>
-          <img src={download} />
-        </DownLoadImg>
+        <PopupProvider label={<ShareUrlPopup />}>
+          <ShareBtn>
+            <img src={download} />
+          </ShareBtn>
+        </PopupProvider>
       </Container>
       <Footer>
         <Top>
           펠리세이드
           <img src={HyundaiWhiteLogo} />
         </Top>
-        <Trim>Le Blanc(르블랑)</Trim>
+        <Trim>{data?.name}</Trim>
       </Footer>
     </Wrapper>
   );
@@ -40,7 +44,7 @@ const TriangleDecoration = styled.div`
   content: "";
 `;
 
-const DownLoadImg = styled.div`
+const ShareBtn = styled.div`
   position: absolute;
   top: 16px;
   right: 20px;

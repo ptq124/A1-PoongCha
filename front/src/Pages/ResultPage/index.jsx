@@ -55,7 +55,7 @@ const ResultPage = () => {
 
   return (
     <Wrapper>
-      <Card />
+      <Card data={resultData.트림} />
       <MainContainer>
         <Summary data={resultData} />
         <BtnContainer>

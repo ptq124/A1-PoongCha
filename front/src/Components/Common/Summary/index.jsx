@@ -1,6 +1,7 @@
 import React from "react";
 import { styled } from "styled-components";
 import SelectedItem from "./SelectedItem/SelectedItem";
+import { renderEstimatedPrice } from "context/UserDataContext";
 
 const Summary = ({ data, estimated = 0 }) => {
   return (
@@ -9,9 +10,9 @@ const Summary = ({ data, estimated = 0 }) => {
         <TrimTitle>
           <TrimName>
             <span className="palisade">팰리세이드</span>
-            <span className="trimName">Le Blanc(르블랑)</span>
+            <span className="trimName">{data.트림?.name}</span>
           </TrimName>
-          <TrimPrice>43,460,000원</TrimPrice>
+          <TrimPrice>{data.트림?.minPrice.toLocaleString()}원</TrimPrice>
         </TrimTitle>
         <TrimSubtitle>
           {data.엔진?.name} • {data.바디?.name} • {data.구동방식?.name}
@@ -36,7 +37,9 @@ const Summary = ({ data, estimated = 0 }) => {
       <Separator></Separator>
       <EstimateContainer>
         <span className="estimate">총 금액</span>
-        <span className="value">{estimated?.toLocaleString()}원</span>
+        <span className="value">
+          {renderEstimatedPrice(data)?.toLocaleString()}원
+        </span>
       </EstimateContainer>
     </Wrapper>
   );

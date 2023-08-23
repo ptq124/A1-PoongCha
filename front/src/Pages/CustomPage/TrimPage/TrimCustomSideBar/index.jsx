@@ -13,17 +13,22 @@ import TrimComparisonPopup from "../TrimComparisonPopup";
 import Tooltip from "@Components/Custom/Tooltip";
 import TooltipProvider from "@Components/Common/TooltipProvider";
 import PopupProvider from "@Components/Common/PopupProvider";
-import { getComponent } from "apis/custom";
+import { getComponent, getAllTrim } from "apis/custom";
 import { useUserData } from "context/UserDataContext";
 
 const TrimCustomSideBar = () => {
   const move = useButtonNavigation();
   const { totalData, 유저데이터저장 } = useUserData();
   const [componentGroupData, setComponentGroupData] = useState([]);
+  const [trimGroupData, setTrimGroupData] = useState([]);
 
   useEffect(() => {
     getComponent().then((data) => {
       setComponentGroupData(data);
+    });
+
+    getAllTrim().then((data) => {
+      setTrimGroupData(data);
     });
   }, []);
 
@@ -83,7 +88,7 @@ const TrimCustomSideBar = () => {
           <RadioGroup
             title={trimRadioGroupTitle()}
             label={<TrimOptionLabel />}
-            options={TrimOptions}
+            options={trimGroupData}
             newStateHandler={(newState) => 유저데이터저장("트림", newState)}
             initialState={totalData["트림"]}
             style={trimOptionGroupStyle}

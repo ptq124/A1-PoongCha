@@ -11,10 +11,14 @@ const DefaultOption = ({ option }) => {
   return (
     <Wrapper>
       {isPopupOpen && (
-        <DefaultOptionPopup popupRef={popupRef} closePopup={closePopup} />
+        <DefaultOptionPopup
+          popupRef={popupRef}
+          closePopup={closePopup}
+          option={option}
+        />
       )}
       <Button
-        text={option}
+        text={option.name}
         style={DefaultOptionBtnStyle}
         onClick={() => openPopup()}
       ></Button>
@@ -23,7 +27,8 @@ const DefaultOption = ({ option }) => {
 };
 
 const DefaultOptionBtnStyle = css`
-  flex-shrink: 0;
+  display: flex;
+  text-align: left;
 
   color: ${({ theme }) => theme.color.secondary};
   background-color: ${({ theme }) => theme.color.grey1000};
@@ -40,5 +45,7 @@ const DefaultOptionBtnStyle = css`
 `;
 const Wrapper = styled.div`
   position: relative;
+  display: flex;
+  flex-wrap: wrap;
 `;
 export default DefaultOption;
