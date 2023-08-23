@@ -2,13 +2,20 @@ import React from "react";
 import { styled } from "styled-components";
 import Check24Icon from "@assets/checkcircle/check-24-white.svg";
 
-const ColorOption = ({ option, selected, onClick }) => {
+const ColorOption = ({ option, selected, onClick, index, opt }) => {
   let isLabeled = true;
+
+  const hasLabel = () => {
+    if (opt === "내장" && index === 0) return <Label>Best</Label>;
+    else if (opt === "외장" && index < 3) {
+      return <Label>Top {index + 1}</Label>;
+    }
+  };
 
   return (
     <Wrapper onClick={onClick}>
       <Preview>
-        {/* {isLabeled && <Label>Top 1</Label>} */}
+        {isLabeled && hasLabel()}
         <ColorImg src={option.imageUrl} />
         {selected && (
           <Cover>

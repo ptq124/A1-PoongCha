@@ -23,7 +23,6 @@ const fetchWrap = async ({ method, url, body }) => {
 
     if (!res.ok) handleHttpError(res.status);
     const data = await res.json();
-    
     return data;
   } catch (error) {
     console.error;

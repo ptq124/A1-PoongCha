@@ -7,19 +7,20 @@ import useButtonNavigation from "@hooks/useButtonNavigation";
 const ColorCustomSideBar = ({ handleColorOption, data, curData }) => {
   const move = useButtonNavigation();
 
-  const datas = data.filter((d) => d.id === 1);
+  const datas = data.filter((d) => d.id === 2);
   const [{ colors }] = datas;
   const exterData = colors.filter((data) => data.type === "EXTERIOR");
   const interData = colors.filter((data) => data.type === "INTERIOR");
 
-  const datas2 = data.filter((d) => d.id !== 1);
+  const datas2 = data.filter((d) => d.id !== 2);
 
   let exceptExter = [];
   let exceptInter = [];
+
   datas2.forEach((data) => {
     const { colors } = data;
-    exceptExter.push(colors.filter((data) => data.type === "EXTERIOR"));
-    exceptInter.push(colors.filter((data) => data.type === "INTERIOR"));
+    exceptExter.push(...colors.filter((data) => data.type === "EXTERIOR"));
+    exceptInter.push(...colors.filter((data) => data.type === "INTERIOR"));
   });
 
   const { exterior, interior } = curData;
@@ -32,6 +33,8 @@ const ColorCustomSideBar = ({ handleColorOption, data, curData }) => {
           handleColorOption={handleColorOption}
           data={exterData}
           curData={exterior}
+          exceptColor={exceptExter}
+          totalData={data}
         />
         <Separator></Separator>
         <ColorOptionGroup
@@ -39,6 +42,8 @@ const ColorCustomSideBar = ({ handleColorOption, data, curData }) => {
           handleColorOption={handleColorOption}
           data={interData}
           curData={interior}
+          exceptColor={exceptInter}
+          totalData={data}
         />
         <BtnContainer>
           <Button
