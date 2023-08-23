@@ -1,14 +1,11 @@
 import React from "react";
 import { css, styled } from "styled-components";
 
-const OptionTagLabel = ({ option, selectedItem, handleSelectItem }) => {
-  const isSelected = selectedItem.id === option.id;
+const OptionTagLabel = ({ value, handleSelectItem, checked }) => {
   return (
-    <Wrapper $isSelected={isSelected} onClick={() => handleSelectItem(option)}>
-      <TagImg
-        src={isSelected ? option.activeIcon : option.inactiveIcon}
-      ></TagImg>
-      {option.name}
+    <Wrapper $isSelected={checked} onClick={() => handleSelectItem(value)}>
+      <TagImg src={checked ? value.activeIcon : value.inactiveIcon}></TagImg>
+      {value.name}
     </Wrapper>
   );
 };

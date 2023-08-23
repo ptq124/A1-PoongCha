@@ -1,14 +1,11 @@
 import React from "react";
 import { css, styled } from "styled-components";
 
-const ModelItemOptionLabel = ({ option, selectedItem, handleSelectItem }) => {
+const ModelItemOptionLabel = ({ value, handleSelectItem, checked }) => {
   return (
     <>
-      <Label
-        selected={option.id === selectedItem.id}
-        onClick={() => handleSelectItem(option)}
-      >
-        {option.name}
+      <Label selected={checked} onClick={() => handleSelectItem(value)}>
+        {value.name}
       </Label>
     </>
   );
