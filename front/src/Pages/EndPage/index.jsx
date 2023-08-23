@@ -8,7 +8,7 @@ import { useUserData } from "context/UserDataContext";
 
 const EndPage = () => {
   const move = useButtonNavigation();
-  const { totalData, estimated } = useUserData();
+  const { totalData, estimated, formatAndPost } = useUserData();
 
   return (
     <Wrapper>
@@ -20,7 +20,11 @@ const EndPage = () => {
           style={CustomBtnStyle}
           onClick={() => move("/custom/trim")}
         />
-        <Button text="빠른 견적내기" style={CompleteEstimateBtnStyle} />
+        <Button
+          text="빠른 견적내기"
+          style={CompleteEstimateBtnStyle}
+          onClick={() => formatAndPost()}
+        />
       </ButtonContainer>
     </Wrapper>
   );

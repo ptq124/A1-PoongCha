@@ -200,5 +200,6 @@ const Wrapper = styled.div`
   flex: 0 0 auto;
   width: 473px;
   height: 1292px;
+  padding-bottom: 36px;
 `;
 export default TrimCustomSideBar;
