@@ -29,6 +29,8 @@ repositories {
 	mavenCentral()
 }
 
+test.onlyIf { !project.hasProperty('skiptest') }
+
 openapi3 {
 	setServer("http://localhost:8080")
 	title = "차량 API 명세서"
