@@ -4,6 +4,7 @@ import com.poongcha.recommend.domain.additionalquestion.AdditionalQuestion;
 import com.poongcha.recommend.domain.additionalquestion.AdditionalQuestionOption;
 import com.poongcha.recommend.domain.additionalquestionanswer.AdditionalQuestionAnswer;
 import com.poongcha.recommend.domain.additionalquestionanswer.AdditionalQuestionAnswerGroup;
+import com.poongcha.recommend.domain.carestimaterecommendation.CarEstimateRecommendation;
 import com.poongcha.recommend.domain.lifestylepersona.LifestyleInterview;
 import com.poongcha.recommend.domain.lifestylepersona.LifestylePersona;
 import com.poongcha.recommend.domain.lifestylepersona.LifestylePersonaAdditionalQuestionOption;
@@ -32,6 +33,7 @@ public class DataInitializeExecutionListener extends AbstractTestExecutionListen
         reset(operation, LifestylePersonaAdditionalQuestionOption.class.getAnnotation(Table.class).name());
         reset(operation, LifestylePersonaLifestylePersonaSituationTag.class.getAnnotation(Table.class).name());
         reset(operation, RecommendationFeedback.class.getAnnotation(Table.class).name());
+        reset(operation, CarEstimateRecommendation.class.getAnnotation(Table.class).name());
     }
 
     private static void reset(

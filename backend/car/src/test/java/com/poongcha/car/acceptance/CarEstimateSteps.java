@@ -88,6 +88,7 @@ public class CarEstimateSteps {
             final List<Integer> carOptionGroupIds,
             final List<String> carOptionGroupName,
             final List<Integer> additionalPrice,
+            final List<String> summaryDescription,
             final List<List<Integer>> optionIds,
             final List<List<String>> optionNames,
             final List<List<String>> optionImageUrls
@@ -122,6 +123,9 @@ public class CarEstimateSteps {
             assertions.assertThat(response.jsonPath().getList("optionGroups.additionalPrice"))
                     .usingRecursiveComparison()
                     .isEqualTo(additionalPrice);
+            assertions.assertThat(response.jsonPath().getList("optionGroups.summaryDescription"))
+                    .usingRecursiveComparison()
+                    .isEqualTo(summaryDescription);
             assertions.assertThat(response.jsonPath().getList("optionGroups.options.id")).usingRecursiveComparison()
                     .isEqualTo(optionIds);
             assertions.assertThat(response.jsonPath().getList("optionGroups.options.name")).usingRecursiveComparison()
@@ -166,6 +170,8 @@ public class CarEstimateSteps {
                                 fieldWithPath("optionGroups[].name").type(JsonFieldType.STRING).description("옵션 그룹 이름"),
                                 fieldWithPath("optionGroups[].additionalPrice").type(JsonFieldType.NUMBER)
                                         .description("옵션 그룹 추가 가격"),
+                                fieldWithPath("optionGroups[].summaryDescription").type(JsonFieldType.STRING)
+                                        .description("옵션 그룹 요약 설명"),
                                 fieldWithPath("optionGroups[].options[].id").type(JsonFieldType.NUMBER)
                                         .description("옵션 ID"),
                                 fieldWithPath("optionGroups[].options[].name").type(JsonFieldType.STRING)

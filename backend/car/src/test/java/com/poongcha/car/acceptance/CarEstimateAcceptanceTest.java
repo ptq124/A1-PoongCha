@@ -162,6 +162,7 @@ public class CarEstimateAcceptanceTest extends CarAcceptanceTest {
                 List.of(1),
                 List.of(compote2CarOptionGroupName),
                 List.of(additionalPrice),
+                List.of("요약 설명"),
                 List.of(List.of(1, 2)),
                 List.of(List.of(optionName1, optionName2)),
                 List.of(List.of(imageUrl1, imageUrl2))
