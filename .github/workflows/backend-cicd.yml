@@ -49,6 +49,20 @@ jobs:
         working-directory: backend/boot-loader/
         shell: bash
 
+      - name: ⚙️ Setup env
+        env:
+          SETUP_ENV: deploy/scripts/setup-env.sh
+        run: |
+          echo "export CAR_DEFAULT_DATABASE_URL="${{ secrets.CAR_DEFAULT_DATABASE_URL }} >> $SETUP_ENV && \
+          echo "export CAR_DEFAULT_DATABASE_USERNAME="${{ secrets.CAR_DEFAULT_DATABASE_USERNAME }} >> $SETUP_ENV && \
+          echo "export CAR_DEFAULT_DATABASE_PASSWORD="${{ secrets.CAR_DEFAULT_DATABASE_PASSWORD }} >> $SETUP_ENV && \
+          echo "export RECOMMEND_DEFAULT_DATABASE_URL="${{ secrets.RECOMMEND_DEFAULT_DATABASE_URL }} >> $SETUP_ENV && \
+          echo "export RECOMMEND_DEFAULT_DATABASE_USERNAME="${{ secrets.RECOMMEND_DEFAULT_DATABASE_USERNAME }} >> $SETUP_ENV && \
+          echo "export RECOMMEND_DEFAULT_DATABASE_PASSWORD="${{ secrets.RECOMMEND_DEFAULT_DATABASE_PASSWORD }} >> $SETUP_ENV && \
+          echo "export MODULE_CAR_PROTOCOL="${{ secrets.MODULE_CAR_PROTOCOL }} >> $SETUP_ENV && \
+          echo "export MODULE_CAR_HOST="${{ secrets.MODULE_CAR_HOST }} >> $SETUP_ENV && \
+          echo "export MODULE_CAR_PORT="${{ secrets.MODULE_CAR_PORT }} >> $SETUP_ENV
+
       - name: 📦 Make zip file
         run: zip -r ./$GITHUB_SHA.zip backend/boot-loader/build/libs/ appspec.yml deploy/scripts/
         shell: bash
@@ -67,7 +81,7 @@ jobs:
         run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://$S3_NAME/$GITHUB_SHA.zip
 
   backend-cd:
-    needs: [backend-ci]
+    needs: [ backend-ci ]
     runs-on: ubuntu-latest
     steps:
       - name: 🔑 Configure AWS credentials

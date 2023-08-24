@@ -7,6 +7,10 @@ files:
 file_exists_behavior: OVERWRITE
 
 hooks:
+  BeforeInstall:
+    - location: deploy/scripts/setup-env.sh
+      timeout: 30
+      runas: root
   AfterInstall:
     - location: deploy/scripts/restart-server.sh
       timeout: 300
