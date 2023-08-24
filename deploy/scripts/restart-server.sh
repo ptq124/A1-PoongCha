@@ -17,4 +17,4 @@ else
   sleep 5
 fi
 
-sudo nohup java -jar -Dspring.profiles.active=test $JAR_PATH > /home/nohup.out &
+sudo nohup java -jar -Dspring.profiles.active=prod $JAR_PATH > /home/nohup.out &
