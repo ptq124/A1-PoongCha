@@ -2,6 +2,12 @@ spring:
   datasource:
     recommend:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: ${RECOMMEND_DEFAULT_DATABASE_URL}
-      username: ${RECOMMEND_DEFAULT_DATABASE_USERNAME}
-      password: ${RECOMMEND_DEFAULT_DATABASE_PASSWORD}
+      url: ${{ secrets.RECOMMEND_DEFAULT_DATABASE_URL}}
+      username: ${{ secrets.RECOMMEND_DEFAULT_DATABASE_USERNAME }}
+      password: ${{ secrets.RECOMMEND_DEFAULT_DATABASE_PASSWORD }}
+
+module:
+  car:
+    protocol: ${{ secrets.MODULE_CAR_PROTOCOL}}
+    host: ${{ secrets.MODULE_CAR_HOST}}
+    port: ${{ secrets.MODULE_CAR_PORT}}

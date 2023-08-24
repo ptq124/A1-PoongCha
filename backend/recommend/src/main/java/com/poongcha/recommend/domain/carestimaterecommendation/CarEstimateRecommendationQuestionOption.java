@@ -1,4 +1,4 @@
-package com.poongcha.recommend.domain.lifestylepersona;
+package com.poongcha.recommend.domain.carestimaterecommendation;
 
 import com.poongcha.recommend.domain.additionalquestion.AdditionalQuestionOption;
 import lombok.AccessLevel;
@@ -12,8 +12,8 @@ import org.springframework.data.relational.core.mapping.Table;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-@Table(name = "lifestyle_persona_additional_question_options")
-public class LifestylePersonaAdditionalQuestionOption {
+@Table("car_estimate_recommendation_question_options")
+public class CarEstimateRecommendationQuestionOption {
     @Column("id")
     @Id
     private Long id;
@@ -21,8 +21,8 @@ public class LifestylePersonaAdditionalQuestionOption {
     @Column("additional_question_option_id")
     private AggregateReference<AdditionalQuestionOption, Long> additionalQuestionOption;
 
-    public LifestylePersonaAdditionalQuestionOption(final Long id) {
-        this.additionalQuestionOption = new IdOnlyAggregateReference<>(id);
+    public CarEstimateRecommendationQuestionOption(final Long additionalQuestionOptionId) {
+        this.additionalQuestionOption = new IdOnlyAggregateReference<>(additionalQuestionOptionId);
     }
 
     public long additionalQuestionOptionId() {
