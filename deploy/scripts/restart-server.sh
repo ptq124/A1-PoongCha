@@ -17,6 +17,4 @@ else
   sleep 5
 fi
 
-sudo iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 8080
-
 sudo nohup java -jar -Dspring.profiles.active=test $JAR_PATH > /home/nohup.out &
