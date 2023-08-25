@@ -63,7 +63,7 @@ const ColorOptionGroup = ({
       )}
       <Header>{option} 색상</Header>
       <Subtitle>
-        <span className="color">그라파이트 그레이 메탈릭</span>
+        <span className="color">{selectedColor}</span>
         <span className="stat">
           <strong>75%</strong>의 구매자가 선택한
         </span>
