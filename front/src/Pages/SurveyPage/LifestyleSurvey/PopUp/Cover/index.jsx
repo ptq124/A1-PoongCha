@@ -3,17 +3,17 @@ import { styled } from "styled-components";
 import cover from "@assets/lifestyle/lifestylecover.svg";
 import logo from "@assets/icons/hyundai-logo-white.svg";
 
-const Cover = () => {
+const Cover = ({ value }) => {
   return (
     <Wrapper>
       <Logo src={logo} />
       <MainContent>
         <TagContent>
-          <Tag>#수행안전</Tag>
-          <Tag>#사용편의</Tag>
+          <Tag>#{value?.situationTags[0]}</Tag>
+          <Tag>#{value?.situationTags[1]}</Tag>;
         </TagContent>
-        <Phrase>가족과 함께 타서 안전을 중시해요.</Phrase>
-        <Item>김현대씨의 라이프스타일 엿보기</Item>
+        <Phrase>{value.representativePhrase}</Phrase>
+        <Item>{value.profile.name}씨의 라이프스타일 엿보기</Item>
       </MainContent>
     </Wrapper>
   );
@@ -46,7 +46,7 @@ const Logo = styled.img`
 `;
 
 const MainContent = styled.div`
-  width: 416px;
+  width: 100%;
   height: 143px;
   color: white;
 

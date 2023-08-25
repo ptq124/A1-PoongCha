@@ -16,25 +16,68 @@ const LifestyleQuestionLabel = ({ value, handleSelectItem, checked }) => {
     <>
       <Wrapper selected={checked} onClick={() => handleSelectItem(value)}>
         <TagWrapper>
-          {value.tags.map((tag, index) => (
+          {value.situationTags.map((tag, index) => (
             <LifestyleTag selected={checked} key={index}>
               {tag}
             </LifestyleTag>
           ))}
         </TagWrapper>
         <LifestylePhrase selected={checked}>
-          <span>{value.phrase}</span>
+          <span>{updatePharse(value.id)}</span>
           <CheckImg src={checked ? check32blue : check32grey} />
         </LifestylePhrase>
-        <PopupProvider label={<PopUp />}>
+        <PopupProvider label={<PopUp value={value} />}>
           <LifestyleDetail selected={checked}>
             라이프스타일 엿보기
           </LifestyleDetail>
         </PopupProvider>
-        <LifestyleImg selected={checked} src={LifeImg} alt="Lifestyle" />
+        <LifestyleImg
+          selected={checked}
+          src={value.profile.imageUrl}
+          alt="Lifestyle"
+        />
       </Wrapper>
     </>
   );
+};
+
+const updatePharse = (id) => {
+  let answer;
+  switch (id) {
+    case 1:
+      answer = (
+        <>
+          가족과 함께 타서 <br /> 안전을 중시해요.
+        </>
+      );
+      break;
+    case 2:
+      answer = (
+        <>
+          매일 출퇴근하여 경제적이고
+          <br />
+          편안한 주행을 원해요.
+        </>
+      );
+      break;
+    case 3:
+      answer = (
+        <>
+          운전 경력이 짧아 <br />
+          똑똑한 주행을 원해요.
+        </>
+      );
+      break;
+    case 4:
+      answer = (
+        <>
+          트렌드에 민감해 <br />
+          디자인과 성능이 중요해요.
+        </>
+      );
+      break;
+  }
+  return answer;
 };
 
 const Wrapper = styled.div`

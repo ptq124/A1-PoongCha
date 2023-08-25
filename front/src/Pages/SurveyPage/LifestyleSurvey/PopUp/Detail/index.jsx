@@ -1,24 +1,20 @@
 import React from "react";
 import { styled } from "styled-components";
-import life from "@assets/lifestyle/lifestyle1.svg";
 import trimSideImg from "@assets/trimsideimg/trimSideNavy.svg";
 import option1 from "@assets/extraoption/fca-2-s-jpg.svg";
 import option2 from "@assets/extraoption/roa-s-jpg.svg";
 
-const Detail = () => {
+const Detail = ({ value }) => {
+  const { name, introduction, imageUrl } = value.profile;
   return (
     <Wrapper>
       <Profile>
-        <LifeImg src={life} />
+        <LifeImg src={imageUrl} />
         <ProfileContent>
-          <span>김현대</span>
+          <span>{name}</span>
           <span>두아이의 엄마</span>
         </ProfileContent>
-        <Phrase>
-          "우리 아이들과 함께 타는 차는 항상
-          <br />
-          안전해야 한다고 생각해요."
-        </Phrase>
+        <Phrase>{introduction}</Phrase>
       </Profile>
       <Recommendation>
         <Title>For You</Title>
@@ -47,23 +43,16 @@ const Detail = () => {
           <InterviewItem>
             <Question>
               <span>Q.</span>
-              <span>어떤 용도로 차를 사용하세요?</span>
+              <span>{value.interviews[0].question}</span>
             </Question>
-            <Answer>
-              저는 차를 타고 출퇴근도 하지만 주중에 아이들 픽업하거나 마트 갈
-              때도 자주 타곤 합니다.
-            </Answer>
+            <Answer>{value.interviews[0].answer}</Answer>
           </InterviewItem>
           <InterviewItem>
             <Question>
               <span>Q.</span>
-              <span>차를 살 때 가장 중요하게 생각하는 부분이 뭔가요?</span>
+              <span>{value.interviews[1].question}</span>
             </Question>
-            <Answer>
-              저는 차를 살 때 안전을 중요하게 생각해요. 가족들이 같이 타는 차라
-              항상 사고에 경각심을 갖고 있죠. 펠리세이드는 그 점에서 뒷좌석
-              에어백도 터지는 모델이라 안심이 되는 편이에요.
-            </Answer>
+            <Answer>{value.interviews[1].answer}</Answer>
           </InterviewItem>
         </InterviewBox>
       </Interview>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import * as S from "../styles";
 import { css } from "styled-components";
 import Button from "@Components/Common/Button/Button";
@@ -7,6 +7,7 @@ import { useOutletContext } from "react-router-dom";
 import LifestyleQuestionLabel from "@Components/Survey/LifestyleQuestionLabel";
 import PageIndicator from "@Components/Survey/PageIndicator";
 import RadioGroup from "@Components/Common/RadioGroup";
+import { getLifeStyle } from "apis/survey";
 
 const lifestyleSurveyInfo = {
   options: [
@@ -77,13 +78,20 @@ const LifestyleSurvey = () => {
     );
   };
 
+  const [lifeStyle, setLifeStyle] = useState();
+  useEffect(() => {
+    getLifeStyle().then((data) => {
+      setLifeStyle(data);
+    });
+  }, []);
+
   return (
     <>
       <S.SurveyContent>
         <RadioGroup
           title={lifestyleRadioGroupTitle()}
           label={<LifestyleQuestionLabel />}
-          options={lifestyleSurveyInfo.options}
+          options={lifeStyle}
           newStateHandler={(newState) =>
             handleOptionSelect("lifestyle", newState)
           }
