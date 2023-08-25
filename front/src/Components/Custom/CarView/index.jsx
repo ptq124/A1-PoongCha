@@ -56,6 +56,7 @@ const CarView = ({ data }) => {
           />
           {!isInternalImg && (
             <Button
+              $isCarViewer={isCarViewer}
               style={RotateBtn}
               img={<img src={degree360} onClick={() => setIsCarViewer(true)} />}
             />
@@ -119,6 +120,12 @@ const RotateBtn = css`
   border-color: ${({ theme }) => theme.color.grey1000};
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(2px);
+
+  ${({ $isCarViewer }) =>
+    $isCarViewer &&
+    css`
+      background-color: #d8f3ff;
+    `}
 `;
 
 const InternalBtn = css`

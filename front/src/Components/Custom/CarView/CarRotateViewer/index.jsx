@@ -37,17 +37,18 @@ const CarRotateViewer = ({ rotateImg }) => {
   };
   const handleMouseLeave = () => setIsClicked(false);
 
-  // 첫 렌더링시 애니메이션 로직 구현
-  const [isAnimate, setIsAnimate] = useState(true);
-  useEffect(() => {
-    if (currentImage <= 5 && isAnimate) {
-      const interval = setInterval(() => {
-        setCurrentImage((prev) => prev + 1);
-      }, 50);
-      return () => clearInterval(interval);
-    }
-    if (currentImage > 5) setIsAnimate(false);
-  }, [currentImage, isAnimate]);
+  // // 첫 렌더링시 애니메이션 로직 구현
+  // const [isAnimate, setIsAnimate] = useState(true);
+  // useEffect(() => {
+  //   //11번시작 ~ 2번끝
+  //   if (currentImage <= 5 && isAnimate) {
+  //     const interval = setInterval(() => {
+  //       setCurrentImage((prev) => prev + 1);
+  //     }, 50);
+  //     return () => clearInterval(interval);
+  //   }
+  //   if (currentImage > 5) setIsAnimate(false);
+  // }, [currentImage, isAnimate]);
 
   return (
     <Wrapper
