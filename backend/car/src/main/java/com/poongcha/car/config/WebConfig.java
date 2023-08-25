@@ -13,7 +13,12 @@ public class WebConfig {
             @Override
             public void addCorsMappings(final CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://my-car.store", "http://localhost:3000");
+                        .allowedOrigins(
+                                "http://my-car.store",
+                                "http://localhost:3000",
+                                "https://my-car.store",
+                                "https://localhost:3000"
+                        );
             }
         };
     }
