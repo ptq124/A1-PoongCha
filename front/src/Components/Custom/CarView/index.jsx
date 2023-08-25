@@ -16,11 +16,12 @@ const CarView = ({ data }) => {
     if (pathname === "/custom/trim")
       return (
         <CarSideViewer
-          src={`https://www.hyundai.com/contents/vr360/LX06/exterior/A2B/011.png`}
+          src={`https://my-car-store-resource.s3.ap-northeast-2.amazonaws.com/rotation/abyss_exterior/image_011.webp`}
         />
       );
     else {
       const { exterior, interior } = data;
+      console.log([exterior].flat()[0].trimExteriorImageUrl);
       return (
         <>
           {isExternalImg &&

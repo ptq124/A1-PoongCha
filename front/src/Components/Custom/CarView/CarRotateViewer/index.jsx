@@ -24,12 +24,12 @@ const CarRotateViewer = ({ rotateImg }) => {
     event.preventDefault();
 
     if (xPosition > event.screenX) {
-      if (event.screenX % 3 === 0) {
+      if (event.screenX % 1 === 0) {
         setCurrentImage((prev) => (prev === 60 ? 1 : prev + 1));
         setXPosition(event.screenX);
       }
     } else {
-      if (event.screenX % 3 === 0) {
+      if (event.screenX % 1 === 0) {
         setCurrentImage((prev) => (prev === 1 ? 60 : prev - 1));
         setXPosition(event.screenX);
       }
@@ -60,7 +60,7 @@ const CarRotateViewer = ({ rotateImg }) => {
         <CarImage
           key={index}
           $isDisplay={index === currentImage}
-          src={`${rotateImg}` + `image_0${convertToTwoDigits(index)}.png`}
+          src={`${rotateImg}` + `image_0${convertToTwoDigits(index)}.webp`}
           alt="360 VR"
         />
       ))}
