@@ -21,7 +21,7 @@ const CarView = ({ data }) => {
       );
     else {
       const { exterior, interior } = data;
-      console.log([exterior].flat()[0].trimExteriorImageUrl);
+
       return (
         <>
           {isExternalImg &&
