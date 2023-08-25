@@ -32,6 +32,7 @@ const SituationView = ({
   const handlePlusBtnClick = () => {
     setIsTooltipFixed(!isTooltipFixed);
   };
+
   // + 버튼 랜덤 위치 설정
   useEffect(() => {
     setMockPositions(
