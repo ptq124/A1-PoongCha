@@ -5,7 +5,7 @@ import SampleImg1 from "@assets/images/model-item-popup-sample1.png";
 import SampleImg2 from "@assets/images/model-item-popup-sample2.png";
 
 const navOptions = ["엔진", "바디타입", "구동방식"];
-const ModelItemsDescriptionPopup = ({ popupRef, closePopup }) => {
+const ModelItemsDescriptionPopup = ({ popupRef, closePopup, data }) => {
   const [selectedNav, setSelectedNav] = useState(0);
   return (
     <Wrapper ref={popupRef}>
@@ -28,18 +28,12 @@ const ModelItemsDescriptionPopup = ({ popupRef, closePopup }) => {
       </NavStateBar>
       <ContentWindow>
         <Content $state={selectedNav}>
-          <CarouselContent>
-            <img src={SampleImg1} />
-            <img src={SampleImg2} />
-          </CarouselContent>
-          <CarouselContent>
-            <img src={SampleImg1} />
-            <img src={SampleImg2} />
-          </CarouselContent>
-          <CarouselContent>
-            <img src={SampleImg1} />
-            <img src={SampleImg2} />
-          </CarouselContent>
+          {data.map((item, index) => (
+            <CarouselContent key={index}>
+              <img src={item && item.component[0].descriptionImageUrl} />
+              <img src={item && item.component[1].descriptionImageUrl} />
+            </CarouselContent>
+          ))}
         </Content>
       </ContentWindow>
     </Wrapper>
@@ -67,7 +61,7 @@ const CarouselContent = styled.div`
 `;
 const ContentWindow = styled.div`
   display: flex;
-  margin: 30px 40px;
+  margin: 20px 25px;
   overflow: hidden;
 `;
 const Filler = styled.div`

@@ -47,7 +47,9 @@ const TrimCustomSideBar = () => {
       <CustomBarContent>
         <LinkBtnContainer>
           <img src={helpIcon} />
-          <PopupProvider label={<ModelItemsDescriptionPopup />}>
+          <PopupProvider
+            label={<ModelItemsDescriptionPopup data={componentGroupData} />}
+          >
             <Button text="고르기 어렵다면?" style={LinkBtnStyle} />
           </PopupProvider>
         </LinkBtnContainer>
