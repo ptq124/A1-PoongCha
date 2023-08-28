@@ -45,10 +45,10 @@ export const UserDataProvider = ({ children }) => {
         "https://www.hyundai.com/contents/vr360/LX06/exterior/A2B/colorchip-exterior.png",
       type: "EXTERIOR",
       trimExteriorImageUrl:
-        "https://www.hyundai.com/contents/vr360/LX06/exterior/A2B/010.png",
+        "https://my-car-store-resource.s3.ap-northeast-2.amazonaws.com/rotation/abyss_exterior/image_011.webp",
       trimRotationImageBaseUrl:
-        "https://www.hyundai.com/contents/vr360/LX06/exterior/A2B/0",
-      incompatibleColorIds: [6, 7],
+        "https://my-car-store-resource.s3.ap-northeast-2.amazonaws.com/rotation/abyss_exterior/",
+      incompatibleColorIds: [],
     },
     내장: {
       id: 6,
@@ -58,7 +58,7 @@ export const UserDataProvider = ({ children }) => {
       type: "INTERIOR",
       trimInteriorImageUrl:
         "https://www.hyundai.com/contents/vr360/LX06/interior/I49/img-interior.png",
-      incompatibleColorIds: [2, 3],
+      incompatibleColorIds: [],
     },
     옵션: [
       {
