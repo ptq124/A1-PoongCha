@@ -14,8 +14,8 @@ const ageRadioGroupTitle = (data) => {
   return (
     <>
       <span>
-        {/* <strong>나이</strong>를 알려주세요. */}
-        {data?.description}
+        <strong>나이</strong>를 알려주세요.
+        {/* {data?.description} */}
       </span>
       <PageIndicator />
     </>
