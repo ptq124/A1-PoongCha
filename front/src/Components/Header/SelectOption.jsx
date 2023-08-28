@@ -6,7 +6,7 @@ import headerDownArrowSmall from "@assets/icons/headerDownArrowSmall.svg";
 
 const SelectOption = ({ pathname }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [option, setOption] = useState(["펠리세이드", "소나타", "아이오닉5"]);
+  const [option, setOption] = useState(["펠리세이드"]);
 
   const handleToggle = () => {
     setIsOpen((prevState) => !prevState);
