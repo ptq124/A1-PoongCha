@@ -9,6 +9,7 @@ import AgeQuestionLabel from "@Components/Survey/AgeQuestionLabel";
 import PageIndicator from "@Components/Survey/PageIndicator";
 import { getSurvey } from "apis/survey";
 import { AGE_SURVEY_ID } from "@utils/constants";
+import RadioGroupComposition from "@Components/Common/RadioGroup/RadioGroupComposition";
 
 const ageRadioGroupTitle = (data) => {
   return (
@@ -35,8 +36,7 @@ const AgeSurvey = () => {
 
   return (
     <S.SurveyContent>
-      <RadioGroup
-        title={ageRadioGroupTitle(surveyData)}
+      <RadioGroupComposition
         label={<AgeQuestionLabel />}
         options={surveyData.options}
         newStateHandler={(newState) =>
@@ -44,7 +44,14 @@ const AgeSurvey = () => {
         }
         initialState={surveyData.options && surveyData.options[0]}
         style={ageRadioGroupStyle}
-      />
+      >
+        <RadioGroupComposition.Title style={ageRadioGroupStyle.title}>
+          <>
+            <span>{surveyData?.description}</span>
+            <PageIndicator />
+          </>
+        </RadioGroupComposition.Title>
+      </RadioGroupComposition>
       <Button
         text="다음"
         style={SurveyBtnStyle}

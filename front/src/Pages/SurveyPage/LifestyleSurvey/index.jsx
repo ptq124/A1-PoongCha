@@ -7,6 +7,7 @@ import { useOutletContext } from "react-router-dom";
 import LifestyleQuestionLabel from "@Components/Survey/LifestyleQuestionLabel";
 import PageIndicator from "@Components/Survey/PageIndicator";
 import RadioGroup from "@Components/Common/RadioGroup";
+import RadioGroupComposition from "@Components/Common/RadioGroup/RadioGroupComposition";
 
 const lifestyleSurveyInfo = {
   options: [
@@ -80,15 +81,34 @@ const LifestyleSurvey = () => {
   return (
     <>
       <S.SurveyContent>
-        <RadioGroup
-          title={lifestyleRadioGroupTitle()}
+        <RadioGroupComposition
           label={<LifestyleQuestionLabel />}
           options={lifestyleSurveyInfo.options}
           newStateHandler={(newState) =>
             handleOptionSelect("lifestyle", newState)
           }
           style={lifestyleRadioGroupStyle}
-        />
+        >
+          <RadioGroupComposition.Title style={lifestyleRadioGroupStyle.title}>
+            <>
+              <div>
+                <span>
+                  유사한 <strong>라이프스타일</strong>을 선택하면
+                  <br />
+                  차량 조합을 추천해 드려요.
+                </span>
+              </div>
+              <PageIndicator />
+            </>
+          </RadioGroupComposition.Title>
+          <RadioGroupComposition.Subtitle>
+            <Button
+              text="원하는 라이프스타일이 없다면?"
+              style={LinkBtnStyle}
+              onClick={() => move("/survey/extra")}
+            />
+          </RadioGroupComposition.Subtitle>
+        </RadioGroupComposition>
       </S.SurveyContent>
       <Button
         text="선택 완료"

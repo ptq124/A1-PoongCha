@@ -2,7 +2,7 @@
 // import properties from "@/config/properties";
 import { handleHttpError } from "@utils/error";
 
-const BASE_URL = "http://api.my-car.store";
+const BASE_URL = "https://api.my-car.store";
 
 const fetchWrap = async ({ method, url, body }) => {
   const URL = `${BASE_URL}/${url}`;
