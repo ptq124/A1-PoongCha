@@ -2,7 +2,33 @@ import React from "react";
 import { styled } from "styled-components";
 import Check24Icon from "@assets/checkcircle/check-24-white.svg";
 
-const ColorOption = ({ option, selected, onClick, index, opt }) => {
+// const ColorOption = ({ option, selected, onClick, index, opt }) => {
+//   let isLabeled = true;
+
+//   const hasLabel = () => {
+//     if (opt === "내장" && index === 0) return <Label>Best</Label>;
+//     else if (opt === "외장" && index < 3) {
+//       return <Label>Top {index + 1}</Label>;
+//     }
+//   };
+
+//   return (
+//     <Wrapper onClick={onClick}>
+//       <Preview>
+//         {isLabeled && hasLabel()}
+//         <ColorImg src={option.imageUrl} />
+//         {selected && (
+//           <Cover>
+//             <div></div>
+//             <img src={Check24Icon} />
+//           </Cover>
+//         )}
+//       </Preview>
+//       <Name>{option.name}</Name>
+//     </Wrapper>
+//   );
+// };
+const ColorOption = ({ value, checked, handleSelectItem, index, opt }) => {
   let isLabeled = true;
 
   const hasLabel = () => {
@@ -13,18 +39,18 @@ const ColorOption = ({ option, selected, onClick, index, opt }) => {
   };
 
   return (
-    <Wrapper onClick={onClick}>
+    <Wrapper onClick={() => handleSelectItem(value)}>
       <Preview>
         {isLabeled && hasLabel()}
-        <ColorImg src={option.imageUrl} />
-        {selected && (
+        <ColorImg src={value?.imageUrl} />
+        {checked && (
           <Cover>
             <div></div>
             <img src={Check24Icon} />
           </Cover>
         )}
       </Preview>
-      <Name>{option.name}</Name>
+      <Name>{value?.name}</Name>
     </Wrapper>
   );
 };

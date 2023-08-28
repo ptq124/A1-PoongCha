@@ -74,7 +74,9 @@ const ColorOptionGroup = ({
             key={index}
             option={data}
             selected={selectedColor === data.name}
-            onClick={() => handleColor(data.name, option)}
+            onClick={() => {
+              handleColor(data.name, option);
+            }}
             index={index}
             opt={option}
           />
@@ -179,7 +181,6 @@ const Subtitle = styled.div`
       color: ${({ theme }) => theme.color.secondary};
     }
   }
-  margin-top: 16px;
 `;
 const Header = styled.div`
   ${({ theme }) => theme.font.Head2};

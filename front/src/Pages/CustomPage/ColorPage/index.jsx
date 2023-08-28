@@ -25,15 +25,19 @@ const ColorPage = () => {
   const exterData = colors.filter((data) => data.type === "EXTERIOR");
   const interData = colors.filter((data) => data.type === "INTERIOR");
 
-  const handleColorOption = (name, option) => {
-    if (option === "외장") {
-      const newExterior = exterData.find((data) => data.name === name);
-      유저데이터저장(option, newExterior);
-      setExterior(newExterior);
+  const handleColorOption = (option, type) => {
+    if (type === "외장") {
+      유저데이터저장(type, option);
+      setExterior(option);
+      // const newExterior = exterData.find((data) => data.name === name);
+      // 유저데이터저장(option, newExterior);
+      // setExterior(newExterior);
     } else {
-      const newInterior = interData.find((data) => data.name === name);
-      유저데이터저장(option, newInterior);
-      setInterior(newInterior);
+      유저데이터저장(type, option);
+      setInterior(option);
+      // const newInterior = interData.find((data) => data.name === name);
+      // 유저데이터저장(option, newInterior);
+      // setInterior(newInterior);
     }
   };
 
