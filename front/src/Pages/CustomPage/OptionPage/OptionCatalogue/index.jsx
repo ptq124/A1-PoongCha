@@ -35,7 +35,7 @@ const OptionCatalogue = ({
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 1500);
+    }, 700);
   }, [selectedTag]);
 
   if (isLoading) return <Loading />;
