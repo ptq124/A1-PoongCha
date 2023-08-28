@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src", // Base directory for resolving paths
+    "paths": {
+      "@Components/*": ["Components/*"], // Path alias configuration
+      "@Pages/*": ["Pages/*"],
+      "@assets/*": ["assets/*"],
+      "@hooks/*": ["hooks/*"],
+      "@styles/*": ["styles/*"],
+      "@utils/*": ["utils/*"]
+    }
+  }
+}
