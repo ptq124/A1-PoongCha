@@ -1,10 +1,8 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { css, styled } from "styled-components";
-import { initialState, reducer } from "./index.reducer";
 import Button from "@Components/Common/Button/Button";
 import useButtonNavigation from "@hooks/useButtonNavigation";
 import helpIcon from "@assets/icons/help-circle.svg";
-import { TrimOptions } from "./mockData";
 import ModelItemOptionLabel from "@Components/Custom/ModelItemOptionLabel";
 import RadioGroup from "@Components/Common/RadioGroup";
 import TrimOptionLabel from "@Components/Custom/TrimOptionLabel";
@@ -47,7 +45,9 @@ const TrimCustomSideBar = () => {
       <CustomBarContent>
         <LinkBtnContainer>
           <img src={helpIcon} />
-          <PopupProvider label={<ModelItemsDescriptionPopup />}>
+          <PopupProvider
+            label={<ModelItemsDescriptionPopup data={componentGroupData} />}
+          >
             <Button text="고르기 어렵다면?" style={LinkBtnStyle} />
           </PopupProvider>
         </LinkBtnContainer>

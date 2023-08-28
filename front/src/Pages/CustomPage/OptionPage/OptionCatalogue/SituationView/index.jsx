@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { css, styled } from "styled-components";
 import OptionTooltip from "./OptionTooltip";
 import OptionItem from "@Components/Custom/OptionItem";
 import PlusIcon from "@assets/icons/plus.svg";
+import { mockPositionData } from "../../optionData";
 
 const SituationView = ({
   filteredData,
@@ -10,7 +11,6 @@ const SituationView = ({
   handleSelectOption,
   selectedOptions,
 }) => {
-  const [mockPositions, setMockPositions] = useState([]);
   const [activeOption, setActiveOption] = useState(null);
   const [isTooltipOpen, setIsTooltipOpen] = useState(false);
   const [isTooltipFixed, setIsTooltipFixed] = useState(false);
@@ -33,16 +33,6 @@ const SituationView = ({
     setIsTooltipFixed(!isTooltipFixed);
   };
 
-  // + 버튼 랜덤 위치 설정
-  useEffect(() => {
-    setMockPositions(
-      filteredData.map((data) => ({
-        x: Math.random() * 80 + 10,
-        y: Math.random() * 80 + 10,
-      }))
-    );
-  }, [selectedTag]);
-
   return (
     <Wrapper>
       <SituationScreen>
@@ -52,8 +42,8 @@ const SituationView = ({
               tag={selectedTag}
               isOpen={isTooltipOpen}
               position={
-                mockPositions[
-                  filteredData.findIndex((data) => data.id === activeOption)
+                mockPositionData[
+                  filteredData.find((data) => data.id === activeOption).id
                 ]
               }
               data={filteredData.find((data) => data.id === activeOption)}
@@ -67,7 +57,7 @@ const SituationView = ({
         {filteredData.map((data, index) => (
           <PlusButton
             key={index}
-            $position={mockPositions[index]}
+            $position={mockPositionData[data.id]}
             $clicked={activeOption === data.id}
             onMouseEnter={() => handlePlusBtnHover(data.id)}
             onMouseLeave={handlePlusBtnLeave}

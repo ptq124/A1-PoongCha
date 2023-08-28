@@ -1,3 +1,10 @@
+export const mockPositionData = Array.from({ length: 108 }, () => {
+  return {
+    x: Math.random() * 80 + 10,
+    y: Math.random() * 80 + 10,
+  }
+});
+
 export const additionalOptionData = [
   {
     id:1,
