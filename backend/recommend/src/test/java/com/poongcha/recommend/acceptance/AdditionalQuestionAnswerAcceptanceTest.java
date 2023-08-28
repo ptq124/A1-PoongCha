@@ -16,8 +16,6 @@ import org.junit.jupiter.api.Test;
 public class AdditionalQuestionAnswerAcceptanceTest extends RecommendAcceptanceTest {
     private final int ageAdditionalQuestionId = 1;
     private final int drivingCareerAdditionalQuestionId = 2;
-    private final int familyMemberAdditionalQuestionId = 3;
-    private final int purposeAdditionalQuestionId = 4;
     private final int valueAdditionalQuestionId = 5;
 
     @BeforeEach
