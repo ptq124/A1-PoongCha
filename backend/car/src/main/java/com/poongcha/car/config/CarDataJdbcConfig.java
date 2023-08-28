@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.context.annotation.Primary;
 import org.springframework.data.jdbc.core.convert.BasicJdbcConverter;
 import org.springframework.data.jdbc.core.convert.BatchJdbcOperations;
 import org.springframework.data.jdbc.core.convert.DataAccessStrategy;
@@ -39,7 +38,6 @@ class CarDataJdbcConfig {
     }
 
     @Bean
-    @Primary
     @Qualifier("car")
     JdbcMappingContext carJdbcMappingContext(
             Optional<NamingStrategy> namingStrategyOption,
@@ -53,7 +51,6 @@ class CarDataJdbcConfig {
     }
 
     @Bean
-    @Primary
     @Qualifier("car")
     JdbcConverter carJdbcConverter(
             @Qualifier("car") JdbcMappingContext mappingContext,

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.jdbc.core.convert.BasicJdbcConverter;
 import org.springframework.data.jdbc.core.convert.BatchJdbcOperations;
 import org.springframework.data.jdbc.core.convert.DataAccessStrategy;
@@ -38,6 +39,7 @@ class RecommendDataJdbcConfig {
     }
 
     @Bean
+    @Primary
     @Qualifier("recommend")
     JdbcMappingContext recommendJdbcMappingContext(
             Optional<NamingStrategy> namingStrategyOption,
@@ -51,6 +53,7 @@ class RecommendDataJdbcConfig {
     }
 
     @Bean
+    @Primary
     @Qualifier("recommend")
     DataAccessStrategy recommendDataAccessStrategy(
             @Qualifier("recommend") NamedParameterJdbcOperations operations,
@@ -77,6 +80,7 @@ class RecommendDataJdbcConfig {
     }
 
     @Bean
+    @Primary
     @Qualifier("recommend")
     JdbcConverter recommendJdbcConverter(
             @Qualifier("recommend") JdbcMappingContext mappingContext,
