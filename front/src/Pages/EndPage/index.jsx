@@ -1,18 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { css, styled } from "styled-components";
 import Card from "./Card";
 import Summary from "@Components/Common/Summary";
 import Button from "@Components/Common/Button/Button";
 import useButtonNavigation from "@hooks/useButtonNavigation";
 import { useUserData } from "context/UserDataContext";
+import { useOutletContext } from "react-router-dom";
 
 const EndPage = () => {
   const move = useButtonNavigation();
-  const { totalData, estimated, formatAndPost } = useUserData();
+  const { totalData, estimated, formatAndPost, 데이터초기화 } = useUserData();
+  const [handleOptionSelect, state] = useOutletContext();
+
+  useEffect(() => {
+    데이터초기화(state.lifestyle.id);
+  }, []);
 
   return (
     <Wrapper>
-      <Card />
+      <Card id={state.lifestyle.id} />
       <Summary data={totalData} estimated={estimated} />
       <ButtonContainer>
         <Button

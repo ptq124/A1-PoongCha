@@ -92,9 +92,9 @@ const LifestyleSurvey = () => {
           title={lifestyleRadioGroupTitle()}
           label={<LifestyleQuestionLabel />}
           options={lifeStyle}
-          newStateHandler={(newState) =>
-            handleOptionSelect("lifestyle", newState)
-          }
+          newStateHandler={(newState) => {
+            handleOptionSelect("lifestyle", newState);
+          }}
           style={lifestyleRadioGroupStyle}
         />
       </S.SurveyContent>

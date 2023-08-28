@@ -4,7 +4,16 @@ import car from "@assets/car.svg";
 import point from "@assets/point.svg";
 import logo from "@assets/icons/hyundaicardlogo.svg";
 
-const Card = () => {
+const data1 = ["", "가족", "편안함", "성능", "트렌디함"];
+const data2 = [
+  "",
+  "우리 아이들과 함께 타는 차는 항상 안전해야 한다고 생각해요",
+  "경제적이면서 사용하기 편한 차가 좋아요",
+  "운전 경력이 짧아 쉬운 주행을 원해요",
+  "성능과 디자인이 뛰어난 차를 원해요",
+];
+
+const Card = ({ id }) => {
   return (
     <Wrapper>
       <RecommendCard>
@@ -17,11 +26,12 @@ const Card = () => {
           <CardTop>
             <Name>펠리세이드 - Le Blanc(르블랑)</Name>
             <Phrase>
-              <span>가족</span>을 생각하는 당신을 위한 펠리세이드
+              <span>{data1 && data1[id]}</span>을 생각하는 당신을 위한
+              펠리세이드
             </Phrase>
           </CardTop>
           <Description>
-            우리 아이들과 함께 타는 차는 항상 안전해야 한다고 생각해요
+            {data2 && data2[id]}
             <Point src={point} />
           </Description>
           <CarImg src={car} />
@@ -81,6 +91,7 @@ const Description = styled.div`
 
   display: flex;
   align-items: flex-start;
+  justify-content: center;
 
   width: 257px;
   height: 55px;

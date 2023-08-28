@@ -10,7 +10,7 @@ const Summary = ({ data, estimated = 0 }) => {
         <TrimTitle>
           <TrimName>
             <span className="palisade">팰리세이드</span>
-            <span className="trimName">{data.트림?.name}</span>
+            <span className="trimName">{data?.트림?.name}</span>
           </TrimName>
           <TrimPrice>{data.트림?.minPrice.toLocaleString()}원</TrimPrice>
         </TrimTitle>

@@ -11,6 +11,21 @@ const SelectedItem = ({ data, option }) => {
     imageUrl = data?.options && data?.options[0].imageUrl;
   }
   if (!data) return null;
+  function getRandomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  // 0부터 3까지의 랜덤 변수 얻기
+  var randomNumber = getRandomNumber(0, 6);
+  const reco = [
+    "75%의 20대~30대 구매자들이 선택했어요.",
+    "35%의 50대~60대 구매자들이 선택했어요.",
+    "25%의 70대~80대 구매자들이 선택했어요.",
+    "15%의 30대~40대 구매자들이 선택했어요.",
+    "75%의 20대~30대 구매자들이 선택했어요.",
+    "85%의 40대~50대 구매자들이 선택했어요.",
+    "35%의 30대~40대 구매자들이 선택했어요.",
+  ];
 
   return (
     <Wrapper>
@@ -27,9 +42,7 @@ const SelectedItem = ({ data, option }) => {
       </ItemDetail>
       {/* 데이터에 Recommend Reason Phrase 있는 경우에만 보여줌*/}
       {pathname !== "/result" && (
-        <RecReasonPhrase>
-          75%의 20대~30대 구매자들이 선택했어요.
-        </RecReasonPhrase>
+        <RecReasonPhrase>{reco[randomNumber]}</RecReasonPhrase>
       )}
     </Wrapper>
   );

@@ -1,6 +1,7 @@
 import useButtonNavigation from "@hooks/useButtonNavigation";
 import { postUserData } from "apis/custom";
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { mockData } from "./userDataMock";
 
 const UserDataContext = createContext();
 
@@ -166,6 +167,10 @@ export const UserDataProvider = ({ children }) => {
     ],
   });
 
+  const 데이터초기화 = (id) => {
+    setTotalData(mockData[id - 1]);
+  };
+
   const 유저데이터저장 = (key, data) => {
     setTotalData((prev) => ({
       ...prev,
@@ -196,7 +201,13 @@ export const UserDataProvider = ({ children }) => {
 
   return (
     <UserDataContext.Provider
-      value={{ totalData, 유저데이터저장, estimated, formatAndPost }}
+      value={{
+        totalData,
+        유저데이터저장,
+        estimated,
+        formatAndPost,
+        데이터초기화,
+      }}
     >
       {children}
     </UserDataContext.Provider>
