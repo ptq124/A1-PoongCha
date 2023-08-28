@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { css, styled } from "styled-components";
 import OptionTooltip from "./OptionTooltip";
 import OptionItem from "@Components/Custom/OptionItem";
@@ -11,7 +11,6 @@ const SituationView = ({
   handleSelectOption,
   selectedOptions,
 }) => {
-  // const [mockPositions, setMockPositions] = useState([]);
   const [activeOption, setActiveOption] = useState(null);
   const [isTooltipOpen, setIsTooltipOpen] = useState(false);
   const [isTooltipFixed, setIsTooltipFixed] = useState(false);
@@ -33,16 +32,6 @@ const SituationView = ({
   const handlePlusBtnClick = () => {
     setIsTooltipFixed(!isTooltipFixed);
   };
-
-  // + 버튼 랜덤 위치 설정
-  // useEffect(() => {
-  //   setMockPositions(
-  //     filteredData.map((data) => ({
-  //       x: Math.random() * 80 + 10,
-  //       y: Math.random() * 80 + 10,
-  //     }))
-  //   );
-  // }, [selectedTag]);
 
   return (
     <Wrapper>
