@@ -19,8 +19,14 @@ const ColorOptionGroup = ({
   const popupRef = useRef();
   const { isPopupOpen, openPopup, closePopup } = useOnClickPopUp(popupRef);
   const [selectedColor, setSelectedColor] = useState(curData.name);
+  // const mockRate = Array.from({ length: data.length }, () =>
+  //   Math.floor(Math.random() * 80)
+  // ).sort((a, b) => b - a);
+  const mockRate = [74, 60, 40, 35, 20, 5];
+  const [count, setCount] = useState(0);
 
   const handleColor = (name, option) => {
+    setCount(data.findIndex((d) => d.name === name));
     setSelectedColor(data.filter((d) => d.name === name)[0].name);
     handleColorOption(name, option);
   };
@@ -65,7 +71,7 @@ const ColorOptionGroup = ({
       <Subtitle>
         <span className="color">{selectedColor}</span>
         <span className="stat">
-          <strong>75%</strong>의 구매자가 선택한
+          <strong>{mockRate[count]}% </strong>의 구매자가 선택한
         </span>
       </Subtitle>
       <OptionsContainer>
@@ -82,7 +88,7 @@ const ColorOptionGroup = ({
       </OptionsContainer>
       <Dropdown>
         <DropdownTitle onClick={handleDropdownClick}>
-          <span>다른 외장 색상을 찾고 있나요?</span>
+          <span>다른 {option} 색상을 찾고 있나요?</span>
           {isDropdownOpen ? (
             <img src={ArrowUpIcon} />
           ) : (

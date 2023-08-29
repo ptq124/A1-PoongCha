@@ -83,8 +83,8 @@ const ResultPage = () => {
           <div>{renderEstimatedPrice(resultData).toLocaleString()}원</div>
         </AmountBox>
         <Footer>
-          <Button style={Btn1} text="내 계정에 저장" />
-          <Button style={Btn2} text="내 계정에 저장" />
+          <Button style={Btn1} text="수정" />
+          <Button style={Btn2} text="구매/상담" />
         </Footer>
       </MainContainer>
     </Wrapper>

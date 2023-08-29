@@ -1,9 +1,19 @@
-export const mockPositionData = Array.from({ length: 108 }, () => {
+
+
+export const mockPositionData = Array.from({ length: 109 }, () => {
   return {
     x: Math.random() * 80 + 10,
     y: Math.random() * 80 + 10,
   }
 });
+
+mockPositionData[93] = {x:55, y:4};
+mockPositionData[94] = {x:50, y:50}
+mockPositionData[100] = {x:20, y:80}
+
+mockPositionData[92] = {x:25, y:13}
+mockPositionData[96] = {x:20, y:45}
+mockPositionData[97] = {x:85, y:85}
 
 export const additionalOptionData = [
   {
