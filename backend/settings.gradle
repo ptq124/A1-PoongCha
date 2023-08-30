@@ -1,0 +1,6 @@
+rootProject.name = 'backend'
+
+include 'boot-loader'
+include 'car'
+include 'recommend'
+include 'common-test'

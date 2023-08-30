@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    car:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: ${CAR_DEFAULT_DATABASE_URL}
+      username: ${CAR_DEFAULT_DATABASE_USERNAME}
+      password: ${CAR_DEFAULT_DATABASE_PASSWORD}
